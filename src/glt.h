@@ -24,6 +24,8 @@
 #define GLT_tasklet ABT_task
 #define GLT_thread ABT_xstream
 #define GLT_mutex ABT_mutex
+#define GLT_barrier ABT_barrier
+
 
 typedef struct glt_team {
     ABT_xstream master;
@@ -53,6 +55,8 @@ typedef struct glt_team {
 #define GLT_tasklet myth_thread_t
 #define GLT_thread myth_thread_t
 #define GLT_mutex myth_mutex_t
+#define GLT_barrier myth_barrier_t
+
 
 #define GLT_ult_attribute NULL
 
@@ -66,11 +70,14 @@ typedef struct glt_team {
 #include <stdio.h>
 #include <stdlib.h>
 #include <qthread/qthread.h>
+# include <qthread/barrier.h>
 
 #define GLT_ult aligned_t
 #define GLT_tasklet aligned_t
 #define GLT_thread aligned_t
 #define GLT_mutex aligned_t
+#define GLT_barrier qt_barrier_t
+
 
 #define GLT_ult_attribute NULL
 
@@ -110,7 +117,14 @@ void glt_mutex_lock(GLT_mutex mutex);
 void glt_mutex_unlock(GLT_mutex mutex);
 void glt_mutex_free(GLT_mutex * mutex);
 
+void glt_barrier_create(int num_waiters, GLT_barrier *barrier);
+void glt_barrier_free(GLT_barrier *barrier);
 
+#ifndef QTHREADS
+void glt_barrier_wait(GLT_barrier barrier);
+#else
+void glt_barrier_wait(GLT_barrier *barrier);
+#endif
 
 int glt_get_thread_num();
 int glt_get_num_threads();

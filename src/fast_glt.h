@@ -24,6 +24,8 @@
 #define GLT_tasklet ABT_task
 #define GLT_thread ABT_xstream
 #define GLT_mutex ABT_mutex
+#define GLT_barrier ABT_barrier
+
 
 typedef struct glt_team {
     ABT_xstream master;
@@ -53,6 +55,8 @@ typedef struct glt_team {
 #define GLT_tasklet myth_thread_t
 #define GLT_thread myth_thread_t
 #define GLT_mutex myth_mutex_t
+#define GLT_barrier myth_barrier_t
+
 
 typedef struct glt_team {
     int num_workers;
@@ -64,11 +68,13 @@ typedef struct glt_team {
 #include <stdio.h>
 #include <stdlib.h>
 #include <qthread/qthread.h>
+# include <qthread/barrier.h>
 
 #define GLT_ult aligned_t
 #define GLT_tasklet aligned_t
 #define GLT_thread aligned_t
 #define GLT_mutex aligned_t
+#define GLT_barrier qt_barrier_t
 
 typedef struct glt_team {
     int num_shepherds;
@@ -372,11 +378,52 @@ static inline void glt_mutex_free(GLT_mutex * mutex){
     ABT_mutex_free(mutex);
 #endif
 #ifdef MASSIVETHREADS
-    myth_mutex_destroy(*mutex);
+    myth_mutex_destroy(mutex);
 #endif
 #ifdef QTHREADS
 #endif     
 }
+
+static inline void glt_barrier_create(int num_waiters, GLT_barrier *barrier){
+#ifdef ARGOBOTS
+    ABT_barrier_create(num_waiters, barrier);
+#endif
+#ifdef MASSIVETHREADS
+    *barrier = myth_barrier_create(num_waiters);
+#endif
+#ifdef QTHREADS
+    barrier = qt_barrier_create(num_waiters, UPLOCK);
+#endif     
+}
+
+static inline void glt_barrier_free(GLT_barrier *barrier){
+#ifdef ARGOBOTS
+    ABT_barrier_free(barrier);
+#endif
+#ifdef MASSIVETHREADS
+    myth_barrier_destroy(*barrier);
+#endif
+#ifdef QTHREADS
+    qt_barrier_destroy(barrier);
+#endif     
+}
+
+#ifndef QTHREADS
+static inline void glt_barrier_wait(GLT_barrier barrier){
+#else
+static inline void glt_barrier_wait(GLT_barrier *barrier){
+#endif
+#ifdef ARGOBOTS
+    ABT_barrier_wait(barrier);
+#endif
+#ifdef MASSIVETHREADS
+    myth_barrier_wait(barrier);
+#endif
+#ifdef QTHREADS
+    qt_barrier_enter(barrier);
+#endif     
+}
+
 
 static inline int glt_get_num_threads() {
 #ifdef ARGOBOTS
