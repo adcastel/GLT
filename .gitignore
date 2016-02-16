@@ -1,3 +1,9 @@
 nbproject
 *.o
 *~
+*.odt
+*#
+*.so
+*_arg*
+*_mth
+*_qth
