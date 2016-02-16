@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <glt.h>
+#include <fast_glt.h>
 
 #define N 100
 void func1(void * arg){
