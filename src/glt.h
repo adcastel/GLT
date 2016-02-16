@@ -1,5 +1,5 @@
 /* 
- * File:   accalt.h
+ * File:   glt.h
  * Author: adcastel
  *
  * Created on 11 de febrero de 2016, 16:20
@@ -8,8 +8,8 @@
 
 
 
-#ifndef ACCALT_H
-#define	ACCALT_H
+#ifndef GLT_H
+#define	GLT_H
 
 
 
@@ -20,17 +20,17 @@
 
 
 
-#define ACCALT_ult ABT_thread
-#define ACCALT_tasklet ABT_task
-#define ACCALT_thread ABT_xstream
+#define GLT_ult ABT_thread
+#define GLT_tasklet ABT_task
+#define GLT_thread ABT_xstream
 
-typedef struct accalt_team {
+typedef struct glt_team {
     ABT_xstream master;
     ABT_xstream *team;
     int num_xstreams;
     int num_pools;
     ABT_pool *pools;
-} accalt_team_t;
+} glt_team_t;
 
 
 #endif
@@ -48,14 +48,14 @@ typedef struct accalt_team {
 #include <unistd.h>
 #include <myth.h>
 
-#define ACCALT_ult myth_thread_t
-#define ACCALT_tasklet myth_thread_t
-#define ACCALT_thread myth_thread_t
-#define ACCALT_ult_attribute NULL
+#define GLT_ult myth_thread_t
+#define GLT_tasklet myth_thread_t
+#define GLT_thread myth_thread_t
+#define GLT_ult_attribute NULL
 
-typedef struct accalt_team {
+typedef struct glt_team {
     int num_workers;
-} accalt_team_t;
+} glt_team_t;
 
 #endif
 
@@ -64,44 +64,44 @@ typedef struct accalt_team {
 #include <stdlib.h>
 #include <qthread/qthread.h>
 
-#define ACCALT_ult aligned_t
-#define ACCALT_tasklet aligned_t
-#define ACCALT_thread aligned_t
-#define ACCALT_ult_attribute NULL
+#define GLT_ult aligned_t
+#define GLT_tasklet aligned_t
+#define GLT_thread aligned_t
+#define GLT_ult_attribute NULL
 
-typedef struct accalt_team {
+typedef struct glt_team {
     int num_shepherds;
     int num_workers_per_shepherd;
-} accalt_team_t;
+} glt_team_t;
 
 #endif
 
-#define ACCALT_VERSION "You are using accalt 0.1v (adcastel@uji.es)"
+#define GLT_VERSION "You are using glt 0.1v (adcastel@uji.es)"
 /* Main team structure*/
-void __attribute__((constructor)) accalt_start(void);
-void __attribute__((destructor)) accalt_end(void);
+void __attribute__((constructor)) glt_start(void);
+void __attribute__((destructor)) glt_end(void);
 
 
-void accalt_init(int argc, char * argv[]);
-void accalt_finalize();
+void glt_init(int argc, char * argv[]);
+void glt_finalize();
 
-ACCALT_ult * accalt_ult_malloc(int number_of_ult);
-ACCALT_tasklet * accalt_tasklet_malloc(int number_of_tasklets);
+GLT_ult * glt_ult_malloc(int number_of_ult);
+GLT_tasklet * glt_tasklet_malloc(int number_of_tasklets);
 
-void accalt_ult_creation(void(*thread_func)(void *), void *arg, ACCALT_ult *new_ult);
-void accalt_ult_creation_to(void(*thread_func)(void *), void *arg, ACCALT_ult *new_ult, int dest);
+void glt_ult_creation(void(*thread_func)(void *), void *arg, GLT_ult *new_ult);
+void glt_ult_creation_to(void(*thread_func)(void *), void *arg, GLT_ult *new_ult, int dest);
 
-void accalt_tasklet_creation(void(*thread_func)(void *), void *arg, ACCALT_tasklet *new_ult);
-void accalt_tasklet_creation_to(void(*thread_func)(void *), void *arg, ACCALT_tasklet *new_ult, int dest);
+void glt_tasklet_creation(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult);
+void glt_tasklet_creation_to(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult, int dest);
 
-void accalt_yield();
-void accalt_yield_to(ACCALT_ult ult);
+void glt_yield();
+void glt_yield_to(GLT_ult ult);
 
-void accalt_ult_join(ACCALT_ult *ult);
-void accalt_tasklet_join(ACCALT_tasklet *tasklet);
+void glt_ult_join(GLT_ult *ult);
+void glt_tasklet_join(GLT_tasklet *tasklet);
 
-int accalt_get_thread_num();
-int accalt_get_num_threads();
+int glt_get_thread_num();
+int glt_get_num_threads();
 
-#endif	/* accalt_H */
+#endif	/* glt_H */
 

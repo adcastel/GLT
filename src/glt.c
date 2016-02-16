@@ -1,8 +1,8 @@
-#include <accalt.h>
+#include <glt.h>
 
-accalt_team_t * main_team;
+glt_team_t * main_team;
 
-void accalt_start() {
+void glt_start() {
 #ifdef ARGOBOTS
     //printf("Starting with ARGOBOTS\n");
 #endif
@@ -14,7 +14,7 @@ void accalt_start() {
 #endif
 }
 
-void accalt_end() {
+void glt_end() {
 #ifdef ARGOBOTS
     //printf("Ending with ARGOBOTS\n");
 #endif
@@ -26,21 +26,21 @@ void accalt_end() {
 #endif
 }
 
-void accalt_init(int argc, char * argv[]) {
+void glt_init(int argc, char * argv[]) {
 
     int num_threads = 1;
-    main_team = (accalt_team_t *) malloc(sizeof (accalt_team_t));
+    main_team = (glt_team_t *) malloc(sizeof (glt_team_t));
 
 #ifdef ARGOBOTS
 
 
     ABT_init(argc, argv);
     int num_pools = 1;
-    if (getenv("ACCALT_NUM_THREADS") != NULL) {
-        num_threads = atoi(getenv("ACCALT_NUM_THREADS"));
+    if (getenv("GLT_NUM_THREADS") != NULL) {
+        num_threads = atoi(getenv("GLT_NUM_THREADS"));
     }
-    if (getenv("ACCALT_NUM_POOLS") != NULL) {
-        num_pools = atoi(getenv("ACCALT_NUM_POOLS"));
+    if (getenv("GLT_NUM_POOLS") != NULL) {
+        num_pools = atoi(getenv("GLT_NUM_POOLS"));
     }
     main_team->num_xstreams = num_threads;
     main_team->num_pools = num_pools;
@@ -67,8 +67,8 @@ void accalt_init(int argc, char * argv[]) {
 #endif
 #ifdef MASSIVETHREADS
     char buff[10];
-    if (getenv("ACCALT_NUM_THREADS") != NULL) {
-        num_threads = atoi(getenv("ACCALT_NUM_THREADS"));
+    if (getenv("GLT_NUM_THREADS") != NULL) {
+        num_threads = atoi(getenv("GLT_NUM_THREADS"));
         sprintf(buff, "%d", num_threads);
         setenv("MYTH_WORKER_NUM", buff, 1);
     } else
@@ -83,15 +83,15 @@ void accalt_init(int argc, char * argv[]) {
 #ifdef QTHREADS
     char buff[10];
     int num_workers_per_thread;
-    if (getenv("ACCALT_NUM_THREADS") != NULL) {
-        num_threads = atoi(getenv("ACCALT_NUM_THREADS"));
+    if (getenv("GLT_NUM_THREADS") != NULL) {
+        num_threads = atoi(getenv("GLT_NUM_THREADS"));
         sprintf(buff, "%d", num_threads);
         setenv("QTHREAD_NUM_SHEPHERDS", buff, 1);
     } else
         num_threads = atoi(getenv("QTHREAD_NUM_SHEPHERDS"));
 
-    if (getenv("ACCALT_NUM_WORKERS_PER_THREAD") != NULL) {
-        num_workers_per_thread = atoi(getenv("ACCALT_NUM_WORKERS_PER_THREAD"));
+    if (getenv("GLT_NUM_WORKERS_PER_THREAD") != NULL) {
+        num_workers_per_thread = atoi(getenv("GLT_NUM_WORKERS_PER_THREAD"));
         sprintf(buff, "%d", num_workers_per_thread);
         setenv("QTHREAD_NUM_WORKERS_PER_SHEPHERD", buff, 1);
     } else
@@ -114,7 +114,7 @@ void accalt_init(int argc, char * argv[]) {
 #endif
 }
 
-void accalt_finalize() {
+void glt_finalize() {
 
 #ifdef ARGOBOTS
 
@@ -130,17 +130,17 @@ void accalt_finalize() {
 #endif    
 }
 
-ACCALT_ult * accalt_ult_malloc(int number_of_ult) {
-    ACCALT_ult * ults = (ACCALT_ult *) malloc(sizeof (ACCALT_ult) * number_of_ult);
+GLT_ult * glt_ult_malloc(int number_of_ult) {
+    GLT_ult * ults = (GLT_ult *) malloc(sizeof (GLT_ult) * number_of_ult);
     return ults;
 }
 
-ACCALT_tasklet * accalt_tasklet_malloc(int number_of_tasklets) {
-    ACCALT_tasklet * tasklets = (ACCALT_tasklet *) malloc(sizeof (ACCALT_tasklet) * number_of_tasklets);
+GLT_tasklet * glt_tasklet_malloc(int number_of_tasklets) {
+    GLT_tasklet * tasklets = (GLT_tasklet *) malloc(sizeof (GLT_tasklet) * number_of_tasklets);
     return tasklets;
 }
 
-void accalt_ult_creation(void(*thread_func)(void *), void *arg, ACCALT_ult *new_ult) {
+void glt_ult_creation(void(*thread_func)(void *), void *arg, GLT_ult *new_ult) {
 #ifdef ARGOBOTS
     ABT_xstream xstream;
     ABT_xstream_self(&xstream);
@@ -156,21 +156,21 @@ void accalt_ult_creation(void(*thread_func)(void *), void *arg, ACCALT_ult *new_
 #endif
 }
 
-void accalt_ult_creation_to(void(*thread_func)(void *), void *arg, ACCALT_ult *new_ult, int dest) {
+void glt_ult_creation_to(void(*thread_func)(void *), void *arg, GLT_ult *new_ult, int dest) {
 #ifdef ARGOBOTS
     ABT_pool pool;
     ABT_xstream_get_main_pools(main_team->team[dest], 1, &pool);
     ABT_thread_create(pool, thread_func, arg, ABT_THREAD_ATTR_NULL, new_ult);
 #endif
 #ifdef MASSIVETHREADS
-    accalt_ult_creation(thread_func, arg, new_ult);
+    glt_ult_creation(thread_func, arg, new_ult);
 #endif
 #ifdef QTHREADS
     qthread_fork_to((void *) thread_func, arg, new_ult, dest);
 #endif
 }
 
-void accalt_tasklet_creation(void(*thread_func)(void *), void *arg, ACCALT_tasklet *new_ult) {
+void glt_tasklet_creation(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult) {
 #ifdef ARGOBOTS
     ABT_xstream xstream;
     ABT_xstream_self(&xstream);
@@ -186,21 +186,21 @@ void accalt_tasklet_creation(void(*thread_func)(void *), void *arg, ACCALT_taskl
 #endif
 }
 
-void accalt_tasklet_creation_to(void(*thread_func)(void *), void *arg, ACCALT_tasklet *new_ult, int dest) {
+void glt_tasklet_creation_to(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult, int dest) {
 #ifdef ARGOBOTS
     ABT_pool pool;
     ABT_xstream_get_main_pools(main_team->team[dest], 1, &pool);
     ABT_task_create(pool, thread_func, arg, new_ult);
 #endif
 #ifdef MASSIVETHREADS
-    accalt_ult_creation(thread_func, arg, new_ult);
+    glt_ult_creation(thread_func, arg, new_ult);
 #endif
 #ifdef QTHREADS
     qthread_fork_to((void *) thread_func, arg, new_ult, dest);
 #endif
 }
 
-void accalt_yield() {
+void glt_yield() {
 #ifdef ARGOBOTS
     ABT_thread_yield();
 #endif
@@ -212,7 +212,7 @@ void accalt_yield() {
 #endif
 }
 
-void accalt_yield_to(ACCALT_ult ult) {
+void glt_yield_to(GLT_ult ult) {
 #ifdef ARGOBOTS
     ABT_thread_yield_to(ult);
 #endif
@@ -224,7 +224,7 @@ void accalt_yield_to(ACCALT_ult ult) {
 #endif
 }
 
-void accalt_ult_join(ACCALT_ult *ult) {
+void glt_ult_join(GLT_ult *ult) {
 #ifdef ARGOBOTS
     ABT_thread_free(ult);
 #endif
@@ -236,7 +236,7 @@ void accalt_ult_join(ACCALT_ult *ult) {
 #endif
 }
 
-void accalt_tasklet_join(ACCALT_tasklet *tasklet) {
+void glt_tasklet_join(GLT_tasklet *tasklet) {
 #ifdef ARGOBOTS
     ABT_task_free(tasklet);
 #endif
@@ -248,7 +248,7 @@ void accalt_tasklet_join(ACCALT_tasklet *tasklet) {
 #endif
 }
 
-int accalt_get_num_threads() {
+int glt_get_num_threads() {
 #ifdef ARGOBOTS
     return main_team->num_xstreams;
 #endif
@@ -260,7 +260,7 @@ int accalt_get_num_threads() {
 #endif
 }
 
-int accalt_get_thread_num() {
+int glt_get_thread_num() {
 #ifdef ARGOBOTS
     int rank;
     ABT_xstream_self_rank(&rank);

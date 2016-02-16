@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <unistd.h>
-#include <accalt.h>
+#include <glt.h>
 #include <math.h>
 #include <sys/time.h>
 #ifndef VERBOSE
@@ -37,7 +37,7 @@ void vector_scal(void *arguments) {
 
 #ifdef VERBOSE
 
-    printf("#Thread: %d (CPU: %d) pos: %d\n", accalt_get_thread_num(), sched_getcpu(), pos);
+    printf("#Thread: %d (CPU: %d) pos: %d\n", glt_get_thread_num(), sched_getcpu(), pos);
 
 #endif
     for(i=pos;i<posfin;i++){
@@ -71,15 +71,15 @@ int main(int argc, char *argv[]) {
 
     args = (vector_scal_args_t *) malloc(sizeof (vector_scal_args_t)
             * ntasks);
-accalt_init(argc,argv);
+glt_init(argc,argv);
 #ifdef TASK
-ACCALT_tasklet * tasklets;
-tasklets = accalt_tasklet_malloc(ntasks);
+GLT_tasklet * tasklets;
+tasklets = glt_tasklet_malloc(ntasks);
 #else
-ACCALT_ult * ults;
-ults = accalt_ult_malloc(ntasks);
+GLT_ult * ults;
+ults = glt_ult_malloc(ntasks);
 #endif
-int num_threads = accalt_get_num_threads();
+int num_threads = glt_get_num_threads();
     
     for (int t = 0; t < TIMES; t++) {
         for (int i = 0; i < total; i++) {
@@ -94,19 +94,19 @@ int num_threads = accalt_get_num_threads();
             args[current_task].value = 0.9f;
             args[current_task].ptr = a;
 #ifdef TASK
-            accalt_tasklet_creation_to(vector_scal, (void *) &args[current_task],&tasklets[j],j%num_threads);
+            glt_tasklet_creation_to(vector_scal, (void *) &args[current_task],&tasklets[j],j%num_threads);
 #else
-            accalt_ult_creation_to(vector_scal, (void *) &args[current_task],&ults[j],j%num_threads);
+            glt_ult_creation_to(vector_scal, (void *) &args[current_task],&ults[j],j%num_threads);
 #endif	   
  current_task++;
 	}
-        accalt_yield();
+        glt_yield();
         gettimeofday(&t_start2, NULL);
         for (int j = 0; j < ntasks; j++) {
 #ifdef TASK
-            	accalt_tasklet_join(&tasklets[j]);
+            	glt_tasklet_join(&tasklets[j]);
 #else
-            	accalt_ult_join(&ults[j]);
+            	glt_ult_join(&ults[j]);
 #endif
         }
         

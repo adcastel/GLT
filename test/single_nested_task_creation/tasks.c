@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <unistd.h>
-#include <accalt.h>
+#include <glt.h>
 #include <math.h>
 #include <sys/time.h>
 #ifndef VERBOSE
@@ -50,7 +50,7 @@ void vector_scal(void *arguments) {
 
 #ifdef VERBOSE
 
-    printf("#Thread: %d (CPU: %d), pos: %d\n", accalt_get_thread_num(),sched_getcpu(),pos);
+    printf("#Thread: %d (CPU: %d), pos: %d\n", glt_get_thread_num(),sched_getcpu(),pos);
 
 #endif
     for(i=pos;i<posfin;i++){
@@ -71,7 +71,7 @@ void task_creator(void *arguments){
     int nchild = in_arg->nchildtask;
     int nlvl = in_arg->nlevels;
 #ifdef VERBOSE
-        printf("#Thread: %d (CPU: %d) en crear task para posicion %d, nchildtask %d, nlevels %d y granularidad %d\n", accalt_get_thread_num(), sched_getcpu(),  pos ,nchild,nlvl,gran);
+        printf("#Thread: %d (CPU: %d) en crear task para posicion %d, nchildtask %d, nlevels %d y granularidad %d\n", glt_get_thread_num(), sched_getcpu(),  pos ,nchild,nlvl,gran);
 #endif
 
     if(nlvl > 1){
@@ -80,11 +80,11 @@ void task_creator(void *arguments){
     else{
         vector_scal_args_t * out_arg = (vector_scal_args_t *) malloc(sizeof (vector_scal_args_t) * nchild);
 #ifdef TASK
-	ACCALT_tasklet * tasklets;
-        tasklets = accalt_tasklet_malloc(nchild);    
+	GLT_tasklet * tasklets;
+        tasklets = glt_tasklet_malloc(nchild);    
 #else
-	ACCALT_ult * ults;
-        ults = accalt_ult_malloc(nchild);    
+	GLT_ult * ults;
+        ults = glt_ult_malloc(nchild);    
 #endif
         int t;
         int start = pos;
@@ -95,20 +95,20 @@ void task_creator(void *arguments){
             out_arg[t].pos=start;
             out_arg[t].gran=gran;
 #ifdef TASK
-	    accalt_tasklet_creation_to(vector_scal, (void *) &out_arg[t],&tasklets[t],accalt_get_thread_num());        
+	    glt_tasklet_creation_to(vector_scal, (void *) &out_arg[t],&tasklets[t],glt_get_thread_num());        
 #else	    
-	    accalt_ult_creation_to(vector_scal, (void *) &out_arg[t],&ults[t],accalt_get_thread_num());        
+	    glt_ult_creation_to(vector_scal, (void *) &out_arg[t],&ults[t],glt_get_thread_num());        
 #endif           
 start+=stride;
         }
 
-        accalt_yield();
+        glt_yield();
 
         for (i = 0; i < nchild; i++) {
 #ifdef TASK
-            accalt_tasklet_join(&tasklets[i]);
+            glt_tasklet_join(&tasklets[i]);
 #else            
-	accalt_ult_join(&ults[i]);
+	glt_ult_join(&ults[i]);
 #endif     
    }
     }
@@ -147,10 +147,10 @@ int main(int argc, char *argv[]) {
     args = (task_creator_args_t *) malloc(sizeof (task_creator_args_t)
             * ntasks);
 
-    int num_threads = accalt_get_num_threads();
-    ACCALT_ult * ults;
+    int num_threads = glt_get_num_threads();
+    GLT_ult * ults;
 
-    ults = accalt_ult_malloc(ntasks);
+    ults = glt_ult_malloc(ntasks);
  
     for (int t = 0; t < TIMES; t++) {
         for (int i = 0; i < total; i++) {
@@ -168,13 +168,13 @@ int main(int argc, char *argv[]) {
             args[ct].nlevels = nlevels;
             args[ct].nchildtask = nchildtask;
  
-	    accalt_ult_creation_to(task_creator,(void *) &args[ct],&ults[ct],ct%num_threads);
+	    glt_ult_creation_to(task_creator,(void *) &args[ct],&ults[ct],ct%num_threads);
 	    ct++;
         }
-        accalt_yield();
+        glt_yield();
         gettimeofday(&t_start2, NULL);
         for (int j = 0; j < ntasks; j++) {
-            accalt_ult_join(&ults[j]);
+            glt_ult_join(&ults[j]);
         }
         
         gettimeofday(&t_end, NULL);
