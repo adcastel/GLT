@@ -23,6 +23,7 @@
 #define GLT_ult ABT_thread
 #define GLT_tasklet ABT_task
 #define GLT_thread ABT_xstream
+#define GLT_mutex ABT_mutex
 
 typedef struct glt_team {
     ABT_xstream master;
@@ -51,7 +52,7 @@ typedef struct glt_team {
 #define GLT_ult myth_thread_t
 #define GLT_tasklet myth_thread_t
 #define GLT_thread myth_thread_t
-#define GLT_ult_attribute NULL
+#define GLT_mutex myth_mutex_t
 
 typedef struct glt_team {
     int num_workers;
@@ -67,7 +68,7 @@ typedef struct glt_team {
 #define GLT_ult aligned_t
 #define GLT_tasklet aligned_t
 #define GLT_thread aligned_t
-#define GLT_ult_attribute NULL
+#define GLT_mutex aligned_t
 
 typedef struct glt_team {
     int num_shepherds;
@@ -330,6 +331,51 @@ static inline void glt_tasklet_join(GLT_tasklet *tasklet) {
 #ifdef QTHREADS
     qthread_readFF(NULL, tasklet);
 #endif
+}
+
+static inline void glt_mutex_create(GLT_mutex * mutex){
+#ifdef ARGOBOTS
+    ABT_mutex_create(mutex);
+#endif
+#ifdef MASSIVETHREADS
+    *mutex = myth_mutex_create();
+#endif
+#ifdef QTHREADS
+    
+#endif
+}
+static inline void glt_mutex_lock(GLT_mutex mutex){
+#ifdef ARGOBOTS
+    ABT_mutex_lock(mutex);
+#endif
+#ifdef MASSIVETHREADS
+    myth_mutex_lock(mutex);
+#endif
+#ifdef QTHREADS
+    qthread_lock(&mutex);
+#endif    
+}
+static inline void glt_mutex_unlock(GLT_mutex mutex){
+#ifdef ARGOBOTS
+    ABT_mutex_unlock(mutex);
+#endif
+#ifdef MASSIVETHREADS
+    myth_mutex_unlock(mutex);
+#endif
+#ifdef QTHREADS
+    qthread_unlock(&mutex);
+#endif     
+}
+
+static inline void glt_mutex_free(GLT_mutex * mutex){
+#ifdef ARGOBOTS
+    ABT_mutex_free(mutex);
+#endif
+#ifdef MASSIVETHREADS
+    myth_mutex_destroy(*mutex);
+#endif
+#ifdef QTHREADS
+#endif     
 }
 
 static inline int glt_get_num_threads() {
