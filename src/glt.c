@@ -127,7 +127,10 @@ void glt_finalize() {
 #endif
 #ifdef MASSIVETHREADS
     myth_fini(); //MassiveThreads
-#endif    
+#endif
+#ifdef QTHREADS
+    qthread_finalize();
+#endif        
 }
 
 GLT_ult * glt_ult_malloc(int number_of_ult) {

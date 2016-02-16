@@ -208,6 +208,9 @@ static inline void glt_finalize() {
 #endif
 #ifdef MASSIVETHREADS
     myth_fini(); //MassiveThreads
+#endif
+#ifdef QTHREADS
+    qthread_finalize();
 #endif    
 }
 
