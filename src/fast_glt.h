@@ -25,8 +25,9 @@
 #define GLT_thread ABT_xstream
 #define GLT_mutex ABT_mutex
 #define GLT_barrier ABT_barrier
+#define GLT_cond ABT_cond
 
-
+ 
 typedef struct glt_team {
     ABT_xstream master;
     ABT_xstream *team;
@@ -56,7 +57,10 @@ typedef struct glt_team {
 #define GLT_thread myth_thread_t
 #define GLT_mutex myth_mutex_t
 #define GLT_barrier myth_barrier_t
+#define GLT_cond myth_cond_t
 
+
+#define GLT_ult_attribute NULL
 
 typedef struct glt_team {
     int num_workers;
@@ -74,7 +78,9 @@ typedef struct glt_team {
 #define GLT_tasklet aligned_t
 #define GLT_thread aligned_t
 #define GLT_mutex aligned_t
-#define GLT_barrier qt_barrier_t
+#define GLT_barrier  qt_barrier_t
+#define GLT_cond aligned_t
+
 
 typedef struct glt_team {
     int num_shepherds;
@@ -421,6 +427,68 @@ static inline void glt_barrier_wait(GLT_barrier *barrier){
 #endif     
 }
 
+static inline void glt_cond_create(GLT_cond *cond){
+#ifdef ARGOBOTS
+    ABT_cond_create (cond);
+#endif
+#ifdef MASSIVETHREADS
+    *cond =  myth_cond_create();
+#endif
+#ifdef QTHREADS
+    cond = (GLT_cond *)malloc(sizeof(GLT_cond));
+#endif
+}
+
+static inline void glt_cond_free(GLT_cond *cond){
+#ifdef ARGOBOTS
+    ABT_cond_free (cond);
+#endif
+#ifdef MASSIVETHREADS
+    myth_cond_destroy(*cond);
+#endif
+#ifdef QTHREADS
+    free(cond);
+#endif
+}
+
+static inline void glt_cond_signal(GLT_cond cond){
+#ifdef ARGOBOTS
+    ABT_cond_signal (cond);
+#endif
+#ifdef MASSIVETHREADS
+    myth_cond_signal(cond);
+#endif
+#ifdef QTHREADS
+    qthread_empty(&cond);
+#endif
+}
+
+static inline void glt_cond_wait(GLT_cond cond, GLT_mutex mutex){
+#ifdef ARGOBOTS
+    ABT_cond_wait (cond, mutex);
+#endif
+#ifdef MASSIVETHREADS
+    myth_cond_wait(cond,mutex);
+#endif
+#ifdef QTHREADS
+    //Waits for memory to become empty and then fills it
+    aligned_t fill=1;
+    qthread_writeEF(&cond,&fill);
+    qthread_lock(&mutex);
+#endif
+}
+
+static inline void glt_cond_broadcast(GLT_cond cond){
+#ifdef ARGOBOTS
+    ABT_cond_broadcast (cond);
+#endif
+#ifdef MASSIVETHREADS
+    myth_cond_broadcast(cond);
+#endif
+#ifdef QTHREADS
+    qthread_empty(&cond);
+#endif
+}
 
 static inline int glt_get_num_threads() {
 #ifdef ARGOBOTS

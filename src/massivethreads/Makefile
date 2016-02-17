@@ -3,7 +3,8 @@ MYTHFLAGS := -I/home/adcastel/massivethreads_wf/include -L/home/adcastel/massive
 CC := gcc
 CFLAGS := -fPIC -I. -I../ $(MYTHFLAGS)
 
-OBJECTS := ../glt.o ../glt_wu.o ../glt_util.o ../glt_mutex.o ../glt_barrier.o
+OBJECTS := ../glt.o ../glt_wu.o ../glt_util.o ../glt_mutex.o ../glt_barrier.o \
+	../glt_condition.o
 
 
 

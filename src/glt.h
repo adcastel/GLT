@@ -25,6 +25,7 @@
 #define GLT_thread ABT_xstream
 #define GLT_mutex ABT_mutex
 #define GLT_barrier ABT_barrier
+#define GLT_cond ABT_cond
 
  
 typedef struct glt_team {
@@ -56,6 +57,7 @@ typedef struct glt_team {
 #define GLT_thread myth_thread_t
 #define GLT_mutex myth_mutex_t
 #define GLT_barrier myth_barrier_t
+#define GLT_cond myth_cond_t
 
 
 #define GLT_ult_attribute NULL
@@ -77,9 +79,8 @@ typedef struct glt_team {
 #define GLT_thread aligned_t
 #define GLT_mutex aligned_t
 #define GLT_barrier  qt_barrier_t
+#define GLT_cond aligned_t
 
-
-#define GLT_ult_attribute NULL
 
 typedef struct glt_team {
     int num_shepherds;
@@ -123,9 +124,13 @@ void glt_mutex_free(GLT_mutex * mutex);
 
 void glt_barrier_create(int num_waiters, GLT_barrier *barrier);
 void glt_barrier_free(GLT_barrier *barrier);
-
 void glt_barrier_wait(GLT_barrier *barrier);
 
+void glt_cond_create(GLT_cond *cond);
+void glt_cond_free(GLT_cond *cond);
+void glt_cond_signal(GLT_cond cond);
+void glt_cond_wait(GLT_cond cond, GLT_mutex mutex);
+void glt_cond_broadcast(GLT_cond cond);
 
 int glt_get_thread_num();
 int glt_get_num_threads();

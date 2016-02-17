@@ -6,4 +6,5 @@ nbproject
 *.so
 *_arg*
 *_mth
-*_qth
+*_qth*
+callgrind*
