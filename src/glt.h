@@ -26,7 +26,7 @@
 #define GLT_mutex ABT_mutex
 #define GLT_barrier ABT_barrier
 
-
+ 
 typedef struct glt_team {
     ABT_xstream master;
     ABT_xstream *team;
@@ -90,6 +90,10 @@ typedef struct glt_team {
 
 #define GLT_VERSION "You are using glt 0.1v (adcastel@uji.es)"
 /* Main team structure*/
+
+glt_team_t * main_team;
+
+
 void __attribute__((constructor)) glt_start(void);
 void __attribute__((destructor)) glt_end(void);
 

@@ -1,34 +1,34 @@
 #include <glt.h>
 
-glt_team_t * main_team;
 
 void glt_start() {
 #ifdef ARGOBOTS
-    //printf("Starting with ARGOBOTS\n");
+    printf("Starting with ARGOBOTS\n");
 #endif
 #ifdef MASSIVETHREADS
-    //printf("Starting with MASSIVETHREADS\n");
+    printf("Starting with MASSIVETHREADS\n");
 #endif
 #ifdef QTHREADS
-    //printf("Starting with QTHREADS\n");
+    printf("Starting with QTHREADS\n");
 #endif
 }
 
 void glt_end() {
 #ifdef ARGOBOTS
-    //printf("Ending with ARGOBOTS\n");
+    printf("Ending with ARGOBOTS\n");
 #endif
 #ifdef MASSIVETHREADS
-    //printf("Ending with MASSIVETHREADS\n");
+    printf("Ending with MASSIVETHREADS\n");
 #endif
 #ifdef QTHREADS
-    //printf("Ending with QTHREADS\n");
+    printf("Ending with QTHREADS\n");
 #endif
 }
 
 void glt_init(int argc, char * argv[]) {
 
     int num_threads = 1;
+
     main_team = (glt_team_t *) malloc(sizeof (glt_team_t));
 
 #ifdef ARGOBOTS
@@ -42,9 +42,10 @@ void glt_init(int argc, char * argv[]) {
     if (getenv("GLT_NUM_POOLS") != NULL) {
         num_pools = atoi(getenv("GLT_NUM_POOLS"));
     }
+
     main_team->num_xstreams = num_threads;
     main_team->num_pools = num_pools;
-    //printf("Argobots %d ES, %d Pools\n", num_threads, num_pools);
+    printf("Argobots %d ES, %d Pools\n", num_threads, num_pools);
     ABT_xstream_self(&main_team->master);
 
     main_team->team = (ABT_xstream *) malloc(sizeof (ABT_xstream) * num_threads);
@@ -132,233 +133,4 @@ void glt_finalize() {
     qthread_finalize();
 #endif        
 }
-
-GLT_ult * glt_ult_malloc(int number_of_ult) {
-    GLT_ult * ults = (GLT_ult *) malloc(sizeof (GLT_ult) * number_of_ult);
-    return ults;
-}
-
-GLT_tasklet * glt_tasklet_malloc(int number_of_tasklets) {
-    GLT_tasklet * tasklets = (GLT_tasklet *) malloc(sizeof (GLT_tasklet) * number_of_tasklets);
-    return tasklets;
-}
-
-void glt_ult_creation(void(*thread_func)(void *), void *arg, GLT_ult *new_ult) {
-#ifdef ARGOBOTS
-    ABT_xstream xstream;
-    ABT_xstream_self(&xstream);
-    ABT_pool pool;
-    ABT_xstream_get_main_pools(xstream, 1, &pool);
-    ABT_thread_create(pool, thread_func, arg, ABT_THREAD_ATTR_NULL, new_ult);
-#endif
-#ifdef MASSIVETHREADS
-    *new_ult = myth_create((void *) thread_func, arg);
-#endif
-#ifdef QTHREADS
-    qthread_fork((void *) thread_func, arg, new_ult);
-#endif
-}
-
-void glt_ult_creation_to(void(*thread_func)(void *), void *arg, GLT_ult *new_ult, int dest) {
-#ifdef ARGOBOTS
-    ABT_pool pool;
-    ABT_xstream_get_main_pools(main_team->team[dest], 1, &pool);
-    ABT_thread_create(pool, thread_func, arg, ABT_THREAD_ATTR_NULL, new_ult);
-#endif
-#ifdef MASSIVETHREADS
-    glt_ult_creation(thread_func, arg, new_ult);
-#endif
-#ifdef QTHREADS
-    qthread_fork_to((void *) thread_func, arg, new_ult, dest);
-#endif
-}
-
-void glt_tasklet_creation(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult) {
-#ifdef ARGOBOTS
-    ABT_xstream xstream;
-    ABT_xstream_self(&xstream);
-    ABT_pool pool;
-    ABT_xstream_get_main_pools(xstream, 1, &pool);
-    ABT_task_create(pool, thread_func, arg, new_ult);
-#endif
-#ifdef MASSIVETHREADS
-    *new_ult = myth_create((void *) thread_func, arg);
-#endif
-#ifdef QTHREADS
-    qthread_fork((void *) thread_func, arg, new_ult);
-#endif
-}
-
-void glt_tasklet_creation_to(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult, int dest) {
-#ifdef ARGOBOTS
-    ABT_pool pool;
-    ABT_xstream_get_main_pools(main_team->team[dest], 1, &pool);
-    ABT_task_create(pool, thread_func, arg, new_ult);
-#endif
-#ifdef MASSIVETHREADS
-    glt_ult_creation(thread_func, arg, new_ult);
-#endif
-#ifdef QTHREADS
-    qthread_fork_to((void *) thread_func, arg, new_ult, dest);
-#endif
-}
-
-void glt_yield() {
-#ifdef ARGOBOTS
-    ABT_thread_yield();
-#endif
-#ifdef MASSIVETHREADS
-    myth_yield(0);
-#endif
-#ifdef QTHREADS
-    qthread_yield();
-#endif
-}
-
-void glt_yield_to(GLT_ult ult) {
-#ifdef ARGOBOTS
-    ABT_thread_yield_to(ult);
-#endif
-#ifdef MASSIVETHREADS
-    myth_yield(0);
-#endif
-#ifdef QTHREADS
-    qthread_yield();
-#endif
-}
-
-void glt_ult_join(GLT_ult *ult) {
-#ifdef ARGOBOTS
-    ABT_thread_free(ult);
-#endif
-#ifdef MASSIVETHREADS
-    myth_join(*ult, NULL);
-#endif
-#ifdef QTHREADS
-    qthread_readFF(NULL, ult);
-#endif
-}
-
-void glt_tasklet_join(GLT_tasklet *tasklet) {
-#ifdef ARGOBOTS
-    ABT_task_free(tasklet);
-#endif
-#ifdef MASSIVETHREADS
-    myth_join(*tasklet, NULL);
-#endif
-#ifdef QTHREADS
-    qthread_readFF(NULL, tasklet);
-#endif
-}
-
-void glt_mutex_create(GLT_mutex * mutex){
-#ifdef ARGOBOTS
-    ABT_mutex_create(mutex);
-#endif
-#ifdef MASSIVETHREADS
-    *mutex = myth_mutex_create();
-#endif
-#ifdef QTHREADS
-    
-#endif
-}
-void glt_mutex_lock(GLT_mutex mutex){
-#ifdef ARGOBOTS
-    ABT_mutex_lock(mutex);
-#endif
-#ifdef MASSIVETHREADS
-    myth_mutex_lock(mutex);
-#endif
-#ifdef QTHREADS
-    qthread_lock(&mutex);
-#endif    
-}
-void glt_mutex_unlock(GLT_mutex mutex){
-#ifdef ARGOBOTS
-    ABT_mutex_unlock(mutex);
-#endif
-#ifdef MASSIVETHREADS
-    myth_mutex_unlock(mutex);
-#endif
-#ifdef QTHREADS
-    qthread_unlock(&mutex);
-#endif     
-}
-
-void glt_mutex_free(GLT_mutex * mutex){
-#ifdef ARGOBOTS
-    ABT_mutex_free(mutex);
-#endif
-#ifdef MASSIVETHREADS
-    myth_mutex_destroy(*mutex);
-#endif
-#ifdef QTHREADS
-#endif     
-}
-
-void glt_barrier_create(int num_waiters, GLT_barrier *barrier){
-#ifdef ARGOBOTS
-    ABT_barrier_create(num_waiters, barrier);
-#endif
-#ifdef MASSIVETHREADS
-    *barrier = myth_barrier_create(num_waiters);
-#endif
-#ifdef QTHREADS
-    barrier = qt_barrier_create(num_waiters, UPLOCK);
-#endif     
-}
-
-void glt_barrier_free(GLT_barrier *barrier){
-#ifdef ARGOBOTS
-    ABT_barrier_free(barrier);
-#endif
-#ifdef MASSIVETHREADS
-    myth_barrier_destroy(*barrier);
-#endif
-#ifdef QTHREADS
-    qt_barrier_destroy(barrier);
-#endif     
-}
-
-
-void glt_barrier_wait(GLT_barrier *barrier){
-#ifdef ARGOBOTS
-    ABT_barrier_wait(*barrier);
-#endif
-#ifdef MASSIVETHREADS
-    myth_barrier_wait(*barrier);
-#endif
-#ifdef QTHREADS
-    qt_barrier_enter(barrier);
-#endif     
-}
-
-
-
-int glt_get_num_threads() {
-#ifdef ARGOBOTS
-    return main_team->num_xstreams;
-#endif
-#ifdef MASSIVETHREADS
-    return main_team->num_workers;
-#endif
-#ifdef QTHREADS
-    return main_team->num_shepherds;
-#endif
-}
-
-int glt_get_thread_num() {
-#ifdef ARGOBOTS
-    int rank;
-    ABT_xstream_self_rank(&rank);
-    return rank;
-#endif
-#ifdef MASSIVETHREADS
-    return myth_get_worker_num();
-#endif
-#ifdef QTHREADS
-    return qthread_shep();
-#endif
-}
-
 

@@ -66,7 +66,7 @@ int main(int argc, char *argv[]) {
         a[i] = i * 1.0f;
     }
 
-
+    glt_init(argc,argv);
     args = (vector_scal_args_t *) malloc(sizeof (vector_scal_args_t)
             * ntasks);
 
