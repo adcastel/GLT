@@ -117,6 +117,10 @@ void glt_yield_to(GLT_ult ult);
 void glt_ult_join(GLT_ult *ult);
 void glt_tasklet_join(GLT_tasklet *tasklet);
 
+//void glt_ult_migrate(GLT_ult ult);
+//void glt_ult_migrate_to(GLT_ult ult, int dest);
+//void glt_ult_get_id(GLT_ult ult, GLT_ult_id * id);
+
 void glt_mutex_create(GLT_mutex * mutex);
 void glt_mutex_lock(GLT_mutex mutex);
 void glt_mutex_unlock(GLT_mutex mutex);

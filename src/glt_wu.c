@@ -119,4 +119,38 @@ void glt_tasklet_join(GLT_tasklet *tasklet) {
     qthread_readFF(NULL, tasklet);
 #endif
 }
-
+/*
+void glt_ult_migrate(GLT_ult ult){
+#ifdef ARGOBOTS
+    ABT_task_free(tasklet);
+#endif
+#ifdef MASSIVETHREADS
+    myth_join(*tasklet, NULL);
+#endif
+#ifdef QTHREADS
+    qthread_readFF(NULL, tasklet);
+#endif
+}
+void glt_ult_migrate_to(GLT_ult ult, int dest){
+#ifdef ARGOBOTS
+    ABT_task_free(tasklet);
+#endif
+#ifdef MASSIVETHREADS
+    myth_join(*tasklet, NULL);
+#endif
+#ifdef QTHREADS
+    qthread_readFF(NULL, tasklet);
+#endif   
+}
+void glt_ult_get_id(GLT_ult ult, GLT_ult_id * id){
+#ifdef ARGOBOTS
+    ABT_thread_get_id (ult, id);
+#endif
+#ifdef MASSIVETHREADS
+    
+#endif
+#ifdef QTHREADS
+    *id=qthread_id();
+#endif   
+}
+*/
