@@ -353,7 +353,8 @@ static inline void glt_mutex_create(GLT_mutex * mutex){
     *mutex = myth_mutex_create();
 #endif
 #ifdef QTHREADS
-    
+    mutex = (GLT_mutex *)malloc(sizeof(GLT_mutex));
+
 #endif
 }
 static inline void glt_mutex_lock(GLT_mutex mutex){
@@ -384,11 +385,13 @@ static inline void glt_mutex_free(GLT_mutex * mutex){
     ABT_mutex_free(mutex);
 #endif
 #ifdef MASSIVETHREADS
-    myth_mutex_destroy(mutex);
+    myth_mutex_destroy(*mutex);
 #endif
 #ifdef QTHREADS
+    free(mutex);
 #endif     
 }
+
 
 static inline void glt_barrier_create(int num_waiters, GLT_barrier *barrier){
 #ifdef ARGOBOTS

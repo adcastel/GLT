@@ -11,7 +11,8 @@ void glt_mutex_create(GLT_mutex * mutex){
     *mutex = myth_mutex_create();
 #endif
 #ifdef QTHREADS
-    
+    mutex = (GLT_mutex *)malloc(sizeof(GLT_mutex));
+
 #endif
 }
 void glt_mutex_lock(GLT_mutex mutex){
@@ -45,6 +46,7 @@ void glt_mutex_free(GLT_mutex * mutex){
     myth_mutex_destroy(*mutex);
 #endif
 #ifdef QTHREADS
+    free(mutex);
 #endif     
 }
 
