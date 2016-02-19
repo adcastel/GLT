@@ -35,13 +35,13 @@ else
 		HOM=$HOMEQTH
 		HOMEGLT=$HOMEGLT/qthreads
 	else
-		if[ $lib -eq "3" ];
+		if [ $lib -eq "3" ];
 		then
 			HOM=$HOMEMTH
 			HOMEGLT=$HOMEGLT/massivethreads
 		else
 			echo "Error. $lib is not a valid value"
-			exit
+			return
 		fi
 	fi
 fi
