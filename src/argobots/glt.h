@@ -13,7 +13,6 @@
 
 
 
-#ifdef ARGOBOTS
 #include <stdio.h>
 #include <stdlib.h>
 #include <abt.h>
@@ -37,59 +36,9 @@ typedef struct glt_team {
 } glt_team_t;
 
 
-#endif
-#ifdef MASSIVETHREADS
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
-#define _GNU_SOURCE             /* See feature_test_macros(7) */
-
-#include <sched.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <assert.h>
-#include <unistd.h>
-#include <myth.h>
-
-#define GLT_ult myth_thread_t
-#define GLT_tasklet myth_thread_t
-#define GLT_thread myth_thread_t
-#define GLT_mutex myth_mutex_t
-#define GLT_barrier myth_barrier_t
-#define GLT_cond myth_cond_t
 
 
-#define GLT_ult_attribute NULL
-
-typedef struct glt_team {
-    int num_workers;
-} glt_team_t;
-
-#endif
-
-#ifdef QTHREADS
-#include <stdio.h>
-#include <stdlib.h>
-#include <qthread/qthread.h>
-# include <qthread/barrier.h>
-
-#define GLT_ult aligned_t
-#define GLT_tasklet aligned_t
-#define GLT_thread aligned_t
-#define GLT_mutex aligned_t
-#define GLT_barrier  qt_barrier_t
-#define GLT_cond aligned_t
-
-
-typedef struct glt_team {
-    int num_shepherds;
-    int num_workers_per_shepherd;
-} glt_team_t;
-
-#endif
-
-#define GLT_VERSION "You are using glt 0.1v (adcastel@uji.es)"
+#define GLT_VERSION "You are using glt 0.1v over Argobots (adcastel@uji.es) "
 /* Main team structure*/
 
 glt_team_t * main_team;
