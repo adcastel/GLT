@@ -227,6 +227,37 @@ static inline void glt_cond_broadcast(GLT_cond cond)
     ABT_cond_broadcast (cond);
 }
 
+static inline double glt_get_wtime() 
+{
+    return ABT_get_wtime();
+}
+
+static inline void glt_timer_create(GLT_timer * timer) 
+{
+    ABT_timer_create(timer);
+}
+
+static inline void glt_timer_free(GLT_timer * timer) 
+{
+    ABT_timer_free(timer);
+}
+
+static inline void glt_timer_start(GLT_timer timer) 
+{
+    ABT_timer_start(timer);
+}
+
+static inline void glt_timer_stop(GLT_timer timer) 
+{
+    ABT_timer_stop(timer);
+}
+
+static inline void glt_timer_get_secs(GLT_timer timer, double *secs) 
+{
+    ABT_timer_read(timer,secs);
+}
+
+
 static inline int glt_get_num_threads() 
 {
     return main_team->num_xstreams;

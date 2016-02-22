@@ -25,6 +25,7 @@
 #define GLT_mutex ABT_mutex
 #define GLT_barrier ABT_barrier
 #define GLT_cond ABT_cond
+#define GLT_timer ABT_timer
 
  
 typedef struct glt_team {
@@ -80,6 +81,13 @@ void glt_cond_free(GLT_cond *cond);
 void glt_cond_signal(GLT_cond cond);
 void glt_cond_wait(GLT_cond cond, GLT_mutex mutex);
 void glt_cond_broadcast(GLT_cond cond);
+
+double glt_get_wtime();
+void glt_timer_create(GLT_timer * timer);
+void glt_timer_free(GLT_timer * timer);
+void glt_timer_start(GLT_timer timer);
+void glt_timer_stop(GLT_timer timer);
+void glt_timer_get_secs(GLT_timer timer, double *secs);
 
 int glt_get_thread_num();
 int glt_get_num_threads();
