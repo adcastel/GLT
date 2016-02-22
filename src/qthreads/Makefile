@@ -5,7 +5,7 @@ CC := gcc
 CFLAGS := -fPIC -I. -I../ $(QTHFLAGS) 
 
 OBJECTS := glt.o glt_wu.o glt_util.o glt_mutex.o glt_barrier.o \
-	glt_condition.o
+	glt_condition.o glt_timer.o
 
 
 qth: $(OBJECTS)

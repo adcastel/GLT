@@ -13,8 +13,12 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/time.h>
+
 #include <qthread/qthread.h>
 # include <qthread/barrier.h>
+#include <qthread/qtimer.h>
+
 
 #define GLT_ult aligned_t
 #define GLT_tasklet aligned_t
@@ -210,6 +214,38 @@ static inline void glt_cond_wait(GLT_cond cond, GLT_mutex mutex)
 static inline void glt_cond_broadcast(GLT_cond cond)
 {
     qthread_empty(&cond);
+}
+
+static inline double glt_get_wtime() 
+{
+    struct timeval time;
+    gettimeofday(&time,NULL);
+    return (time.tv_sec * 1000000 + time.tv_usec)/1000000.0;
+}
+
+static inline void glt_timer_create(GLT_timer * timer) 
+{
+    *timer = qtimer_create();
+}
+
+static inline void glt_timer_free(GLT_timer * timer) 
+{
+    qtimer_destroy(*timer);
+}
+
+static inline void glt_timer_start(GLT_timer timer) 
+{
+    qtimer_start(timer);
+}
+
+static inline void glt_timer_stop(GLT_timer timer) 
+{
+    qtimer_stop(timer);
+}
+
+static inline void glt_timer_get_secs(GLT_timer timer, double *secs) 
+{
+    *secs = qtimer_secs(timer);
 }
 
 static inline int glt_get_num_threads() 
