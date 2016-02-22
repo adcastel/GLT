@@ -15,6 +15,8 @@
 
 #define _GNU_SOURCE             /* See feature_test_macros(7) */
 
+#include <sys/time.h>
+
 #include <sched.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -22,15 +24,19 @@
 #include <unistd.h>
 #include <myth.h>
 
+typedef struct myth_timer {
+    struct timeval start;
+    struct timeval end;
+} myth_timer_t;
+
 #define GLT_ult myth_thread_t
 #define GLT_tasklet myth_thread_t
 #define GLT_thread myth_thread_t
 #define GLT_mutex myth_mutex_t
 #define GLT_barrier myth_barrier_t
 #define GLT_cond myth_cond_t
+#define GLT_timer myth_timer_t
 
-
-#define GLT_ult_attribute NULL
 
 typedef struct glt_team {
     int num_workers;
@@ -79,6 +85,13 @@ void glt_cond_free(GLT_cond *cond);
 void glt_cond_signal(GLT_cond cond);
 void glt_cond_wait(GLT_cond cond, GLT_mutex mutex);
 void glt_cond_broadcast(GLT_cond cond);
+
+double glt_get_wtime();
+void glt_timer_create(GLT_timer * timer);
+void glt_timer_free(GLT_timer * timer);
+void glt_timer_start(GLT_timer timer);
+void glt_timer_stop(GLT_timer timer);
+void glt_timer_get_secs(GLT_timer timer, double *secs);
 
 int glt_get_thread_num();
 int glt_get_num_threads();

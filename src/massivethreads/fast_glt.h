@@ -17,6 +17,8 @@
 
 #define _GNU_SOURCE             /* See feature_test_macros(7) */
 
+#include <sys/time.h>
+
 #include <sched.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,15 +26,19 @@
 #include <unistd.h>
 #include <myth.h>
 
+typedef struct myth_timer {
+    struct timeval start;
+    struct timeval end;
+} myth_timer_t;
+
 #define GLT_ult myth_thread_t
 #define GLT_tasklet myth_thread_t
 #define GLT_thread myth_thread_t
 #define GLT_mutex myth_mutex_t
 #define GLT_barrier myth_barrier_t
 #define GLT_cond myth_cond_t
+#define GLT_timer myth_timer_t
 
-
-#define GLT_ult_attribute NULL
 
 typedef struct glt_team {
     int num_workers;
@@ -194,6 +200,39 @@ static inline void glt_cond_wait(GLT_cond cond, GLT_mutex mutex)
 static inline void glt_cond_broadcast(GLT_cond cond)
 {
     myth_cond_broadcast(cond);
+}
+
+static inline double glt_get_wtime() 
+{
+    struct timeval time;
+    gettimeofday(&time,NULL);
+    return (time.tv_sec * 1000000 + time.tv_usec)/1000000.0;
+}
+
+static inline void glt_timer_create(GLT_timer * timer) 
+{
+    timer = (GLT_timer *)malloc (sizeof(GLT_timer));
+}
+
+static inline void glt_timer_free(GLT_timer * timer) 
+{
+    free(timer);
+}
+
+static inline void glt_timer_start(GLT_timer timer) 
+{
+    gettimeofday(&timer.start,NULL);
+}
+
+static inline void glt_timer_stop(GLT_timer timer) 
+{
+    gettimeofday(&timer.end,NULL);
+}
+
+static inline void glt_timer_get_secs(GLT_timer timer, double *secs) 
+{
+    *secs = ((timer.end.tv_sec * 1000000 + timer.end.tv_usec)
+		  - (timer.start.tv_sec * 1000000 + timer.start.tv_usec))/1000000.0;
 }
 
 static inline int glt_get_num_threads() 
