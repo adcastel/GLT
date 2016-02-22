@@ -6,69 +6,10 @@
  */
 
 
-
-
 #ifndef GLT_H
 #define	GLT_H
 
 
-
-#ifdef ARGOBOTS
-#include <stdio.h>
-#include <stdlib.h>
-#include <abt.h>
-
-
-
-#define GLT_ult ABT_thread
-#define GLT_tasklet ABT_task
-#define GLT_thread ABT_xstream
-#define GLT_mutex ABT_mutex
-#define GLT_barrier ABT_barrier
-#define GLT_cond ABT_cond
-
- 
-typedef struct glt_team {
-    ABT_xstream master;
-    ABT_xstream *team;
-    int num_xstreams;
-    int num_pools;
-    ABT_pool *pools;
-} glt_team_t;
-
-
-#endif
-#ifdef MASSIVETHREADS
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
-#define _GNU_SOURCE             /* See feature_test_macros(7) */
-
-#include <sched.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <assert.h>
-#include <unistd.h>
-#include <myth.h>
-
-#define GLT_ult myth_thread_t
-#define GLT_tasklet myth_thread_t
-#define GLT_thread myth_thread_t
-#define GLT_mutex myth_mutex_t
-#define GLT_barrier myth_barrier_t
-#define GLT_cond myth_cond_t
-
-
-#define GLT_ult_attribute NULL
-
-typedef struct glt_team {
-    int num_workers;
-} glt_team_t;
-
-#endif
-
-#ifdef QTHREADS
 #include <stdio.h>
 #include <stdlib.h>
 #include <qthread/qthread.h>
@@ -81,15 +22,12 @@ typedef struct glt_team {
 #define GLT_barrier  qt_barrier_t
 #define GLT_cond aligned_t
 
-
 typedef struct glt_team {
     int num_shepherds;
     int num_workers_per_shepherd;
 } glt_team_t;
 
-#endif
-
-#define GLT_VERSION "You are using glt 0.1v (adcastel@uji.es)"
+#define GLT_VERSION "You are using glt 0.1v over Qthreads (adcastel@uji.es)"
 /* Main team structure*/
 
 glt_team_t * main_team;
