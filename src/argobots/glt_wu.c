@@ -54,7 +54,6 @@ void glt_yield()
 void glt_yield_to(GLT_ult ult) 
 {
     ABT_thread_yield_to(ult);
-
 }
 
 void glt_ult_join(GLT_ult *ult) 
