@@ -152,6 +152,12 @@ static inline void glt_tasklet_join(GLT_tasklet *tasklet)
     qthread_readFF(NULL, tasklet);
 }
 
+static inline uint64_t glt_get_ult_id(GLT_ult ult)
+{
+    uint64_t id = qthread_id();
+    return id;
+}
+
 static inline void glt_mutex_create(GLT_mutex * mutex)
 {
     mutex = (GLT_mutex *)malloc(sizeof(GLT_mutex));
