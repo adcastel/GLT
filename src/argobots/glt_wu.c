@@ -65,3 +65,10 @@ void glt_tasklet_join(GLT_tasklet *tasklet)
 {
     ABT_task_free(tasklet);
 }
+
+uint64_t glt_get_ult_id(GLT_ult ult)
+{
+    uint64_t id;
+    ABT_thread_get_id (ult, &id);
+    return id;
+}
