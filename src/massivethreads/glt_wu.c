@@ -51,3 +51,8 @@ void glt_tasklet_join(GLT_tasklet *tasklet)
 {
     myth_join(*tasklet, NULL);
 }
+
+uint64_t glt_get_ult_id(GLT_ult ult){
+    printf("Warning: this feature is not supported in MassiveThreads\n");
+    return 0;
+}

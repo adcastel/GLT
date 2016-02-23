@@ -22,6 +22,7 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <unistd.h>
+#include <stdint.h>
 #include <myth.h>
 
 typedef struct myth_timer {
@@ -70,6 +71,8 @@ void glt_yield_to(GLT_ult ult);
 
 void glt_ult_join(GLT_ult *ult);
 void glt_tasklet_join(GLT_tasklet *tasklet);
+
+uint64_t glt_get_ult_id(GLT_ult ult);
 
 void glt_mutex_create(GLT_mutex * mutex);
 void glt_mutex_lock(GLT_mutex mutex);

@@ -24,6 +24,7 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <unistd.h>
+#include <stdint.h>
 #include <myth.h>
 
 typedef struct myth_timer {
@@ -141,6 +142,11 @@ static inline void glt_ult_join(GLT_ult *ult)
 static inline void glt_tasklet_join(GLT_tasklet *tasklet) 
 {
     myth_join(*tasklet, NULL);
+}
+
+static inline uint64_t glt_get_ult_id(GLT_ult ult){
+    printf("Warning: this feature is not supported in MassiveThreads\n");
+    return 0;
 }
 
 static inline void glt_mutex_create(GLT_mutex * mutex)
