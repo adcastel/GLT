@@ -39,6 +39,9 @@
 #define GLT_pool_access ABT_pool_access
 #define GLT_unit ABT_unit
 #define GLT_sched ABT_sched
+#define GLT_sched_config ABT_sched_config
+#define GLT_sched_def ABT_sched_def
+#define GLT_sched_predef ABT_sched_predef
  
 typedef struct glt_team {
     ABT_xstream master;
@@ -90,8 +93,8 @@ static inline void glt_init(int argc, char * argv[])
 
     main_team->num_xstreams = num_threads;
     main_team->num_pools = num_pools;
-    main_team->team = (ABT_xstream *) malloc(sizeof (ABT_xstream) * num_threads*2);
-    main_team->pools = (ABT_pool *) malloc(sizeof (ABT_pool) * num_pools*2);
+    main_team->team = (ABT_xstream *) malloc(sizeof (ABT_xstream) * min(num_threads,36));
+    main_team->pools = (ABT_pool *) malloc(sizeof (ABT_pool) * min(num_threads,36));
 
     for (int i = 0; i < num_pools; i++) {
         ABT_pool_create_basic(ABT_POOL_FIFO, ABT_POOL_ACCESS_MPMC, ABT_TRUE,
@@ -445,6 +448,8 @@ static inline void glt_pool_create_basic (GLT_pool_kind kind,
         GLT_pool_access access, GLT_bool automatic, GLT_pool *newpool)
 {
     ABT_pool_create_basic (kind, access, automatic, newpool);
+    main_team->pools[num_pools]=newpool;
+    num_pools++;
 }
 
 static inline void glt_pool_free (GLT_pool *pool)
@@ -501,5 +506,90 @@ static inline void glt_pool_get_id (GLT_pool pool, int *id)
 {
     ABT_pool_get_id (pool, id);
 }
+
+static inline int glt_can_manage_scheduler()
+{
+    return 1;
+}
+
+static inline void glt_scheduler_config_create(GLT_sched_config *config,...)
+{
+    ABT_sched_config_create (config,...);	
+}
+
+static inline void glt_scheduler_config_read(GLT_sched_config config, int num_vars, ...)
+{
+    ABT_sched_config_read (config, num_vars,...):
+}
+
+static inline void glt_scheduler_config_free (GLT_sched_config *config)
+{ 	
+    ABT_sched_config_free (config);
+}
+
+static inline void glt_scheduler_create (GLT_sched_def *def, int num_pools, 
+        GLT_pool *pools, GLT_sched_config config, GLT_sched *newsched)
+{
+    ABT_sched_create (def, num_pools, pools, config, newsched);
+}
+
+static inline void glt_schededuler_create_basic (GLT_sched_predef predef, 
+        int num_pools, GLT_pool *pools, GLT_sched_config config, 
+        GLT_sched *newsched)
+}
+    ABT_sched_create_basic (predef, num_pools, pools, config, newsched);
+}
+
+static inline void glt_scheduler_free (GLT_sched *sched)
+{
+    ABT_sched_free (sched);
+}
+
+static inline void glt_scheduler_get_num_pools(GLT_sched sched, int *num_pools)
+{
+    ABT_sched_get_num_pools ( sched, num_pools);
+}
+
+static inline void glt_scheduler_get_pools(GLT_sched sched, int max_pools, 
+        int idx, GLT_pool *pools)
+{
+    ABT_sched_get_pools ( sched, max_pools, idx, pools);
+}
+
+static inline void glt_scheduler_finish (GLT_sched sched)
+{
+    ABT_sched_finish (sched);
+}
+
+static inline void glt_scheduler_exit (GLT_sched sched)
+{
+    ABT_sched_exit (sched);
+}
+
+static inline void glt_scheduler_has_to_stop (GLT_sched sched, GLT_bool *stop)
+{
+    ABT_sched_has_to_stop (sched, stop);
+}
+
+static inline void glt_scheduler_set_data (GLT_sched sched, void *data)
+{
+    ABT_sched_set_data (sched,data);
+}
+
+static inline void glt_scheduler_get_data(ABT_sched sched, void **data)
+{
+    ABT_sched_get_data (ched, data);
+}
+
+static inline void glt_scheduler_get_size (GLT_sched sched, size_t *size)
+{
+    ABT_sched_get_size (sched, size);
+}
+
+static inline void glt_scheduler_get_total_size(GLT_sched sched, size_t *size)
+{
+    ABT_sched_get_total_size (sched, size);
+}
+
 #endif	/* FAST_GLT_H */
 
