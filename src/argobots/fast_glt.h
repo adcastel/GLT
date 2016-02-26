@@ -591,5 +591,39 @@ static inline void glt_scheduler_get_total_size(GLT_sched sched, size_t *size)
     ABT_sched_get_total_size (sched, size);
 }
 
+static inline int glt_can_self()
+{
+    return 1;
+}
+
+static inline void glt_self_get_type (GLT_unit_type *type)
+{
+    ABT_self_get_type (type);
+}
+static inline void glt_self_is_primary (GLT_bool *flag)
+{
+int 	ABT_self_is_primary (flag);
+}
+
+static inline void glt_self_on_primary_xstream (GLT_bool *flag)
+{
+    ABT_self_on_primary_xstream (flag);
+}
+
+static inline void glt_self_get_last_pool_id (int *pool_id)
+{
+    ABT_self_get_last_pool_id (pool_id);
+}
+
+static inline void glt_self_suspend (void)
+{
+    ABT_self_suspend ();
+    
+}
+
+static inline void glt_self_get_arg (void **arg)
+{
+    ABT_self_get_arg (arg);
+}
 #endif	/* FAST_GLT_H */
 
