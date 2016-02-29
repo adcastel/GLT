@@ -46,6 +46,7 @@
 #define GLT_tasklet_state ABT_task_state
 #define GLT_ult_state ABT_thread_state
 #define GLT_ult_id ABT_thread_id
+#define GLT_ult_attr ABT_thread_attr
  
 typedef struct glt_team {
     ABT_xstream master;
@@ -634,107 +635,107 @@ static inline int glt_can_manage_threads()
     return 1;
 }
 
-static inline int glt_thread_create (GLT_sched sched, GLT_thread *newthread)
+static inline void glt_thread_create (GLT_sched sched, GLT_thread *newthread)
 {
     ABT_xstream_create (sched, newthread);
     main_team->team[main_team->num_xstreams]=newthread;
     main_team->num_xstreams++;
 }
 
-static inline int glt_thread_create_basic(GLT_sched_predef predef, int num_pools,
+static inline void glt_thread_create_basic(GLT_sched_predef predef, int num_pools,
         GLT_pool *pools, GLT_sched_config config, GLT_thread *newthread)
 {
     ABT_xstream_create_basic (predef, num_pools, pools, config, newthread);
     main_team->team[main_team->num_xstreams]=newthread;
     main_team->num_xstreams++;
 } 
-static inline int glt_thread_start(GLT_thread thread)
+static inline void glt_thread_start(GLT_thread thread)
 {
     ABT_xstream_start (thread);
 }
 
-static inline int glt_thread_free(GLT_thread *thread)
+static inline void glt_thread_free(GLT_thread *thread)
 {
     ABT_xstream_free (thread);
 }
 
-static inline int glt_thread_join(GLT_thread thread)
+static inline void glt_thread_join(GLT_thread thread)
 {
     ABT_xstream_join (thread);
 }
 
-static inline int glt_thread_exit()
+static inline void glt_thread_exit()
 {
     ABT_xstream_exit ();
 }
 
-static inline int glt_thread_cancel(GLT_thread *thread)
+static inline void glt_thread_cancel(GLT_thread *thread)
 {
     ABT_xstream_cancel (thread);
 }
 
-static inline int glt_thread_self(GLT_thread *thread)
+static inline void glt_thread_self(GLT_thread *thread)
 {
     ABT_xstream_self (thread);
 }
 
-static inline int glt_thread_self_rank(int *rank)
+static inline void glt_thread_self_rank(int *rank)
 {
     ABT_xstream_self_rank (rank);
 }
 
-static inline int glt_thread_get_rank(GLT_thread thread, int *rank)
+static inline void glt_thread_get_rank(GLT_thread thread, int *rank)
 {
     ABT_xstream_get_rank (thread, rank);
 }
 
-static inline int glt_thread_set_main_sched (GLT_thread thread, GLT_sched sched)
+static inline void glt_thread_set_main_sched (GLT_thread thread, GLT_sched sched)
 {
     ABT_xstream_set_main_sched (thread, sched);
 }
-static inline int glt_thread_set_main_sched_basic (GLT_thread thread, 
+static inline void glt_thread_set_main_sched_basic (GLT_thread thread, 
         GLT_sched_predef predef, int num_pools, GLT_pool *pools)
 {
     ABT_xstream_set_main_sched_basic (thread, predef, num_pools, pools);
 }
 
-static inline int glt_thread_get_main_sched (GLT_thread thread, GLT_sched *sched)
+static inline void glt_thread_get_main_sched (GLT_thread thread, GLT_sched *sched)
 {
     ABT_xstream_get_main_sched (thread, sched);
 }
 
-static inline int glt_thread_get_main_pools (GLT_thread thread, int max_pools, 
+static inline void glt_thread_get_main_pools (GLT_thread thread, int max_pools, 
         GLT_pool *pools)
 {
     ABT_xstream_get_main_pools (thread, max_pools, pools);
 }
 
-static inline int glt_thread_get_state (GLT_thread thread, GLT_thread_state *state)
+static inline void glt_thread_get_state (GLT_thread thread, GLT_thread_state *state)
 {
     ABT_xstream_get_state (thread, state);
 }
 
-static inline int glt_thread_equal (GLT_thread thread1, GLT_thread thread2, GLT_bool *result)
+static inline void glt_thread_equal (GLT_thread thread1, GLT_thread thread2, GLT_bool *result)
 {
     ABT_xstream_equal (thread1, thread2, result);
 }
 
-static inline int glt_thread_get_num (int *num_xstreams)
+static inline void glt_thread_get_num (int *num_xstreams)
 {
     ABT_xstream_get_num (num_xstreams);
 }
  
-static inline int glt_thread_is_primary (GLT_thread thread, GLT_bool *flag)
+static inline void glt_thread_is_primary (GLT_thread thread, GLT_bool *flag)
 {
     ABT_xstream_is_primary (thread, flag);
 }
 
-static inline int glt_thread_run_unit (GLT_unit unit, GLT_pool pool)
+static inline void glt_thread_run_unit (GLT_unit unit, GLT_pool pool)
 {
     ABT_xstream_run_unit (unit,pool);
 }
 
-static inline int glt_thread_check_events(GLT_sched sched)
+static inline void glt_thread_check_events(GLT_sched sched)
 {
     ABT_xstream_check_events (sched);
 }
@@ -744,61 +745,61 @@ static inline int can_extended_tasklets()
     return 1;
 }
 
-static inline int glt_tasklet_cancel (GLT_tasklet tasklet)
+static inline void glt_tasklet_cancel (GLT_tasklet tasklet)
 {
     ABT_task_cancel (tasklet);
 }
 
-static inline int glt_tasklet_self(GLT_tasklet *tasklet)
+static inline void glt_tasklet_self(GLT_tasklet *tasklet)
 {
     ABT_task_self (tasklet);
 }
 
-static inline int glt_tasklet_get_thread(GLT_tasklet tasklet, GLT_thread *thread)
+static inline void glt_tasklet_get_thread(GLT_tasklet tasklet, GLT_thread *thread)
 {
     ABT_task_get_xstream (tasklet, thread);
 }
 
-static inline int glt_tasklet_get_state(GLT_tasklet tasklet, GLT_tasklet_state *state)
+static inline void glt_tasklet_get_state(GLT_tasklet tasklet, GLT_tasklet_state *state)
 {
     ABT_task_get_state (tasklet, state);
 }
-static inline int glt_tasklet_get_last_pool(GLT_tasklet tasklet, GLT_pool *pool)
+static inline void glt_tasklet_get_last_pool(GLT_tasklet tasklet, GLT_pool *pool)
 {
     ABT_task_get_last_pool (tasklet, pool);
 }
 
-static inline int glt_tasklet_get_last_pool_id(GLT_tasklet tasklet,int *id)
+static inline void glt_tasklet_get_last_pool_id(GLT_tasklet tasklet,int *id)
 {
     ABT_task_get_last_pool_id (tasklet, id);
 }
 
-static inline int glt_tasklet_set_migratable(GLT_tasklet tasklet, GLT_bool flag)
+static inline void glt_tasklet_set_migratable(GLT_tasklet tasklet, GLT_bool flag)
 {
     ABT_task_set_migratable (tasklet, flag);
 }
 
-static inline int glt_tasklet_is_migratable(GLT_tasklet tasklet,GLT_bool flag)
+static inline void glt_tasklet_is_migratable(GLT_tasklet tasklet,GLT_bool flag)
 {
     ABT_task_is_migratable (tasklet, flag);
 }
 
-static inline int glt_tasklet_equal(GLT_tasklet tasklet1, GLT_tasklet tasklet2, GLT_bool *result)
+static inline void glt_tasklet_equal(GLT_tasklet tasklet1, GLT_tasklet tasklet2, GLT_bool *result)
 {
     ABT_task_equal (tasklet1, tasklet2, result);
 }
 
-static inline int glt_tasklet_retain(GLT_tasklet tasklet)
+static inline void glt_tasklet_retain(GLT_tasklet tasklet)
 {
     ABT_task_retain (tasklet);
 }
 
-static inline int glt_tasklet_release(GLT_tasklet tasklet)
+static inline void glt_tasklet_release(GLT_tasklet tasklet)
 {
     ABT_task_release (tasklet);
 }
 
-static inline int glt_tasklet_get_arg(GLT_tasklet tasklet, void **arg)
+static inline void glt_tasklet_get_arg(GLT_tasklet tasklet, void **arg)
 {
     ABT_task_get_arg (tasklet, arg);
 }
@@ -808,109 +809,140 @@ static inline int can_extended_ults()
     return 1;
 }
 
-static inline int glt_ult_exit()
+static inline void glt_ult_exit()
 {
     ABT_thread_exit ();
 }
 
-static inline int glt_ult_cancel(GLT_ult ult)
+static inline void glt_ult_cancel(GLT_ult ult)
 {
     ABT_thread_cancel (ult);
 }
 
-static inline int glt_ult_self(GLT_ult *ult)
+static inline void glt_ult_self(GLT_ult *ult)
 {
     ABT_thread_self (ult);
 }
 
-static inline int glt_ult_get_state(GLT_ult ult, GLT_ult_state *state)
+static inline void glt_ult_get_state(GLT_ult ult, GLT_ult_state *state)
 {
     ABT_thread_get_state (ult, state);
 }
 
-static inline int glt_ult_get_last_pool(GLT_ult ult, GLT_pool *pool)
+static inline void glt_ult_get_last_pool(GLT_ult ult, GLT_pool *pool)
 {
     ABT_thread_get_last_pool (ult, pool);
 }
 
-static inline int glt_ult_get_last_pool_id(GLT_ult ult, int *id)
+static inline void glt_ult_get_last_pool_id(GLT_ult ult, int *id)
 {
     ABT_thread_get_last_pool_id (ult, id);
 }
 
-static inline int glt_ult_resume(GLT_ult ult)
+static inline void glt_ult_resume(GLT_ult ult)
 {
     ABT_thread_resume (ult);
 }
 
-static inline int glt_ult_migrate_to_thread(GLT_ult ult, GLT_thread thread)
+static inline void glt_ult_migrate_to_thread(GLT_ult ult, GLT_thread thread)
 {
     ABT_thread_migrate_to_xstream (ult, thread);
 }
 
-static inline int glt_ult_migrate_to_scheduler(GLT_ult ult, GLT_sched sched)
+static inline void glt_ult_migrate_to_scheduler(GLT_ult ult, GLT_sched sched)
 {
     ABT_thread_migrate_to_sched (ult, sched);
 }
 
-static inline int glt_ult_migrate_to_pool(GLT_ult ult, GLT_pool pool)
+static inline void glt_ult_migrate_to_pool(GLT_ult ult, GLT_pool pool)
 {
     ABT_thread_migrate_to_pool (ult, pool);
 }
 
-static inline int glt_ult_migrate(GLT_ult ult)
+static inline void glt_ult_migrate(GLT_ult ult)
 {
     ABT_thread_migrate (ult);
 }
 
-static inline int glt_ult_set_callback(GLT_ult ult,void(*cb_func)(GLT_ult ult, void *cb_arg), void *cb_arg)
+static inline void glt_ult_set_callback(GLT_ult ult,void(*cb_func)(GLT_ult ult, void *cb_arg), void *cb_arg)
 {
     ABT_thread_set_callback (ult, (*cb_func)(thread, cb_arg), cb_arg);
 }
 
-static inline int glt_ult_set_migratable (GLT_ult ult, GLT_bool flag)
+static inline void glt_ult_set_migratable (GLT_ult ult, GLT_bool flag)
 {
     ABT_thread_set_migratable (ult, flag);
 }
 
-static inline int glt_ult_is_migratable(GLT_ult ult, GLT_bool *flag)
+static inline void glt_ult_is_migratable(GLT_ult ult, GLT_bool *flag)
 {
     ABT_thread_is_migratable (ult, flag);
 }
 
-static inline int glt_ult_is_primary(GLT_ult ult, GLT_bool *flag)
+static inline void glt_ult_is_primary(GLT_ult ult, GLT_bool *flag)
 {
     ABT_thread_is_primary (ult, flag);
 }
 
-static inline int glt_ult_equal(GLT_ult ult1, GLT_ult ult2, GLT_bool * result)
+static inline void glt_ult_equal(GLT_ult ult1, GLT_ult ult2, GLT_bool * result)
 {
     ABT_thread_equal (ult1, ult2, result);
 }
 
-static inline int glt_ult_ult_retain(GLT_ult ult)
+static inline void glt_ult_retain(GLT_ult ult)
 {
     ABT_thread_retain (ult);
 }
 
-static inline int glt_ult_release(GLT_ult ult)
+static inline void glt_ult_release(GLT_ult ult)
 {
     ABT_thread_release (ult);
 }
 
-static inline int glt_ult_get_stacksize(GLT_ult ult, size_t *stacksize)
+static inline void glt_ult_get_stacksize(GLT_ult ult, size_t *stacksize)
 {
     ABT_thread_get_stacksize (ult, stacksize);
 }
 
-static inline int glt_ult_get_id(GLT_ult ult, GLT_ult_id *ult_id)
+static inline void glt_ult_get_id(GLT_ult ult, GLT_ult_id *ult_id)
 {
     ABT_thread_get_id (ult, ult_id);
 }
 
-static inline int glt_ult_get_arg(GLT_ult ult, void **arg)
+static inline void glt_ult_get_arg(GLT_ult ult, void **arg)
 {
     ABT_thread_get_arg (ult, arg);
 }
+
+static inline void glt_ult_attr_create (GLT_ult_attr *newattr)
+{
+    ABT_thread_attr_create (Anewattr);
+}
+
+static inline void glt_ult_attr_free(GLT_ult_attr *attr)
+{
+    ABT_thread_attr_free (attr);
+}
+
+static inline void glt_ult_attr_set_stacksize (GLT_ult_attr attr, size_t stacksize)
+{
+    ABT_thread_attr_set_stacksize ( attr,  stacksize);
+}
+
+static inline void glt_ult_attr_get_stacksize (GLT_ult_attr attr, size_t *stacksize)
+{
+    ABT_thread_attr_get_stacksize ( attr, tacksize);
+}
+
+static inline void glt_ult_attr_set_callback (GLT_ult_attr attr, void(*cb_func)(GLT_ult ult, void *cb_arg), void *cb_arg)
+{ 
+    ABT_thread_attr_set_callback ( attr, void(*cb_func)(ult, cb_arg), cb_arg);
+}
+
+static inline void glt_ult_attr__set_migratable (GLT_ult_attr attr, GLT_bool flag)
+{
+    ABT_thread_attr_set_migratable ( attr,  flag);
+}
+
 #endif	/* FAST_GLT_H */
 
