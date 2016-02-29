@@ -42,6 +42,7 @@
 #define GLT_sched_config ABT_sched_config
 #define GLT_sched_def ABT_sched_def
 #define GLT_sched_predef ABT_sched_predef
+#define GLT_thread_state ABT_xstream_state
  
 typedef struct glt_team {
     ABT_xstream master;
@@ -440,16 +441,16 @@ static inline void glt_pool_create (GLT_pool_def *def, Glt_pool_config config,
         GLT_pool *newpool)
 {
     ABT_pool_create (def, config, newpool);
-    main_team->pools[num_pools]=newpool;
-    num_pools++;
+    main_team->pools[main_team->num_pools]=newpool;
+    main_team->num_pools++;
 }
 
 static inline void glt_pool_create_basic (GLT_pool_kind kind, 
         GLT_pool_access access, GLT_bool automatic, GLT_pool *newpool)
 {
     ABT_pool_create_basic (kind, access, automatic, newpool);
-    main_team->pools[num_pools]=newpool;
-    num_pools++;
+    main_team->pools[main_team->num_pools]=newpool;
+    main_team->num_pools++;
 }
 
 static inline void glt_pool_free (GLT_pool *pool)
@@ -602,7 +603,7 @@ static inline void glt_self_get_type (GLT_unit_type *type)
 }
 static inline void glt_self_is_primary (GLT_bool *flag)
 {
-int 	ABT_self_is_primary (flag);
+    ABT_self_is_primary (flag);
 }
 
 static inline void glt_self_on_primary_xstream (GLT_bool *flag)
@@ -618,12 +619,122 @@ static inline void glt_self_get_last_pool_id (int *pool_id)
 static inline void glt_self_suspend (void)
 {
     ABT_self_suspend ();
-    
 }
 
 static inline void glt_self_get_arg (void **arg)
 {
     ABT_self_get_arg (arg);
 }
+
+static inline int glt_can_manage_threads()
+{
+    return 1;
+}
+
+static inline int glt_thread_create (GLT_sched sched, GLT_thread *newthread)
+{
+    ABT_xstream_create (sched, newthread);
+    main_team->team[main_team->num_xstreams]=newthread;
+    main_team->num_xstreams++;
+}
+
+static inline int glt_thread_create_basic(GLT_sched_predef predef, int num_pools,
+        GLT_pool *pools, GLT_sched_config config, GLT_thread *newthread)
+{
+    ABT_xstream_create_basic (predef, num_pools, pools, config, newthread);
+    main_team->team[main_team->num_xstreams]=newthread;
+    main_team->num_xstreams++;
+} 
+static inline int glt_thread_start(GLT_thread thread)
+{
+    ABT_xstream_start (thread);
+}
+
+static inline int glt_thread_free(GLT_thread *thread)
+{
+    ABT_xstream_free (thread);
+}
+
+static inline int glt_thread_join(GLT_thread thread)
+{
+    ABT_xstream_join (thread);
+}
+
+static inline int glt_thread_exit()
+{
+    ABT_xstream_exit ();
+}
+
+static inline int glt_thread_cancel(GLT_thread *thread)
+{
+    ABT_xstream_cancel (thread);
+}
+
+static inline int glt_thread_self(GLT_thread *thread)
+{
+    ABT_xstream_self (thread);
+}
+
+static inline int glt_thread_self_rank(int *rank)
+{
+    ABT_xstream_self_rank (rank);
+}
+
+static inline int glt_thread_get_rank(GLT_thread thread, int *rank)
+{
+    ABT_xstream_get_rank (thread, rank);
+}
+
+static inline int glt_thread_set_main_sched (GLT_thread thread, GLT_sched sched)
+{
+    ABT_xstream_set_main_sched (thread, sched);
+}
+static inline int glt_thread_set_main_sched_basic (GLT_thread thread, 
+        GLT_sched_predef predef, int num_pools, GLT_pool *pools)
+{
+    ABT_xstream_set_main_sched_basic (thread, predef, num_pools, pools);
+}
+
+static inline int glt_thread_get_main_sched (GLT_thread thread, GLT_sched *sched)
+{
+    ABT_xstream_get_main_sched (thread, sched);
+}
+
+static inline int glt_thread_get_main_pools (GLT_thread thread, int max_pools, 
+        GLT_pool *pools)
+{
+    ABT_xstream_get_main_pools (thread, max_pools, pools);
+}
+
+static inline int glt_thread_get_state (GLT_thread thread, GLT_thread_state *state)
+{
+    ABT_xstream_get_state (thread, state);
+}
+
+static inline int glt_thread_equal (GLT_thread thread1, GLT_thread thread2, GLT_bool *result)
+{
+    ABT_xstream_equal (thread1, thread2, result);
+}
+
+static inline int glt_thread_get_num (int *num_xstreams)
+{
+    ABT_xstream_get_num (num_xstreams);
+}
+ 
+static inline int glt_thread_is_primary (GLT_thread thread, GLT_bool *flag)
+{
+    ABT_xstream_is_primary (thread, flag);
+}
+
+static inline int glt_thread_run_unit (GLT_unit unit, GLT_pool pool)
+{
+    ABT_xstream_run_unit (unit,pool);
+}
+
+static inline int glt_thread_check_events(GLT_sched sched)
+{
+    ABT_xstream_check_events (sched);
+}
+
 #endif	/* FAST_GLT_H */
 
