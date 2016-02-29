@@ -43,6 +43,7 @@
 #define GLT_sched_def ABT_sched_def
 #define GLT_sched_predef ABT_sched_predef
 #define GLT_thread_state ABT_xstream_state
+#define GLT_tasklet_state ABT_task_state
  
 typedef struct glt_team {
     ABT_xstream master;
@@ -736,5 +737,68 @@ static inline int glt_thread_check_events(GLT_sched sched)
     ABT_xstream_check_events (sched);
 }
 
+static inline int can_extended_tasklets()
+{
+    return 1;
+}
+
+static inline int glt_tasklet_cancel (GLT_tasklet tasklet)
+{
+    ABT_task_cancel (tasklet);
+}
+
+static inline int glt_tasklet_self(GLT_tasklet *tasklet)
+{
+    ABT_task_self (tasklet);
+}
+
+static inline int glt_tasklet_get_thread(GLT_tasklet tasklet, GLT_thread *thread)
+{
+    ABT_task_get_xstream (tasklet, thread);
+}
+
+static inline int glt_tasklet_get_state(GLT_tasklet tasklet, GLT_tasklet_state *state)
+{
+    ABT_task_get_state (tasklet, state);
+}
+static inline int glt_tasklet_get_last_pool(GLT_tasklet tasklet, GLT_pool *pool)
+{
+    ABT_task_get_last_pool (tasklet, pool);
+}
+
+static inline int glt_tasklet_get_last_pool_id(GLT_tasklet tasklet,int *id)
+{
+    ABT_task_get_last_pool_id (tasklet, id);
+}
+
+static inline int glt_tasklet_set_migratable(GLT_tasklet tasklet, GLT_bool flag)
+{
+    ABT_task_set_migratable (tasklet, flag);
+}
+
+static inline int glt_tasklet_is_migratable(GLT_tasklet tasklet,GLT_bool flag)
+{
+    ABT_task_is_migratable (tasklet, flag);
+}
+
+static inline int glt_tasklet_equal(GLT_tasklet tasklet1, GLT_tasklet tasklet2, GLT_bool *result)
+{
+    ABT_task_equal (tasklet1, tasklet2, result);
+}
+
+static inline int glt_tasklet_retain(GLT_tasklet tasklet)
+{
+    ABT_task_retain (tasklet);
+}
+
+static inline int glt_tasklet_release(GLT_tasklet tasklet)
+{
+    ABT_task_release (tasklet);
+}
+
+static inline int glt_tasklet_get_arg(GLT_tasklet tasklet, void **arg)
+{
+    ABT_task_get_arg (tasklet, arg);
+}
 #endif	/* FAST_GLT_H */
 
