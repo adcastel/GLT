@@ -17,7 +17,8 @@
 #include <stdlib.h>
 #include <abt.h>
 
-
+#define MIN(a,b) (((a)<(b))?(a):(b))
+#define MAX(a,b) (((a)>(b))?(a):(b))
 
 #define GLT_ult ABT_thread
 #define GLT_tasklet ABT_task
@@ -47,7 +48,13 @@
 #define GLT_ult_state ABT_thread_state
 #define GLT_ult_id ABT_thread_id
 #define GLT_ult_attr ABT_thread_attr
+#define GLT_timer ABT_timer
+#define GLT_unit_type ABT_unit_type
  
+
+#define glt_scheduler_config_create ABT_sched_config_create
+#define glt_scheduler_config_read ABT_sched_config_read
+
 typedef struct glt_team {
     ABT_xstream master;
     ABT_xstream *team;
@@ -98,8 +105,8 @@ static inline void glt_init(int argc, char * argv[])
 
     main_team->num_xstreams = num_threads;
     main_team->num_pools = num_pools;
-    main_team->team = (ABT_xstream *) malloc(sizeof (ABT_xstream) * min(num_threads,36));
-    main_team->pools = (ABT_pool *) malloc(sizeof (ABT_pool) * min(num_threads,36));
+    main_team->team = (ABT_xstream *) malloc(sizeof (ABT_xstream) * MIN(num_threads,36));
+    main_team->pools = (ABT_pool *) malloc(sizeof (ABT_pool) * MIN(num_threads,36));
 
     for (int i = 0; i < num_pools; i++) {
         ABT_pool_create_basic(ABT_POOL_FIFO, ABT_POOL_ACCESS_MPMC, ABT_TRUE,
@@ -302,14 +309,21 @@ static inline int glt_get_thread_num()
 
 //Extended functions
 
+
+//Event functions
+static inline int glt_can_event_functions()
+{
+#ifdef CORE
+    return 0;
+#else
+    return 1;
+#endif
+}
+
+#ifndef CORE
 static inline void glt_get_error_str(int errno, char *str, size_t *len)
 {
     ABT_error_get_str (errno,str,len);
-}
-
-static inline int glt_can_event_functions()
-{
-    return 1;
 }
 
 static inline void glt_event_add_callbac (GLT_event_kind event, GLT_event_cb_fn ask_cb,
@@ -324,41 +338,56 @@ static inline void glt_event_del_callback (GLT_event_kind event, int cb_id)
 {
     ABT_event_del_callback (event, cb_id);
 }
+#endif
 
+//future functions
 static inline int glt_can_future_functions()
 {
+#ifdef CORE
+    return 0;
+#else
     return 1;
+#endif
 }
+
+#ifndef CORE
 
 static inline void glt_future_create (int nbytes, GLT_future *newfuture)
 {
     ABT_eventual_create (nbytes, newfuture);
 }
 
-static inline glt_future_free (GLT_future *future)
+static inline void glt_future_free (GLT_future *future)
 {
     ABT_eventual_free (future);
 }
 
-static inline glt_future_wait (GLT_future future, void **value)
+static inline void glt_future_wait (GLT_future future, void **value)
 {
     ABT_eventual_wait (future, value);
 }
 
-static inline glt_future_set (GLT_future future, void *value, int nbytes)
+static inline void glt_future_set (GLT_future future, void *value, int nbytes)
 {
     ABT_eventual_set (future, value, nbytes);
 }
+#endif
 
+//promise functions
 static inline int glt_can_promise_functions()
 {
+#ifdef CORE
+    return 0;
+#else
     return 1;
+#endif
 }
 
-static inline void glt_promise_create (uint32_t compartments, 
-        void(*cb_func)(void **arg), GLT_promise *newpromise)
+#ifndef CORE
+
+static inline void glt_promise_create (uint32_t compartments, void(*cb_func)(void **arg), GLT_promise *newpromise)
 {
-    ABT_future_create (compartments, cb_func(arg), newpromise);
+    ABT_future_create (compartments, cb_func, newpromise);
 }
 
 static inline void glt_promise_free (GLT_promise *promise)
@@ -380,15 +409,23 @@ static inline void glt_promise_set (GLT_promise promise, void * value)
 {
     ABT_future_set (promise,value);
 }
+#endif
 
+//tls functions
 static inline int glt_can_tls_functions()
 {
+#ifdef CORE
+    return 0;
+#else
     return 1;
+#endif
 }
+
+#ifndef CORE
 
 static inline void glt_key_create (void(*destructor)(void *value), GLT_key *newkey)
 {
-    ABT_key_create ((destructor)(value),newkey);
+    ABT_key_create (destructor,newkey);
 }
 
 static inline void glt_key_free (GLT_key *key)
@@ -405,11 +442,19 @@ static inline void glt_key_get (GLT_key key, void **value)
 {
     ABT_key_get (key,value);
 }
+#endif
 
+//extended mutex functions
 static inline int glt_can_extended_mutex()
 {
+#ifdef CORE
+    return 0;
+#else
     return 1;
+#endif
 }
+
+#ifndef CORE
 
 static inline void glt_mutex_lock_low(GLT_mutex mutex)
 {
@@ -435,13 +480,21 @@ static inline void glt_mutex_equal (GLT_mutex mutex1, GLT_mutex mutex2, GLT_bool
 {
     ABT_mutex_equal (mutex1, mutex2, result);
 }
+#endif
+
+//pools functions
+#ifndef CORE
 
 static inline int glt_can_manage_pools()
 {
+#ifdef CORE
+    return 0;
+#else
     return 1;
+#endif
 }
 
-static inline void glt_pool_create (GLT_pool_def *def, Glt_pool_config config, 
+static inline void glt_pool_create (GLT_pool_def *def, GLT_pool_config config, 
         GLT_pool *newpool)
 {
     ABT_pool_create (def, config, newpool);
@@ -511,21 +564,37 @@ static inline void glt_pool_get_id (GLT_pool pool, int *id)
 {
     ABT_pool_get_id (pool, id);
 }
+#endif
+
+//scheduler functions
+
 
 static inline int glt_can_manage_scheduler()
 {
+#ifdef CORE
+    return 0;
+#else
     return 1;
+#endif
 }
 
-static inline void glt_scheduler_config_create(GLT_sched_config *config,...)
+#ifndef CORE
+
+
+/*static inline void glt_scheduler_config_create(GLT_sched_config *config,...)
 {
+    va_list args;
+    va_start(args, config);
+    
     ABT_sched_config_create (config,...);	
-}
+    va_end(args);
+    
+}*/
 
-static inline void glt_scheduler_config_read(GLT_sched_config config, int num_vars, ...)
+/*static inline void glt_scheduler_config_read(GLT_sched_config config, int num_vars, ...)
 {
-    ABT_sched_config_read (config, num_vars,...):
-}
+    ABT_sched_config_read (config, num_vars,...);
+}*/
 
 static inline void glt_scheduler_config_free (GLT_sched_config *config)
 { 	
@@ -541,7 +610,7 @@ static inline void glt_scheduler_create (GLT_sched_def *def, int num_pools,
 static inline void glt_schededuler_create_basic (GLT_sched_predef predef, 
         int num_pools, GLT_pool *pools, GLT_sched_config config, 
         GLT_sched *newsched)
-}
+{
     ABT_sched_create_basic (predef, num_pools, pools, config, newsched);
 }
 
@@ -583,7 +652,7 @@ static inline void glt_scheduler_set_data (GLT_sched sched, void *data)
 
 static inline void glt_scheduler_get_data(ABT_sched sched, void **data)
 {
-    ABT_sched_get_data (ched, data);
+    ABT_sched_get_data (sched, data);
 }
 
 static inline void glt_scheduler_get_size (GLT_sched sched, size_t *size)
@@ -595,11 +664,20 @@ static inline void glt_scheduler_get_total_size(GLT_sched sched, size_t *size)
 {
     ABT_sched_get_total_size (sched, size);
 }
+#endif
+
+//self functions
 
 static inline int glt_can_self()
 {
+#ifdef CORE
+    return 0;
+#else
     return 1;
+#endif
 }
+
+#ifndef CORE
 
 static inline void glt_self_get_type (GLT_unit_type *type)
 {
@@ -630,10 +708,21 @@ static inline void glt_self_get_arg (void **arg)
     ABT_self_get_arg (arg);
 }
 
+#endif
+
+//threads functions
+
+
 static inline int glt_can_manage_threads()
 {
+#ifdef CORE
+    return 0;
+#else
     return 1;
+#endif
 }
+
+#ifndef CORE
 
 static inline void glt_thread_create (GLT_sched sched, GLT_thread *newthread)
 {
@@ -739,11 +828,20 @@ static inline void glt_thread_check_events(GLT_sched sched)
 {
     ABT_xstream_check_events (sched);
 }
+#endif
+
+//tasklets functions
 
 static inline int can_extended_tasklets()
 {
+#ifdef CORE
+    return 0;
+#else
     return 1;
+#endif
 }
+
+#ifndef CORE
 
 static inline void glt_tasklet_cancel (GLT_tasklet tasklet)
 {
@@ -779,7 +877,7 @@ static inline void glt_tasklet_set_migratable(GLT_tasklet tasklet, GLT_bool flag
     ABT_task_set_migratable (tasklet, flag);
 }
 
-static inline void glt_tasklet_is_migratable(GLT_tasklet tasklet,GLT_bool flag)
+static inline void glt_tasklet_is_migratable(GLT_tasklet tasklet,GLT_bool *flag)
 {
     ABT_task_is_migratable (tasklet, flag);
 }
@@ -804,11 +902,20 @@ static inline void glt_tasklet_get_arg(GLT_tasklet tasklet, void **arg)
     ABT_task_get_arg (tasklet, arg);
 }
 
+#endif
+
+// ult functions
+
 static inline int can_extended_ults()
 {
+#ifdef CORE
+    return 0;
+#else
     return 1;
+#endif
 }
 
+#ifndef CORE
 static inline void glt_ult_exit()
 {
     ABT_thread_exit ();
@@ -866,7 +973,7 @@ static inline void glt_ult_migrate(GLT_ult ult)
 
 static inline void glt_ult_set_callback(GLT_ult ult,void(*cb_func)(GLT_ult ult, void *cb_arg), void *cb_arg)
 {
-    ABT_thread_set_callback (ult, (*cb_func)(thread, cb_arg), cb_arg);
+    ABT_thread_set_callback (ult, cb_func, cb_arg);
 }
 
 static inline void glt_ult_set_migratable (GLT_ult ult, GLT_bool flag)
@@ -916,7 +1023,7 @@ static inline void glt_ult_get_arg(GLT_ult ult, void **arg)
 
 static inline void glt_ult_attr_create (GLT_ult_attr *newattr)
 {
-    ABT_thread_attr_create (Anewattr);
+    ABT_thread_attr_create (newattr);
 }
 
 static inline void glt_ult_attr_free(GLT_ult_attr *attr)
@@ -931,18 +1038,19 @@ static inline void glt_ult_attr_set_stacksize (GLT_ult_attr attr, size_t stacksi
 
 static inline void glt_ult_attr_get_stacksize (GLT_ult_attr attr, size_t *stacksize)
 {
-    ABT_thread_attr_get_stacksize ( attr, tacksize);
+    ABT_thread_attr_get_stacksize ( attr, stacksize);
 }
 
 static inline void glt_ult_attr_set_callback (GLT_ult_attr attr, void(*cb_func)(GLT_ult ult, void *cb_arg), void *cb_arg)
 { 
-    ABT_thread_attr_set_callback ( attr, void(*cb_func)(ult, cb_arg), cb_arg);
+    ABT_thread_attr_set_callback ( attr, cb_func, cb_arg);
 }
 
-static inline void glt_ult_attr__set_migratable (GLT_ult_attr attr, GLT_bool flag)
+static inline void glt_ult_attr_set_migratable (GLT_ult_attr attr, GLT_bool flag)
 {
     ABT_thread_attr_set_migratable ( attr,  flag);
 }
+#endif /*#ifndef CORE*/
 
 #endif	/* FAST_GLT_H */
 
