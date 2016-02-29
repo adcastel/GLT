@@ -44,6 +44,8 @@
 #define GLT_sched_predef ABT_sched_predef
 #define GLT_thread_state ABT_xstream_state
 #define GLT_tasklet_state ABT_task_state
+#define GLT_ult_state ABT_thread_state
+#define GLT_ult_id ABT_thread_id
  
 typedef struct glt_team {
     ABT_xstream master;
@@ -799,6 +801,116 @@ static inline int glt_tasklet_release(GLT_tasklet tasklet)
 static inline int glt_tasklet_get_arg(GLT_tasklet tasklet, void **arg)
 {
     ABT_task_get_arg (tasklet, arg);
+}
+
+static inline int can_extended_ults()
+{
+    return 1;
+}
+
+static inline int glt_ult_exit()
+{
+    ABT_thread_exit ();
+}
+
+static inline int glt_ult_cancel(GLT_ult ult)
+{
+    ABT_thread_cancel (ult);
+}
+
+static inline int glt_ult_self(GLT_ult *ult)
+{
+    ABT_thread_self (ult);
+}
+
+static inline int glt_ult_get_state(GLT_ult ult, GLT_ult_state *state)
+{
+    ABT_thread_get_state (ult, state);
+}
+
+static inline int glt_ult_get_last_pool(GLT_ult ult, GLT_pool *pool)
+{
+    ABT_thread_get_last_pool (ult, pool);
+}
+
+static inline int glt_ult_get_last_pool_id(GLT_ult ult, int *id)
+{
+    ABT_thread_get_last_pool_id (ult, id);
+}
+
+static inline int glt_ult_resume(GLT_ult ult)
+{
+    ABT_thread_resume (ult);
+}
+
+static inline int glt_ult_migrate_to_thread(GLT_ult ult, GLT_thread thread)
+{
+    ABT_thread_migrate_to_xstream (ult, thread);
+}
+
+static inline int glt_ult_migrate_to_scheduler(GLT_ult ult, GLT_sched sched)
+{
+    ABT_thread_migrate_to_sched (ult, sched);
+}
+
+static inline int glt_ult_migrate_to_pool(GLT_ult ult, GLT_pool pool)
+{
+    ABT_thread_migrate_to_pool (ult, pool);
+}
+
+static inline int glt_ult_migrate(GLT_ult ult)
+{
+    ABT_thread_migrate (ult);
+}
+
+static inline int glt_ult_set_callback(GLT_ult ult,void(*cb_func)(GLT_ult ult, void *cb_arg), void *cb_arg)
+{
+    ABT_thread_set_callback (ult, (*cb_func)(thread, cb_arg), cb_arg);
+}
+
+static inline int glt_ult_set_migratable (GLT_ult ult, GLT_bool flag)
+{
+    ABT_thread_set_migratable (ult, flag);
+}
+
+static inline int glt_ult_is_migratable(GLT_ult ult, GLT_bool *flag)
+{
+    ABT_thread_is_migratable (ult, flag);
+}
+
+static inline int glt_ult_is_primary(GLT_ult ult, GLT_bool *flag)
+{
+    ABT_thread_is_primary (ult, flag);
+}
+
+static inline int glt_ult_equal(GLT_ult ult1, GLT_ult ult2, GLT_bool * result)
+{
+    ABT_thread_equal (ult1, ult2, result);
+}
+
+static inline int glt_ult_ult_retain(GLT_ult ult)
+{
+    ABT_thread_retain (ult);
+}
+
+static inline int glt_ult_release(GLT_ult ult)
+{
+    ABT_thread_release (ult);
+}
+
+static inline int glt_ult_get_stacksize(GLT_ult ult, size_t *stacksize)
+{
+    ABT_thread_get_stacksize (ult, stacksize);
+}
+
+static inline int glt_ult_get_id(GLT_ult ult, GLT_ult_id *ult_id)
+{
+    ABT_thread_get_id (ult, ult_id);
+}
+
+static inline int glt_ult_get_arg(GLT_ult ult, void **arg)
+{
+    ABT_thread_get_arg (ult, arg);
 }
 #endif	/* FAST_GLT_H */
 
