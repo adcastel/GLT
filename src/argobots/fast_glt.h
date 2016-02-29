@@ -27,6 +27,7 @@
 #define GLT_barrier ABT_barrier
 #define GLT_cond ABT_cond
 //Extended variables
+#ifndef CORE
 #define GLT_event_kind ABT_event_kind
 #define GLT_event_cb_fn ABT_event_cb_fn
 #define GLT_future ABT_eventual
@@ -54,6 +55,7 @@
 
 #define glt_scheduler_config_create ABT_sched_config_create
 #define glt_scheduler_config_read ABT_sched_config_read
+#endif
 
 typedef struct glt_team {
     ABT_xstream master;
@@ -483,7 +485,6 @@ static inline void glt_mutex_equal (GLT_mutex mutex1, GLT_mutex mutex2, GLT_bool
 #endif
 
 //pools functions
-#ifndef CORE
 
 static inline int glt_can_manage_pools()
 {
@@ -493,6 +494,7 @@ static inline int glt_can_manage_pools()
     return 1;
 #endif
 }
+#ifndef CORE
 
 static inline void glt_pool_create (GLT_pool_def *def, GLT_pool_config config, 
         GLT_pool *newpool)
