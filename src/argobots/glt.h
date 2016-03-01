@@ -15,6 +15,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/sysinfo.h>
 #include <abt.h>
 
 
@@ -27,6 +28,8 @@
 #define GLT_mutex ABT_mutex
 #define GLT_barrier ABT_barrier
 #define GLT_cond ABT_cond
+#define GLT_timer ABT_timer
+
 //Extended variables
 #ifndef CORE
 #define GLT_event_kind ABT_event_kind
@@ -50,7 +53,6 @@
 #define GLT_ult_state ABT_thread_state
 #define GLT_ult_id ABT_thread_id
 #define GLT_ult_attr ABT_thread_attr
-#define GLT_timer ABT_timer
 #define GLT_unit_type ABT_unit_type
 
 
@@ -64,6 +66,7 @@ typedef struct glt_team {
     int num_xstreams;
     int num_pools;
     ABT_pool *pools;
+    int max_elem;
 } glt_team_t;
 
 
@@ -133,8 +136,8 @@ int glt_can_manage_pools();
 int glt_can_manage_scheduler();
 int glt_can_self();
 int glt_can_manage_threads();
- int can_extended_tasklets();
-  int can_extended_ults();
+int can_extended_tasklets();
+int can_extended_ults();
 
 
 
@@ -200,7 +203,7 @@ void glt_scheduler_finish(GLT_sched sched);
 void glt_scheduler_exit(GLT_sched sched);
 void glt_scheduler_has_to_stop(GLT_sched sched, GLT_bool *stop);
 void glt_scheduler_set_data(GLT_sched sched, void *data);
-void glt_scheduler_get_data(ABT_sched sched, void **data);
+void glt_scheduler_get_data(GLT_sched sched, void **data);
 void glt_scheduler_get_size(GLT_sched sched, size_t *size);
 void glt_scheduler_get_total_size(GLT_sched sched, size_t *size);
 

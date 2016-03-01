@@ -90,7 +90,7 @@
     ABT_sched_set_data (sched,data);
 }
 
- void glt_scheduler_get_data(ABT_sched sched, void **data)
+ void glt_scheduler_get_data(GLT_sched sched, void **data)
 {
     ABT_sched_get_data (sched, data);
 }

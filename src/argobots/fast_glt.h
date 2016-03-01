@@ -15,6 +15,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/sysinfo.h>
 #include <abt.h>
 
 #define MIN(a,b) (((a)<(b))?(a):(b))
@@ -26,6 +27,8 @@
 #define GLT_mutex ABT_mutex
 #define GLT_barrier ABT_barrier
 #define GLT_cond ABT_cond
+#define GLT_timer ABT_timer
+
 //Extended variables
 #ifndef CORE
 #define GLT_event_kind ABT_event_kind
@@ -49,7 +52,6 @@
 #define GLT_ult_state ABT_thread_state
 #define GLT_ult_id ABT_thread_id
 #define GLT_ult_attr ABT_thread_attr
-#define GLT_timer ABT_timer
 #define GLT_unit_type ABT_unit_type
  
 
@@ -63,6 +65,7 @@ typedef struct glt_team {
     int num_xstreams;
     int num_pools;
     ABT_pool *pools;
+    int max_elem;
 } glt_team_t;
 
 
@@ -88,8 +91,8 @@ static inline  void glt_end()
 
 static inline void glt_init(int argc, char * argv[]) 
 {
-    int num_threads = 1;
-    int num_pools = 1;
+    int num_threads = get_nprocs();
+    int num_pools = num_threads;
 
     main_team = (glt_team_t *) malloc(sizeof (glt_team_t));
 
@@ -107,8 +110,9 @@ static inline void glt_init(int argc, char * argv[])
 
     main_team->num_xstreams = num_threads;
     main_team->num_pools = num_pools;
-    main_team->team = (ABT_xstream *) malloc(sizeof (ABT_xstream) * MIN(num_threads,36));
-    main_team->pools = (ABT_pool *) malloc(sizeof (ABT_pool) * MIN(num_threads,36));
+    main_team->max_elem= get_nprocs()*2;
+    main_team->team = (ABT_xstream *) malloc(sizeof (ABT_xstream) * MAX(num_threads,get_nprocs()*2));
+    main_team->pools = (ABT_pool *) malloc(sizeof (ABT_pool) * MAX(num_threads,get_nprocs()*2));
 
     for (int i = 0; i < num_pools; i++) {
         ABT_pool_create_basic(ABT_POOL_FIFO, ABT_POOL_ACCESS_MPMC, ABT_TRUE,
@@ -499,17 +503,27 @@ static inline int glt_can_manage_pools()
 static inline void glt_pool_create (GLT_pool_def *def, GLT_pool_config config, 
         GLT_pool *newpool)
 {
-    ABT_pool_create (def, config, newpool);
-    main_team->pools[main_team->num_pools]=newpool;
-    main_team->num_pools++;
+    if(main_team->num_pools < main_team->max_elem){
+        ABT_pool_create (def, config, newpool);
+        main_team->pools[main_team->num_pools]=newpool;
+        main_team->num_pools++;
+    }
+    else {
+        printf("Error: There are not more sloots for pools\n");
+    }
 }
 
 static inline void glt_pool_create_basic (GLT_pool_kind kind, 
         GLT_pool_access access, GLT_bool automatic, GLT_pool *newpool)
 {
-    ABT_pool_create_basic (kind, access, automatic, newpool);
-    main_team->pools[main_team->num_pools]=newpool;
-    main_team->num_pools++;
+    if(main_team->num_pools < main_team->max_elem){
+        ABT_pool_create_basic (kind, access, automatic, newpool);
+        main_team->pools[main_team->num_pools]=newpool;
+        main_team->num_pools++;
+    }
+    else {
+        printf("Error: There are not more sloots for pools\n");
+    }
 }
 
 static inline void glt_pool_free (GLT_pool *pool)
@@ -652,7 +666,7 @@ static inline void glt_scheduler_set_data (GLT_sched sched, void *data)
     ABT_sched_set_data (sched,data);
 }
 
-static inline void glt_scheduler_get_data(ABT_sched sched, void **data)
+static inline void glt_scheduler_get_data(GLT_sched sched, void **data)
 {
     ABT_sched_get_data (sched, data);
 }
@@ -728,18 +742,30 @@ static inline int glt_can_manage_threads()
 
 static inline void glt_thread_create (GLT_sched sched, GLT_thread *newthread)
 {
-    ABT_xstream_create (sched, newthread);
-    main_team->team[main_team->num_xstreams]=newthread;
-    main_team->num_xstreams++;
+
+    if(main_team->num_xstreams < main_team->max_elem){
+        ABT_xstream_create (sched, newthread);
+        main_team->team[main_team->num_xstreams]=newthread;
+        main_team->num_xstreams++;
+    }
+    else {
+        printf("Error: There are not more sloots for threads\n");
+    }
 }
 
 static inline void glt_thread_create_basic(GLT_sched_predef predef, int num_pools,
         GLT_pool *pools, GLT_sched_config config, GLT_thread *newthread)
 {
-    ABT_xstream_create_basic (predef, num_pools, pools, config, newthread);
-    main_team->team[main_team->num_xstreams]=newthread;
-    main_team->num_xstreams++;
-} 
+    if(main_team->num_xstreams < main_team->max_elem){
+        ABT_xstream_create_basic (predef, num_pools, pools, config, newthread);
+        main_team->team[main_team->num_xstreams]=newthread;
+        main_team->num_xstreams++;
+    }
+    else {
+        printf("Error: There are not more sloots for threads\n");
+    }
+}
+
 static inline void glt_thread_start(GLT_thread thread)
 {
     ABT_xstream_start (thread);

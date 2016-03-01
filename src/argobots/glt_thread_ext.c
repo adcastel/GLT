@@ -20,20 +20,32 @@
 
 #ifndef CORE
 
- void glt_thread_create (GLT_sched sched, GLT_thread *newthread)
+void glt_thread_create (GLT_sched sched, GLT_thread *newthread)
 {
-    ABT_xstream_create (sched, newthread);
-    main_team->team[main_team->num_xstreams]=newthread;
-    main_team->num_xstreams++;
+
+    if(main_team->num_xstreams < main_team->max_elem){
+        ABT_xstream_create (sched, newthread);
+        main_team->team[main_team->num_xstreams]=newthread;
+        main_team->num_xstreams++;
+    }
+    else {
+        printf("Error: There are not more sloots for threads\n");
+    }
 }
 
- void glt_thread_create_basic(GLT_sched_predef predef, int num_pools,
+void glt_thread_create_basic(GLT_sched_predef predef, int num_pools,
         GLT_pool *pools, GLT_sched_config config, GLT_thread *newthread)
 {
-    ABT_xstream_create_basic (predef, num_pools, pools, config, newthread);
-    main_team->team[main_team->num_xstreams]=newthread;
-    main_team->num_xstreams++;
-} 
+    if(main_team->num_xstreams < main_team->max_elem){
+        ABT_xstream_create_basic (predef, num_pools, pools, config, newthread);
+        main_team->team[main_team->num_xstreams]=newthread;
+        main_team->num_xstreams++;
+    }
+    else {
+        printf("Error: There are not more sloots for threads\n");
+    }
+}
+
  void glt_thread_start(GLT_thread thread)
 {
     ABT_xstream_start (thread);

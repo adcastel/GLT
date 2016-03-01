@@ -21,17 +21,27 @@ int glt_can_manage_pools()
 void glt_pool_create (GLT_pool_def *def, GLT_pool_config config, 
         GLT_pool *newpool)
 {
-    ABT_pool_create (def, config, newpool);
-    main_team->pools[main_team->num_pools]=newpool;
-    main_team->num_pools++;
+    if(main_team->num_pools < main_team->max_elem){
+        ABT_pool_create (def, config, newpool);
+        main_team->pools[main_team->num_pools]=newpool;
+        main_team->num_pools++;
+    }
+    else {
+        printf("Error: There are not more sloots for pools\n");
+    }
 }
 
 void glt_pool_create_basic (GLT_pool_kind kind, 
         GLT_pool_access access, GLT_bool automatic, GLT_pool *newpool)
 {
-    ABT_pool_create_basic (kind, access, automatic, newpool);
-    main_team->pools[main_team->num_pools]=newpool;
-    main_team->num_pools++;
+    if(main_team->num_pools < main_team->max_elem){
+        ABT_pool_create_basic (kind, access, automatic, newpool);
+        main_team->pools[main_team->num_pools]=newpool;
+        main_team->num_pools++;
+    }
+    else {
+        printf("Error: There are not more sloots for pools\n");
+    }
 }
 
  void glt_pool_free (GLT_pool *pool)
