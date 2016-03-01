@@ -34,6 +34,8 @@
 //Extended variables
 #ifndef CORE
 #define GLT_syncvar syncvar_t
+#define GLT_aligned aligned_t
+#define GLT_memory_state aligned_t
 //ARGOBOTS
 #define GLT_event_kind void *
 #define GLT_event_cb_fn void *
@@ -373,7 +375,95 @@ static inline void glt_ult_retloc(GLT_ult * ult)
     ult = qthread_retloc();
 }
 
+static inline int glt_can_atomic_functions()
+{
+#ifdef CORE
+    return 0;
+#else
+    return 1;
+#endif
+}
 
+static inline void glt_atomic_incr(GLT_aligned * operand, int incr)
+{
+    qthread_incr(operand,incr);
+}
+
+static inline void glt_atomic_fincr(float * operand, float incr)
+{
+    qthread_fincr(operand,incr);
+}
+
+static inline void glt_atomic_dincr(double * operand, double incr)
+{
+    qthread_dincr(operand,incr);
+}
+
+static inline void glt_atomic_cas(volatile GLT_aligned * addr, GLT_aligned oldval,
+        GLT_aligned newval)
+{
+    qthread_cas(addr,oldval,newval);
+}
+
+static inline void glt_atomic_cas_ptr(void * volatile * addr, * oldval,
+        void * newval)
+{
+    qthread_cas_ptr(addr,oldval,newval);
+}
+
+static inline int glt_can_FEB_functions()
+{
+#ifdef CORE
+    return 0;
+#else
+    return 1;
+#endif
+}
+
+static inline void glt_FEB_empty(const GLT_memory_state *dest)
+{
+    qthread_empty(dest);
+}
+
+static inline void glt_FEB_fill(const GLT_memory_state *dest)
+{
+    qthread_fill(dest);
+}
+
+static inline void glt_FEB_status(const GLT_memory_state *addr, int *status);
+{
+    *status = qthread_feb_status(addr);
+}
+
+static inline void glt_FEB_readFE( GLT_memory_state *dst, const GLT_memory_state *src);
+{
+    qthread_readFE(dst,src);
+}
+
+static inline void glt_FEB_readFF( GLT_memory_state *dst, const GLT_memory_state *src);
+{
+    qthread_readFF(dst,src);
+}
+
+static inline void glt_FEB_writeEF( GLT_memory_state * restrict dst, const GLT_memory_state * restrict src);
+{
+    qthread_writeEF(dst,src);
+}
+
+static inline void glt_FEB_writeEF_const( GLT_memory_state *  dst,  GLT_memory_state src);
+{
+    qthread_writeEF_const(dst,src);
+}
+
+static inline void glt_FEB_writeF( GLT_memory_state * restrict dst, const GLT_memory_state * restrict src);
+{
+    qthread_writeF(dst,src);
+}
+
+static inline void glt_FEB_writeF_const( GLT_memory_state *  dst,  GLT_memory_state src);
+{
+    qthread_writeF_const(dst,src);
+}
 //ARGOBOTS FUNCTIONS that are not supported by Qthreads
 
 static inline int glt_can_event_functions()
