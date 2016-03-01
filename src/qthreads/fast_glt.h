@@ -23,6 +23,12 @@
 #include <qthread/sinc.h>
 #include <qthread/qloop.h>
 #include <qthread/qutil.h>
+#include <qthread/qpool.h>
+#include <qthread/qarray.h>
+#include <qthread/qlfqueue.h>
+#include <qthread/qdqueue.h>
+#include <qthread/dictionary.h>
+
 
 
 
@@ -51,6 +57,15 @@
 #define GLT_accum_f qt_accum_f
 #define GLT_loop_queue qqloop_handle_t
 #define GLT_loop_queue_kind qt_loop_queue_type
+#define GLT_ds_pool qpool
+#define GLT_ds_array qarray
+#define GLT_ds_lfqueue qlfqueue_t
+#define GLT_ds_dqueue qdqueue_t
+#define GLT_ds_dictionary qt_dictionary
+#define GLT_ds_dictionary_key_equals qt_dict_key_equals_f
+#define GLT_ds_dictionary_hash qt_dict_hash_f
+#define GLT_ds_dictionary_tag_cleanup qt_dict_tag_cleanup_f
+
 
 //ARGOBOTS
 #define GLT_event_kind void *
@@ -728,6 +743,39 @@ static inline void glt_util_mergesort(double * array, size_t lenght)
     qutil_mergesort(array,lenght);
 }
 
+static inline int glt_can_data_structures_functions()
+{
+#ifdef CORE
+    return 0;
+#else
+    return 1;
+#endif
+}
+
+static inline void glt_ds_pool_create(GLT_ds_pool *pool, const size_t item_size)
+{
+    pool = qpool_create(item_size);
+}
+
+static inline void glt_ds_pool_create_aligned(GLT_ds_pool *pool, const size_t item_size, const size_t alignment)
+{
+    pool = qpool_create_aligned(item_size, alignment);
+}
+
+static inline void glt_ds_pool_destroy(GLT_ds_pool *pool)
+{
+    qpool_destroy(pool);
+}
+
+static inline void glt_ds_pool_alloc(GLT_ds_pool *pool)
+{
+    qpool_alloc(pool);
+}
+
+static inline void glt_ds_pool_free(GLT_ds_pool *restrict pool, void * restrict mem)
+{
+    qpool_free(pool, mem);
+}
 //ARGOBOTS FUNCTIONS that are not supported by Qthreads
 
 static inline int glt_can_event_functions()
