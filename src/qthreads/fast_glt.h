@@ -59,6 +59,10 @@
 #define GLT_loop_queue_kind qt_loop_queue_type
 #define GLT_ds_pool qpool
 #define GLT_ds_array qarray
+#define GLT_ds_array_distribution distribution_t
+#define GLT_ds_loop_f qa_loop_f
+#define GLT_ds_loopr_f qa_loopr_f
+#define GLT_ds_cloop_f qa_cloop_f
 #define GLT_ds_lfqueue qlfqueue_t
 #define GLT_ds_dqueue qdqueue_t
 #define GLT_ds_dictionary qt_dictionary
@@ -673,57 +677,58 @@ static inline int glt_can_util_functions()
 #endif
 }
 
-static inline void glt_util_double_max(double * res, double * array, size_t lenght, 
-        int checkfeb){
+static inline void glt_util_double_max(double * res, double * array, 
+        size_t lenght, int checkfeb){
     *res = qutil_double_max(array,lenght, checkfeb);
 }
 
-static inline void glt_util_uint_max(unsigned int * res, const long unsigned int * array, size_t lenght, 
-        int checkfeb){
+static inline void glt_util_uint_max(unsigned int * res, 
+        const long unsigned int * array, size_t lenght, int checkfeb){
     *res = qutil_uint_max(array,lenght, checkfeb);
 }
 
-static inline void glt_util_int_max(int * res, const long int * array, size_t lenght, 
-        int checkfeb){
+static inline void glt_util_int_max(int * res, const long int * array, 
+        size_t lenght, int checkfeb){
     *res = qutil_int_max(array,lenght, checkfeb);
 }
 
-static inline void glt_util_double_min(double * res, double * array, size_t lenght, 
-        int checkfeb){
+static inline void glt_util_double_min(double * res, double * array, 
+        size_t lenght, int checkfeb){
     *res = qutil_double_min(array,lenght, checkfeb);
 }
 
-static inline void glt_util_uint_min(unsigned int * res, const long unsigned int * array, size_t lenght, 
-        int checkfeb){
+static inline void glt_util_uint_min(unsigned int * res, 
+        const long unsigned int * array, size_t lenght, int checkfeb){
     *res = qutil_uint_min(array,lenght, checkfeb);
 }
 
-static inline void glt_util_int_min(int * res, const long int * array, size_t lenght, 
-        int checkfeb){
+static inline void glt_util_int_min(int * res, const long int * array, 
+        size_t lenght, int checkfeb){
     *res = qutil_int_min(array,lenght, checkfeb);
 }
 
-static inline void glt_util_double_mult(double * res, double * array, size_t lenght, 
-        int checkfeb){
+static inline void glt_util_double_mult(double * res, double * array, 
+        size_t lenght, int checkfeb){
     *res = qutil_double_mult(array,lenght, checkfeb);
 }
 
-static inline void glt_util_uint_mult(unsigned int * res, const long unsigned int * array, size_t lenght, 
-        int checkfeb){
+static inline void glt_util_uint_mult(unsigned int * res, 
+        const long unsigned int * array, size_t lenght, int checkfeb){
     *res = qutil_uint_mult(array,lenght, checkfeb);
 }
 
-static inline void glt_util_int_mult(int * res, const long int * array, size_t lenght, 
-        int checkfeb){
+static inline void glt_util_int_mult(int * res, const long int * array, 
+        size_t lenght, int checkfeb){
     *res = qutil_int_mult(array,lenght, checkfeb);
 }
 
-static inline void glt_util_double_sum(double * res, double * array, size_t lenght, 
-        int checkfeb){
+static inline void glt_util_double_sum(double * res, double * array, 
+        size_t lenght, int checkfeb){
     *res = qutil_double_sum(array,lenght, checkfeb);
 }
 
-static inline void glt_util_uint_sum(unsigned int * res, const long unsigned int * array, size_t lenght, 
+static inline void glt_util_uint_sum(unsigned int * res, 
+        const long unsigned int * array, size_t lenght, 
         int checkfeb){
     *res = qutil_uint_sum(array,lenght, checkfeb);
 }
@@ -757,7 +762,8 @@ static inline void glt_ds_pool_create(GLT_ds_pool *pool, const size_t item_size)
     pool = qpool_create(item_size);
 }
 
-static inline void glt_ds_pool_create_aligned(GLT_ds_pool *pool, const size_t item_size, const size_t alignment)
+static inline void glt_ds_pool_create_aligned(GLT_ds_pool *pool, 
+        const size_t item_size, const size_t alignment)
 {
     pool = qpool_create_aligned(item_size, alignment);
 }
@@ -772,9 +778,97 @@ static inline void glt_ds_pool_alloc(GLT_ds_pool *pool)
     qpool_alloc(pool);
 }
 
-static inline void glt_ds_pool_free(GLT_ds_pool *restrict pool, void * restrict mem)
+static inline void glt_ds_pool_free(GLT_ds_pool *restrict pool, 
+        void * restrict mem)
 {
     qpool_free(pool, mem);
+}
+
+static inline void glt_ds_array_create(GLT_ds_array *array, const size_t count, 
+        const size_t item_size)
+{
+    array = qarray_create(count,item_size);
+}
+
+static inline void glt_ds_array_create_tight(GLT_ds_array *array, 
+        const size_t count, const size_t item_size)
+{
+    array = qarray_create_tight(count,item_size);
+}
+
+static inline void glt_ds_array_create_configured(GLT_ds_array *array, 
+        const size_t count, const size_t item_size, 
+        const GLT_ds_array_distribution d, const char thight, const int seg_pages)
+{
+    array = qarray_create_configured(count, item_size, d, thight, seg_pages);
+}
+
+static inline void glt_ds_array_destroy(GLT_ds_array *array)
+{
+    qarray_destroy(array);
+}
+
+static inline void glt_ds_array_elem(void * elem, const GLT_ds_array *array, 
+        const size_t index)
+{
+    elem = qarray_elem(array,index);
+}
+
+static inline void glt_ds_array_elem_nomigrate(void * elem, const GLT_ds_array *array, 
+        const size_t index)
+{
+    elem = qarray_elem_nomigrate(array,index);
+}
+
+static inline void glt_ds_array_elem_migrate(void * elem, const GLT_ds_array *array, 
+        const size_t index)
+{
+    elem = qarray_elem_migrate(array,index);
+}
+
+static inline void glt_ds_array_thread_of(GLT_thread * id, const GLT_ds_array *array, 
+        const size_t index)
+{
+    *id = qarray_shepof(array,index);
+}
+
+static inline void glt_ds_array_set_thread_of(GLT_ds_array *array, 
+        const size_t index, GLT_thread id )
+{
+    qarray_set_shepof(array,index,id);
+}
+
+static inline void glt_ds_array_iter(GLT_ds_array *array, 
+        const size_t start, const size_t stop, void(*thread_func)(void *))
+{
+    qarray_iter(array,start,stop,(void *)thread_func);
+}
+
+static inline void glt_ds_array_iter_loop(GLT_ds_array *array, 
+        const size_t start, const size_t stop, GLT_ds_loop_f thread_func, void * arg)
+{
+    qarray_iter_loop(array,start,stop,thread_func,arg);
+}
+
+static inline void glt_ds_array_iter_nb(GLT_ds_array *array, 
+        const size_t start, const size_t stop, GLT_ds_loop_f thread_func, 
+        void * args, aligned_t *arg)
+{
+    qarray_iter_loop_nb(array,start,stop,thread_func,args,arg);
+}
+
+static inline void glt_ds_array_iter_constloop(GLT_ds_array *array, 
+        const size_t start, const size_t stop, GLT_ds_cloop_f thread_func, 
+        void * args)
+{
+    qarray_iter_constloop(array,start,stop,thread_func,args);
+}
+
+static inline void glt_ds_array_iter_loopaccum(GLT_ds_array *array, 
+        const size_t start, const size_t stop, GLT_ds_loopr_f thread_func, 
+        void * args, void * ret, const size_t resize, GLT_accum_f acc )
+{
+    qarray_iter_loopaccum(array,start,stop,thread_func,args,ret,resize,acc);
 }
 //ARGOBOTS FUNCTIONS that are not supported by Qthreads
 
