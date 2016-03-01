@@ -16,6 +16,8 @@
 #define _GNU_SOURCE             /* See feature_test_macros(7) */
 
 #include <sys/time.h>
+#include <sys/sysinfo.h>
+
 
 #include <sched.h>
 #include <stdio.h>

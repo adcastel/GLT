@@ -12,6 +12,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/sysinfo.h>
+
 #include <qthread/qthread.h>
 # include <qthread/barrier.h>
 #include <qthread/qtimer.h>

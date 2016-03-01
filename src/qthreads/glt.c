@@ -12,7 +12,7 @@ void glt_end()
 
 void glt_init(int argc, char * argv[]) 
 {
-    int num_threads = 1;
+    int num_threads = get_nprocs();
     main_team = (glt_team_t *) malloc(sizeof (glt_team_t));
 
     char buff[10];

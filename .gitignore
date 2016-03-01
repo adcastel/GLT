@@ -4,7 +4,7 @@ nbproject
 *.odt
 *#
 *.so
-*_arg*
+*_arg
 *_mth
-*_qth*
+*_qth
 callgrind*

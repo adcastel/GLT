@@ -18,6 +18,8 @@
 #define _GNU_SOURCE             /* See feature_test_macros(7) */
 
 #include <sys/time.h>
+#include <sys/sysinfo.h>
+
 
 #include <sched.h>
 #include <stdio.h>
@@ -98,7 +100,7 @@ static inline  void glt_end()
 
 static inline void glt_init(int argc, char * argv[]) 
 {
-    int num_threads = 1;
+    int num_threads = get_nprocs();
     main_team = (glt_team_t *) malloc(sizeof (glt_team_t));
 
     char buff[10];

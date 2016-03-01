@@ -14,6 +14,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
+#include <sys/sysinfo.h>
+
 
 #include <qthread/qthread.h>
 # include <qthread/barrier.h>
@@ -87,7 +89,7 @@ static inline  void glt_end()
 
 static inline  void glt_init(int argc, char * argv[]) 
 {
-    int num_threads = 1;
+    int num_threads = get_nprocs();
     main_team = (glt_team_t *) malloc(sizeof (glt_team_t));
 
     char buff[10];
