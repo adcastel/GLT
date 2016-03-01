@@ -22,9 +22,10 @@
 #include <qthread/qtimer.h>
 
 
+
 #define GLT_ult aligned_t
 #define GLT_tasklet aligned_t
-#define GLT_thread aligned_t
+#define GLT_thread qthread_shepherd_id_t
 #define GLT_mutex aligned_t
 #define GLT_barrier  qt_barrier_t
 #define GLT_cond aligned_t
@@ -32,6 +33,7 @@
 
 //Extended variables
 #ifndef CORE
+#define GLT_syncvar syncvar_t
 //ARGOBOTS
 #define GLT_event_kind void *
 #define GLT_event_cb_fn void *
@@ -58,7 +60,11 @@
 
 
 #define glt_scheduler_config_create 
-#define glt_scheduler_config_read 
+#define glt_scheduler_config_read
+
+#define glt_ult_creation_precond(f,a,u,n,...) qthread_fork_precond(f,a,u,n,...)
+#define glt_ult_creation_precond_to(f,a,u,d,n,...) qthread_fork_precond_to(f,a,u,d,n,...)
+
 #endif
 
 
@@ -301,6 +307,71 @@ static inline int glt_get_thread_num()
 }
 
 //Extended functions
+
+static inline int glt_can_extended_basic()
+{
+#ifdef CORE
+    return 0;
+#else
+    return 1;
+#endif
+}
+
+
+/*static inline void glt_ult_creation_precond(void(*thread_func)(void *), void * arg,
+        GLT_ult * ult, int npreconds, ...){
+    qthread_fork_precond((void *)thread_func,arg,ult,npreconds,...);
+}
+
+static inline void glt_ult_creation_precond_to(void(*thread_func)(void *), void * arg,
+        GLT_ult * ult, int dest,int npreconds, ...){
+    qthread_fork_precond_to((void *)thread_func,arg,ult,dest,npreconds,...);
+}
+*/
+static inline void glt_ult_creation_syncvar(void(*thread_func)(void *), void * arg,
+        GLT_syncvar *syncvar){
+    qthread_fork_syncvar((void *)thread_func,arg,syncvar);
+}
+
+static inline void glt_ult_creation_syncvar_to(void(*thread_func)(void *), void * arg,
+        GLT_syncvar *syncvar, int dest,int npreconds, ...){
+    qthread_fork_syncvar_to((void *)thread_func,arg,syncvar,dest);
+}
+
+static inline void glt_ult_get_thread(GLT_thread *thread, int *worker)
+{
+    *worker = qthread_worker(thread);
+}
+
+static inline void glt_ult_get_thread_unique(GLT_thread *thread, int *worker)
+{
+    *worker = qthread_worker_unique(thread);
+}
+
+static inline void glt_ult_get_tasklocal(void * pointer, unsigned int size)
+{
+    pointer = qthread_get_tasklocal(size);
+}
+
+static inline void glt_ult_size_tasklocal(unsigned int *size)
+{
+    *size = qthread_size_tasklocal();
+}
+
+static inline void glt_ult_migrate_self_to(int dest)
+{
+    qthread_migrate_to(dest);
+}
+
+static inline void glt_ult_get_stack_left(size_t *size)
+{
+    *size = qthread_stackleft();
+}
+
+static inline void glt_ult_retloc(GLT_ult * ult)
+{
+    ult = qthread_retloc();
+}
 
 
 //ARGOBOTS FUNCTIONS that are not supported by Qthreads
