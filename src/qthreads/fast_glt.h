@@ -23,6 +23,7 @@
 
 
 
+
 #define GLT_ult aligned_t
 #define GLT_tasklet aligned_t
 #define GLT_thread qthread_shepherd_id_t
@@ -405,13 +406,13 @@ static inline void glt_atomic_cas(volatile GLT_aligned * addr, GLT_aligned oldva
     qthread_cas(addr,oldval,newval);
 }
 
-static inline void glt_atomic_cas_ptr(void * volatile * addr, * oldval,
+static inline void glt_atomic_cas_ptr(void * volatile * addr, void * oldval,
         void * newval)
 {
     qthread_cas_ptr(addr,oldval,newval);
 }
 
-static inline int glt_can_FEB_functions()
+static inline int glt_can_feb_functions()
 {
 #ifdef CORE
     return 0;
@@ -420,50 +421,97 @@ static inline int glt_can_FEB_functions()
 #endif
 }
 
-static inline void glt_FEB_empty(const GLT_memory_state *dest)
+static inline void glt_feb_empty(const GLT_memory_state *dest)
 {
     qthread_empty(dest);
 }
 
-static inline void glt_FEB_fill(const GLT_memory_state *dest)
+static inline void glt_feb_fill(const GLT_memory_state *dest)
 {
     qthread_fill(dest);
 }
 
-static inline void glt_FEB_status(const GLT_memory_state *addr, int *status);
+static inline void glt_feb_status(const GLT_memory_state *addr, int *status)
 {
     *status = qthread_feb_status(addr);
 }
 
-static inline void glt_FEB_readFE( GLT_memory_state *dst, const GLT_memory_state *src);
+static inline void glt_feb_readFE( GLT_memory_state *dst, const GLT_memory_state *src)
 {
     qthread_readFE(dst,src);
 }
 
-static inline void glt_FEB_readFF( GLT_memory_state *dst, const GLT_memory_state *src);
+static inline void glt_feb_readFF( GLT_memory_state *dst, const GLT_memory_state *src)
 {
     qthread_readFF(dst,src);
 }
 
-static inline void glt_FEB_writeEF( GLT_memory_state * restrict dst, const GLT_memory_state * restrict src);
+static inline void glt_feb_writeEF( GLT_memory_state * restrict dst, const GLT_memory_state * restrict src)
 {
     qthread_writeEF(dst,src);
 }
 
-static inline void glt_FEB_writeEF_const( GLT_memory_state *  dst,  GLT_memory_state src);
+static inline void glt_feb_writeEF_const( GLT_memory_state *  dst,  GLT_memory_state src)
 {
     qthread_writeEF_const(dst,src);
 }
 
-static inline void glt_FEB_writeF( GLT_memory_state * restrict dst, const GLT_memory_state * restrict src);
+static inline void glt_feb_writeF( GLT_memory_state * restrict dst, const GLT_memory_state * restrict src)
 {
     qthread_writeF(dst,src);
 }
 
-static inline void glt_FEB_writeF_const( GLT_memory_state *  dst,  GLT_memory_state src);
+static inline void glt_feb_writeF_const( GLT_memory_state *  dst,  GLT_memory_state src)
 {
     qthread_writeF_const(dst,src);
 }
+
+static inline void glt_syncvar_empty(GLT_syncvar *dest)
+{
+    qthread_syncvar_empty(dest);
+}
+
+static inline void glt_syncvar_fill(GLT_syncvar *dest)
+{
+    qthread_syncvar_fill(dest);
+}
+
+static inline void glt_syncvar_status(GLT_syncvar *addr, int *status)
+{
+    *status = qthread_syncvar_status(addr);
+}
+
+static inline void glt_syncvar_readFE( uint64_t * restrict dst, GLT_syncvar * restrict src)
+{
+    qthread_syncvar_readFE(dst,src);
+}
+
+static inline void glt_syncvar_readFF( uint64_t * restrict dst, GLT_syncvar * restrict src)
+{
+    qthread_syncvar_readFF(dst,src);
+}
+
+static inline void glt_syncvar_writeEF( GLT_syncvar * restrict dst, const uint64_t * restrict src)
+{
+    qthread_syncvar_writeEF(dst,src);
+}
+
+static inline void glt_syncvar_writeEF_const( GLT_syncvar *  dst,  uint64_t src)
+{
+    qthread_syncvar_writeEF_const(dst,src);
+}
+
+static inline void glt_syncvar_writeF( GLT_syncvar * restrict dst, const uint64_t * restrict src)
+{
+    qthread_syncvar_writeF(dst,src);
+}
+
+static inline void glt_syncvar_writeF_const( GLT_syncvar *  dst,  uint64_t src)
+{
+    qthread_syncvar_writeF_const(dst,src);
+}
+
+
 //ARGOBOTS FUNCTIONS that are not supported by Qthreads
 
 static inline int glt_can_event_functions()
