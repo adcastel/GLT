@@ -18,8 +18,10 @@
 
 
 #include <qthread/qthread.h>
-# include <qthread/barrier.h>
+#include <qthread/barrier.h>
 #include <qthread/qtimer.h>
+#include <qthread/sinc.h>
+
 
 
 
@@ -37,6 +39,8 @@
 #define GLT_syncvar syncvar_t
 #define GLT_aligned aligned_t
 #define GLT_memory_state aligned_t
+#define GLT_sinc_op qt_sinc_op_f
+#define GLT_sinc qt_sinc_t
 //ARGOBOTS
 #define GLT_event_kind void *
 #define GLT_event_cb_fn void *
@@ -511,6 +515,51 @@ static inline void glt_syncvar_writeF_const( GLT_syncvar *  dst,  uint64_t src)
     qthread_syncvar_writeF_const(dst,src);
 }
 
+static inline int glt_can_sinc_functions()
+{
+#ifdef CORE
+    return 0;
+#else
+    return 1;
+#endif
+}
+
+static inline void glt_sinc_create(GLT_sinc *sinc, size_t sizeof_value,
+        const void * initial_value, GLT_sinc_op op, size_t expected)
+{
+    sinc = qt_sinc_create(sizeof_value, initial_value, op, expected);
+}
+
+static inline void glt_sinc_init(GLT_sinc *restrict sinc, size_t sizeof_value,
+        const void * initial_value, GLT_sinc_op op, size_t expected)
+{
+    qt_sinc_init(sinc, sizeof_value, initial_value, op, expected);
+}
+
+static inline void glt_sinc_destroy(GLT_sinc *sinc)
+{
+    qt_sinc_destroy(sinc);
+}
+
+static inline void glt_sinc_fini(GLT_sinc * sinc)
+{
+    qt_sinc_fini(sinc);
+}
+
+static inline void glt_sinc_reset(GLT_sinc * sinc, size_t expect)
+{
+    qt_sinc_reset(sinc,expect);
+}
+
+static inline void glt_sinc_submit(GLT_sinc * restrict sinc, const void * restrict value)
+{
+    qt_sinc_submit(sinc,value);
+}
+
+static inline void glt_sinc_wait(GLT_sinc * restrict sinc,  void * restrict target)
+{
+    qt_sinc_wait(sinc,target);
+}
 
 //ARGOBOTS FUNCTIONS that are not supported by Qthreads
 
