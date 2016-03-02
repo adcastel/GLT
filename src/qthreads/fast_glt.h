@@ -896,6 +896,37 @@ static inline void glt_ds_lfqueue_empty(GLT_bool * empty, GLT_ds_lfqueue * lfque
     *empty = qlfqueue_empty(lfqueue);
 }
 
+static inline void glt_ds_dqueue_create(GLT_ds_dqueue * dqueue)
+{
+    dqueue = qdqueue_create();
+}
+
+static inline void glt_ds_dqueue_destroy(GLT_ds_dqueue * dqueue)
+{
+    qdqueue_destroy(dqueue);
+}
+
+static inline void glt_ds_dqueue_enqueue(GLT_ds_dqueue * dqueue, void * elem)
+{
+    qdqueue_enqueue(dqueue,elem);
+}
+
+static inline void glt_ds_dqueue_enqueue_there(GLT_ds_dqueue * dqueue, 
+        void * elem, GLT_thread id)
+{
+    qdqueue_enqueue_there(dqueue,elem,id);
+}
+
+static inline void glt_ds_dqueue_dequeue( void * elem, GLT_ds_dqueue * dqueue)
+{
+    elem = qdqueue_dequeue(dqueue);
+}
+
+static inline void glt_ds_dqueue_empty(GLT_bool * empty, GLT_ds_dqueue * dqueue)
+{
+    *empty = qdqueue_empty(dqueue);
+}
+
 //ARGOBOTS FUNCTIONS that are not supported by Qthreads
 
 static inline int glt_can_event_functions()
