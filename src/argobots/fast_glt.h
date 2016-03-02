@@ -28,6 +28,7 @@
 #define GLT_barrier ABT_barrier
 #define GLT_cond ABT_cond
 #define GLT_timer ABT_timer
+#define GLT_bool ABT_bool
 
 //Extended variables
 #ifndef CORE
@@ -35,7 +36,6 @@
 #define GLT_event_cb_fn ABT_event_cb_fn
 #define GLT_future ABT_eventual
 #define GLT_promise ABT_future
-#define GLT_bool ABT_bool
 #define GLT_key ABT_key
 #define GLT_pool_def ABT_pool_def
 #define GLT_pool_config ABT_pool_config

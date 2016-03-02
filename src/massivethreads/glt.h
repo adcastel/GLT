@@ -39,6 +39,7 @@ typedef struct myth_timer {
 #define GLT_barrier myth_barrier_t
 #define GLT_cond myth_cond_t
 #define GLT_timer myth_timer_t
+#define GLT_bool int
 
 //Extended variables
 #ifndef CORE
@@ -46,7 +47,6 @@ typedef struct myth_timer {
 #define GLT_event_cb_fn void *
 #define GLT_future void *
 #define GLT_promise void *
-#define GLT_bool int
 #define GLT_key void *
 #define GLT_pool_def void *
 #define GLT_pool_config void *
