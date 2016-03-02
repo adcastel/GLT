@@ -43,6 +43,7 @@
 #define GLT_barrier  qt_barrier_t
 #define GLT_cond aligned_t
 #define GLT_timer qtimer_t
+#define GLT_bool int
 
 //Extended variables
 #ifndef CORE
@@ -76,7 +77,6 @@
 #define GLT_event_cb_fn void *
 #define GLT_future void *
 #define GLT_promise void *
-#define GLT_bool int
 #define GLT_key void *
 #define GLT_pool_def void *
 #define GLT_pool_config void *
@@ -870,6 +870,32 @@ static inline void glt_ds_array_iter_loopaccum(GLT_ds_array *array,
 {
     qarray_iter_loopaccum(array,start,stop,thread_func,args,ret,resize,acc);
 }
+
+static inline void glt_ds_lfqueue_create(GLT_ds_lfqueue * lfqueue)
+{
+    lfqueue = qlfqueue_create();
+}
+
+static inline void glt_ds_lfqueue_destroy(GLT_ds_lfqueue * lfqueue)
+{
+    qlfqueue_destroy(lfqueue);
+}
+
+static inline void glt_ds_lfqueue_enqueue(GLT_ds_lfqueue * lfqueue, void * elem)
+{
+    qlfqueue_enqueue(lfqueue,elem);
+}
+
+static inline void glt_ds_lfqueue_dequeue( void * elem, GLT_ds_lfqueue * lfqueue)
+{
+    elem = qlfqueue_dequeue(lfqueue);
+}
+
+static inline void glt_ds_lfqueue_empty(GLT_bool * empty, GLT_ds_lfqueue * lfqueue)
+{
+    *empty = qlfqueue_empty(lfqueue);
+}
+
 //ARGOBOTS FUNCTIONS that are not supported by Qthreads
 
 static inline int glt_can_event_functions()

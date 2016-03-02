@@ -25,6 +25,7 @@
 #define GLT_barrier  qt_barrier_t
 #define GLT_cond aligned_t
 #define GLT_timer qtimer_t
+#define GLT_bool int
 
 //Extended variables
 #ifndef CORE
@@ -32,7 +33,6 @@
 #define GLT_event_cb_fn void *
 #define GLT_future void *
 #define GLT_promise void *
-#define GLT_bool int
 #define GLT_key void *
 #define GLT_pool_def void *
 #define GLT_pool_config void *
