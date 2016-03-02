@@ -28,7 +28,8 @@
 #include <qthread/qlfqueue.h>
 #include <qthread/qdqueue.h>
 #include <qthread/dictionary.h>
-
+ #include <qthread/io.h>
+ #include <qthread/qt_syscalls.h> 
 
 
 
@@ -1003,7 +1004,36 @@ static inline void glt_ds_dictionary_it_copy(GLT_ds_dictionary_it *output,
     output = qt_dictionary_iterator_copy(input);
 }
 
+static inline int glt_can_syscall_functions()
+{
+#ifdef CORE
+    return 0;
+#else
+    return 1;
+#endif
+}
 
+static inline void glt_syscall_begin_blocking()
+{
+     qt_begin_blocking_action(); 
+}
+
+static inline void glt_syscall_end_blocking()
+{
+     qt_end_blocking_action(); 
+}
+
+static inline void glt_syscall_accept(int * fd, int socket, 
+        struct sockaddr *restrict address, socklen_t *restrict address_len)
+{
+    *fd = qt_accept (socket, address, address_len);
+}
+
+static inline void glt_syscall_connect(int * res, int socket, 
+        struct sockaddr *restrict address, socklen_t *restrict address_len)
+{
+    *fd = qt_connect (socket, address, address_len);
+}
 //ARGOBOTS FUNCTIONS that are not supported by Qthreads
 
 static inline int glt_can_event_functions()
