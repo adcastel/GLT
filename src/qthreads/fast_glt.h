@@ -31,6 +31,7 @@
 #include <qthread/io.h>
 #include <qthread/qt_syscalls.h> 
 #include <qthread/cacheline.h>
+#include <qthread/qalloc.h>
 
 
 
@@ -358,6 +359,8 @@ static inline int glt_can_extended_basic()
 #endif
 }
 
+#ifndef CORE
+
 
 /*static inline void glt_ult_creation_precond(void(*thread_func)(void *), void * arg,
         GLT_ult * ult, int npreconds, ...){
@@ -414,6 +417,8 @@ static inline void glt_ult_retloc(GLT_ult * ult)
     ult = qthread_retloc();
 }
 
+#endif
+
 static inline int glt_can_atomic_functions()
 {
 #ifdef CORE
@@ -422,6 +427,8 @@ static inline int glt_can_atomic_functions()
     return 1;
 #endif
 }
+
+#ifndef CORE
 
 static inline void glt_atomic_incr(GLT_aligned * operand, int incr)
 {
@@ -450,6 +457,8 @@ static inline void glt_atomic_cas_ptr(void * volatile * addr, void * oldval,
     qthread_cas_ptr(addr,oldval,newval);
 }
 
+#endif
+
 static inline int glt_can_feb_functions()
 {
 #ifdef CORE
@@ -458,6 +467,8 @@ static inline int glt_can_feb_functions()
     return 1;
 #endif
 }
+
+#ifndef CORE
 
 static inline void glt_feb_empty(const GLT_memory_state *dest)
 {
@@ -549,6 +560,8 @@ static inline void glt_syncvar_writeF_const( GLT_syncvar *  dst,  uint64_t src)
     qthread_syncvar_writeF_const(dst,src);
 }
 
+#endif
+
 static inline int glt_can_sinc_functions()
 {
 #ifdef CORE
@@ -557,6 +570,8 @@ static inline int glt_can_sinc_functions()
     return 1;
 #endif
 }
+
+#ifndef CORE
 
 static inline void glt_sinc_create(GLT_sinc *sinc, size_t sizeof_value,
         const void * initial_value, GLT_sinc_op op, size_t expected)
@@ -595,6 +610,8 @@ static inline void glt_sinc_wait(GLT_sinc * restrict sinc,  void * restrict targ
     qt_sinc_wait(sinc,target);
 }
 
+#endif
+
 static inline int glt_can_loop_functions()
 {
 #ifdef CORE
@@ -603,6 +620,8 @@ static inline int glt_can_loop_functions()
     return 1;
 #endif
 }
+
+#ifndef CORE
 
 static inline void glt_loop(const size_t start, const size_t end, 
          const GLT_loop_f func, void * arg){
@@ -672,6 +691,8 @@ static inline void glt_loop_queue_add_thread(GLT_loop_queue * loop, GLT_thread i
     qt_loop_queue_addworker(loop,id);
 }
 
+#endif
+
 static inline int glt_can_util_functions()
 {
 #ifdef CORE
@@ -680,6 +701,8 @@ static inline int glt_can_util_functions()
     return 1;
 #endif
 }
+
+#ifndef CORE
 
 static inline void glt_util_double_max(double * res, double * array, 
         size_t lenght, int checkfeb){
@@ -752,6 +775,8 @@ static inline void glt_util_mergesort(double * array, size_t lenght)
     qutil_mergesort(array,lenght);
 }
 
+#endif
+
 static inline int glt_can_data_structures_functions()
 {
 #ifdef CORE
@@ -760,6 +785,8 @@ static inline int glt_can_data_structures_functions()
     return 1;
 #endif
 }
+
+#ifndef CORE
 
 static inline void glt_ds_pool_create(GLT_ds_pool *pool, const size_t item_size)
 {
@@ -1006,6 +1033,8 @@ static inline void glt_ds_dictionary_it_copy(GLT_ds_dictionary_it *output,
     output = qt_dictionary_iterator_copy(input);
 }
 
+#endif
+
 static inline int glt_can_syscall_functions()
 {
 #ifdef CORE
@@ -1014,6 +1043,8 @@ static inline int glt_can_syscall_functions()
     return 1;
 #endif
 }
+
+#ifndef CORE
 
 static inline void glt_syscall_begin_blocking()
 {
@@ -1082,6 +1113,8 @@ static inline int glt_syscall_wait4 (pid_t pid, int *stat_loc, int options,
     return qt_wait4 ( pid, stat_loc, options, rusage);
 }
 
+#endif
+
 static inline int glt_can_extended_runtime()
 {
 #ifdef CORE
@@ -1090,6 +1123,8 @@ static inline int glt_can_extended_runtime()
     return 1;
 #endif
 }
+
+#ifndef CORE
 
 static inline void glt_subthread_get_num(GLT_subthread *num)
 {
@@ -1150,6 +1185,79 @@ static inline void glt_thread_ok(GLT_bool *res)
 {
     *res = qthread_shep_ok();
 }
+
+#endif
+
+static inline int glt_can_memory_functions()
+{
+#ifdef CORE
+    return 0;
+#else
+    return 1;
+#endif
+}
+
+#ifndef CORE
+
+static inline void * glt_memory_make_stat_map(const off_t filesize, void *addr,
+        const char *filename, size_t itemsize, const size_t streams)
+{
+    return qalloc_makestatmap (filesize, addr, filename, itemsize, streams);
+}
+
+static inline void * glt_memory_make_dyn_map(const off_t filesize, void *addr,
+        const char *filename,  const size_t streams)
+{
+    return qalloc_makedynmap (filesize, addr, filename, streams);
+}
+
+static inline void * glt_memory_load_map(const char *filename)
+{
+    return qalloc_loadmap (filename);
+}
+
+static inline void * glt_memory_malloc(void *map, size_t size)
+{
+    return qalloc_malloc (map,size);
+}
+
+static inline void * glt_memory_stat_malloc(struct mapinfo_s *map)
+{
+    return qalloc_statmalloc (map);
+}
+
+static inline void * glt_memory_dyn_malloc(struct dynmapinfo_s *map, size_t size)
+{
+    return qalloc_dynmalloc (map, size);
+}
+
+static inline void glt_memory_free(void *block, void * map)
+{
+     qalloc_free (block,map);
+}
+
+static inline void glt_memory_stat_free(void *block, struct mapinfo_s *map)
+{
+     qalloc_statfree (block,map);
+}
+
+static inline void glt_memory_dyn_free(void *block, struct dynmapinfo_s *map)
+{
+     qalloc_dynfree (block,map);
+}
+
+static inline void glt_memory_cleanup()
+{
+    qalloc_cleanup();
+}
+
+static inline void glt_memory_checkpoint()
+{
+    qalloc_checkpoint();
+}
+
+#endif
+
 //ARGOBOTS FUNCTIONS that are not supported by Qthreads
 
 static inline int glt_can_event_functions()
