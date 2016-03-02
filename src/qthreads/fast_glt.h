@@ -1023,17 +1023,63 @@ static inline void glt_syscall_end_blocking()
      qt_end_blocking_action(); 
 }
 
-static inline void glt_syscall_accept(int * fd, int socket, 
+static inline int glt_syscall_accept(int socket, 
         struct sockaddr *restrict address, socklen_t *restrict address_len)
 {
-    *fd = qt_accept (socket, address, address_len);
+    return qt_accept (socket, address, address_len);
 }
 
-static inline void glt_syscall_connect(int * res, int socket, 
-        struct sockaddr *restrict address, socklen_t *restrict address_len)
+static inline int glt_syscall_connect(int socket, 
+        struct sockaddr *restrict address, socklen_t address_len)
 {
-    *fd = qt_connect (socket, address, address_len);
+    return qt_connect (socket, address, address_len);
 }
+
+static inline int glt_syscall_poll(struct pollfd fds[], nfds_t nfds, int timeout)
+{
+    return qt_poll (fds, nfds, timeout);
+}
+
+static inline size_t glt_syscall_pread(int filedes, void *buf, size_t nbyte, 
+        off_t offset)
+{
+    return qt_pread (filedes, buf, nbyte, offset);
+}
+
+static inline size_t glt_syscall_read(int filedes, void *buf, size_t nbyte)
+{
+    return qt_read (filedes, buf, nbyte);
+}
+
+static inline size_t glt_syscall_pwrite(int filedes, void *buf, size_t nbyte, 
+        off_t offset)
+{
+    return qt_pwrite (filedes, buf, nbyte, offset);
+}
+
+static inline size_t glt_syscall_write(int filedes, void *buf, size_t nbyte)
+{
+    return qt_write (filedes, buf, nbyte);
+}
+
+static inline int glt_syscall_select(int nfds, fd_set *restrict readfds, 
+        fd_set *restrict writefds, fd_set *restrict errorfds, 
+        struct timeval *restrict timeout)
+{
+    return qt_select (nfds, readfds, writefds, errorfds, timeout);
+}
+
+static inline int glt_syscall_system(const char * command)
+{
+    return qt_system(command);
+}
+
+static inline int glt_syscall_wait4 (pid_t pid, int *stat_loc, int options, 
+        struct rusage *rusage)
+{
+    return qt_wait4 ( pid, stat_loc, options, rusage);
+}
+
 //ARGOBOTS FUNCTIONS that are not supported by Qthreads
 
 static inline int glt_can_event_functions()
