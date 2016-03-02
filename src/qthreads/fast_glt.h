@@ -69,7 +69,8 @@
 #define GLT_ds_dictionary qt_dictionary
 #define GLT_ds_dictionary_key_equals qt_dict_key_equals_f
 #define GLT_ds_dictionary_hash qt_dict_hash_f
-#define GLT_ds_dictionary_tag_cleanup qt_dict_tag_cleanup_f
+#define GLT_ds_dictionary_cleanup qt_dict_cleanup_f
+#define GLT_ds_dictionary_it qt_dictionary_iterator
 
 
 //ARGOBOTS
@@ -926,6 +927,82 @@ static inline void glt_ds_dqueue_empty(GLT_bool * empty, GLT_ds_dqueue * dqueue)
 {
     *empty = qdqueue_empty(dqueue);
 }
+
+static inline void glt_ds_dictionary_create(GLT_ds_dictionary * dictionary, 
+        GLT_ds_dictionary_key_equals eq, 
+        GLT_ds_dictionary_hash hash, GLT_ds_dictionary_cleanup cleanup)
+{
+    dictionary = qt_dictionary_create(eq, hash, cleanup);
+}
+
+static inline void glt_ds_dictionary_destroy(GLT_ds_dictionary * dictionary)
+{
+    qt_dictionary_destroy(dictionary);
+}
+
+static inline void glt_ds_dictionary_put(void * next, GLT_ds_dictionary * dictionary,
+        void * key, void *value)
+{
+    next = qt_dictionary_put(dictionary, key, value);
+}
+
+static inline void glt_ds_dictionary_put_if_absent(void * next, GLT_ds_dictionary * dictionary,
+        void * key, void *value)
+{
+    next = qt_dictionary_put_if_absent(dictionary, key, value);
+}
+
+static inline void glt_ds_dictionary_get(void * value, GLT_ds_dictionary * dictionary,
+        void * key)
+{
+    value = qt_dictionary_get(dictionary, key);
+}
+
+static inline void glt_ds_dictionary_delete(void * value, GLT_ds_dictionary * dictionary,
+        void * key)
+{
+    value = qt_dictionary_delete(dictionary, key);
+}
+
+static inline void glt_ds_dictionary_end(GLT_ds_dictionary_it *it, 
+        GLT_ds_dictionary * dictionary)
+{
+    it = qt_dictionary_end(dictionary);
+}
+
+static inline void glt_ds_dictionary_it_create(GLT_ds_dictionary_it *it, 
+        GLT_ds_dictionary * dictionary)
+{
+    it = qt_dictionary_iterator_create(dictionary);
+}
+
+static inline void glt_ds_dictionary_it_destroy(GLT_ds_dictionary_it *it)
+{
+    qt_dictionary_iterator_destroy(it);
+}
+
+static inline void glt_ds_dictionary_it_next(void * entry, GLT_ds_dictionary_it *it)
+{
+    entry = qt_dictionary_iterator_next(it);
+}
+
+static inline void glt_ds_dictionary_it_get(void * entry, GLT_ds_dictionary_it *it)
+{
+    entry = qt_dictionary_iterator_get(it);
+}
+
+static inline void glt_ds_dictionary_it_equals(GLT_bool * eq, 
+        GLT_ds_dictionary_it *it1, GLT_ds_dictionary_it *it2)
+{
+    *eq = qt_dictionary_iterator_equals(it1, it2);
+}
+
+static inline void glt_ds_dictionary_it_copy(GLT_ds_dictionary_it *output, 
+        GLT_ds_dictionary_it *input)
+{
+    output = qt_dictionary_iterator_copy(input);
+}
+
 
 //ARGOBOTS FUNCTIONS that are not supported by Qthreads
 
