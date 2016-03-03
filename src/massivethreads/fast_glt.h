@@ -47,6 +47,9 @@ typedef struct myth_timer {
 
 //Extended variables
 #ifndef CORE
+
+#define GLT_workunit_f myth_func_t
+#define GLT_workunit_o myth_thread_option_t
 #include <sys/socket.h>
 #include <poll.h>
 #include <sys/resource.h>
@@ -368,6 +371,59 @@ static inline int glt_get_thread_num()
 {
     return myth_get_worker_num();
 }
+
+//Extended functions
+
+static inline int can_extended_workunits(){
+#ifdef CORE
+    return 0;
+#else
+    return 1;
+}
+
+#ifndef CORE
+static inline void glt_wu_create_ex(GLT_ult * ult, GLT_workunit_f func, void * arg,
+        GLT_workunit_o opt)
+{
+    *ult = myth_create_ex(func,arg,opt);
+}
+static inline void glt_wu_create_nonsched(GLT_ult * ult, GLT_workunit_f func, void * arg,
+        GLT_workunit_o opt)
+{
+    *ult = myth_create_nonsched(func,arg,opt);
+}
+
+static inline void glt_yield2()
+{
+    myth_yield2();
+}
+
+static inline void glt_wu_detach(GLT_ult ult)
+{
+    myth_detach(ult);
+}
+
+static inline void glt_wu_set_cancel_state(int state, int *oldstate)
+{
+    myth_setcancelstate(state,oldstate);
+}
+
+static inline void glt_wu_set_cancel_type(int type, int *oldtype)
+{
+    myth_setcanceltype(type, oldtype);
+}
+
+static inline void glt_wu_test_cancel()
+{
+    myth_testcancel();
+}
+
+static inline void glt_wu_set_def_stack_size(size_t newsize)
+{
+    myth_set_def_stack_size(newsize);
+}
+
+#endif
 
 
 //ARGOBOTS FUNCTIONS that are not supported by Massivethreads
