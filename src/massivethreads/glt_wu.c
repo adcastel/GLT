@@ -78,3 +78,19 @@ void glt_workunit_get_thread_id(GLT_thread_id *id)
 {
     *ult = myth_self();
 }
+ 
+void glt_ult_exit()
+{
+    void *ret;
+    myth_exit(ret);
+}
+
+ void glt_ult_cancel(GLT_ult ult)
+{
+    myth_cancel (ult);
+}
+
+ void glt_tasklet_cancel (GLT_tasklet tasklet)
+{
+    myth_cancel (tasklet);
+}

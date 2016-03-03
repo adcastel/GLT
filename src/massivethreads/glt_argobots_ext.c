@@ -424,13 +424,6 @@ void glt_thread_check_events(GLT_sched sched)
     GLT_ERROR_ARG;
 }
 
-
- void glt_tasklet_cancel (GLT_tasklet tasklet)
-{
-    GLT_ERROR_ARG;
-}
-
-
  void glt_tasklet_get_thread(GLT_tasklet tasklet, GLT_thread *thread)
 {
     GLT_ERROR_ARG;
@@ -480,17 +473,6 @@ void glt_thread_check_events(GLT_sched sched)
 {
     GLT_ERROR_ARG;
 }
- 
- void glt_ult_exit()
-{
-    GLT_ERROR_ARG;
-}
-
- void glt_ult_cancel(GLT_ult ult)
-{
-    GLT_ERROR_ARG;
-}
-
 
  void glt_ult_get_state(GLT_ult ult, GLT_ult_state *state)
 {

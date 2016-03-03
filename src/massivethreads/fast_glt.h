@@ -251,6 +251,22 @@ static inline void glt_workunit_get_thread_id(GLT_thread_id *id)
     *ult = myth_self();
 }
  
+ static inline void glt_ult_exit()
+{
+    void *ret;
+    myth_exit(ret);
+}
+
+  static inline void glt_ult_cancel(GLT_ult ult)
+{
+    myth_cancel (ult);
+}
+
+  static inline void glt_tasklet_cancel (GLT_tasklet tasklet)
+{
+    myth_cancel (tasklet);
+}
+ 
 static inline void glt_mutex_create(GLT_mutex * mutex)
 {
     *mutex = myth_mutex_create();

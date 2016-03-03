@@ -159,6 +159,10 @@ void glt_ult_migrate_self_to(GLT_thread_id id);
  void glt_tasklet_self(GLT_tasklet *tasklet);
  void glt_ult_self(GLT_ult *ult);
  
+ void glt_ult_exit();
+ void glt_ult_cancel(GLT_ult ult);
+ void glt_tasklet_cancel (GLT_tasklet tasklet);
+ 
 void glt_mutex_create(GLT_mutex * mutex);
 void glt_mutex_lock(GLT_mutex mutex);
 void glt_mutex_unlock(GLT_mutex mutex);

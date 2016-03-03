@@ -282,6 +282,20 @@ static inline void glt_ult_self(GLT_ult *ult)
     ABT_thread_self (ult);
 }
 
+
+static inline void glt_ult_exit()
+{
+    ABT_thread_exit ();
+}
+static inline void glt_ult_cancel(GLT_ult ult)
+{
+    ABT_thread_cancel (ult);
+}
+static inline void glt_tasklet_cancel (GLT_tasklet tasklet)
+{
+    ABT_task_cancel (tasklet);
+}
+
 static inline void glt_mutex_create(GLT_mutex * mutex)
 {
     ABT_mutex_create(mutex);
@@ -942,10 +956,6 @@ static inline int can_extended_tasklets()
 
 #ifndef CORE
 
-static inline void glt_tasklet_cancel (GLT_tasklet tasklet)
-{
-    ABT_task_cancel (tasklet);
-}
 
 static inline void glt_tasklet_get_thread(GLT_tasklet tasklet, GLT_thread *thread)
 {
@@ -1010,15 +1020,7 @@ static inline int can_extended_ults()
 }
 
 #ifndef CORE
-static inline void glt_ult_exit()
-{
-    ABT_thread_exit ();
-}
 
-static inline void glt_ult_cancel(GLT_ult ult)
-{
-    ABT_thread_cancel (ult);
-}
 
 static inline void glt_ult_get_state(GLT_ult ult, GLT_ult_state *state)
 {

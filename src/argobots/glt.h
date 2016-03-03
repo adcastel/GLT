@@ -159,6 +159,10 @@ void glt_workunit_get_thread_id(GLT_thread_id *id);
  void glt_thread_self(GLT_thread *thread);
  void glt_tasklet_self(GLT_tasklet *tasklet);
 
+ void glt_ult_cancel(GLT_ult ult);
+ void glt_tasklet_cancel (GLT_tasklet tasklet);
+ void glt_ult_exit();
+ 
 void glt_mutex_create(GLT_mutex * mutex);
 void glt_mutex_lock(GLT_mutex mutex);
 void glt_mutex_unlock(GLT_mutex mutex);
@@ -306,7 +310,7 @@ void glt_thread_is_primary(GLT_thread thread, GLT_bool *flag);
 void glt_thread_run_unit(GLT_unit unit, GLT_pool pool);
 void glt_thread_check_events(GLT_sched sched);
 
- void glt_tasklet_cancel (GLT_tasklet tasklet);
+ 
  void glt_tasklet_get_thread(GLT_tasklet tasklet, GLT_thread *thread);
  void glt_tasklet_get_state(GLT_tasklet tasklet, GLT_tasklet_state *state);
  void glt_tasklet_get_last_pool(GLT_tasklet tasklet, GLT_pool *pool);
@@ -318,8 +322,7 @@ void glt_thread_check_events(GLT_sched sched);
  void glt_tasklet_release(GLT_tasklet tasklet);
  void glt_tasklet_get_arg(GLT_tasklet tasklet, void **arg);
  
- void glt_ult_exit();
- void glt_ult_cancel(GLT_ult ult);
+ 
  void glt_ult_self(GLT_ult *ult);
  void glt_ult_get_state(GLT_ult ult, GLT_ult_state *state);
  void glt_ult_get_last_pool(GLT_ult ult, GLT_pool *pool);

@@ -87,9 +87,24 @@ void glt_tasklet_self(GLT_tasklet *tasklet)
 {
     ABT_task_self (tasklet);
 }
- void glt_ult_self(GLT_ult *ult)
+void glt_ult_self(GLT_ult *ult)
 {
     ABT_thread_self (ult);
+}
+ 
+  void glt_ult_exit()
+{
+    ABT_thread_exit ();
+}
+
+ void glt_ult_cancel(GLT_ult ult)
+{
+    ABT_thread_cancel (ult);
+}
+
+ void glt_tasklet_cancel (GLT_tasklet tasklet)
+{
+    ABT_task_cancel (tasklet);
 }
 
 // Extended functions
@@ -107,10 +122,6 @@ void glt_tasklet_self(GLT_tasklet *tasklet)
 
 #ifndef CORE
 
- void glt_tasklet_cancel (GLT_tasklet tasklet)
-{
-    ABT_task_cancel (tasklet);
-}
 
  void glt_tasklet_get_thread(GLT_tasklet tasklet, GLT_thread *thread)
 {
@@ -175,17 +186,7 @@ void glt_tasklet_self(GLT_tasklet *tasklet)
 }
 
 #ifndef CORE
- void glt_ult_exit()
-{
-    ABT_thread_exit ();
-}
 
- void glt_ult_cancel(GLT_ult ult)
-{
-    ABT_thread_cancel (ult);
-}
-
- 
 
  void glt_ult_get_state(GLT_ult ult, GLT_ult_state *state)
 {

@@ -76,3 +76,19 @@ void glt_tasklet_self(GLT_ult * ult)
 {
     ult = qthread_retloc();
 }
+
+void glt_ult_exit()
+{
+    printf("Warning: this feature is not supported in Qthreads\n");
+
+}
+
+void glt_ult_cancel(GLT_ult ult)
+{
+    printf("Warning: this feature is not supported in Qthreads\n");
+}
+
+void glt_tasklet_cancel (GLT_tasklet tasklet)
+{
+    printf("Warning: this feature is not supported in Qthreads\n");
+}

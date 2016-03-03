@@ -264,6 +264,22 @@ static inline void glt_tasklet_self(GLT_ult * ult)
     ult = qthread_retloc();
 }
 
+ static inline void glt_ult_exit()
+{
+    printf("Warning: this feature is not supported in Qthreads\n");
+
+}
+
+  static inline void glt_ult_cancel(GLT_ult ult)
+{
+    printf("Warning: this feature is not supported in Qthreads\n");
+}
+
+  static inline void glt_tasklet_cancel (GLT_tasklet tasklet)
+{
+    printf("Warning: this feature is not supported in Qthreads\n");
+}
+
 static inline void glt_mutex_create(GLT_mutex * mutex)
 {
     mutex = (GLT_mutex *)malloc(sizeof(GLT_mutex));
