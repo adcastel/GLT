@@ -76,7 +76,8 @@ typedef struct glt_team {
 
 
 #define GLT_VERSION "You are using glt 0.1v overMassiveThreads (adcastel@uji.es)"
-#define GLT_ERROR_ARG "Error: This feature is only supported by Argobots implementation and you are using MassiveThreads. Please use the query functions"
+#define GLT_ERROR_ARG printf("Error: This feature is only supported by Argobots \
+    implementation and you are using MassiveThreads. Please use the query functions")
 
 /* Main team structure*/
 
