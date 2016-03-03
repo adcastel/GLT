@@ -41,8 +41,22 @@ typedef struct myth_timer {
 #define GLT_timer myth_timer_t
 #define GLT_bool int
 
-//Extended variables
 #ifndef CORE
+#include <sys/socket.h>
+#include <poll.h>
+#include <sys/resource.h>
+
+#define aligned_t long unsigned int
+typedef enum introspective_state {NOT_SUPPORTED} introspective_state;
+
+typedef struct mapinfo_s {
+    int not_supported;
+}mapinfo_s_t;
+
+typedef struct dynmapinfo_s {
+    int not_supported;
+}dynmapinfo_s_t;
+//ARGOBOTS
 #define GLT_event_kind void *
 #define GLT_event_cb_fn void *
 #define GLT_future void *
@@ -64,10 +78,39 @@ typedef struct myth_timer {
 #define GLT_ult_id int
 #define GLT_ult_attr void *
 #define GLT_unit_type void *
-
+//QTHREADS
+#define GLT_syncvar void *
+#define GLT_aligned void *
+#define GLT_memory_state void *
+#define GLT_sinc_op void *
+#define GLT_sinc void *
+#define GLT_loop_f void *
+#define GLT_loopr_f void *
+#define GLT_loop_step_f void *
+#define GLT_accum_f void *
+#define GLT_loop_queue void *
+#define GLT_loop_queue_kind void *
+#define GLT_ds_pool void *
+#define GLT_ds_array void *
+#define GLT_ds_array_distribution void *
+#define GLT_ds_loop_f void *
+#define GLT_ds_loopr_f void *
+#define GLT_ds_cloop_f void *
+#define GLT_ds_lfqueue void *
+#define GLT_ds_dqueue void *
+#define GLT_ds_dictionary void *
+#define GLT_ds_dictionary_key_equals void *
+#define GLT_ds_dictionary_hash void *
+#define GLT_ds_dictionary_cleanup void *
+#define GLT_ds_dictionary_it void *
+#define GLT_subthread void *
 
 #define glt_scheduler_config_create 
-#define glt_scheduler_config_read 
+#define glt_scheduler_config_read
+
+#define glt_ult_creation_precond(f,a,u,n,...) qthread_fork_precond(f,a,u,n,...)
+#define glt_ult_creation_precond_to(f,a,u,d,n,...) qthread_fork_precond_to(f,a,u,d,n,...)
+
 #endif
 
 typedef struct glt_team {
@@ -77,6 +120,8 @@ typedef struct glt_team {
 
 #define GLT_VERSION "You are using glt 0.1v overMassiveThreads (adcastel@uji.es)"
 #define GLT_ERROR_ARG printf("Error: This feature is only supported by Argobots \
+    implementation and you are using MassiveThreads. Please use the query functions")
+#define GLT_ERROR_QTH printf("Error: This feature is only supported by Qthreads \
     implementation and you are using MassiveThreads. Please use the query functions")
 
 /* Main team structure*/
@@ -146,7 +191,18 @@ int glt_can_self();
 int glt_can_manage_threads();
 int can_extended_tasklets();
 int can_extended_ults();
-
+//QUERY functions for QTHREADS
+//Always return 0;
+int glt_can_extended_basic();
+ int glt_can_atomic_functions();
+ int glt_can_feb_functions();
+ int glt_can_sinc_functions();
+ int glt_can_loop_functions();
+ int glt_can_util_functions();
+ int glt_can_data_structures_functions();
+ int glt_can_syscall_functions();
+ int glt_can_extended_runtime();
+ int glt_can_memory_functions();
 
 
 
@@ -289,6 +345,227 @@ void glt_thread_check_events(GLT_sched sched);
  void glt_ult_attr_get_stacksize (GLT_ult_attr attr, size_t *stacksize);
  void glt_ult_attr_set_callback (GLT_ult_attr attr, void(*cb_func)(GLT_ult ult, void *cb_arg), void *cb_arg);
  void glt_ult_attr_set_migratable (GLT_ult_attr attr, GLT_bool flag);
+ 
+ //HEADERS for QTHREADS extended functions
+//Null codes
+ 
+/* void glt_ult_creation_precond(void(*thread_func)(void *), void * arg,
+        GLT_ult * ult, int npreconds, ...);
+ void glt_ult_creation_precond_to(void(*thread_func)(void *), void * arg,
+        GLT_ult * ult, int dest,int npreconds, ...);
+*/
+ void glt_ult_creation_syncvar(void(*thread_func)(void *), void * arg,
+        GLT_syncvar *syncvar);
+ void glt_ult_creation_syncvar_to(void(*thread_func)(void *), void * arg,
+        GLT_syncvar *syncvar, int dest,int npreconds, ...);
+ void glt_ult_get_thread(GLT_thread *thread, int *worker);
+ void glt_ult_get_thread_unique(GLT_thread *thread, int *worker);
+ void glt_ult_get_tasklocal(void * pointer, unsigned int size);
+ void glt_ult_size_tasklocal(unsigned int *size);
+ void glt_ult_migrate_self_to(int dest);
+ void glt_ult_get_stack_left(size_t *size);
+ void glt_ult_retloc(GLT_ult * ult);
+ void glt_atomic_incr(GLT_aligned * operand, int incr);
+ void glt_atomic_fincr(float * operand, float incr);
+ void glt_atomic_dincr(double * operand, double incr);
+ void glt_atomic_cas(volatile GLT_aligned * addr, GLT_aligned oldval,
+        GLT_aligned newval);
+ void glt_atomic_cas_ptr(void * volatile * addr, void * oldval,
+        void * newval);
+ void glt_feb_empty(const GLT_memory_state *dest);
+ void glt_feb_fill(const GLT_memory_state *dest);
+ void glt_feb_status(const GLT_memory_state *addr, int *status);
+ void glt_feb_readFE( GLT_memory_state *dst, const GLT_memory_state *src);
+ void glt_feb_readFF( GLT_memory_state *dst, const GLT_memory_state *src);
+ void glt_feb_writeEF( GLT_memory_state * restrict dst, const GLT_memory_state * restrict src);
+ void glt_feb_writeEF_const( GLT_memory_state *  dst,  GLT_memory_state src);
+ void glt_feb_writeF( GLT_memory_state * restrict dst, const GLT_memory_state * restrict src);
+ void glt_feb_writeF_const( GLT_memory_state *  dst,  GLT_memory_state src);
+ void glt_syncvar_empty(GLT_syncvar *dest);
+ void glt_syncvar_fill(GLT_syncvar *dest);
+ void glt_syncvar_status(GLT_syncvar *addr, int *status);
+ void glt_syncvar_readFE( uint64_t * restrict dst, GLT_syncvar * restrict src);
+ void glt_syncvar_readFF( uint64_t * restrict dst, GLT_syncvar * restrict src);
+ void glt_syncvar_writeEF( GLT_syncvar * restrict dst, const uint64_t * restrict src);
+ void glt_syncvar_writeEF_const( GLT_syncvar *  dst,  uint64_t src);
+ void glt_syncvar_writeF( GLT_syncvar * restrict dst, const uint64_t * restrict src);
+ void glt_syncvar_writeF_const( GLT_syncvar *  dst,  uint64_t src);
+ void glt_sinc_create(GLT_sinc *sinc, size_t sizeof_value,
+        const void * initial_value, GLT_sinc_op op, size_t expected);
+ void glt_sinc_init(GLT_sinc *restrict sinc, size_t sizeof_value,
+        const void * initial_value, GLT_sinc_op op, size_t expected);
+ void glt_sinc_destroy(GLT_sinc *sinc);
+ void glt_sinc_fini(GLT_sinc * sinc);
+ void glt_sinc_reset(GLT_sinc * sinc, size_t expect);
+ void glt_sinc_submit(GLT_sinc * restrict sinc, const void * restrict value);
+ void glt_sinc_wait(GLT_sinc * restrict sinc,  void * restrict target);
+ void glt_loop(const size_t start, const size_t end, 
+         const GLT_loop_f func, void * arg);
+ void glt_loop_step(const size_t start, const size_t end, 
+        const size_t stride, const GLT_loop_step_f func, void * arg);
+/* void glt_loop_future(const size_t start, const size_t end, 
+         const GLT_loop_f func, void * arg);
+ void glt_loop_step_future(const size_t start, const size_t end, 
+        const size_t stride, const GLT_loop_step_f func, void * arg);*/
+ void glt_loop_balance(const size_t start, const size_t end, 
+         const GLT_loop_f func, void * arg);
+/* void glt_loop_balance_future(const size_t start, const size_t end, 
+         const GLT_loop_f func, void * arg);*/
+ void glt_loopaccum_balance(const size_t start, const size_t end, 
+         size_t size, void *out, const GLT_loopr_f func, void * arg, GLT_accum_f acc);
+/* void glt_loopaccum_balance_future(const size_t start, const size_t end, 
+size_t size, void *out, const GLT_loop_f func, void * arg, GLT_accum_f acc);*/
+ void glt_loop_queue_create(GLT_loop_queue * loop, GLT_loop_queue_kind kind,
+        const size_t start, const size_t end, 
+        const size_t stride, const GLT_loop_f func, void * arg);
+ void glt_loop_queue_set_chunk(GLT_loop_queue * loop, size_t chunk);
+ void glt_loop_queue_run(GLT_loop_queue * loop);
+ void glt_loop_queue_run_there(GLT_loop_queue * loop, GLT_thread id);
+ void glt_loop_queue_add_thread(GLT_loop_queue * loop, GLT_thread id);
+ void glt_util_double_max(double * res, double * array, 
+        size_t lenght, int checkfeb);
+ void glt_util_uint_max(unsigned int * res, 
+        const long unsigned int * array, size_t lenght, int checkfeb);
+ void glt_util_int_max(int * res, const long int * array, 
+        size_t lenght, int checkfeb);
+ void glt_util_double_min(double * res, double * array, 
+        size_t lenght, int checkfeb);
+ void glt_util_uint_min(unsigned int * res, 
+        const long unsigned int * array, size_t lenght, int checkfeb);
+ void glt_util_int_min(int * res, const long int * array, 
+        size_t lenght, int checkfeb);
+ void glt_util_double_mult(double * res, double * array, 
+        size_t lenght, int checkfeb);
+ void glt_util_uint_mult(unsigned int * res, 
+        const long unsigned int * array, size_t lenght, int checkfeb);
+ void glt_util_int_mult(int * res, const long int * array, 
+        size_t lenght, int checkfeb);
+ void glt_util_double_sum(double * res, double * array, 
+        size_t lenght, int checkfeb);
+ void glt_util_uint_sum(unsigned int * res, 
+        const long unsigned int * array, size_t lenght, 
+        int checkfeb);
+ void glt_util_int_sum(int * res, const long int * array, size_t lenght, 
+        int checkfeb);
+ void glt_util_qsort(double * array, size_t lenght);
+ void glt_util_mergesort(double * array, size_t lenght);
+ void glt_ds_pool_create(GLT_ds_pool *pool, const size_t item_size);
+ void glt_ds_pool_create_aligned(GLT_ds_pool *pool, 
+        const size_t item_size, const size_t alignment);
+ void glt_ds_pool_destroy(GLT_ds_pool *pool);
+ void glt_ds_pool_alloc(GLT_ds_pool *pool);
+ void glt_ds_pool_free(GLT_ds_pool *restrict pool, 
+        void * restrict mem);
+ void glt_ds_array_create(GLT_ds_array *array, const size_t count, 
+        const size_t item_size);
+ void glt_ds_array_create_tight(GLT_ds_array *array, 
+        const size_t count, const size_t item_size);
+ void glt_ds_array_create_configured(GLT_ds_array *array, 
+        const size_t count, const size_t item_size, 
+        const GLT_ds_array_distribution d, const char thight, const int seg_pages);
+ void glt_ds_array_destroy(GLT_ds_array *array);
+ void glt_ds_array_elem(void * elem, const GLT_ds_array *array, 
+        const size_t index);
+ void glt_ds_array_elem_nomigrate(void * elem, const GLT_ds_array *array, 
+        const size_t index);
+ void glt_ds_array_elem_migrate(void * elem, const GLT_ds_array *array, 
+        const size_t index);
+ void glt_ds_array_thread_of(GLT_thread * id, const GLT_ds_array *array, 
+        const size_t index);
+ void glt_ds_array_set_thread_of(GLT_ds_array *array, 
+        const size_t index, GLT_thread id );
+ void glt_ds_array_iter(GLT_ds_array *array, 
+        const size_t start, const size_t stop, void(*thread_func)(void *));
+ void glt_ds_array_iter_loop(GLT_ds_array *array, 
+        const size_t start, const size_t stop, GLT_ds_loop_f thread_func, void * arg);
+ void glt_ds_array_iter_nb(GLT_ds_array *array, 
+        const size_t start, const size_t stop, GLT_ds_loop_f thread_func, 
+        void * args, aligned_t *arg);
+ void glt_ds_array_iter_constloop(GLT_ds_array *array, 
+        const size_t start, const size_t stop, GLT_ds_cloop_f thread_func, 
+        void * args);
+ void glt_ds_array_iter_loopaccum(GLT_ds_array *array, 
+        const size_t start, const size_t stop, GLT_ds_loopr_f thread_func, 
+        void * args, void * ret, const size_t resize, GLT_accum_f acc );
+ void glt_ds_lfqueue_create(GLT_ds_lfqueue * lfqueue);
+ void glt_ds_lfqueue_destroy(GLT_ds_lfqueue * lfqueue);
+ void glt_ds_lfqueue_enqueue(GLT_ds_lfqueue * lfqueue, void * elem);
+ void glt_ds_lfqueue_dequeue( void * elem, GLT_ds_lfqueue * lfqueue);
+ void glt_ds_lfqueue_empty(GLT_bool * empty, GLT_ds_lfqueue * lfqueue);
+ void glt_ds_dqueue_create(GLT_ds_dqueue * dqueue);
+ void glt_ds_dqueue_destroy(GLT_ds_dqueue * dqueue);
+ void glt_ds_dqueue_enqueue(GLT_ds_dqueue * dqueue, void * elem);
+ void glt_ds_dqueue_enqueue_there(GLT_ds_dqueue * dqueue, 
+        void * elem, GLT_thread id);
+ void glt_ds_dqueue_dequeue( void * elem, GLT_ds_dqueue * dqueue);
+ void glt_ds_dqueue_empty(GLT_bool * empty, GLT_ds_dqueue * dqueue);
+ void glt_ds_dictionary_create(GLT_ds_dictionary * dictionary, 
+        GLT_ds_dictionary_key_equals eq, 
+        GLT_ds_dictionary_hash hash, GLT_ds_dictionary_cleanup cleanup);
+ void glt_ds_dictionary_destroy(GLT_ds_dictionary * dictionary);
+ void glt_ds_dictionary_put(void * next, GLT_ds_dictionary * dictionary,
+        void * key, void *value);
+ void glt_ds_dictionary_put_if_absent(void * next, GLT_ds_dictionary * dictionary,
+        void * key, void *value);
+ void glt_ds_dictionary_get(void * value, GLT_ds_dictionary * dictionary,
+        void * key);
+ void glt_ds_dictionary_delete(void * value, GLT_ds_dictionary * dictionary,
+        void * key);
+ void glt_ds_dictionary_end(GLT_ds_dictionary_it *it, 
+        GLT_ds_dictionary * dictionary);
+ void glt_ds_dictionary_it_create(GLT_ds_dictionary_it *it, 
+        GLT_ds_dictionary * dictionary);
+ void glt_ds_dictionary_it_destroy(GLT_ds_dictionary_it *it);
+ void glt_ds_dictionary_it_next(void * entry, GLT_ds_dictionary_it *it);
+ void glt_ds_dictionary_it_get(void * entry, GLT_ds_dictionary_it *it);
+ void glt_ds_dictionary_it_equals(GLT_bool * eq, 
+        GLT_ds_dictionary_it *it1, GLT_ds_dictionary_it *it2);
+ void glt_ds_dictionary_it_copy(GLT_ds_dictionary_it *output, 
+        GLT_ds_dictionary_it *input);
+ void glt_syscall_begin_blocking();
+ void glt_syscall_end_blocking();
+ int glt_syscall_accept(int socket, 
+        struct sockaddr *restrict address, socklen_t *restrict address_len);
+ int glt_syscall_connect(int socket, 
+        struct sockaddr *restrict address, socklen_t address_len);
+ int glt_syscall_poll(struct pollfd fds[], nfds_t nfds, int timeout);
+ size_t glt_syscall_pread(int filedes, void *buf, size_t nbyte, 
+        off_t offset);
+ size_t glt_syscall_read(int filedes, void *buf, size_t nbyte);
+ size_t glt_syscall_pwrite(int filedes, void *buf, size_t nbyte, 
+        off_t offset);
+ size_t glt_syscall_write(int filedes, void *buf, size_t nbyte);
+ int glt_syscall_select(int nfds, fd_set *restrict readfds, 
+        fd_set *restrict writefds, fd_set *restrict errorfds, 
+        struct timeval *restrict timeout);
+ int glt_syscall_system(const char * command);
+ int glt_syscall_wait4 (pid_t pid, int *stat_loc, int options, 
+        struct rusage *rusage);
+ void glt_subthread_get_num(GLT_subthread *num);
+ void glt_cacheline(int *cl);
+ void glt_sorted_threads(const GLT_thread * list);
+ void glt_sorted_threads_remote(const GLT_thread * list, const GLT_thread src);
+ void glt_debuglevel(size_t *level, const enum introspective_state type);
+ void glt_readstate(size_t *value, const enum introspective_state type);
+ void glt_thread_distance(int * dist, const GLT_thread src, const GLT_thread dst);
+ void glt_thread_enable(GLT_thread id);
+ void glt_thread_disable(GLT_bool *res, GLT_thread id);
+ void glt_subthread_enable(GLT_subthread id);
+ void glt_subthread_disable(GLT_bool *res, GLT_subthread id);
+ void glt_thread_ok(GLT_bool *res);
+ void * glt_memory_make_stat_map(const off_t filesize, void *addr,
+        const char *filename, size_t itemsize, const size_t streams);
+ void * glt_memory_make_dyn_map(const off_t filesize, void *addr,
+        const char *filename,  const size_t streams);
+ void * glt_memory_load_map(const char *filename);
+ void * glt_memory_malloc(void *map, size_t size);
+ void * glt_memory_stat_malloc(struct mapinfo_s *map);
+ void * glt_memory_dyn_malloc(struct dynmapinfo_s *map, size_t size);
+ void glt_memory_free(void *block, void * map);
+ void glt_memory_stat_free(void *block, struct mapinfo_s *map);
+ void glt_memory_dyn_free(void *block, struct dynmapinfo_s *map);
+ void glt_memory_cleanup();
+ void glt_memory_checkpoint();
 #endif
 
 #endif	/* glt_H */
