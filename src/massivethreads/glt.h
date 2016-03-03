@@ -154,6 +154,7 @@ void glt_tasklet_join(GLT_tasklet *tasklet);
 
 void glt_ult_get_id(GLT_ult_id * id, GLT_ult ult);
 void glt_workunit_get_thread_id(GLT_thread_id *id);
+void glt_ult_migrate_self_to(GLT_thread_id id);
 
 void glt_mutex_create(GLT_mutex * mutex);
 void glt_mutex_lock(GLT_mutex mutex);

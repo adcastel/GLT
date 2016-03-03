@@ -249,6 +249,10 @@ static inline void glt_workunit_get_thread_id(GLT_thread_id *id)
     *id = qthread_shep();
 }
 
+static inline void glt_ult_migrate_self_to(GLT_thread_id id);
+{
+    qthread_migrate_to(id);
+}
 
 static inline void glt_mutex_create(GLT_mutex * mutex)
 {
@@ -408,11 +412,6 @@ static inline void glt_ult_get_tasklocal(void * pointer, unsigned int size)
 static inline void glt_ult_size_tasklocal(unsigned int *size)
 {
     *size = qthread_size_tasklocal();
-}
-
-static inline void glt_ult_migrate_self_to(int dest)
-{
-    qthread_migrate_to(dest);
 }
 
 static inline void glt_ult_get_stack_left(size_t *size)

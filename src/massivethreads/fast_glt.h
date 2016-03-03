@@ -228,15 +228,19 @@ static inline void glt_tasklet_join(GLT_tasklet *tasklet)
 static inline void glt_ult_get_id(GLT_ult_id * id, GLT_ult ult)
 {
     printf("Warning: this feature is not supported in MassiveThreads\n");
-    return 0;
 }
 
 static inline void glt_workunit_get_thread_id(GLT_thread_id *id)
 {
     myth_thread_t thread = myth_self();
-    *id = thread->running_env.rank;
+    printf("Warning: this feature is not supported in MassiveThreads\n");
+
 }
 
+ static inline glt_ult_migrate_self_to(GLT_thread_id id);
+{
+    printf("Warning: this feature is not supported in MassiveThreads\n");
+}
 static inline void glt_mutex_create(GLT_mutex * mutex)
 {
     *mutex = myth_mutex_create();
@@ -1053,10 +1057,6 @@ static inline void glt_ult_size_tasklocal(unsigned int *size)
     GLT_ERROR_QTH;
 }
 
-static inline void glt_ult_migrate_self_to(int dest)
-{
-    GLT_ERROR_QTH;
-}
 
 static inline void glt_ult_get_stack_left(size_t *size)
 {

@@ -76,6 +76,13 @@ void glt_workunit_get_thread_id(GLT_thread_id *id)
     ABT_xstream_self_rank (id);
 }
 
+ void glt_ult_migrate_self_to(GLT_thread_id id)
+{
+    GLT_ult ult;
+    ABT_thread_self(&ult);
+    ABT_thread_migrate_to_xstream (ult, main_team->team[id]);
+}
+
 // Extended functions
 
 //tasklets functions

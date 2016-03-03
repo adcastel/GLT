@@ -64,3 +64,8 @@ void glt_workunit_get_thread_id(GLT_thread_id *id)
     printf("Warning: this feature is not supported in MassiveThreads\n");
     *id = -1;
 }
+
+ void glt_ult_migrate_self_to(GLT_thread_id id)
+{
+    printf("Warning: this feature is not supported in MassiveThreads\n");
+}

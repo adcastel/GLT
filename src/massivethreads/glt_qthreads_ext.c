@@ -95,10 +95,6 @@
     GLT_ERROR_QTH;
 }
 
- void glt_ult_migrate_self_to(int dest)
-{
-    GLT_ERROR_QTH;
-}
 
  void glt_ult_get_stack_left(size_t *size)
 {

@@ -61,3 +61,8 @@ void glt_workunit_get_thread_id(GLT_thread_id *id)
 {
     *id = qthread_shep();
 }
+
+ void glt_ult_migrate_self_to(GLT_thread_id dest)
+{
+    qthread_migrate_to(dest);
+}

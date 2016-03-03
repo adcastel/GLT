@@ -58,10 +58,7 @@
     *size = qthread_size_tasklocal();
 }
 
- void glt_ult_migrate_self_to(int dest)
-{
-    qthread_migrate_to(dest);
-}
+
 
  void glt_ult_get_stack_left(size_t *size)
 {

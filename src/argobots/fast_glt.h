@@ -266,6 +266,13 @@ static inline void glt_workunit_get_thread_id(GLT_thread_id *id)
     ABT_xstream_self_rank (id);
 }
 
+ static inline glt_ult_migrate_self_to(GLT_thread_id id)
+{
+    GLT_ult ult;
+    ABT_thread_self(&ult);
+    ABT_thread_migrate_to_xstream (ult, main_team->team[id]);
+}
+
 static inline void glt_mutex_create(GLT_mutex * mutex)
 {
     ABT_mutex_create(mutex);
@@ -1222,10 +1229,6 @@ static inline void glt_ult_size_tasklocal(unsigned int *size)
     GLT_ERROR_QTH;
 }
 
-static inline void glt_ult_migrate_self_to(int dest)
-{
-    GLT_ERROR_QTH;
-}
 
 static inline void glt_ult_get_stack_left(size_t *size)
 {
