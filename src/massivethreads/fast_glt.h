@@ -237,10 +237,20 @@ static inline void glt_workunit_get_thread_id(GLT_thread_id *id)
 
 }
 
- static inline glt_ult_migrate_self_to(GLT_thread_id id);
+ static inline void glt_ult_migrate_self_to(GLT_thread_id id);
 {
     printf("Warning: this feature is not supported in MassiveThreads\n");
 }
+ 
+ static inline   void glt_tasklet_self(GLT_tasklet *tasklet)
+{
+    *tasklet = myth_self();
+}
+ static inline  void glt_ult_self(GLT_ult *ult)
+{
+    *ult = myth_self();
+}
+ 
 static inline void glt_mutex_create(GLT_mutex * mutex)
 {
     *mutex = myth_mutex_create();

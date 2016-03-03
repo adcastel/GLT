@@ -66,3 +66,13 @@ void glt_workunit_get_thread_id(GLT_thread_id *id)
 {
     qthread_migrate_to(dest);
 }
+ 
+void glt_ult_self(GLT_ult * ult)
+{
+    ult = qthread_retloc();
+}
+ 
+void glt_tasklet_self(GLT_ult * ult)
+{
+    ult = qthread_retloc();
+}

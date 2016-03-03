@@ -434,11 +434,6 @@ void glt_thread_check_events(GLT_sched sched)
     GLT_ERROR_ARG;
 }
 
- void glt_tasklet_self(GLT_tasklet *tasklet)
-{
-    GLT_ERROR_ARG;
-}
-
  void glt_tasklet_get_thread(GLT_tasklet tasklet, GLT_thread *thread)
 {
     GLT_ERROR_ARG;
@@ -495,11 +490,6 @@ void glt_thread_check_events(GLT_sched sched)
 }
 
  void glt_ult_cancel(GLT_ult ult)
-{
-    GLT_ERROR_ARG;
-}
-
- void glt_ult_self(GLT_ult *ult)
 {
     GLT_ERROR_ARG;
 }

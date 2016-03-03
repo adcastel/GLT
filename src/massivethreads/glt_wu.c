@@ -69,3 +69,12 @@ void glt_workunit_get_thread_id(GLT_thread_id *id)
 {
     printf("Warning: this feature is not supported in MassiveThreads\n");
 }
+ 
+ void glt_tasklet_self(GLT_tasklet *tasklet)
+{
+    *tasklet = myth_self();
+}
+ void glt_ult_self(GLT_ult *ult)
+{
+    *ult = myth_self();
+}

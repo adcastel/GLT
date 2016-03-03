@@ -82,6 +82,15 @@ void glt_workunit_get_thread_id(GLT_thread_id *id)
     ABT_thread_self(&ult);
     ABT_thread_migrate_to_xstream (ult, main_team->team[id]);
 }
+ 
+void glt_tasklet_self(GLT_tasklet *tasklet)
+{
+    ABT_task_self (tasklet);
+}
+ void glt_ult_self(GLT_ult *ult)
+{
+    ABT_thread_self (ult);
+}
 
 // Extended functions
 
@@ -101,11 +110,6 @@ void glt_workunit_get_thread_id(GLT_thread_id *id)
  void glt_tasklet_cancel (GLT_tasklet tasklet)
 {
     ABT_task_cancel (tasklet);
-}
-
- void glt_tasklet_self(GLT_tasklet *tasklet)
-{
-    ABT_task_self (tasklet);
 }
 
  void glt_tasklet_get_thread(GLT_tasklet tasklet, GLT_thread *thread)
@@ -181,10 +185,7 @@ void glt_workunit_get_thread_id(GLT_thread_id *id)
     ABT_thread_cancel (ult);
 }
 
- void glt_ult_self(GLT_ult *ult)
-{
-    ABT_thread_self (ult);
-}
+ 
 
  void glt_ult_get_state(GLT_ult ult, GLT_ult_state *state)
 {

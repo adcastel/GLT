@@ -65,9 +65,6 @@
     *size = qthread_stackleft();
 }
 
- void glt_ult_retloc(GLT_ult * ult)
-{
-    ult = qthread_retloc();
-}
+
 
 #endif

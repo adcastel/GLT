@@ -254,6 +254,16 @@ static inline void glt_ult_migrate_self_to(GLT_thread_id id);
     qthread_migrate_to(id);
 }
 
+ static inline void glt_ult_self(GLT_ult * ult)
+{
+    ult = qthread_retloc();
+}
+ 
+static inline void glt_tasklet_self(GLT_ult * ult)
+{
+    ult = qthread_retloc();
+}
+
 static inline void glt_mutex_create(GLT_mutex * mutex)
 {
     mutex = (GLT_mutex *)malloc(sizeof(GLT_mutex));
@@ -419,10 +429,6 @@ static inline void glt_ult_get_stack_left(size_t *size)
     *size = qthread_stackleft();
 }
 
-static inline void glt_ult_retloc(GLT_ult * ult)
-{
-    ult = qthread_retloc();
-}
 
 #endif
 

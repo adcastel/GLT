@@ -101,10 +101,6 @@
     GLT_ERROR_QTH;
 }
 
- void glt_ult_retloc(GLT_ult * ult)
-{
-    GLT_ERROR_QTH;
-}
 
  void glt_atomic_incr(GLT_aligned * operand, int incr)
 {

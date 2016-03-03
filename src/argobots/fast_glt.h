@@ -266,11 +266,20 @@ static inline void glt_workunit_get_thread_id(GLT_thread_id *id)
     ABT_xstream_self_rank (id);
 }
 
- static inline glt_ult_migrate_self_to(GLT_thread_id id)
+ static inline void glt_ult_migrate_self_to(GLT_thread_id id)
 {
     GLT_ult ult;
     ABT_thread_self(&ult);
     ABT_thread_migrate_to_xstream (ult, main_team->team[id]);
+}
+ 
+static inline void glt_tasklet_self(GLT_tasklet *tasklet)
+{
+    ABT_task_self (tasklet);
+}
+static inline void glt_ult_self(GLT_ult *ult)
+{
+    ABT_thread_self (ult);
 }
 
 static inline void glt_mutex_create(GLT_mutex * mutex)
@@ -938,11 +947,6 @@ static inline void glt_tasklet_cancel (GLT_tasklet tasklet)
     ABT_task_cancel (tasklet);
 }
 
-static inline void glt_tasklet_self(GLT_tasklet *tasklet)
-{
-    ABT_task_self (tasklet);
-}
-
 static inline void glt_tasklet_get_thread(GLT_tasklet tasklet, GLT_thread *thread)
 {
     ABT_task_get_xstream (tasklet, thread);
@@ -1014,11 +1018,6 @@ static inline void glt_ult_exit()
 static inline void glt_ult_cancel(GLT_ult ult)
 {
     ABT_thread_cancel (ult);
-}
-
-static inline void glt_ult_self(GLT_ult *ult)
-{
-    ABT_thread_self (ult);
 }
 
 static inline void glt_ult_get_state(GLT_ult ult, GLT_ult_state *state)

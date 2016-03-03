@@ -361,10 +361,6 @@ void glt_thread_cancel(GLT_thread *thread)
     GLT_ERROR_ARG;
 }
 
-void glt_thread_self(GLT_thread *thread)
-{
-    GLT_ERROR_ARG;
-}
 
 void glt_thread_self_rank(int *rank)
 {
@@ -434,10 +430,6 @@ void glt_thread_check_events(GLT_sched sched)
     GLT_ERROR_ARG;
 }
 
- void glt_tasklet_self(GLT_tasklet *tasklet)
-{
-    GLT_ERROR_ARG;
-}
 
  void glt_tasklet_get_thread(GLT_tasklet tasklet, GLT_thread *thread)
 {
@@ -499,10 +491,6 @@ void glt_thread_check_events(GLT_sched sched)
     GLT_ERROR_ARG;
 }
 
- void glt_ult_self(GLT_ult *ult)
-{
-    GLT_ERROR_ARG;
-}
 
  void glt_ult_get_state(GLT_ult ult, GLT_ult_state *state)
 {
