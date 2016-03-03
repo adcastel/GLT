@@ -44,6 +44,8 @@
 #define GLT_cond aligned_t
 #define GLT_timer qtimer_t
 #define GLT_bool int
+#define GLT_thread_id int
+#define GLT_ult_id int
 
 //Extended variables
 #ifndef CORE
@@ -142,7 +144,8 @@ void glt_yield_to(GLT_ult ult);
 void glt_ult_join(GLT_ult *ult);
 void glt_tasklet_join(GLT_tasklet *tasklet);
 
-uint64_t glt_get_ult_id(GLT_ult ult);
+void glt_ult_get_id(GLT_ult_id * id, GLT_ult ult);
+void glt_workunit_get_thread_id(GLT_thread_id *id);
 
 void glt_mutex_create(GLT_mutex * mutex);
 void glt_mutex_lock(GLT_mutex mutex);
@@ -543,7 +546,6 @@ void glt_thread_check_events(GLT_sched sched);
  void glt_ult_retain(GLT_ult ult);
  void glt_ult_release(GLT_ult ult);
  void glt_ult_get_stacksize(GLT_ult ult, size_t *stacksize);
- void glt_ult_get_id(GLT_ult ult, GLT_ult_id *ult_id);
  void glt_ult_get_arg(GLT_ult ult, void **arg);
  void glt_ult_attr_create (GLT_ult_attr *newattr);
  void glt_ult_attr_free(GLT_ult_attr *attr);

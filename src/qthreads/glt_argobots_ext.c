@@ -584,11 +584,6 @@ void glt_thread_check_events(GLT_sched sched)
     GLT_ERROR_ARG;
 }
 
- void glt_ult_get_id(GLT_ult ult, GLT_ult_id *ult_id)
-{
-    GLT_ERROR_ARG;
-}
-
  void glt_ult_get_arg(GLT_ult ult, void **arg)
 {
     GLT_ERROR_ARG;

@@ -29,6 +29,9 @@
 #define GLT_cond ABT_cond
 #define GLT_timer ABT_timer
 #define GLT_bool ABT_bool
+#define GLT_thread_id int
+#define GLT_ult_id ABT_thread_id
+
 
 //Extended variables
 #ifndef CORE
@@ -50,7 +53,6 @@
 #define GLT_thread_state ABT_xstream_state
 #define GLT_tasklet_state ABT_task_state
 #define GLT_ult_state ABT_thread_state
-#define GLT_ult_id ABT_thread_id
 #define GLT_ult_attr ABT_thread_attr
 #define GLT_unit_type ABT_unit_type
  
@@ -254,11 +256,14 @@ static inline void glt_tasklet_join(GLT_tasklet *tasklet)
     ABT_task_free(tasklet);
 }
 
-static inline uint64_t glt_get_ult_id(GLT_ult ult)
+static inline void glt_ult_get_id(GLT_ult_id * id, GLT_ult ult)
 {
-    uint64_t id;
-    ABT_thread_get_id (ult, &id);
-    return id;
+    ABT_thread_get_id (ult, id);
+}
+
+static inline void glt_workunit_get_thread_id(GLT_thread_id *id)
+{
+    ABT_xstream_self_rank (id);
 }
 
 static inline void glt_mutex_create(GLT_mutex * mutex)
@@ -1087,11 +1092,6 @@ static inline void glt_ult_release(GLT_ult ult)
 static inline void glt_ult_get_stacksize(GLT_ult ult, size_t *stacksize)
 {
     ABT_thread_get_stacksize (ult, stacksize);
-}
-
-static inline void glt_ult_get_id(GLT_ult ult, GLT_ult_id *ult_id)
-{
-    ABT_thread_get_id (ult, ult_id);
 }
 
 static inline void glt_ult_get_arg(GLT_ult ult, void **arg)

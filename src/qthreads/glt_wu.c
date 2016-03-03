@@ -52,8 +52,12 @@ void glt_tasklet_join(GLT_tasklet *tasklet)
     qthread_readFF(NULL, tasklet);
 }
 
-uint64_t glt_get_ult_id(GLT_ult ult)
+void glt_ult_get_id(GLT_ult_id * id, GLT_ult ult)
 {
-    uint64_t id = qthread_id();
-    return id;
+    *id = qthread_id();
+}
+
+void glt_workunit_get_thread_id(GLT_thread_id *id)
+{
+    *id = qthread_shep();
 }

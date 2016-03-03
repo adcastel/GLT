@@ -47,6 +47,8 @@
 #define GLT_cond aligned_t
 #define GLT_timer qtimer_t
 #define GLT_bool int
+#define GLT_thread_id int
+#define GLT_ult_id int
 
 //Extended variables
 #ifndef CORE
@@ -237,11 +239,16 @@ static inline void glt_tasklet_join(GLT_tasklet *tasklet)
     qthread_readFF(NULL, tasklet);
 }
 
-static inline uint64_t glt_get_ult_id(GLT_ult ult)
+static inline void glt_ult_get_id(GLT_ult_id * id, GLT_ult ult)
 {
-    uint64_t id = qthread_id();
-    return id;
+    *id = qthread_id();
 }
+
+static inline void glt_workunit_get_thread_id(GLT_thread_id *id)
+{
+    *id = qthread_shep();
+}
+
 
 static inline void glt_mutex_create(GLT_mutex * mutex)
 {
@@ -1839,11 +1846,6 @@ static inline  void glt_ult_release(GLT_ult ult)
 }
 
 static inline  void glt_ult_get_stacksize(GLT_ult ult, size_t *stacksize)
-{
-    GLT_ERROR_ARG;
-}
-
-static inline  void glt_ult_get_id(GLT_ult ult, GLT_ult_id *ult_id)
 {
     GLT_ERROR_ARG;
 }

@@ -66,11 +66,14 @@ void glt_tasklet_join(GLT_tasklet *tasklet)
     ABT_task_free(tasklet);
 }
 
-uint64_t glt_get_ult_id(GLT_ult ult)
+void glt_ult_get_id(GLT_ult_id * id, GLT_ult ult)
 {
-    uint64_t id;
-    ABT_thread_get_id (ult, &id);
-    return id;
+    ABT_thread_get_id (ult, id);
+}
+
+void glt_workunit_get_thread_id(GLT_thread_id *id)
+{
+    ABT_xstream_self_rank (id);
 }
 
 // Extended functions
@@ -256,10 +259,6 @@ uint64_t glt_get_ult_id(GLT_ult ult)
     ABT_thread_get_stacksize (ult, stacksize);
 }
 
- void glt_ult_get_id(GLT_ult ult, GLT_ult_id *ult_id)
-{
-    ABT_thread_get_id (ult, ult_id);
-}
 
  void glt_ult_get_arg(GLT_ult ult, void **arg)
 {

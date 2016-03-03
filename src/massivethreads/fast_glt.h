@@ -42,6 +42,8 @@ typedef struct myth_timer {
 #define GLT_cond myth_cond_t
 #define GLT_timer myth_timer_t
 #define GLT_bool int
+#define GLT_thread_id int
+#define GLT_ult_id int
 
 //Extended variables
 #ifndef CORE
@@ -78,7 +80,6 @@ typedef struct dynmapinfo_s {
 #define GLT_thread_state void *
 #define GLT_tasklet_state void *
 #define GLT_ult_state void *
-#define GLT_ult_id int
 #define GLT_ult_attr void *
 #define GLT_unit_type void *
 //QTHREADS
@@ -224,9 +225,16 @@ static inline void glt_tasklet_join(GLT_tasklet *tasklet)
     myth_join(*tasklet, NULL);
 }
 
-static inline uint64_t glt_get_ult_id(GLT_ult ult){
+static inline void glt_ult_get_id(GLT_ult_id * id, GLT_ult ult)
+{
     printf("Warning: this feature is not supported in MassiveThreads\n");
     return 0;
+}
+
+static inline void glt_workunit_get_thread_id(GLT_thread_id *id)
+{
+    myth_thread_t thread = myth_self();
+    *id = thread->running_env.rank;
 }
 
 static inline void glt_mutex_create(GLT_mutex * mutex)
@@ -916,10 +924,6 @@ static inline  void glt_ult_get_stacksize(GLT_ult ult, size_t *stacksize)
     GLT_ERROR_ARG;
 }
 
-static inline  void glt_ult_get_id(GLT_ult ult, GLT_ult_id *ult_id)
-{
-    GLT_ERROR_ARG;
-}
 
 static inline  void glt_ult_get_arg(GLT_ult ult, void **arg)
 {
