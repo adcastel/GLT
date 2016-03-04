@@ -102,6 +102,14 @@
 #define GLT_ult_attr void *
 #define GLT_unit_type void *
 
+//MASSIVETHREAD
+#define GLT_workunit_f void *
+#define GLT_workunit_o void *
+#define GLT_felock void *
+#define GLT_felock_status int
+#define GLT_pickle void *
+#define GLT_wsapi_decide_f void *
+#define GLT_wsapi_steal_f void *
 
 #define glt_scheduler_config_create 
 #define glt_scheduler_config_read
@@ -120,7 +128,9 @@ typedef struct glt_team {
 
 #define GLT_VERSION "You are using fast glt 0.1v over Qthreads (adcastel@uji.es)"
 #define GLT_ERROR_ARG printf("Error: This feature is only supported by Argobots \
-    implementation and you are using MassiveThreads. Please use the query functions")
+    implementation and you are using Qthreads. Please use the query functions")
+#define GLT_ERROR_MYTH printf("Error: This feature is only supported by MassiveThredashreads \
+    implementation and you are using Qthreads. Please use the query functions")
 
 /* Main team structure*/
 //void __attribute__((constructor)) glt_start(void);
@@ -249,7 +259,7 @@ static inline void glt_workunit_get_thread_id(GLT_thread_id *id)
     *id = qthread_shep();
 }
 
-static inline void glt_ult_migrate_self_to(GLT_thread_id id);
+static inline void glt_ult_migrate_self_to(GLT_thread_id id)
 {
     qthread_migrate_to(id);
 }
@@ -1716,17 +1726,6 @@ static inline void glt_thread_check_events(GLT_sched sched)
     GLT_ERROR_ARG;
 }
 
-
-static inline  void glt_tasklet_cancel (GLT_tasklet tasklet)
-{
-    GLT_ERROR_ARG;
-}
-
-static inline  void glt_tasklet_self(GLT_tasklet *tasklet)
-{
-    GLT_ERROR_ARG;
-}
-
 static inline  void glt_tasklet_get_thread(GLT_tasklet tasklet, GLT_thread *thread)
 {
     GLT_ERROR_ARG;
@@ -1773,21 +1772,6 @@ static inline  void glt_tasklet_release(GLT_tasklet tasklet)
 }
 
 static inline  void glt_tasklet_get_arg(GLT_tasklet tasklet, void **arg)
-{
-    GLT_ERROR_ARG;
-}
- 
-static inline  void glt_ult_exit()
-{
-    GLT_ERROR_ARG;
-}
-
-static inline  void glt_ult_cancel(GLT_ult ult)
-{
-    GLT_ERROR_ARG;
-}
-
-static inline  void glt_ult_self(GLT_ult *ult)
 {
     GLT_ERROR_ARG;
 }
@@ -1907,6 +1891,254 @@ static inline  void glt_ult_attr_set_migratable (GLT_ult_attr attr, GLT_bool fla
     GLT_ERROR_ARG;
 }
 
+#endif
+
+//MASSIVETHREADS functions that are not supported by Qthreads
+
+static inline int glt_can_wsapi_functions()
+{
+    return 0;
+}
+
+static inline int glt_can_prof_functions()
+{
+    return 0;
+}
+
+static inline int glt_can_log_functions()
+{
+    return 0;
+}
+
+static inline int glt_can_serialize_functions()
+{
+    return 0;
+}
+
+static inline int can_felock_functions()
+{
+    return 0;
+}
+
+static inline int can_extended_workunits()
+{
+    return 0;
+}
+
+#ifndef CORE
+
+static inline   void glt_wu_create_ex(GLT_ult * ult, GLT_workunit_f func, void * arg,
+        GLT_workunit_o opt)
+  {
+      GLT_ERROR_MYTH;
+  }
+  
+static inline  void glt_wu_create_nosched(GLT_ult * ult, GLT_workunit_f func, void * arg,
+        GLT_workunit_o opt)
+  {
+      GLT_ERROR_MYTH;
+  }
+
+static inline  void glt_yield2()
+  {
+      GLT_ERROR_MYTH;
+  }
+
+static inline  void glt_wu_detach(GLT_ult ult)
+  {
+      GLT_ERROR_MYTH;
+  }
+
+static inline  void glt_wu_set_cancel_state(int state, int *oldstate)
+  {
+      GLT_ERROR_MYTH;
+  }
+
+static inline  void glt_wu_set_cancel_type(int type, int *oldtype)
+  {
+      GLT_ERROR_MYTH;
+  }
+
+static inline  void glt_wu_test_cancel()
+  {
+      GLT_ERROR_MYTH;
+  }
+
+static inline  void glt_wu_set_def_stack_size(size_t newsize)
+  {
+      GLT_ERROR_MYTH;
+  }
+
+static inline  void glt_wu_steal(GLT_ult * ult)
+  {
+      GLT_ERROR_MYTH;
+  }
+
+static inline  void glt_wu_import(GLT_ult ult)
+  {
+      GLT_ERROR_MYTH;
+  }
+
+static inline  void glt_wu_ext_import(GLT_ult ult)
+  {
+      GLT_ERROR_MYTH;
+  }
+
+static inline  void glt_wu_release_stack(GLT_ult ult)
+  {
+      GLT_ERROR_MYTH;
+  }
+
+static inline  void glt_wu_release_desc(GLT_ult ult)
+  {
+      GLT_ERROR_MYTH;
+  }
+ 
+static inline   void glt_felock_create(GLT_felock * felock)
+  {
+      GLT_ERROR_MYTH;
+  }
+
+static inline  void glt_felock_free(GLT_felock felock)
+  {
+      GLT_ERROR_MYTH;
+  }
+
+static inline  void glt_felock_lock(GLT_bool *lock, GLT_felock felock)
+  {
+      GLT_ERROR_MYTH;
+  }
+
+static inline  void glt_felock_wait_lock(GLT_bool *lock, GLT_felock felock, int val)
+  {
+      GLT_ERROR_MYTH;
+  }
+
+static inline  void glt_felock_unlock(GLT_bool *unlock, GLT_felock felock)
+  {
+      GLT_ERROR_MYTH;
+  }
+
+static inline  void glt_felock_status(GLT_felock_status *status, GLT_felock felock)
+  {
+      GLT_ERROR_MYTH;
+  }
+
+static inline  void glt_felock_set_unlock(GLT_felock felock, int val)
+  {
+      GLT_ERROR_MYTH;
+  }
+
+static inline   void glt_serialize(GLT_ult ult, GLT_pickle pickle)
+  {
+      GLT_ERROR_MYTH;
+  }
+
+static inline  void glt_deserialize(GLT_ult *ult, GLT_pickle pickle)
+  {
+      GLT_ERROR_MYTH;
+  }
+
+static inline  void glt_ext_deserialize(GLT_ult *ult, GLT_pickle pickle)
+  {
+      GLT_ERROR_MYTH;
+  }
+ 
+static inline  void glt_log_start()
+  {
+      GLT_ERROR_MYTH;
+  }
+
+static inline  void glt_log_pause()
+  {
+      GLT_ERROR_MYTH;
+  }
+
+static inline  void glt_log_flush()
+  {
+      GLT_ERROR_MYTH;
+  }
+
+static inline  void glt_log_reset()
+  {
+      GLT_ERROR_MYTH;
+  }
+
+static inline  void glt_log_annotate_ult(GLT_ult ult, char *name)
+  {
+      GLT_ERROR_MYTH;
+  }
+
+static inline  void glt_sched_prof_start()
+  {
+      GLT_ERROR_MYTH;
+  }
+
+static inline  void glt_sched_prof_pause()
+  {
+      GLT_ERROR_MYTH;
+  }
+
+static inline  void glt_wsapi_runqueue_peek(GLT_ult *ult, int victim,void *ptr,size_t *psize)
+  {
+      GLT_ERROR_MYTH;
+  }
+
+static inline  void glt_wsapi_get_hint_size(size_t *size, GLT_ult ult)
+  {
+      GLT_ERROR_MYTH;
+  }
+
+static inline  void glt_wsapi_get_hint_ptr(void *ptr, GLT_ult ult)
+  {
+      GLT_ERROR_MYTH;
+  }
+
+static inline  void glt_wsapi_set_hint(GLT_ult ult,void **data,size_t *size)
+  {
+      GLT_ERROR_MYTH;
+  }
+
+static inline  void glt_wsapi_rand(int * rand)
+  {
+      GLT_ERROR_MYTH;
+  }
+
+static inline  void glt_wsapi_randrr(int *ret, int n)
+  {
+      GLT_ERROR_MYTH;
+  }
+
+static inline  void glt_wsapi_runqueue_take(GLT_ult * ult, int victim,GLT_wsapi_decide_f decidefn,void *udata)
+  {
+      GLT_ERROR_MYTH;
+  }
+
+static inline  void glt_wsapi_runqueue_pass(GLT_bool *pass, int target,GLT_ult ult)
+  {
+      GLT_ERROR_MYTH;
+  }
+
+static inline  void glt_wsapi_runqueue_push(GLT_ult ult)
+  {
+      GLT_ERROR_MYTH;
+  }
+
+static inline  void glt_wsapi_runqueue_pop(GLT_ult * ult)
+  {
+      GLT_ERROR_MYTH;
+  }
+
+static inline  void glt_wsapi_rand2(int * rand_value, int min, int max)
+  {
+      GLT_ERROR_MYTH;
+  }
+
+ static inline void glt_wsapi_set_stealfunc(GLT_wsapi_steal_f *out, GLT_wsapi_steal_f fn)
+  {
+      GLT_ERROR_MYTH;
+  }
+ 
 #endif
 
 

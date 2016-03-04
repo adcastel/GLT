@@ -75,6 +75,15 @@
 #define GLT_ds_dictionary_it qt_dictionary_iterator
 #define GLT_subthread qthread_worker_id_t
 
+//MASSIVETHREAD
+#define GLT_workunit_f void *
+#define GLT_workunit_o void *
+#define GLT_felock void *
+#define GLT_felock_status int
+#define GLT_pickle void *
+#define GLT_wsapi_decide_f void *
+#define GLT_wsapi_steal_f void *
+
 
 //ARGOBOTS
 #define GLT_event_kind void *
@@ -115,7 +124,9 @@ typedef struct glt_team {
 
 #define GLT_VERSION "You are using glt 0.1v over Qthreads (adcastel@uji.es)"
 #define GLT_ERROR_ARG printf("Error: This feature is only supported by Argobots \
-    implementation and you are using MassiveThreads. Please use the query functions")
+    implementation and you are using Qthreads. Please use the query functions")
+#define GLT_ERROR_MYTH printf("Error: This feature is only supported by MassiveThredashreads \
+    implementation and you are using Qthreads. Please use the query functions")
 
 /* Main team structure*/
 
@@ -207,7 +218,14 @@ int glt_can_manage_threads();
 int can_extended_tasklets();
 int can_extended_ults();
 
-
+ //QUERY functions for MAssiveThreads
+ //Always return 0;
+ int glt_can_wsapi_functions();
+ int glt_can_prof_functions();
+ int glt_can_log_functions();
+ int glt_can_serialize_functions();
+ int can_felock_functions();
+ int can_extended_workunits();
 
 
 
@@ -558,6 +576,64 @@ void glt_thread_check_events(GLT_sched sched);
  void glt_ult_attr_get_stacksize (GLT_ult_attr attr, size_t *stacksize);
  void glt_ult_attr_set_callback (GLT_ult_attr attr, void(*cb_func)(GLT_ult ult, void *cb_arg), void *cb_arg);
  void glt_ult_attr_set_migratable (GLT_ult_attr attr, GLT_bool flag);
+
+ //HEADERS for MASSIVETHREADS extended functions
+//Null codes
+   void glt_wu_create_ex(GLT_ult * ult, GLT_workunit_f func, void * arg,
+        GLT_workunit_o opt);
+ void glt_wu_create_nosched(GLT_ult * ult, GLT_workunit_f func, void * arg,
+        GLT_workunit_o opt);
+ void glt_yield2();
+ void glt_wu_detach(GLT_ult ult);
+ void glt_wu_set_cancel_state(int state, int *oldstate);
+ void glt_wu_set_cancel_type(int type, int *oldtype);
+ void glt_wu_test_cancel();
+ void glt_wu_set_def_stack_size(size_t newsize);
+ void glt_wu_steal(GLT_ult * ult);
+ void glt_wu_import(GLT_ult ult);
+ void glt_wu_ext_import(GLT_ult ult);
+ void glt_wu_release_stack(GLT_ult ult);
+ void glt_wu_release_desc(GLT_ult ult);
+ 
+  void glt_felock_create(GLT_felock * felock);
+ void glt_felock_free(GLT_felock felock);
+ void glt_felock_lock(GLT_bool *lock, GLT_felock felock);
+ void glt_felock_wait_lock(GLT_bool *lock, GLT_felock felock, int val);
+ void glt_felock_unlock(GLT_bool *unlock, GLT_felock felock);
+ void glt_felock_status(GLT_felock_status *status, GLT_felock felock);
+ void glt_felock_set_unlock(GLT_felock felock, int val);
+ 
+  void glt_key_create (void(*destructor)(void *value), GLT_key *newkey);
+ void glt_key_free (GLT_key *key);
+ void glt_key_set (GLT_key key, void *value);
+ void glt_key_get (GLT_key key, void **value);
+ 
+  void glt_serialize(GLT_ult ult, GLT_pickle pickle);
+ void glt_deserialize(GLT_ult *ult, GLT_pickle pickle);
+ void glt_ext_deserialize(GLT_ult *ult, GLT_pickle pickle);
+ 
+ void glt_log_start();
+ void glt_log_pause();
+ void glt_log_flush();
+ void glt_log_reset();
+ void glt_log_annotate_ult(GLT_ult ult, char *name);
+ void glt_sched_prof_start();
+ void glt_sched_prof_pause();
+ 
+ void glt_wsapi_runqueue_peek(GLT_ult *ult, int victim,void *ptr,size_t *psize);
+ void glt_wsapi_get_hint_size(size_t *size, GLT_ult ult);
+ void glt_wsapi_get_hint_ptr(void *ptr, GLT_ult ult);
+ void glt_wsapi_set_hint(GLT_ult ult,void **data,size_t *size);
+ void glt_wsapi_rand(int * rand);
+ void glt_wsapi_randrr(int *ret, int n);
+ void glt_wsapi_runqueue_take(GLT_ult * ult, int victim,GLT_wsapi_decide_f decidefn,void *udata);
+ void glt_wsapi_runqueue_pass(GLT_bool *pass, int target,GLT_ult ult);
+ void glt_wsapi_runqueue_push(GLT_ult ult);
+ void glt_wsapi_runqueue_pop(GLT_ult * ult);
+ void glt_wsapi_rand2(int * rand_value, int min, int max);
+ void glt_wsapi_set_stealfunc(GLT_wsapi_steal_f *out, GLT_wsapi_steal_f fn);
+
+
 #endif
 
 #endif	/* glt_H */

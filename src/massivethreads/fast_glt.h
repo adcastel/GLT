@@ -130,7 +130,7 @@ typedef struct dynmapinfo_s {
 #define glt_ult_creation_precond(f,a,u,n,...) qthread_fork_precond(f,a,u,n,...)
 #define glt_ult_creation_precond_to(f,a,u,d,n,...) qthread_fork_precond_to(f,a,u,d,n,...)
 
-#endif
+#endif /*#ifndef CORE*/
 
 typedef struct glt_team {
     int num_workers;
@@ -252,7 +252,7 @@ static inline void glt_workunit_get_thread_id(GLT_thread_id *id)
 
 }
 
- static inline void glt_ult_migrate_self_to(GLT_thread_id id);
+ static inline void glt_ult_migrate_self_to(GLT_thread_id id)
 {
     printf("Warning: this feature is not supported in MassiveThreads\n");
 }
@@ -465,7 +465,8 @@ static inline void glt_wu_release_desc(GLT_ult ult)
 {
     myth_release_desc(ult);
 }
-#endif
+
+#endif /*#ifndef CORE wu MTH*/
 
 static inline int can_felock_functions(){
 #ifdef CORE
@@ -510,7 +511,7 @@ static inline void glt_felock_set_unlock(GLT_felock felock, int val)
     myth_felock_set_unlock(felock,val);
 }
 
-#endif
+#endif /*#ifndef CORE felock MTH*/
 
 static inline int glt_can_tls_functions()
 {
@@ -613,6 +614,7 @@ static inline int glt_can_prof_functions()
     return 0;
 #else
     return 1;
+#endif
 }
 
 #ifndef CORE
@@ -804,26 +806,6 @@ static inline void glt_promise_test(GLT_promise promise, GLT_bool *flag)
 }
 
 static inline void glt_promise_set(GLT_promise promise, void * value)
-{
-    GLT_ERROR_ARG;
-}
-
-static inline void glt_key_create(void(*destructor)(void *value), GLT_key *newkey)
-{
-    GLT_ERROR_ARG;
-}
-
-static inline void glt_key_free(GLT_key *key)
-{
-    GLT_ERROR_ARG;
-}
-
-static inline void glt_key_set(GLT_key key, void *value)
-{
-    GLT_ERROR_ARG;
-}
-
-static inline void glt_key_get(GLT_key key, void **value)
 {
     GLT_ERROR_ARG;
 }
@@ -1117,17 +1099,6 @@ static inline void glt_thread_check_events(GLT_sched sched)
     GLT_ERROR_ARG;
 }
 
-
-static inline  void glt_tasklet_cancel (GLT_tasklet tasklet)
-{
-    GLT_ERROR_ARG;
-}
-
-static inline  void glt_tasklet_self(GLT_tasklet *tasklet)
-{
-    GLT_ERROR_ARG;
-}
-
 static inline  void glt_tasklet_get_thread(GLT_tasklet tasklet, GLT_thread *thread)
 {
     GLT_ERROR_ARG;
@@ -1174,21 +1145,6 @@ static inline  void glt_tasklet_release(GLT_tasklet tasklet)
 }
 
 static inline  void glt_tasklet_get_arg(GLT_tasklet tasklet, void **arg)
-{
-    GLT_ERROR_ARG;
-}
- 
-static inline  void glt_ult_exit()
-{
-    GLT_ERROR_ARG;
-}
-
-static inline  void glt_ult_cancel(GLT_ult ult)
-{
-    GLT_ERROR_ARG;
-}
-
-static inline  void glt_ult_self(GLT_ult *ult)
 {
     GLT_ERROR_ARG;
 }
@@ -1309,7 +1265,7 @@ static inline  void glt_ult_attr_set_migratable (GLT_ult_attr attr, GLT_bool fla
     GLT_ERROR_ARG;
 }
 
-#endif
+#endif /*#ifndef CORE ARG*/
 
 //QTHREADS functions that are not supported by MassiveThreads
 
@@ -2180,7 +2136,7 @@ static inline void glt_memory_checkpoint()
     GLT_ERROR_QTH;
 }
 
-#endif
+#endif /*#ifndef QTHREADS*/
 
 
 #endif	/* FAST_GLT_H */

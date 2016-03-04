@@ -205,7 +205,7 @@ int glt_get_num_threads();
  int glt_can_serialize_functions();
  int glt_can_tls_functions();
  int can_felock_functions();
-  int can_extended_workunits();
+ int can_extended_workunits();
 
 
 
