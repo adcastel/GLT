@@ -21,6 +21,11 @@ void glt_mutex_free(GLT_mutex * mutex)
     ABT_mutex_free(mutex);
 }
 
+void glt_mutex_trylock(GLT_bool * locked, GLT_mutex mutex)
+{
+    *locked = ABT_mutex_trylock (mutex);
+}
+
 //extended mutex functions
 int glt_can_extended_mutex()
 {
@@ -37,11 +42,6 @@ void glt_mutex_lock_low(GLT_mutex mutex)
 {
     ABT_mutex_lock_low (mutex);
 } 
-
-void glt_mutex_trylock(GLT_mutex mutex)
-{
-    ABT_mutex_trylock (mutex);
-}
 
 void glt_mutex_spinlock (GLT_mutex mutex)
 {

@@ -316,6 +316,11 @@ static inline void glt_mutex_free(GLT_mutex * mutex)
     ABT_mutex_free(mutex);
 }
 
+static inline void glt_mutex_trylock(GLT_bool * locked, GLT_mutex mutex)
+{
+    *locked = ABT_mutex_trylock (mutex);
+}
+
 static inline void glt_barrier_create(int num_waiters, GLT_barrier *barrier)
 {
     ABT_barrier_create(num_waiters, barrier);
@@ -551,11 +556,6 @@ static inline void glt_mutex_lock_low(GLT_mutex mutex)
 {
     ABT_mutex_lock_low (mutex);
 } 
-
-static inline void glt_mutex_trylock(GLT_mutex mutex)
-{
-    ABT_mutex_trylock (mutex);
-}
 
 static inline void glt_mutex_spinlock (GLT_mutex mutex)
 {

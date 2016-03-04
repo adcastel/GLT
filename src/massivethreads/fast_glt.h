@@ -289,6 +289,11 @@ static inline void glt_mutex_free(GLT_mutex * mutex)
     myth_mutex_destroy(*mutex);
 }
 
+static inline void glt_mutex_trylock(GLT_bool * locked, GLT_mutex mutex)
+{
+    *locked = myth_mutex_trylock(mutex);
+}
+
 static inline void glt_barrier_create(int num_waiters, GLT_barrier *barrier)
 {
     *barrier = myth_barrier_create(num_waiters);
@@ -561,11 +566,6 @@ static inline void glt_key_get(GLT_key key, void **value)
 }
 
 static inline void glt_mutex_lock_low(GLT_mutex mutex)
-{
-    GLT_ERROR_ARG;
-}
-
-static inline void glt_mutex_trylock(GLT_mutex mutex)
 {
     GLT_ERROR_ARG;
 }

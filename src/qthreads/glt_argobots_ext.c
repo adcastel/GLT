@@ -139,11 +139,6 @@ void glt_mutex_lock_low(GLT_mutex mutex)
     GLT_ERROR_ARG;
 }
 
-void glt_mutex_trylock(GLT_mutex mutex)
-{
-    GLT_ERROR_ARG;
-}
-
 void glt_mutex_spinlock(GLT_mutex mutex)
 {
     GLT_ERROR_ARG;

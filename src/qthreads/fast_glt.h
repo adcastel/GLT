@@ -283,6 +283,7 @@ static inline void glt_tasklet_self(GLT_ult * ult)
 static inline void glt_mutex_create(GLT_mutex * mutex)
 {
     mutex = (GLT_mutex *)malloc(sizeof(GLT_mutex));
+    *mutex =0;
 }
 
 static inline void glt_mutex_lock(GLT_mutex mutex)
@@ -300,6 +301,12 @@ static inline void glt_mutex_free(GLT_mutex * mutex)
     free(mutex);
 }
 
+static inline void glt_mutex_trylock(GLT_bool * locked, GLT_mutex mutex)
+{
+    aligned_t res = qthread_cas(mutex,0,1);
+    *locked = (res==0)? 1 : 0; 
+        
+}
 
 static inline void glt_barrier_create(int num_waiters, GLT_barrier *barrier)
 {
@@ -1422,11 +1429,6 @@ static inline void glt_key_get(GLT_key key, void **value)
 }
 
 static inline void glt_mutex_lock_low(GLT_mutex mutex)
-{
-    GLT_ERROR_ARG;
-}
-
-static inline void glt_mutex_trylock(GLT_mutex mutex)
 {
     GLT_ERROR_ARG;
 }

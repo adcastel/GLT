@@ -167,6 +167,7 @@ void glt_mutex_create(GLT_mutex * mutex);
 void glt_mutex_lock(GLT_mutex mutex);
 void glt_mutex_unlock(GLT_mutex mutex);
 void glt_mutex_free(GLT_mutex * mutex);
+void glt_mutex_trylock(GLT_bool * locked, GLT_mutex mutex);
 
 void glt_barrier_create(int num_waiters, GLT_barrier *barrier);
 void glt_barrier_free(GLT_barrier *barrier);
@@ -240,7 +241,6 @@ void glt_key_set(GLT_key key, void *value);
 void glt_key_get(GLT_key key, void **value);
 
 void glt_mutex_lock_low(GLT_mutex mutex);
-void glt_mutex_trylock(GLT_mutex mutex);
 void glt_mutex_spinlock(GLT_mutex mutex);
 void glt_mutex_unlock_se(GLT_mutex mutex);
 void glt_mutex_equal(GLT_mutex mutex1, GLT_mutex mutex2, GLT_bool *result);

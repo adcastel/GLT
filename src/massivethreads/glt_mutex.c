@@ -18,3 +18,7 @@ void glt_mutex_free(GLT_mutex * mutex)
     myth_mutex_destroy(*mutex);
 }
 
+void glt_mutex_trylock(GLT_bool * locked, GLT_mutex mutex)
+{
+    *locked = myth_mutex_trylock(mutex);
+}
