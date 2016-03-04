@@ -40,7 +40,6 @@
 #define GLT_event_cb_fn ABT_event_cb_fn
 #define GLT_future ABT_eventual
 #define GLT_promise ABT_future
-#define GLT_key ABT_key
 #define GLT_pool_def ABT_pool_def
 #define GLT_pool_config ABT_pool_config
 #define GLT_pool ABT_pool
@@ -60,6 +59,19 @@
 
 #define glt_scheduler_config_create 
 #define glt_scheduler_config_read
+
+
+//MASSIVETHREAD
+#define GLT_workunit_f void *
+#define GLT_workunit_o void *
+#define GLT_felock void *
+#define GLT_felock_status int
+#define GLT_pickle void *
+#define GLT_wsapi_decide_f void *
+#define GLT_wsapi_steal_f void *
+//Shared
+#define GLT_key ABT_key
+
 
 //QTHREADS
 
@@ -124,7 +136,10 @@ typedef struct glt_team {
 #define GLT_VERSION "You are using glt 0.1v over Argobots (adcastel@uji.es) "
 
 #define GLT_ERROR_QTH printf("Error: This feature is only supported by Qthreads \
-    implementation and you are using MassiveThreads. Please use the query functions")
+    implementation and you are using Argobots. Please use the query functions")
+#define GLT_ERROR_MYTH printf("Error: This feature is only supported by MassiveThredashreads \
+    implementation and you are using Argobots. Please use the query functions")
+
 /* Main team structure*/
 
 glt_team_t * main_team;
