@@ -94,3 +94,79 @@ void glt_ult_exit()
 {
     myth_cancel (tasklet);
 }
+ 
+  int can_extended_workunits(){
+#ifdef CORE
+    return 0;
+#else
+    return 1;
+#endif
+}
+
+#ifndef CORE
+ void glt_wu_create_ex(GLT_ult * ult, GLT_workunit_f func, void * arg,
+        GLT_workunit_o opt)
+{
+    *ult = myth_create_ex(func,arg,opt);
+}
+ void glt_wu_create_nosched(GLT_ult * ult, GLT_workunit_f func, void * arg,
+        GLT_workunit_o opt)
+{
+    *ult = myth_create_nosched(func,arg,opt);
+}
+
+ void glt_yield2()
+{
+    myth_yield2();
+}
+
+ void glt_wu_detach(GLT_ult ult)
+{
+    myth_detach(ult);
+}
+
+ void glt_wu_set_cancel_state(int state, int *oldstate)
+{
+    myth_setcancelstate(state,oldstate);
+}
+
+ void glt_wu_set_cancel_type(int type, int *oldtype)
+{
+    myth_setcanceltype(type, oldtype);
+}
+
+ void glt_wu_test_cancel()
+{
+    myth_testcancel();
+}
+
+ void glt_wu_set_def_stack_size(size_t newsize)
+{
+    myth_set_def_stack_size(newsize);
+}
+
+ void glt_wu_steal(GLT_ult * ult)
+{
+    *ult = myth_steal();
+}
+
+ void glt_wu_import(GLT_ult ult)
+{
+    myth_import(ult);
+}
+
+ void glt_wu_ext_import(GLT_ult ult)
+{
+    myth_ext_import(ult);
+}
+
+ void glt_wu_release_stack(GLT_ult ult)
+{
+    myth_release_stack(ult);
+}
+    
+ void glt_wu_release_desc(GLT_ult ult)
+{
+    myth_release_desc(ult);
+}
+#endif

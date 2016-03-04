@@ -50,6 +50,14 @@ typedef struct myth_timer {
 
 #define GLT_workunit_f myth_func_t
 #define GLT_workunit_o myth_thread_option_t
+#define GLT_felock myth_felock_t
+#define GLT_felock_status int
+#define GLT_pickle myth_pickle_t
+#define GLT_wsapi_decide_f myth_wsapi_decidefn_t
+#define GLT_wsapi_steal_f myth_steal_func_t
+//Shared
+#define GLT_key myth_key_t
+
 #include <sys/socket.h>
 #include <poll.h>
 #include <sys/resource.h>
@@ -64,12 +72,16 @@ typedef struct mapinfo_s {
 typedef struct dynmapinfo_s {
     int not_supported;
 }dynmapinfo_s_t;
+
+
+
+
 //ARGOBOTS
 #define GLT_event_kind void *
 #define GLT_event_cb_fn void *
 #define GLT_future void *
 #define GLT_promise void *
-#define GLT_key void *
+
 #define GLT_pool_def void *
 #define GLT_pool_config void *
 #define GLT_pool void *
@@ -384,6 +396,7 @@ static inline int can_extended_workunits(){
     return 0;
 #else
     return 1;
+#endif
 }
 
 #ifndef CORE
@@ -392,10 +405,10 @@ static inline void glt_wu_create_ex(GLT_ult * ult, GLT_workunit_f func, void * a
 {
     *ult = myth_create_ex(func,arg,opt);
 }
-static inline void glt_wu_create_nonsched(GLT_ult * ult, GLT_workunit_f func, void * arg,
+static inline void glt_wu_create_nosched(GLT_ult * ult, GLT_workunit_f func, void * arg,
         GLT_workunit_o opt)
 {
-    *ult = myth_create_nonsched(func,arg,opt);
+    *ult = myth_create_nosched(func,arg,opt);
 }
 
 static inline void glt_yield2()
@@ -428,9 +441,263 @@ static inline void glt_wu_set_def_stack_size(size_t newsize)
     myth_set_def_stack_size(newsize);
 }
 
+static inline void glt_wu_steal(GLT_ult * ult)
+{
+    *ult = myth_steal();
+}
+
+static inline void glt_wu_import(GLT_ult ult)
+{
+    myth_import(ult);
+}
+
+static inline void glt_wu_ext_import(GLT_ult ult)
+{
+    myth_ext_import(ult);
+}
+
+static inline void glt_wu_release_stack(GLT_ult ult)
+{
+    myth_release_stack(ult);
+}
+    
+static inline void glt_wu_release_desc(GLT_ult ult)
+{
+    myth_release_desc(ult);
+}
+#endif
+
+static inline int can_felock_functions(){
+#ifdef CORE
+    return 0;
+#else
+    return 1;
+#endif
+}
+
+#ifndef CORE
+static inline void glt_felock_create(GLT_felock * felock)
+{
+    *felock = myth_felock_create();
+}
+
+static inline void glt_felock_free(GLT_felock felock)
+{
+    myth_felock_destroy(felock);
+}
+
+static inline void glt_felock_lock(GLT_bool *lock, GLT_felock felock)
+{
+    *lock = myth_felock_lock(felock);
+}
+
+static inline void glt_felock_wait_lock(GLT_bool *lock, GLT_felock felock, int val)
+{
+    *lock = myth_felock_wait_lock(felock,val);
+}
+
+static inline void glt_felock_unlock(GLT_bool *unlock, GLT_felock felock)
+{
+    *unlock = myth_felock_unlock(felock);
+}
+static inline void glt_felock_status(GLT_felock_status *status, GLT_felock felock)
+{
+    *status = myth_felock_status(felock);
+}
+
+static inline void glt_felock_set_unlock(GLT_felock felock, int val)
+{
+    myth_felock_set_unlock(felock,val);
+}
+
+#endif
+
+static inline int glt_can_tls_functions()
+{
+#ifdef CORE
+    return 0;
+#else
+    return 1;
+#endif
+}
+
+#ifndef CORE
+
+static inline void glt_key_create (void(*destructor)(void *value), GLT_key *newkey)
+{
+    myth_key_create(newkey,destructor);
+}
+
+static inline void glt_key_free (GLT_key *key)
+{
+    myth_key_delete (*key);
+}
+
+static inline void glt_key_set (GLT_key key, void *value)
+{
+    myth_setspecific (key,value);
+}
+
+static inline void glt_key_get (GLT_key key, void **value)
+{
+    *value = myth_getspecific (key);
+}
+#endif
+
+static inline int glt_can_serialize_functions()
+{
+#ifdef CORE
+    return 0;
+#else
+    return 1;
+#endif
+}
+
+#ifndef CORE
+
+static inline void glt_serialize(GLT_ult ult, GLT_pickle pickle)
+{
+    myth_serialize(ult,pickle);
+}
+
+static inline void glt_deserialize(GLT_ult *ult, GLT_pickle pickle)
+{
+    *ult = myth_deserialize(pickle);
+}
+
+static inline void glt_ext_deserialize(GLT_ult *ult, GLT_pickle pickle)
+{
+    *ult = myth_ext_deserialize(pickle);
+}
 #endif
 
 
+static inline int glt_can_log_functions()
+{
+#ifdef CORE
+    return 0;
+#else
+    return 1;
+#endif
+}
+
+#ifndef CORE
+static inline void glt_log_start()
+{
+    myth_log_start();
+}
+
+static inline void glt_log_pause()
+{
+    myth_log_pause();
+}
+
+static inline void glt_log_flush()
+{
+    myth_log_flush();
+}
+static inline void glt_log_reset()
+{
+    myth_log_reset();
+}
+
+static inline void glt_log_annotate_ult(GLT_ult ult, char *name)
+{
+    myth_log_annotate_thread(ult,name);
+}
+#endif
+
+static inline int glt_can_prof_functions()
+{
+#ifdef CORE
+    return 0;
+#else
+    return 1;
+}
+
+#ifndef CORE
+static inline void glt_sched_prof_start()
+{
+    myth_sched_prof_start();
+}
+
+static inline void glt_sched_prof_pause()
+{
+    myth_sched_prof_pause();
+}
+#endif
+
+static inline int glt_can_wsapi_functions()
+{
+#ifdef CORE
+    return 0;
+#else
+    return 1;
+#endif
+}
+
+#ifndef CORE
+static inline void glt_wsapi_runqueue_peek(GLT_ult *ult, int victim,void *ptr,size_t *psize)
+{
+    *ult = myth_wsapi_runqueue_peek(victim,ptr,psize);
+}
+
+static inline void glt_wsapi_get_hint_size(size_t *size, GLT_ult ult)
+{
+    *size = myth_wsapi_get_hint_size(ult);
+}
+
+static inline void glt_wsapi_get_hint_ptr(void *ptr, GLT_ult ult)
+{
+    ptr = myth_wsapi_get_hint_ptr(ult);
+}
+
+static inline void glt_wsapi_set_hint(GLT_ult ult,void **data,size_t *size)
+{
+    myth_wsapi_set_hint(ult,data,size);
+}
+
+static inline void glt_wsapi_rand(int * rand)
+{
+    *rand = myth_wsapi_rand();
+}
+
+static inline void glt_wsapi_randrr(int *ret, int n)
+{
+    myth_wsapi_randarr(ret,n);
+}
+
+static inline void glt_wsapi_runqueue_take(GLT_ult * ult, int victim,GLT_wsapi_decide_f decidefn,void *udata)
+{
+    *ult = myth_wsapi_runqueue_take(victim,decidefn,udata);
+}
+
+static inline void glt_wsapi_runqueue_pass(GLT_bool *pass, int target,GLT_ult ult)
+{
+    *pass = myth_wsapi_runqueue_pass(target,ult);
+}
+
+static inline void glt_wsapi_runqueue_push(GLT_ult ult)
+{
+    myth_wsapi_runqueue_push(ult);
+}
+
+static inline void glt_wsapi_runqueue_pop(GLT_ult * ult)
+{
+    *ult = myth_wsapi_runqueue_pop();
+}
+
+static inline void glt_wsapi_rand2(int * rand_value, int min, int max)
+{
+    *rand_value = myth_wsapi_rand2(min,max);
+}
+
+static inline void glt_wsapi_set_stealfunc(GLT_wsapi_steal_f *out, GLT_wsapi_steal_f fn)
+{
+    *out = myth_wsapi_set_stealfunc(fn);
+}
+
+#endif
 //ARGOBOTS FUNCTIONS that are not supported by Massivethreads
 
 static inline int glt_can_event_functions()
@@ -444,10 +711,6 @@ static inline int glt_can_future_functions()
 }
 
 static inline int glt_can_promise_functions()
-{
-    return 0;
-}
-static inline int glt_can_tls_functions()
 {
     return 0;
 }

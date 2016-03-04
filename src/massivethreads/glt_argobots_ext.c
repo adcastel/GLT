@@ -17,10 +17,6 @@ int glt_can_promise_functions()
 {
     return 0;
 }
-int glt_can_tls_functions()
-{
-    return 0;
-}
 int glt_can_extended_mutex()
 {
     return 0;
@@ -114,31 +110,11 @@ void glt_promise_set(GLT_promise promise, void * value)
     GLT_ERROR_ARG;
 }
 
-void glt_key_create(void(*destructor)(void *value), GLT_key *newkey)
-{
-    GLT_ERROR_ARG;
-}
-
-void glt_key_free(GLT_key *key)
-{
-    GLT_ERROR_ARG;
-}
-
-void glt_key_set(GLT_key key, void *value)
-{
-    GLT_ERROR_ARG;
-}
-
-void glt_key_get(GLT_key key, void **value)
-{
-    GLT_ERROR_ARG;
-}
 
 void glt_mutex_lock_low(GLT_mutex mutex)
 {
     GLT_ERROR_ARG;
 }
-
 
 void glt_mutex_spinlock(GLT_mutex mutex)
 {

@@ -303,9 +303,8 @@ static inline void glt_mutex_free(GLT_mutex * mutex)
 
 static inline void glt_mutex_trylock(GLT_bool * locked, GLT_mutex mutex)
 {
-    aligned_t res = qthread_cas(mutex,0,1);
-    *locked = (res==0)? 1 : 0; 
-        
+    aligned_t res = qthread_cas(&mutex,0,1);
+    *locked = (res==0)? 1 : 0;        
 }
 
 static inline void glt_barrier_create(int num_waiters, GLT_barrier *barrier)

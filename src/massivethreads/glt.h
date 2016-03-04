@@ -44,6 +44,17 @@ typedef struct myth_timer {
 #define GLT_ult_id int
 
 #ifndef CORE
+
+#define GLT_workunit_f myth_func_t
+#define GLT_workunit_o myth_thread_option_t
+#define GLT_felock myth_felock_t
+#define GLT_felock_status int
+#define GLT_pickle myth_pickle_t
+#define GLT_wsapi_decide_f myth_wsapi_decidefn_t
+#define GLT_wsapi_steal_f myth_steal_func_t
+//Shared
+#define GLT_key myth_key_t
+
 #include <sys/socket.h>
 #include <poll.h>
 #include <sys/resource.h>
@@ -63,7 +74,6 @@ typedef struct dynmapinfo_s {
 #define GLT_event_cb_fn void *
 #define GLT_future void *
 #define GLT_promise void *
-#define GLT_key void *
 #define GLT_pool_def void *
 #define GLT_pool_config void *
 #define GLT_pool void *
