@@ -10,8 +10,12 @@ OBJECTS := glt.o glt_wu.o glt_util.o glt_mutex.o glt_barrier.o \
 	glt_data_structures_ext.o glt_syscall_ext.o glt_runtime_ext.o \
 	glt_memory_ext.o glt_argobots_ext.o glt_massivethreads_ext.o
 
-ifeq ($(CORE), 1)
+ifeq ($(GLT_CORE), 1)
     CFLAGS += -DCORE
+endif
+
+ifeq ($(GLT_DEBUG), 1)
+    CFLAGS += -g
 endif
 
 

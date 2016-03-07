@@ -8,8 +8,12 @@ OBJECTS := glt.o glt_wu.o glt_util.o glt_mutex.o glt_barrier.o glt_condition.o \
 	glt_scheduler_ext.o glt_self_ext.o glt_thread_ext.o glt_tls_ext.o \
 	glt_qthreads_ext.o glt_massivethreads_ext.o
 
-ifeq ($(CORE), 1)
+ifeq ($(GLT_CORE), 1)
     CFLAGS += -DCORE
+endif
+
+ifeq ($(GLT_DEBUG), 1)
+    CFLAGS += -g
 endif
 
 arg: $(OBJECTS)
