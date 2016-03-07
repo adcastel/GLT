@@ -111,8 +111,8 @@
 #define GLT_wsapi_decide_f void *
 #define GLT_wsapi_steal_f void *
 
-#define glt_scheduler_config_create 
-#define glt_scheduler_config_read
+#define glt_scheduler_config_create (config,...) ABT_sched_config_create(config,...)
+#define glt_scheduler_config_read (config, num_vars,...) ABT_sched_config_read (config, num_vars,...)
 
 #define glt_ult_creation_precond(f,a,u,n,...) qthread_fork_precond(f,a,u,n,...)
 #define glt_ult_creation_precond_to(f,a,u,d,n,...) qthread_fork_precond_to(f,a,u,d,n,...)
