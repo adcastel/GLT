@@ -163,7 +163,8 @@ static inline  void glt_init(int argc, char * argv[])
     } else if (getenv("QTHREAD_NUM_SHEPHERDS") != NULL){
         num_threads = atoi(getenv("QTHREAD_NUM_SHEPHERDS"));
     } else {
-        setenv("QTHREAD_NUM_SHEPHERDS", "1", 1);
+        sprintf(buff,"%d",num_threads);
+        setenv("QTHREAD_NUM_SHEPHERDS", buff, 1);
     }
 
     if (getenv("GLT_NUM_WORKERS_PER_THREAD") != NULL) {

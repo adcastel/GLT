@@ -174,7 +174,8 @@ static inline void glt_init(int argc, char * argv[])
         num_threads = atoi(getenv("MYTH_WORKER_NUM"));
     }
     else{
-        setenv("MYTH_WORKER_NUM","1",1);
+        sprintf(buff,"%d",num_threads);
+        setenv("MYTH_WORKER_NUM",buff,1);
     }
 
     setenv("MYTH_BIND_WORKERS", "1", 1);
