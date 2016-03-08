@@ -1,7 +1,7 @@
 all: arg
 ARGFLAGS := -I/home/adcastel/argobots/include -L/home/adcastel/argobots/lib -labt
 CC := gcc
-CFLAGS := -fPIC -I. -I../ $(ARGFLAGS)
+CFLAGS := -fPIC -I. $(ARGFLAGS)
 
 OBJECTS := glt.o glt_wu.o glt_util.o glt_mutex.o glt_barrier.o glt_condition.o \
 	glt_timer.o glt_event_ext.o glt_future_promise_ext.o glt_pool_ext.o \

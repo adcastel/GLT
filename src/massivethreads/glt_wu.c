@@ -112,7 +112,7 @@ void glt_ult_exit()
  void glt_wu_create_nosched(GLT_ult * ult, GLT_workunit_f func, void * arg,
         GLT_workunit_o opt)
 {
-    *ult = myth_create_nosched(func,arg,opt);
+    //*ult = myth_create_nosched(func,arg,opt);
 }
 
  void glt_yield2()
@@ -147,26 +147,26 @@ void glt_ult_exit()
 
  void glt_wu_steal(GLT_ult * ult)
 {
-    *ult = myth_steal();
+    //*ult = myth_steal();
 }
 
  void glt_wu_import(GLT_ult ult)
 {
-    myth_import(ult);
+    //myth_import(ult);
 }
 
  void glt_wu_ext_import(GLT_ult ult)
 {
-    myth_ext_import(ult);
+    //myth_ext_import(ult);
 }
 
  void glt_wu_release_stack(GLT_ult ult)
 {
-    myth_release_stack(ult);
+    //myth_release_stack(ult);
 }
     
  void glt_wu_release_desc(GLT_ult ult)
 {
-    myth_release_desc(ult);
+    //myth_release_desc(ult);
 }
 #endif

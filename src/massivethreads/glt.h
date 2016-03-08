@@ -27,6 +27,7 @@
 #include <stdint.h>
 #include <myth.h>
 
+
 typedef struct myth_timer {
     struct timeval start;
     struct timeval end;

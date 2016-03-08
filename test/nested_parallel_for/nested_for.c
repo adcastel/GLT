@@ -8,11 +8,17 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <unistd.h>
+
+#ifdef FASTGLT
+#include <fast_glt.h>
+#else
 #include <glt.h>
+#endif
+
 #include <math.h>
 #include <sys/time.h>
 #ifndef VERBOSE
-#define TIMES 50
+#define TIMES 5
 #else
 #define TIMES 1
 #endif

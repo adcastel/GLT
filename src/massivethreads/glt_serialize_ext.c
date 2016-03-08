@@ -19,16 +19,16 @@
 
  void glt_serialize(GLT_ult ult, GLT_pickle pickle)
 {
-    myth_serialize(ult,pickle);
+    //myth_serialize(ult,pickle);
 }
 
  void glt_deserialize(GLT_ult *ult, GLT_pickle pickle)
 {
-    *ult = myth_deserialize(pickle);
+    //*ult = myth_deserialize(pickle);
 }
 
  void glt_ext_deserialize(GLT_ult *ult, GLT_pickle pickle)
 {
-    *ult = myth_ext_deserialize(pickle);
+    //*ult = myth_ext_deserialize(pickle);
 }
 #endif

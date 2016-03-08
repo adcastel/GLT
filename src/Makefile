@@ -1,4 +1,4 @@
-all:arg mth qth
+all:qth mth arg
 
 arg:
 	make -C argobots

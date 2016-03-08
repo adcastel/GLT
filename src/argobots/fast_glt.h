@@ -156,7 +156,6 @@ static inline  void glt_end()
 static inline void glt_init(int argc, char * argv[]) 
 {
     int num_threads = get_nprocs();
-    int num_pools = num_threads;
 
     main_team = (glt_team_t *) malloc(sizeof (glt_team_t));
 
@@ -165,6 +164,8 @@ static inline void glt_init(int argc, char * argv[])
     if (getenv("GLT_NUM_THREADS") != NULL) {
         num_threads = atoi(getenv("GLT_NUM_THREADS"));
     }
+
+    int num_pools = num_threads;
 
     if (getenv("GLT_NUM_POOLS") != NULL) {
         num_pools = atoi(getenv("GLT_NUM_POOLS"));
@@ -566,7 +567,7 @@ static inline int glt_can_extended_mutex()
 
 static inline void glt_mutex_lock_low(GLT_mutex mutex)
 {
-    ABT_mutex_lock_low (mutex);
+    //ABT_mutex_lock_low (mutex);
 } 
 
 static inline void glt_mutex_spinlock (GLT_mutex mutex)
@@ -576,7 +577,7 @@ static inline void glt_mutex_spinlock (GLT_mutex mutex)
 
 static inline void glt_mutex_unlock_se (GLT_mutex mutex)
 {
-    ABT_mutex_unlock_se (mutex);
+    //ABT_mutex_unlock_se (mutex);
 }
 
 static inline void glt_mutex_equal (GLT_mutex mutex1, GLT_mutex mutex2, GLT_bool *result)

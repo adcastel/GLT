@@ -69,7 +69,7 @@
 
  void glt_wsapi_rand2(int * rand_value, int min, int max)
 {
-    *rand_value = myth_wsapi_rand2(min,max);
+    //*rand_value = myth_wsapi_rand2(min,max);
 }
 
  void glt_wsapi_set_stealfunc(GLT_wsapi_steal_f *out, GLT_wsapi_steal_f fn)

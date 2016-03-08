@@ -14,7 +14,7 @@ void glt_end()
 void glt_init(int argc, char * argv[]) 
 {
     int num_threads = get_nprocs();
-    int num_pools = num_threads;
+    
 
     main_team = (glt_team_t *) malloc(sizeof (glt_team_t));
 
@@ -23,7 +23,9 @@ void glt_init(int argc, char * argv[])
     if (getenv("GLT_NUM_THREADS") != NULL) {
         num_threads = atoi(getenv("GLT_NUM_THREADS"));
     }
-
+    
+    int num_pools = num_threads;
+    
     if (getenv("GLT_NUM_POOLS") != NULL) {
         num_pools = atoi(getenv("GLT_NUM_POOLS"));
     }
