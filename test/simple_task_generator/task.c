@@ -8,7 +8,11 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <unistd.h>
+#ifdef FASTGLT
+#include <fast_glt.h>
+#else
 #include <glt.h>
+#endif
 #include <math.h>
 #include <sys/time.h>
 #ifndef VERBOSE
@@ -43,7 +47,7 @@ void vector_scal(void *arguments) {
     for(i=pos;i<posfin;i++){
         ptr[i] *= value;
     }
-    return 0;
+    //return 0;
 }
 
 int main(int argc, char *argv[]) {

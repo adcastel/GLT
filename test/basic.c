@@ -1,7 +1,9 @@
 #include <stdio.h>
+#ifdef FASTGLT
 #include <fast_glt.h>
-//#include <glt.h>
-
+#else
+#include <glt.h>
+#endif
 #define N 100
 void func1(void * arg){
 
