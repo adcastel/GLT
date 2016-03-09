@@ -128,9 +128,11 @@ typedef struct glt_team {
 
 #define GLT_VERSION "You are using fast glt 0.1v over Qthreads (adcastel@uji.es)"
 #define GLT_ERROR_ARG printf("Error: This feature is only supported by Argobots \
-    implementation and you are using Qthreads. Please use the query functions")
+    implementation and you are using Qthreads. Please use the query functions\n")
 #define GLT_ERROR_MYTH printf("Error: This feature is only supported by MassiveThredashreads \
-    implementation and you are using Qthreads. Please use the query functions")
+    implementation and you are using Qthreads. Please use the query functions\n")
+#define GLT_LIB_ERROR printf("Error: This feature is in the API but it is not \
+    included in the Library\n")
 
 /* Main team structure*/
 //void __attribute__((constructor)) glt_start(void);
@@ -675,8 +677,11 @@ static inline void glt_loop(const size_t start, const size_t end,
 }
 
 static inline void glt_loop_step(const size_t start, const size_t end, 
-        const size_t stride, const GLT_loop_step_f func, void * arg){
-    qt_loop_step(start,end,stride,func,arg);
+        const size_t stride, const GLT_loop_step_f func, void * arg)
+{
+    GLT_LIB_ERROR;
+    //This function is found in the header but not in the static or dynamic qthreads libraries
+    //qt_loop_step(start,end,stride,func,arg);
 }
 
 /*static inline void glt_loop_future(const size_t start, const size_t end, 
