@@ -19,16 +19,22 @@
 
  void glt_serialize(GLT_ult ult, GLT_pickle pickle)
 {
+     GLT_LIB_ERROR;
+         //This function is found in the header but not in the static or dynamic massivethreads libraries
     //myth_serialize(ult,pickle);
 }
 
  void glt_deserialize(GLT_ult *ult, GLT_pickle pickle)
 {
+     GLT_LIB_ERROR;
+         //This function is found in the header but not in the static or dynamic massivethreads libraries
     //*ult = myth_deserialize(pickle);
 }
 
  void glt_ext_deserialize(GLT_ult *ult, GLT_pickle pickle)
 {
+     GLT_LIB_ERROR;
+         //This function is found in the header but not in the static or dynamic massivethreads libraries
     //*ult = myth_ext_deserialize(pickle);
 }
 #endif

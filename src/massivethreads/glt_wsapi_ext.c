@@ -69,6 +69,8 @@
 
  void glt_wsapi_rand2(int * rand_value, int min, int max)
 {
+     GLT_LIB_ERROR;
+         //This function is found in the header but not in the static or dynamic massivethreads libraries
     //*rand_value = myth_wsapi_rand2(min,max);
 }
 

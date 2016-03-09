@@ -112,7 +112,9 @@ void glt_ult_exit()
  void glt_wu_create_nosched(GLT_ult * ult, GLT_workunit_f func, void * arg,
         GLT_workunit_o opt)
 {
-    //*ult = myth_create_nosched(func,arg,opt);
+        GLT_LIB_ERROR;
+         //This function is found in the header but not in the static or dynamic massivethreads libraries
+         //*ult = myth_create_nosched(func,arg,opt);
 }
 
  void glt_yield2()
@@ -147,26 +149,36 @@ void glt_ult_exit()
 
  void glt_wu_steal(GLT_ult * ult)
 {
+     GLT_LIB_ERROR;
+         //This function is found in the header but not in the static or dynamic massivethreads libraries
     //*ult = myth_steal();
 }
 
  void glt_wu_import(GLT_ult ult)
 {
+     GLT_LIB_ERROR;
+         //This function is found in the header but not in the static or dynamic massivethreads libraries
     //myth_import(ult);
 }
 
  void glt_wu_ext_import(GLT_ult ult)
 {
+     GLT_LIB_ERROR;
+         //This function is found in the header but not in the static or dynamic massivethreads libraries
     //myth_ext_import(ult);
 }
 
  void glt_wu_release_stack(GLT_ult ult)
 {
+     GLT_LIB_ERROR;
+         //This function is found in the header but not in the static or dynamic massivethreads libraries
     //myth_release_stack(ult);
 }
     
  void glt_wu_release_desc(GLT_ult ult)
 {
+     GLT_LIB_ERROR;
+         //This function is found in the header but not in the static or dynamic massivethreads libraries
     //myth_release_desc(ult);
 }
 #endif
