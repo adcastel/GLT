@@ -408,13 +408,13 @@ static inline void glt_wu_create_ex(GLT_ult * ult, GLT_workunit_f func, void * a
 {
     *ult = myth_create_ex(func,arg,opt);
 }
-static inline void glt_wu_create_nosched(GLT_ult * ult, GLT_workunit_f func, void * arg,
-        GLT_workunit_o opt)
-{
-    GLT_LIB_ERROR;
-         //This function is found in the header but not in the static or dynamic massivethreads libraries
-         //*ult = myth_create_nosched(func,arg,opt);
-}
+//static inline void glt_wu_create_nosched(GLT_ult * ult, GLT_workunit_f func, void * arg,
+//        GLT_workunit_o opt)
+//{
+//    GLT_LIB_ERROR;
+//         //This function is found in the header but not in the static or dynamic massivethreads libraries
+//         //*ult = myth_create_nosched(func,arg,opt);
+//}
 
 static inline void glt_yield2()
 {
@@ -446,40 +446,40 @@ static inline void glt_wu_set_def_stack_size(size_t newsize)
     myth_set_def_stack_size(newsize);
 }
 
-static inline void glt_wu_steal(GLT_ult * ult)
-{
-    GLT_LIB_ERROR;
-         //This function is found in the header but not in the static or dynamic massivethreads libraries
-    //*ult = myth_steal();
-}
-
-static inline void glt_wu_import(GLT_ult ult)
-{
-    GLT_LIB_ERROR;
-         //This function is found in the header but not in the static or dynamic massivethreads libraries
-    //myth_import(ult);
-}
-
-static inline void glt_wu_ext_import(GLT_ult ult)
-{
-    GLT_LIB_ERROR;
-         //This function is found in the header but not in the static or dynamic massivethreads libraries
-    //myth_ext_import(ult);
-}
-
-static inline void glt_wu_release_stack(GLT_ult ult)
-{
-    GLT_LIB_ERROR;
-         //This function is found in the header but not in the static or dynamic massivethreads libraries
-    //myth_release_stack(ult);
-}
-    
-static inline void glt_wu_release_desc(GLT_ult ult)
-{
-    GLT_LIB_ERROR;
-         //This function is found in the header but not in the static or dynamic massivethreads libraries
-    //myth_release_desc(ult);
-}
+//static inline void glt_wu_steal(GLT_ult * ult)
+//{
+//    GLT_LIB_ERROR;
+//         //This function is found in the header but not in the static or dynamic massivethreads libraries
+//    //*ult = myth_steal();
+//}
+//
+//static inline void glt_wu_import(GLT_ult ult)
+//{
+//    GLT_LIB_ERROR;
+//         //This function is found in the header but not in the static or dynamic massivethreads libraries
+//    //myth_import(ult);
+//}
+//
+//static inline void glt_wu_ext_import(GLT_ult ult)
+//{
+//    GLT_LIB_ERROR;
+//         //This function is found in the header but not in the static or dynamic massivethreads libraries
+//    //myth_ext_import(ult);
+//}
+//
+//static inline void glt_wu_release_stack(GLT_ult ult)
+//{
+//    GLT_LIB_ERROR;
+//         //This function is found in the header but not in the static or dynamic massivethreads libraries
+//    //myth_release_stack(ult);
+//}
+//    
+//static inline void glt_wu_release_desc(GLT_ult ult)
+//{
+//    GLT_LIB_ERROR;
+//         //This function is found in the header but not in the static or dynamic massivethreads libraries
+//    //myth_release_desc(ult);
+//}
 
 #endif /*#ifndef CORE wu MTH*/
 
@@ -565,32 +565,32 @@ static inline int glt_can_serialize_functions()
 #ifdef CORE
     return 0;
 #else
-    return 1;
+    return 0;
 #endif
 }
 
 #ifndef CORE
 
-static inline void glt_serialize(GLT_ult ult, GLT_pickle pickle)
-{
-    GLT_LIB_ERROR;
-         //This function is found in the header but not in the static or dynamic massivethreads libraries
-    //myth_serialize(ult,pickle);
-}
-
-static inline void glt_deserialize(GLT_ult *ult, GLT_pickle pickle)
-{
-    GLT_LIB_ERROR;
-         //This function is found in the header but not in the static or dynamic massivethreads libraries
-    //*ult = myth_deserialize(pickle);
-}
-
-static inline void glt_ext_deserialize(GLT_ult *ult, GLT_pickle pickle)
-{
-    GLT_LIB_ERROR;
-         //This function is found in the header but not in the static or dynamic massivethreads libraries
-    //*ult = myth_ext_deserialize(pickle);
-}
+//static inline void glt_serialize(GLT_ult ult, GLT_pickle pickle)
+//{
+//    GLT_LIB_ERROR;
+//         //This function is found in the header but not in the static or dynamic massivethreads libraries
+//    //myth_serialize(ult,pickle);
+//}
+//
+//static inline void glt_deserialize(GLT_ult *ult, GLT_pickle pickle)
+//{
+//    GLT_LIB_ERROR;
+//         //This function is found in the header but not in the static or dynamic massivethreads libraries
+//    //*ult = myth_deserialize(pickle);
+//}
+//
+//static inline void glt_ext_deserialize(GLT_ult *ult, GLT_pickle pickle)
+//{
+//    GLT_LIB_ERROR;
+//         //This function is found in the header but not in the static or dynamic massivethreads libraries
+//    //*ult = myth_ext_deserialize(pickle);
+//}
 #endif
 
 
@@ -710,12 +710,12 @@ static inline void glt_wsapi_runqueue_pop(GLT_ult * ult)
     *ult = myth_wsapi_runqueue_pop();
 }
 
-static inline void glt_wsapi_rand2(int * rand_value, int min, int max)
-{
-    GLT_LIB_ERROR;
-         //This function is found in the header but not in the static or dynamic massivethreads libraries
-    //*rand_value = myth_wsapi_rand2(min,max);
-}
+//static inline void glt_wsapi_rand2(int * rand_value, int min, int max)
+//{
+//    GLT_LIB_ERROR;
+//         //This function is found in the header but not in the static or dynamic massivethreads libraries
+//    //*rand_value = myth_wsapi_rand2(min,max);
+//}
 
 static inline void glt_wsapi_set_stealfunc(GLT_wsapi_steal_f *out, GLT_wsapi_steal_f fn)
 {

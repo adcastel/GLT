@@ -109,6 +109,7 @@ void glt_ult_exit()
 {
     *ult = myth_create_ex(func,arg,opt);
 }
+/*
  void glt_wu_create_nosched(GLT_ult * ult, GLT_workunit_f func, void * arg,
         GLT_workunit_o opt)
 {
@@ -116,6 +117,7 @@ void glt_ult_exit()
          //This function is found in the header but not in the static or dynamic massivethreads libraries
          //*ult = myth_create_nosched(func,arg,opt);
 }
+*/
 
  void glt_yield2()
 {
@@ -147,6 +149,7 @@ void glt_ult_exit()
     myth_set_def_stack_size(newsize);
 }
 
+/*
  void glt_wu_steal(GLT_ult * ult)
 {
      GLT_LIB_ERROR;
@@ -181,4 +184,5 @@ void glt_ult_exit()
          //This function is found in the header but not in the static or dynamic massivethreads libraries
     //myth_release_desc(ult);
 }
+*/
 #endif

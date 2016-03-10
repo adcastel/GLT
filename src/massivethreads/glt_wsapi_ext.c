@@ -67,12 +67,14 @@
     *ult = myth_wsapi_runqueue_pop();
 }
 
+/*
  void glt_wsapi_rand2(int * rand_value, int min, int max)
 {
      GLT_LIB_ERROR;
          //This function is found in the header but not in the static or dynamic massivethreads libraries
     //*rand_value = myth_wsapi_rand2(min,max);
 }
+*/
 
  void glt_wsapi_set_stealfunc(GLT_wsapi_steal_f *out, GLT_wsapi_steal_f fn)
 {
