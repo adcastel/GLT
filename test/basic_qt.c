@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <qthread/qthread.h>
+#include <qthread/qloop.h>
 //#include <fast_glt.h>
 //#include <glt.h>
 
@@ -26,6 +27,9 @@ for (int i = 0; i < N; i++){
 
 	//glt_ult_creation_to(func1,NULL,&ults[i],i%glt_get_num_threads());
 }
+
+//qt_loop_step(0,12,2,(qt_loop_step_f)func1,NULL);
+qt_loop(0,12,(qt_loop_f)func1,NULL);
 
 qthread_yield();
 
