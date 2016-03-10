@@ -676,13 +676,13 @@ static inline void glt_loop(const size_t start, const size_t end,
     qt_loop(start,end,func,arg);
 }
 
-static inline void glt_loop_step(const size_t start, const size_t end, 
-        const size_t stride, const GLT_loop_step_f func, void * arg)
-{
-    GLT_LIB_ERROR;
+//static inline void glt_loop_step(const size_t start, const size_t end, 
+//        const size_t stride, const GLT_loop_step_f func, void * arg)
+//{
+//    GLT_LIB_ERROR;
     //This function is found in the header but not in the static or dynamic qthreads libraries
     //qt_loop_step(start,end,stride,func,arg);
-}
+//}
 
 /*static inline void glt_loop_future(const size_t start, const size_t end, 
          const GLT_loop_f func, void * arg){
