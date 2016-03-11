@@ -42,7 +42,7 @@
 #define GLT_ult aligned_t
 #define GLT_tasklet aligned_t
 #define GLT_thread qthread_shepherd_id_t
-#define GLT_mutex aligned_t
+#define GLT_mutex aligned_t *
 #define GLT_barrier  qt_barrier_t
 #define GLT_cond aligned_t
 #define GLT_timer qtimer_t
@@ -295,28 +295,28 @@ static inline void glt_tasklet_self(GLT_ult * ult)
 
 static inline void glt_mutex_create(GLT_mutex * mutex)
 {
-    mutex = (GLT_mutex *)malloc(sizeof(GLT_mutex));
-    *mutex =0;
+    //mutex = (GLT_mutex *)malloc(sizeof(GLT_mutex));
 }
 
 static inline void glt_mutex_lock(GLT_mutex mutex)
 {
-    qthread_lock(&mutex);
+    qthread_lock(mutex);
+
 }
 
 static inline void glt_mutex_unlock(GLT_mutex mutex)
 {
-    qthread_unlock(&mutex);
+    qthread_unlock(mutex);
 }
 
 static inline void glt_mutex_free(GLT_mutex * mutex)
 {
-    free(mutex);
+    //free(mutex);
 }
 
 static inline void glt_mutex_trylock(GLT_bool * locked, GLT_mutex mutex)
 {
-    aligned_t res = qthread_cas(&mutex,0,1);
+    aligned_t res = qthread_cas(mutex,0,1);
     *locked = (res==0)? 1 : 0;        
 }
 
@@ -355,7 +355,7 @@ static inline void glt_cond_wait(GLT_cond cond, GLT_mutex mutex)
     /*Waits for memory to become empty and then fills it*/
     aligned_t fill=1;
     qthread_writeEF(&cond,&fill);
-    qthread_lock(&mutex);
+    qthread_lock(mutex);
 }
 
 static inline void glt_cond_broadcast(GLT_cond cond)

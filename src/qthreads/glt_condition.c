@@ -20,7 +20,7 @@ void glt_cond_wait(GLT_cond cond, GLT_mutex mutex)
     /*Waits for memory to become empty and then fills it*/
     aligned_t fill=1;
     qthread_writeEF(&cond,&fill);
-    qthread_lock(&mutex);
+    qthread_lock(mutex);
 }
 
 void glt_cond_broadcast(GLT_cond cond)

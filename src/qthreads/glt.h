@@ -39,7 +39,7 @@
 #define GLT_ult aligned_t
 #define GLT_tasklet aligned_t
 #define GLT_thread qthread_shepherd_id_t
-#define GLT_mutex aligned_t
+#define GLT_mutex aligned_t *
 #define GLT_barrier  qt_barrier_t
 #define GLT_cond aligned_t
 #define GLT_timer qtimer_t
