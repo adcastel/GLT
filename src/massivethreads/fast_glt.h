@@ -250,9 +250,7 @@ static inline void glt_ult_get_id(GLT_ult_id * id, GLT_ult ult)
 
 static inline void glt_workunit_get_thread_id(GLT_thread_id *id)
 {
-    myth_thread_t thread = myth_self();
-    printf("Warning: this feature is not supported in MassiveThreads\n");
-
+    *id = myth_get_worker_num();
 }
 
  static inline void glt_ult_migrate_self_to(GLT_thread_id id)
