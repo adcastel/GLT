@@ -158,7 +158,6 @@ static inline void glt_init(int argc, char * argv[])
     int num_threads = get_nprocs();
 
     main_team = (glt_team_t *) malloc(sizeof (glt_team_t));
-
     ABT_init(argc, argv);
 
     if (getenv("GLT_NUM_THREADS") != NULL) {
@@ -176,8 +175,8 @@ static inline void glt_init(int argc, char * argv[])
     main_team->num_xstreams = num_threads;
     main_team->num_pools = num_pools;
     main_team->max_elem= get_nprocs();//*2;
-    main_team->team = (ABT_xstream *) malloc(sizeof (ABT_xstream) * MAX(num_threads,get_nprocs()/**2*/));
-    main_team->pools = (ABT_pool *) malloc(sizeof (ABT_pool) * MAX(num_threads,get_nprocs()/**2*/));
+    main_team->team = (ABT_xstream *) malloc(sizeof (ABT_xstream) * num_threads);
+    main_team->pools = (ABT_pool *) malloc(sizeof (ABT_pool) * num_pools);
 
     for (int i = 0; i < num_pools; i++) {
         ABT_pool_create_basic(ABT_POOL_FIFO, ABT_POOL_ACCESS_MPMC, ABT_TRUE,
@@ -194,6 +193,7 @@ static inline void glt_init(int argc, char * argv[])
                 ABT_SCHED_CONFIG_NULL, &main_team->team[i]);
         ABT_xstream_start(main_team->team[i]);
     }
+
 }
 
 static inline void glt_finalize() 
@@ -230,7 +230,8 @@ static inline void glt_ult_creation_to(void(*thread_func)(void *), void *arg, GL
 {
     ABT_pool pool;
     ABT_xstream_get_main_pools(main_team->team[dest], 1, &pool);
-    ABT_thread_create(pool, thread_func, arg, ABT_THREAD_ATTR_NULL, new_ult);
+    /*int ret = */ABT_thread_create(pool, thread_func, arg, ABT_THREAD_ATTR_NULL, new_ult);
+    //printf("Created to %d with error %d\n",dest,ret);
 }
 
 static inline void glt_tasklet_creation(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult) 
