@@ -313,6 +313,11 @@ static inline void glt_tasklet_cancel (GLT_tasklet tasklet)
     ABT_task_cancel (tasklet);
 }
 
+
+#include <glt_mutex.c>
+
+
+/*
 static inline void glt_mutex_create(GLT_mutex * mutex)
 {
     ABT_mutex_create(mutex);
@@ -337,6 +342,8 @@ static inline void glt_mutex_trylock(GLT_bool * locked, GLT_mutex mutex)
 {
     *locked = ABT_mutex_trylock (mutex);
 }
+*/
+
 
 #include <glt_barrier.c>
 
@@ -579,6 +586,8 @@ static inline void glt_key_get (GLT_key key, void **value)
 #endif
 
 //extended mutex functions
+
+/*
 static inline int glt_can_extended_mutex()
 {
 #ifdef CORE
@@ -611,6 +620,7 @@ static inline void glt_mutex_equal (GLT_mutex mutex1, GLT_mutex mutex2, GLT_bool
 }
 #endif
 
+ */
 //pools functions
 
 static inline int glt_can_manage_pools()
