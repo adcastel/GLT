@@ -1,16 +1,21 @@
+#ifndef FASTGLT
 #include <glt.h>
+#define GLT_return 
+#else
+#define GLT_return static inline
+#endif
 
-void glt_start() 
+GLT_return void glt_start() 
 {
     printf("Starting with QTHREADS\n");
 }
 
-void glt_end() 
+GLT_return void glt_end() 
 {
     printf("Ending with QTHREADS\n");
 }
 
-void glt_init(int argc, char * argv[]) 
+GLT_return void glt_init(int argc, char * argv[]) 
 {
     int num_threads = get_nprocs();
     main_team = (glt_team_t *) malloc(sizeof (glt_team_t));
@@ -61,7 +66,7 @@ void glt_init(int argc, char * argv[])
     qthread_initialize(); //qthreads
 }
 
-void glt_finalize() 
+GLT_return void glt_finalize() 
 {
     qthread_finalize();
 }
