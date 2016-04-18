@@ -4,9 +4,9 @@ CC := gcc
 CFLAGS := -fPIC -I. $(ARGFLAGS)
 
 OBJECTS := glt.o glt_wu.o glt_util.o glt_mutex.o glt_barrier.o glt_condition.o \
-	glt_timer.o glt_event.o glt_future_promise.o glt_pool_ext.o \
-	glt_scheduler_ext.o glt_self_ext.o glt_thread_ext.o glt_tls_ext.o \
-	glt_qthreads_ext.o glt_massivethreads_ext.o
+	glt_timer.o glt_event.o glt_future_promise.o glt_pool.o \
+	glt_scheduler.o glt_self.o glt_thread.o glt_tls.o \
+	glt_qthreads.o glt_massivethreads.o
 
 ifeq ($(GLT_CORE), 1)
     CFLAGS += -DCORE
