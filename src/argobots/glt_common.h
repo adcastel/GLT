@@ -58,8 +58,8 @@
 #define GLT_unit_type ABT_unit_type
 
 
-#define glt_scheduler_config_create (config,...) ABT_sched_config_create(config,...)
-#define glt_scheduler_config_read (config, num_vars,...) ABT_sched_config_read (config, num_vars,...)
+#define glt_scheduler_config_create (config,args...) ABT_sched_config_create(config,##args)
+#define glt_scheduler_config_read (config, num_vars,args...) ABT_sched_config_read (config, num_vars,##args)
 
 //MASSIVETHREAD
 #define GLT_workunit_f void *
