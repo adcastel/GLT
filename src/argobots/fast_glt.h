@@ -381,6 +381,10 @@ static inline void glt_cond_broadcast(GLT_cond cond)
     ABT_cond_broadcast (cond);
 }
 */
+
+#include <glt_timer.c>
+
+/*
 static inline double glt_get_wtime() 
 {
     return ABT_get_wtime();
@@ -410,6 +414,7 @@ static inline void glt_timer_get_secs(GLT_timer timer, double *secs)
 {
     ABT_timer_read(timer,secs);
 }
+*/
 
 static inline int glt_get_num_threads() 
 {
