@@ -1,17 +1,21 @@
+#ifndef FASTGLT
 #include <glt.h>
+#define GLT_return 
+#else
+#define GLT_return static inline
+#endif
 
-void glt_barrier_create(int num_waiters, GLT_barrier *barrier)
+GLT_return void glt_barrier_create(int num_waiters, GLT_barrier *barrier)
 {
     ABT_barrier_create(num_waiters, barrier);
 }
 
-void glt_barrier_free(GLT_barrier *barrier)
+GLT_return void glt_barrier_free(GLT_barrier *barrier)
 {
     ABT_barrier_free(barrier);
 }
 
-
-void glt_barrier_wait(GLT_barrier *barrier)
+GLT_return void glt_barrier_wait(GLT_barrier *barrier)
 {
     ABT_barrier_wait(*barrier);
 }
