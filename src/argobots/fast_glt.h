@@ -353,6 +353,9 @@ static inline void glt_barrier_wait(GLT_barrier *barrier)
     ABT_barrier_wait(*barrier);
 }
 */
+
+#include <glt_condition.c>
+/*
 static inline void glt_cond_create(GLT_cond *cond)
 {
     ABT_cond_create (cond);
@@ -377,7 +380,7 @@ static inline void glt_cond_broadcast(GLT_cond cond)
 {
     ABT_cond_broadcast (cond);
 }
-
+*/
 static inline double glt_get_wtime() 
 {
     return ABT_get_wtime();
