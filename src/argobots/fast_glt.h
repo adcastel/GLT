@@ -623,6 +623,10 @@ static inline void glt_mutex_equal (GLT_mutex mutex1, GLT_mutex mutex2, GLT_bool
  */
 //pools functions
 
+#include <glt_pool.c>
+
+
+/*
 static inline int glt_can_manage_pools()
 {
 #ifdef CORE
@@ -714,7 +718,7 @@ static inline void glt_pool_get_id (GLT_pool pool, int *id)
     ABT_pool_get_id (pool, id);
 }
 #endif
-
+*/
 //scheduler functions
 
 

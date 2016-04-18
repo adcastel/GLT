@@ -4,11 +4,16 @@
  * and open the template in the editor.
  */
 
+#ifndef FASTGLT
 #include <glt.h>
+#define GLT_return 
+#else
+#define GLT_return static inline
+#endif
 
 //pools functions
 
-int glt_can_manage_pools()
+GLT_return int glt_can_manage_pools()
 {
 #ifdef CORE
     return 0;
@@ -18,7 +23,7 @@ int glt_can_manage_pools()
 }
 #ifndef CORE
 
-void glt_pool_create (GLT_pool_def *def, GLT_pool_config config, 
+GLT_return void glt_pool_create (GLT_pool_def *def, GLT_pool_config config, 
         GLT_pool *newpool)
 {
     if(main_team->num_pools < main_team->max_elem){
@@ -31,7 +36,7 @@ void glt_pool_create (GLT_pool_def *def, GLT_pool_config config,
     }
 }
 
-void glt_pool_create_basic (GLT_pool_kind kind, 
+GLT_return void glt_pool_create_basic (GLT_pool_kind kind, 
         GLT_pool_access access, GLT_bool automatic, GLT_pool *newpool)
 {
     if(main_team->num_pools < main_team->max_elem){
@@ -44,57 +49,57 @@ void glt_pool_create_basic (GLT_pool_kind kind,
     }
 }
 
- void glt_pool_free (GLT_pool *pool)
+GLT_return void glt_pool_free (GLT_pool *pool)
 {
     ABT_pool_free (pool);
 }
 
- void glt_pool_get_access (GLT_pool pool, GLT_pool_access *access)
+GLT_return  void glt_pool_get_access (GLT_pool pool, GLT_pool_access *access)
 {
     ABT_pool_get_access (pool, access);
 }
 
- void glt_pool_get_total_size (GLT_pool pool, size_t *size)
+GLT_return void glt_pool_get_total_size (GLT_pool pool, size_t *size)
 {
     ABT_pool_get_total_size (pool, size);
 }
 
- void glt_pool_get_size (GLT_pool pool, size_t *size)
+GLT_return void glt_pool_get_size (GLT_pool pool, size_t *size)
 {
     ABT_pool_get_size (pool, size);
 }
 
- void glt_pool_pop (GLT_pool pool, GLT_unit *p_unit)
+GLT_return void glt_pool_pop (GLT_pool pool, GLT_unit *p_unit)
 {
     ABT_pool_pop (pool,p_unit);
 }
 
- void glt_pool_push (GLT_pool pool, GLT_unit p_unit)
+GLT_return void glt_pool_push (GLT_pool pool, GLT_unit p_unit)
 {
     ABT_pool_push (pool,p_unit);
 }
 
- void glt_pool_remove (GLT_pool pool, GLT_unit p_unit)
+GLT_return void glt_pool_remove (GLT_pool pool, GLT_unit p_unit)
 {
     ABT_pool_remove (pool,p_unit);
 }
 
- void glt_pool_set_data (GLT_pool pool, void *data)
+GLT_return void glt_pool_set_data (GLT_pool pool, void *data)
 {
     ABT_pool_set_data (pool,data);
 }
 
- void glt_pool_get_data (GLT_pool pool, void **data)
+GLT_return void glt_pool_get_data (GLT_pool pool, void **data)
 {
     ABT_pool_get_data (pool,data);
 }
 
- void glt_pool_add_sched (GLT_pool pool, GLT_sched sched)
+GLT_return void glt_pool_add_sched (GLT_pool pool, GLT_sched sched)
 {
     ABT_pool_add_sched (pool, sched);
 }
 
- void glt_pool_get_id (GLT_pool pool, int *id)
+GLT_return void glt_pool_get_id (GLT_pool pool, int *id)
 {
     ABT_pool_get_id (pool, id);
 }
