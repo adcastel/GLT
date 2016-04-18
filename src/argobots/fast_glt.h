@@ -143,7 +143,8 @@ glt_team_t * main_team;
 
 //Core functions
 
-
+#include <glt.c>
+/*
 static inline void glt_start() 
 {
      printf("Starting with ARGOBOTS\n");
@@ -204,6 +205,7 @@ static inline void glt_finalize()
     }
     ABT_finalize();
 }
+*/
 
 static inline GLT_ult * glt_ult_malloc(int number_of_ult) 
 {

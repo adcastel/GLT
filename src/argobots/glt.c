@@ -1,31 +1,34 @@
+#ifndef FASTGLT
 #include <glt.h>
+#define GLT_return 
+#else
+#define GLT_return static inline
+#endif
 
 
-void glt_start() 
+GLT_return void glt_start() 
 {
     printf("Starting with ARGOBOTS\n");
 }
 
-void glt_end() 
+GLT_return void glt_end() 
 {
     printf("Ending with ARGOBOTS\n");
 }
 
-void glt_init(int argc, char * argv[]) 
+GLT_return void glt_init(int argc, char * argv[]) 
 {
-    int num_threads = get_nprocs();
-    
+     int num_threads = get_nprocs();
 
     main_team = (glt_team_t *) malloc(sizeof (glt_team_t));
-
     ABT_init(argc, argv);
 
     if (getenv("GLT_NUM_THREADS") != NULL) {
         num_threads = atoi(getenv("GLT_NUM_THREADS"));
     }
-    
+
     int num_pools = num_threads;
-    
+
     if (getenv("GLT_NUM_POOLS") != NULL) {
         num_pools = atoi(getenv("GLT_NUM_POOLS"));
     }
@@ -34,9 +37,9 @@ void glt_init(int argc, char * argv[])
 
     main_team->num_xstreams = num_threads;
     main_team->num_pools = num_pools;
-    main_team->max_elem= get_nprocs()*2;
-    main_team->team = (ABT_xstream *) malloc(sizeof (ABT_xstream) * MAX(num_threads,get_nprocs()*2));
-    main_team->pools = (ABT_pool *) malloc(sizeof (ABT_pool) * MAX(num_pools,get_nprocs()*2));
+    main_team->max_elem= get_nprocs();//*2;
+    main_team->team = (ABT_xstream *) malloc(sizeof (ABT_xstream) * num_threads);
+    main_team->pools = (ABT_pool *) malloc(sizeof (ABT_pool) * num_pools);
 
     for (int i = 0; i < num_pools; i++) {
         ABT_pool_create_basic(ABT_POOL_FIFO, ABT_POOL_ACCESS_MPMC, ABT_TRUE,
@@ -55,7 +58,7 @@ void glt_init(int argc, char * argv[])
     }
 }
 
-void glt_finalize() 
+GLT_return void glt_finalize() 
 {
     for (int i = 1; i < main_team->num_xstreams; i++) {
         ABT_xstream_join(main_team->team[i]);
