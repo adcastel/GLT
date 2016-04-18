@@ -141,6 +141,9 @@
 //
 //glt_team_t * main_team;
 
+
+#include <glt.c>
+/*
 static inline void glt_start() 
 {
     //printf("Starting with QTHREADS\n");
@@ -205,7 +208,10 @@ static inline void glt_finalize()
 {
     qthread_finalize();
 }
+*/
 
+#include <glt_wu.c>
+/*
 static inline GLT_ult * glt_ult_malloc(int number_of_ult) 
 {
     GLT_ult * ults = (GLT_ult *) malloc(sizeof (GLT_ult) * number_of_ult);
@@ -298,7 +304,9 @@ static inline void glt_tasklet_self(GLT_ult * ult)
 {
     printf("Warning: this feature is not supported in Qthreads\n");
 }
-
+*/
+#include <glt_mutex.c>
+  /*
 static inline void glt_mutex_create(GLT_mutex * mutex)
 {
     //mutex = (GLT_mutex *)malloc(sizeof(GLT_mutex));
@@ -325,7 +333,9 @@ static inline void glt_mutex_trylock(GLT_bool * locked, GLT_mutex mutex)
     aligned_t res = qthread_cas(mutex,0,1);
     *locked = (res==0)? 1 : 0;        
 }
-
+*/
+#include <glt_barrier.c>
+/*
 static inline void glt_barrier_create(int num_waiters, GLT_barrier *barrier)
 {
     barrier = qt_barrier_create(num_waiters, UPLOCK);
@@ -340,7 +350,10 @@ static inline void glt_barrier_wait(GLT_barrier *barrier)
 {
     qt_barrier_enter(barrier);
 }
+*/
 
+#include <glt_condition.c>
+/*
 static inline void glt_cond_create(GLT_cond *cond)
 {
     cond = (GLT_cond *)malloc(sizeof(GLT_cond));
@@ -358,7 +371,7 @@ static inline void glt_cond_signal(GLT_cond cond)
 
 static inline void glt_cond_wait(GLT_cond cond, GLT_mutex mutex)
 {
-    /*Waits for memory to become empty and then fills it*/
+    //Waits for memory to become empty and then fills it
     aligned_t fill=1;
     qthread_writeEF(&cond,&fill);
     qthread_lock(mutex);
@@ -368,7 +381,9 @@ static inline void glt_cond_broadcast(GLT_cond cond)
 {
     qthread_empty(&cond);
 }
-
+*/
+#include <glt_timer.c>
+  /*
 static inline double glt_get_wtime() 
 {
     struct timeval time;
@@ -400,7 +415,10 @@ static inline void glt_timer_get_secs(GLT_timer timer, double *secs)
 {
     *secs = qtimer_secs(timer);
 }
+*/
 
+#include <glt_util.c>
+ /*
 static inline int glt_get_num_threads() 
 {
     return main_team->num_shepherds;
@@ -410,9 +428,10 @@ static inline int glt_get_thread_num()
 {
     return qthread_shep();
 }
-
+*/
 //Extended functions
-
+#include <glt_basic.c>
+/*
 static inline int glt_can_extended_basic()
 {
 #ifdef CORE
@@ -425,16 +444,16 @@ static inline int glt_can_extended_basic()
 #ifndef CORE
 
 
-/*static inline void glt_ult_creation_precond(void(*thread_func)(void *), void * arg,
-        GLT_ult * ult, int npreconds, ...){
-    qthread_fork_precond((void *)thread_func,arg,ult,npreconds,...);
-}
-
-static inline void glt_ult_creation_precond_to(void(*thread_func)(void *), void * arg,
-        GLT_ult * ult, int dest,int npreconds, ...){
-    qthread_fork_precond_to((void *)thread_func,arg,ult,dest,npreconds,...);
-}
-*/
+//static inline void glt_ult_creation_precond(void(*thread_func)(void *), void * arg,
+//        GLT_ult * ult, int npreconds, ...){
+//    qthread_fork_precond((void *)thread_func,arg,ult,npreconds,...);
+//}
+//
+//static inline void glt_ult_creation_precond_to(void(*thread_func)(void *), void * arg,
+//        GLT_ult * ult, int dest,int npreconds, ...){
+//    qthread_fork_precond_to((void *)thread_func,arg,ult,dest,npreconds,...);
+//}
+//
 static inline void glt_ult_creation_syncvar(void(*thread_func)(void *), void * arg,
         GLT_syncvar *syncvar){
     qthread_fork_syncvar((void *)thread_func,arg,syncvar);
@@ -472,7 +491,9 @@ static inline void glt_ult_get_stack_left(size_t *size)
 
 
 #endif
-
+*/
+#include <glt_atomic.c>
+/*
 static inline int glt_can_atomic_functions()
 {
 #ifdef CORE
@@ -512,7 +533,10 @@ static inline void glt_atomic_cas_ptr(void * volatile * addr, void * oldval,
 }
 
 #endif
+*/
 
+#include <glt_feb.c>
+/*
 static inline int glt_can_feb_functions()
 {
 #ifdef CORE
@@ -615,7 +639,10 @@ static inline void glt_syncvar_writeF_const( GLT_syncvar *  dst,  uint64_t src)
 }
 
 #endif
+*/
 
+#include <glt_sinc.c>
+/*
 static inline int glt_can_sinc_functions()
 {
 #ifdef CORE
@@ -665,7 +692,9 @@ static inline void glt_sinc_wait(GLT_sinc * restrict sinc,  void * restrict targ
 }
 
 #endif
-
+*/
+#include <glt_loop.c>
+/*
 static inline int glt_can_loop_functions()
 {
 #ifdef CORE
@@ -690,36 +719,36 @@ static inline void glt_loop(const size_t start, const size_t end,
     //qt_loop_step(start,end,stride,func,arg);
 //}
 
-/*static inline void glt_loop_future(const size_t start, const size_t end, 
-         const GLT_loop_f func, void * arg){
-    qt_loop_future(start,end,func,arg);
-}
-
-static inline void glt_loop_step_future(const size_t start, const size_t end, 
-        const size_t stride, const GLT_loop_step_f func, void * arg){
-    qt_loop_step_future(start,end,stride,func,arg);
-}
-*/
+//static inline void glt_loop_future(const size_t start, const size_t end, 
+//         const GLT_loop_f func, void * arg){
+//    qt_loop_future(start,end,func,arg);
+//}
+//
+//static inline void glt_loop_step_future(const size_t start, const size_t end, 
+//        const size_t stride, const GLT_loop_step_f func, void * arg){
+//    qt_loop_step_future(start,end,stride,func,arg);
+//}
+//
 static inline void glt_loop_balance(const size_t start, const size_t end, 
          const GLT_loop_f func, void * arg){
     qt_loop_balance(start,end,func,arg);
 }
 
-/*static inline void glt_loop_balance_future(const size_t start, const size_t end, 
-         const GLT_loop_f func, void * arg){
-    qt_loop_balance_future(start,end,func,arg);
-}
-*/
+//static inline void glt_loop_balance_future(const size_t start, const size_t end, 
+//         const GLT_loop_f func, void * arg){
+//    qt_loop_balance_future(start,end,func,arg);
+//}
+//
 static inline void glt_loopaccum_balance(const size_t start, const size_t end, 
          size_t size, void *out, const GLT_loopr_f func, void * arg, GLT_accum_f acc){
     qt_loopaccum_balance(start,end,size,out,func,arg,acc);
 }
 
-/*static inline void glt_loopaccum_balance_future(const size_t start, const size_t end, 
-size_t size, void *out, const GLT_loop_f func, void * arg, GLT_accum_f acc){
-    qt_loop_balance_future(start,end,size,out,func,arg,acc);
-}
-*/
+//static inline void glt_loopaccum_balance_future(const size_t start, const size_t end, 
+//size_t size, void *out, const GLT_loop_f func, void * arg, GLT_accum_f acc){
+//    qt_loop_balance_future(start,end,size,out,func,arg,acc);
+//}
+//
 
 static inline void glt_loop_queue_create(GLT_loop_queue * loop, GLT_loop_queue_kind kind,
         const size_t start, const size_t end, 
@@ -749,7 +778,9 @@ static inline void glt_loop_queue_add_thread(GLT_loop_queue * loop, GLT_thread i
 }
 
 #endif
-
+*/
+  
+/*
 static inline int glt_can_util_functions()
 {
 #ifdef CORE
@@ -833,7 +864,10 @@ static inline void glt_util_mergesort(double * array, size_t lenght)
 }
 
 #endif
-
+*/
+  
+#include <glt_data_structures.c>
+/*
 static inline int glt_can_data_structures_functions()
 {
 #ifdef CORE
@@ -1091,7 +1125,10 @@ static inline void glt_ds_dictionary_it_copy(GLT_ds_dictionary_it *output,
 }
 
 #endif
+*/
 
+#include <glt_syscall.c>
+/*
 static inline int glt_can_syscall_functions()
 {
 #ifdef CORE
@@ -1171,7 +1208,10 @@ static inline int glt_syscall_wait4 (pid_t pid, int *stat_loc, int options,
 }
 
 #endif
+*/
 
+#include <glt_runtime.c>
+/*
 static inline int glt_can_extended_runtime()
 {
 #ifdef CORE
@@ -1244,7 +1284,9 @@ static inline void glt_thread_ok(GLT_bool *res)
 }
 
 #endif
-
+*/
+#include <glt_memory.c>
+/*
 static inline int glt_can_memory_functions()
 {
 #ifdef CORE
@@ -1314,9 +1356,10 @@ static inline void glt_memory_checkpoint()
 }
 
 #endif
-
+*/
 //ARGOBOTS FUNCTIONS that are not supported by Qthreads
-
+#include <glt_argobots.c>
+/*
 static inline int glt_can_event_functions()
 {
     return 0;
@@ -1904,9 +1947,12 @@ static inline  void glt_ult_attr_set_migratable (GLT_ult_attr attr, GLT_bool fla
 }
 
 #endif
-
+*/
 //MASSIVETHREADS functions that are not supported by Qthreads
 
+#include <glt_massivethreads.c>
+
+/*
 static inline int glt_can_wsapi_functions()
 {
     return 0;
@@ -2152,7 +2198,7 @@ static inline  void glt_wsapi_rand2(int * rand_value, int min, int max)
   }
  
 #endif
-
+*/
 
 #endif	/* FAST_GLT_H */
 
