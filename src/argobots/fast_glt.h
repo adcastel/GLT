@@ -416,6 +416,9 @@ static inline void glt_timer_get_secs(GLT_timer timer, double *secs)
 }
 */
 
+#include <glt_util.c>
+
+/*
 static inline int glt_get_num_threads() 
 {
     return main_team->num_xstreams;
@@ -427,7 +430,7 @@ static inline int glt_get_thread_num()
     ABT_xstream_self_rank(&rank);
     return rank;
 }
-
+*/
 //Extended functions
 
 
