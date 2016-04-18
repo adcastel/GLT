@@ -4,10 +4,15 @@
  * and open the template in the editor.
  */
 
+#ifndef FASTGLT
 #include <glt.h>
+#define GLT_return 
+#else
+#define GLT_return static inline
+#endif
 //self functions
 
- int glt_can_self()
+GLT_return int glt_can_self()
 {
 #ifdef CORE
     return 0;
@@ -18,31 +23,32 @@
 
 #ifndef CORE
 
- void glt_self_get_type (GLT_unit_type *type)
+GLT_return void glt_self_get_type (GLT_unit_type *type)
 {
     ABT_self_get_type (type);
 }
- void glt_self_is_primary (GLT_bool *flag)
+
+GLT_return void glt_self_is_primary (GLT_bool *flag)
 {
     ABT_self_is_primary (flag);
 }
 
- void glt_self_on_primary_xstream (GLT_bool *flag)
+GLT_return void glt_self_on_primary_xstream (GLT_bool *flag)
 {
     ABT_self_on_primary_xstream (flag);
 }
 
- void glt_self_get_last_pool_id (int *pool_id)
+GLT_return void glt_self_get_last_pool_id (int *pool_id)
 {
     ABT_self_get_last_pool_id (pool_id);
 }
 
- void glt_self_suspend (void)
+GLT_return void glt_self_suspend (void)
 {
     ABT_self_suspend ();
 }
 
- void glt_self_get_arg (void **arg)
+GLT_return void glt_self_get_arg (void **arg)
 {
     ABT_self_get_arg (arg);
 }

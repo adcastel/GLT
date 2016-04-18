@@ -208,6 +208,9 @@ static inline void glt_finalize()
 }
 */
 
+#include <glt_wu.c>
+
+/*
 static inline GLT_ult * glt_ult_malloc(int number_of_ult) 
 {
     GLT_ult * ults = (GLT_ult *) malloc(sizeof (GLT_ult) * number_of_ult);
@@ -233,8 +236,7 @@ static inline void glt_ult_creation_to(void(*thread_func)(void *), void *arg, GL
 {
     ABT_pool pool;
     ABT_xstream_get_main_pools(main_team->team[dest], 1, &pool);
-    /*int ret = */ABT_thread_create(pool, thread_func, arg, ABT_THREAD_ATTR_NULL, new_ult);
-    //printf("Created to %d with error %d\n",dest,ret);
+    ABT_thread_create(pool, thread_func, arg, ABT_THREAD_ATTR_NULL, new_ult);
 }
 
 static inline void glt_tasklet_creation(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult) 
@@ -312,7 +314,7 @@ static inline void glt_tasklet_cancel (GLT_tasklet tasklet)
 {
     ABT_task_cancel (tasklet);
 }
-
+*/
 
 #include <glt_mutex.c>
 
@@ -553,6 +555,9 @@ static inline void glt_promise_set (GLT_promise promise, void * value)
 #endif
 */
 //tls functions
+
+#include <glt_tls.c>
+/*
 static inline int glt_can_tls_functions()
 {
 #ifdef CORE
@@ -584,7 +589,7 @@ static inline void glt_key_get (GLT_key key, void **value)
     ABT_key_get (key,value);
 }
 #endif
-
+*/
 //extended mutex functions
 
 /*
@@ -721,7 +726,8 @@ static inline void glt_pool_get_id (GLT_pool pool, int *id)
 */
 //scheduler functions
 
-
+#include <glt_scheduler.c>
+/*
 static inline int glt_can_manage_scheduler()
 {
 #ifdef CORE
@@ -734,20 +740,20 @@ static inline int glt_can_manage_scheduler()
 #ifndef CORE
 
 
-/*static inline void glt_scheduler_config_create(GLT_sched_config *config,...)
-{
-    va_list args;
-    va_start(args, config);
-    
-    ABT_sched_config_create (config,...);	
-    va_end(args);
-    
-}*/
-
-/*static inline void glt_scheduler_config_read(GLT_sched_config config, int num_vars, ...)
-{
-    ABT_sched_config_read (config, num_vars,...);
-}*/
+//static inline void glt_scheduler_config_create(GLT_sched_config *config,...)
+//{
+//    va_list args;
+//    va_start(args, config);
+//    
+//    ABT_sched_config_create (config,...);	
+//    va_end(args);
+//    
+//}
+//
+//static inline void glt_scheduler_config_read(GLT_sched_config config, int num_vars, ...)
+//{
+//    ABT_sched_config_read (config, num_vars,...);
+//}
 
 static inline void glt_scheduler_config_free (GLT_sched_config *config)
 { 	
@@ -818,9 +824,12 @@ static inline void glt_scheduler_get_total_size(GLT_sched sched, size_t *size)
     ABT_sched_get_total_size (sched, size);
 }
 #endif
-
+*/
 //self functions
 
+#include<glt_self.c>
+
+/*
 static inline int glt_can_self()
 {
 #ifdef CORE
@@ -862,10 +871,10 @@ static inline void glt_self_get_arg (void **arg)
 }
 
 #endif
-
+*/
 //threads functions
-
-
+#include<glt_thread.c>
+/*
 static inline int glt_can_manage_threads()
 {
 #ifdef CORE
@@ -994,9 +1003,9 @@ static inline void glt_thread_check_events(GLT_sched sched)
     ABT_xstream_check_events (sched);
 }
 #endif
-
+*/
 //tasklets functions
-
+/*
 static inline int can_extended_tasklets()
 {
 #ifdef CORE
@@ -1188,8 +1197,8 @@ static inline void glt_ult_attr_set_migratable (GLT_ult_attr attr, GLT_bool flag
 {
     ABT_thread_attr_set_migratable ( attr,  flag);
 }
-#endif /*#ifndef CORE*/
-
+#endif 
+*/
 //MASSIVETHREADS functions that are not supported by Argobots
 
 #include <glt_massivethreads.c>
@@ -1442,6 +1451,8 @@ static inline  void glt_wsapi_rand2(int * rand_value, int min, int max)
 */
 //QTHREADS functions that are not supported by Argobots
 
+#include <glt_qthreads.c>
+/*
 static inline int glt_can_extended_basic()
 {
     return 0;
@@ -1491,16 +1502,16 @@ static inline int glt_can_memory_functions()
 #ifndef CORE
 
 
-/*static inline void glt_ult_creation_precond(void(*thread_func)(void *), void * arg,
-        GLT_ult * ult, int npreconds, ...){
-    qthread_fork_precond((void *)thread_func,arg,ult,npreconds,...);
-}
-
-static inline void glt_ult_creation_precond_to(void(*thread_func)(void *), void * arg,
-        GLT_ult * ult, int dest,int npreconds, ...){
-    qthread_fork_precond_to((void *)thread_func,arg,ult,dest,npreconds,...);
-}
-*/
+//static inline void glt_ult_creation_precond(void(*thread_func)(void *), void * arg,
+//        GLT_ult * ult, int npreconds, ...){
+//    qthread_fork_precond((void *)thread_func,arg,ult,npreconds,...);
+//}
+//
+//static inline void glt_ult_creation_precond_to(void(*thread_func)(void *), void * arg,
+//        GLT_ult * ult, int dest,int npreconds, ...){
+//    qthread_fork_precond_to((void *)thread_func,arg,ult,dest,npreconds,...);
+//}
+//
 static inline void glt_ult_creation_syncvar(void(*thread_func)(void *), void * arg,
         GLT_syncvar *syncvar){
     GLT_ERROR_QTH;
@@ -1708,42 +1719,42 @@ static inline void glt_loop_step(const size_t start, const size_t end,
     GLT_ERROR_QTH;
 }
 
-/*static inline void glt_loop_future(const size_t start, const size_t end, 
-         const GLT_loop_f func, void * arg)
-{
-    GLT_ERROR_QTH;
-}
-
-static inline void glt_loop_step_future(const size_t start, const size_t end, 
-        const size_t stride, const GLT_loop_step_f func, void * arg)
-{
-    GLT_ERROR_QTH;
-}
-*/
+//static inline void glt_loop_future(const size_t start, const size_t end, 
+//         const GLT_loop_f func, void * arg)
+//{
+//    GLT_ERROR_QTH;
+//}
+//
+//static inline void glt_loop_step_future(const size_t start, const size_t end, 
+//        const size_t stride, const GLT_loop_step_f func, void * arg)
+//{
+//    GLT_ERROR_QTH;
+//}
+//
 static inline void glt_loop_balance(const size_t start, const size_t end, 
          const GLT_loop_f func, void * arg)
 {
     GLT_ERROR_QTH;
 }
 
-/*static inline void glt_loop_balance_future(const size_t start, const size_t end, 
-         const GLT_loop_f func, void * arg)
-{
-    GLT_ERROR_QTH;
-}
-*/
+//static inline void glt_loop_balance_future(const size_t start, const size_t end, 
+//         const GLT_loop_f func, void * arg)
+//{
+//    GLT_ERROR_QTH;
+//}
+//
 static inline void glt_loopaccum_balance(const size_t start, const size_t end, 
          size_t size, void *out, const GLT_loopr_f func, void * arg, GLT_accum_f acc)
 {
     GLT_ERROR_QTH;
 }
 
-/*static inline void glt_loopaccum_balance_future(const size_t start, const size_t end, 
-size_t size, void *out, const GLT_loop_f func, void * arg, GLT_accum_f acc)
-{
-    GLT_ERROR_QTH;
-}
-*/
+//static inline void glt_loopaccum_balance_future(const size_t start, const size_t end, 
+//size_t size, void *out, const GLT_loop_f func, void * arg, GLT_accum_f acc)
+//{
+//    GLT_ERROR_QTH;
+//}
+//
 
 static inline void glt_loop_queue_create(GLT_loop_queue * loop, GLT_loop_queue_kind kind,
         const size_t start, const size_t end, 
@@ -2310,7 +2321,7 @@ static inline void glt_memory_checkpoint()
 }
 
 #endif
-
+*/
 
 #endif	/* FAST_GLT_H */
 
