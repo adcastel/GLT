@@ -1188,6 +1188,8 @@ static inline void glt_ult_attr_set_migratable (GLT_ult_attr attr, GLT_bool flag
 
 //MASSIVETHREADS functions that are not supported by Argobots
 
+#include <glt_massivethreads.c>
+/*
 static inline int glt_can_wsapi_functions()
 {
     return 0;
@@ -1433,7 +1435,7 @@ static inline  void glt_wsapi_rand2(int * rand_value, int min, int max)
   }
  
 #endif
-
+*/
 //QTHREADS functions that are not supported by Argobots
 
 static inline int glt_can_extended_basic()

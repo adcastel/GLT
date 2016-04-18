@@ -60,7 +60,7 @@ GLT_return void glt_mutex_unlock_se (GLT_mutex mutex)
    // ABT_mutex_unlock_se (mutex);
 }
 
-GLT_return GLT_return void glt_mutex_equal (GLT_mutex mutex1, GLT_mutex mutex2, GLT_bool *result)
+GLT_return void glt_mutex_equal (GLT_mutex mutex1, GLT_mutex mutex2, GLT_bool *result)
 {
     ABT_mutex_equal (mutex1, mutex2, result);
 }
