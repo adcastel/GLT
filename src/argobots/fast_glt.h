@@ -437,6 +437,8 @@ static inline int glt_get_thread_num()
 
 
 //Event functions
+
+/*
 static inline int glt_can_event_functions()
 {
 #ifdef CORE
@@ -465,6 +467,9 @@ static inline void glt_event_del_callback (GLT_event_kind event, int cb_id)
     ABT_event_del_callback (event, cb_id);
 }
 #endif
+*/
+
+#include <glt_event.c>
 
 //future functions
 static inline int glt_can_future_functions()
