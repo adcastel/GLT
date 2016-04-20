@@ -90,6 +90,8 @@ typedef struct dynmapinfo_s {
 #define GLT_sched_config void *
 #define GLT_sched_def void *
 #define GLT_sched_predef void *
+#define GLT_sched_config_var void *
+#define GLT_sched_config_var_end void *
 #define GLT_thread_state void *
 #define GLT_tasklet_state void *
 #define GLT_ult_state void *
@@ -122,11 +124,11 @@ typedef struct dynmapinfo_s {
 #define GLT_ds_dictionary_it void *
 #define GLT_subthread void *
 
-#define glt_scheduler_config_create (config,...) ABT_sched_config_create(config,...)
-#define glt_scheduler_config_read (config, num_vars,...) ABT_sched_config_read (config, num_vars,...)
+#define glt_scheduler_config_create  ABT_sched_config_create
+#define glt_scheduler_config_read  ABT_sched_config_read 
 
-#define glt_ult_creation_precond(f,a,u,n,...) qthread_fork_precond(f,a,u,n,...)
-#define glt_ult_creation_precond_to(f,a,u,d,n,...) qthread_fork_precond_to(f,a,u,d,n,...)
+#define glt_ult_creation_precond qthread_fork_precond
+#define glt_ult_creation_precond_to qthread_fork_precond_to
 
 #endif
 
