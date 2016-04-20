@@ -1,22 +1,22 @@
 #ifndef FASTGLT
 #include <glt.h>
-#define GLT_return 
+#define GLT_func_prefix 
 #else
-#define GLT_return static inline
+#define GLT_func_prefix static inline
 #endif
 
 
-GLT_return void glt_start() 
+GLT_func_prefix void glt_start() 
 {
     printf("Starting with ARGOBOTS\n");
 }
 
-GLT_return void glt_end() 
+GLT_func_prefix void glt_end() 
 {
     printf("Ending with ARGOBOTS\n");
 }
 
-GLT_return void glt_init(int argc, char * argv[]) 
+GLT_func_prefix void glt_init(int argc, char * argv[]) 
 {
      int num_threads = get_nprocs();
 
@@ -58,7 +58,7 @@ GLT_return void glt_init(int argc, char * argv[])
     }
 }
 
-GLT_return void glt_finalize() 
+GLT_func_prefix void glt_finalize() 
 {
     for (int i = 1; i < main_team->num_xstreams; i++) {
         ABT_xstream_join(main_team->team[i]);
