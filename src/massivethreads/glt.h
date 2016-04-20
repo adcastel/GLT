@@ -103,7 +103,6 @@ int glt_can_extended_basic();
  int glt_can_data_structures_functions();
  int glt_can_syscall_functions();
  int glt_can_extended_runtime();
- int glt_can_memory_functions();
 
 
 
@@ -508,19 +507,7 @@ size_t size, void *out, const GLT_loop_f func, void * arg, GLT_accum_f acc);*/
  void glt_subthread_enable(GLT_subthread id);
  void glt_subthread_disable(GLT_bool *res, GLT_subthread id);
  void glt_thread_ok(GLT_bool *res);
- void * glt_memory_make_stat_map(const off_t filesize, void *addr,
-        const char *filename, size_t itemsize, const size_t streams);
- void * glt_memory_make_dyn_map(const off_t filesize, void *addr,
-        const char *filename,  const size_t streams);
- void * glt_memory_load_map(const char *filename);
- void * glt_memory_malloc(void *map, size_t size);
- void * glt_memory_stat_malloc(struct mapinfo_s *map);
- void * glt_memory_dyn_malloc(struct dynmapinfo_s *map, size_t size);
- void glt_memory_free(void *block, void * map);
- void glt_memory_stat_free(void *block, struct mapinfo_s *map);
- void glt_memory_dyn_free(void *block, struct dynmapinfo_s *map);
- void glt_memory_cleanup();
- void glt_memory_checkpoint();
+
 #endif
 
 #endif	/* glt_H */
