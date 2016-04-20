@@ -37,9 +37,9 @@ GLT_func_prefix void glt_init(int argc, char * argv[])
 
     main_team->num_xstreams = num_threads;
     main_team->num_pools = num_pools;
-    main_team->max_elem= get_nprocs();//*2;
-    main_team->team = (ABT_xstream *) malloc(sizeof (ABT_xstream) * num_threads);
-    main_team->pools = (ABT_pool *) malloc(sizeof (ABT_pool) * num_pools);
+    main_team->max_elem= get_nprocs();
+    main_team->team = (ABT_xstream *) malloc(sizeof (ABT_xstream) * main_team->max_elem);
+    main_team->pools = (ABT_pool *) malloc(sizeof (ABT_pool) * main_team->max_elem);
 
     for (int i = 0; i < num_pools; i++) {
         ABT_pool_create_basic(ABT_POOL_FIFO, ABT_POOL_ACCESS_MPMC, ABT_TRUE,
