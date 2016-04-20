@@ -1,16 +1,21 @@
+#ifndef FASTGLT
 #include <glt.h>
+#define GLT_func_prefix 
+#else
+#define GLT_func_prefix static inline
+#endif
 
-void glt_start() 
+GLT_func_prefix void glt_start() 
 {
     printf("Starting with MASSIVETHREADS\n");
 }
 
-void glt_end() 
+GLT_func_prefix void glt_end() 
 {
     printf("Ending with MASSIVETHREADS\n");
 }
 
-void glt_init(int argc, char * argv[]) 
+GLT_func_prefix void glt_init(int argc, char * argv[]) 
 {
     int num_threads = get_nprocs();
     main_team = (glt_team_t *) malloc(sizeof (glt_team_t));
@@ -34,7 +39,7 @@ void glt_init(int argc, char * argv[])
     myth_init(); //MassiveThreads
 }
 
-void glt_finalize() 
+GLT_func_prefix void glt_finalize() 
 {
     myth_fini(); //MassiveThreads
 }
