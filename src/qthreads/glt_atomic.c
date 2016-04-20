@@ -6,12 +6,12 @@
 
 #ifndef FASTGLT
 #include <glt.h>
-#define GLT_return 
+#define GLT_func_prefix 
 #else
-#define GLT_return static inline
+#define GLT_func_prefix static inline
 #endif
 
-GLT_return int glt_can_atomic_functions()
+GLT_func_prefix int glt_can_atomic_functions()
 {
 #ifdef CORE
     return 0;
@@ -22,28 +22,28 @@ GLT_return int glt_can_atomic_functions()
 
 #ifndef CORE
 
- GLT_return void glt_atomic_incr(GLT_aligned * operand, int incr)
+ GLT_func_prefix void glt_atomic_incr(GLT_aligned * operand, int incr)
 {
     qthread_incr(operand,incr);
 }
 
-GLT_return void glt_atomic_fincr(float * operand, float incr)
+GLT_func_prefix void glt_atomic_fincr(float * operand, float incr)
 {
     qthread_fincr(operand,incr);
 }
 
-GLT_return void glt_atomic_dincr(double * operand, double incr)
+GLT_func_prefix void glt_atomic_dincr(double * operand, double incr)
 {
     qthread_dincr(operand,incr);
 }
 
-GLT_return void glt_atomic_cas(volatile GLT_aligned * addr, GLT_aligned oldval,
+GLT_func_prefix void glt_atomic_cas(volatile GLT_aligned * addr, GLT_aligned oldval,
         GLT_aligned newval)
 {
     qthread_cas(addr,oldval,newval);
 }
 
-GLT_return void glt_atomic_cas_ptr(void * volatile * addr, void * oldval,
+GLT_func_prefix void glt_atomic_cas_ptr(void * volatile * addr, void * oldval,
         void * newval)
 {
     qthread_cas_ptr(addr,oldval,newval);
