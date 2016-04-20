@@ -1,16 +1,21 @@
+#ifndef FASTGLT
 #include <glt.h>
+#define GLT_func_prefix 
+#else
+#define GLT_func_prefix static inline
+#endif
 
-void glt_barrier_create(int num_waiters, GLT_barrier *barrier)
+GLT_func_prefix void glt_barrier_create(int num_waiters, GLT_barrier *barrier)
 {
     *barrier = myth_barrier_create(num_waiters);
 }
 
-void glt_barrier_free(GLT_barrier *barrier)
+GLT_func_prefix void glt_barrier_free(GLT_barrier *barrier)
 {
     myth_barrier_destroy(*barrier);
 }
 
-void glt_barrier_wait(GLT_barrier *barrier)
+GLT_func_prefix void glt_barrier_wait(GLT_barrier *barrier)
 {
     myth_barrier_wait(*barrier);
 }
