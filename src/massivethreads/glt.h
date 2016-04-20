@@ -303,11 +303,7 @@ void glt_thread_check_events(GLT_sched sched);
  //HEADERS for QTHREADS extended functions
 //Null codes
  
-/* void glt_ult_creation_precond(void(*thread_func)(void *), void * arg,
-        GLT_ult * ult, int npreconds, ...);
- void glt_ult_creation_precond_to(void(*thread_func)(void *), void * arg,
-        GLT_ult * ult, int dest,int npreconds, ...);
-*/
+
  void glt_ult_creation_syncvar(void(*thread_func)(void *), void * arg,
         GLT_syncvar *syncvar);
  void glt_ult_creation_syncvar_to(void(*thread_func)(void *), void * arg,
@@ -355,20 +351,13 @@ void glt_thread_check_events(GLT_sched sched);
  void glt_sinc_wait(GLT_sinc * restrict sinc,  void * restrict target);
  void glt_loop(const size_t start, const size_t end, 
          const GLT_loop_f func, void * arg);
- void glt_loop_step(const size_t start, const size_t end, 
-        const size_t stride, const GLT_loop_step_f func, void * arg);
-/* void glt_loop_future(const size_t start, const size_t end, 
-         const GLT_loop_f func, void * arg);
- void glt_loop_step_future(const size_t start, const size_t end, 
-        const size_t stride, const GLT_loop_step_f func, void * arg);*/
+
  void glt_loop_balance(const size_t start, const size_t end, 
          const GLT_loop_f func, void * arg);
-/* void glt_loop_balance_future(const size_t start, const size_t end, 
-         const GLT_loop_f func, void * arg);*/
+
  void glt_loopaccum_balance(const size_t start, const size_t end, 
          size_t size, void *out, const GLT_loopr_f func, void * arg, GLT_accum_f acc);
-/* void glt_loopaccum_balance_future(const size_t start, const size_t end, 
-size_t size, void *out, const GLT_loop_f func, void * arg, GLT_accum_f acc);*/
+
  void glt_loop_queue_create(GLT_loop_queue * loop, GLT_loop_queue_kind kind,
         const size_t start, const size_t end, 
         const size_t stride, const GLT_loop_f func, void * arg);
