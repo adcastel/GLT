@@ -31,7 +31,6 @@
 #include <glt_data_structures.c>
 #include <glt_syscall.c>
 #include <glt_runtime.c>
-#include <glt_memory.c>
 #include <glt_argobots.c>
 #include <glt_massivethreads.c>
 

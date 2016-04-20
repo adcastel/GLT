@@ -78,7 +78,6 @@ int glt_can_atomic_functions();
   int glt_can_data_structures_functions();
  int glt_can_syscall_functions();
   int glt_can_extended_runtime();
-   int glt_can_memory_functions();
 
 
 
@@ -309,19 +308,6 @@ void glt_ult_creation_syncvar(void(*thread_func)(void *), void * arg,
  void glt_subthread_disable(GLT_bool *res, GLT_subthread id);
  void glt_thread_ok(GLT_bool *res);
  
- void * glt_memory_make_stat_map(const off_t filesize, void *addr,
-        const char *filename, size_t itemsize, const size_t streams);
- void * glt_memory_make_dyn_map(const off_t filesize, void *addr,
-        const char *filename,  const size_t streams);
- void * glt_memory_load_map(const char *filename);
- void * glt_memory_malloc(void *map, size_t size);
- void * glt_memory_stat_malloc(struct mapinfo_s *map);
- void * glt_memory_dyn_malloc(struct dynmapinfo_s *map, size_t size);
- void glt_memory_free(void *block, void * map);
- void glt_memory_stat_free(void *block, struct mapinfo_s *map);
- void glt_memory_dyn_free(void *block, struct dynmapinfo_s *map);
- void glt_memory_cleanup();
- void glt_memory_checkpoint();
 //HEADERS for ARGOBOTS extended functions
 //Null codes
 void glt_get_error_str(int errno, char *str, size_t *len);
