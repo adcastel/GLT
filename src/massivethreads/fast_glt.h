@@ -11,147 +11,153 @@
 #ifndef FAST_GLT_H
 #define	FAST_GLT_H
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
 
-#define _GNU_SOURCE             /* See feature_test_macros(7) */
+#include <glt_common.h>
 
-#include <sys/time.h>
-#include <sys/sysinfo.h>
-       
+//#ifdef HAVE_CONFIG_H
+//#include <config.h>
+//#endif
+//
+//#define _GNU_SOURCE             /* See feature_test_macros(7) */
+//
+//#include <sys/time.h>
+//#include <sys/sysinfo.h>
+//       
+//
+//#include <sched.h>
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <assert.h>
+//#include <unistd.h>
+//#include <stdint.h>
+//#include <myth.h>
+//
+//typedef struct myth_timer {
+//    struct timeval start;
+//    struct timeval end;
+//} myth_timer_t;
+//
+//#define GLT_ult myth_thread_t
+//#define GLT_tasklet myth_thread_t
+//#define GLT_thread myth_thread_t
+//#define GLT_mutex myth_mutex_t
+//#define GLT_barrier myth_barrier_t
+//#define GLT_cond myth_cond_t
+//#define GLT_timer myth_timer_t
+//#define GLT_bool int
+//#define GLT_thread_id int
+//#define GLT_ult_id int
+//
+////Extended variables
+//#ifndef CORE
+//
+//#define GLT_workunit_f myth_func_t
+//#define GLT_workunit_o myth_thread_option_t
+//#define GLT_felock myth_felock_t
+//#define GLT_felock_status int
+//#define GLT_pickle myth_pickle_t
+//#define GLT_wsapi_decide_f myth_wsapi_decidefn_t
+//#define GLT_wsapi_steal_f myth_steal_func_t
+////Shared
+//#define GLT_key myth_key_t
+//
+//#include <sys/socket.h>
+//#include <poll.h>
+//#include <sys/resource.h>
+//
+//#define aligned_t long unsigned int
+//typedef enum introspective_state {NOT_SUPPORTED} introspective_state;
+//
+//typedef struct mapinfo_s {
+//    int not_supported;
+//}mapinfo_s_t;
+//
+//typedef struct dynmapinfo_s {
+//    int not_supported;
+//}dynmapinfo_s_t;
+//
+//
+//
+//
+////ARGOBOTS
+//#define GLT_event_kind void *
+//#define GLT_event_cb_fn void *
+//#define GLT_future void *
+//#define GLT_promise void *
+//
+//#define GLT_pool_def void *
+//#define GLT_pool_config void *
+//#define GLT_pool void *
+//#define GLT_pool_kind void *
+//#define GLT_pool_access void *
+//#define GLT_unit void *
+//#define GLT_sched void *
+//#define GLT_sched_config void *
+//#define GLT_sched_def void *
+//#define GLT_sched_predef void *
+//#define GLT_thread_state void *
+//#define GLT_tasklet_state void *
+//#define GLT_ult_state void *
+//#define GLT_ult_attr void *
+//#define GLT_unit_type void *
+////QTHREADS
+//#define GLT_syncvar void *
+//#define GLT_aligned void *
+//#define GLT_memory_state void *
+//#define GLT_sinc_op void *
+//#define GLT_sinc void *
+//#define GLT_loop_f void *
+//#define GLT_loopr_f void *
+//#define GLT_loop_step_f void *
+//#define GLT_accum_f void *
+//#define GLT_loop_queue void *
+//#define GLT_loop_queue_kind void *
+//#define GLT_ds_pool void *
+//#define GLT_ds_array void *
+//#define GLT_ds_array_distribution void *
+//#define GLT_ds_loop_f void *
+//#define GLT_ds_loopr_f void *
+//#define GLT_ds_cloop_f void *
+//#define GLT_ds_lfqueue void *
+//#define GLT_ds_dqueue void *
+//#define GLT_ds_dictionary void *
+//#define GLT_ds_dictionary_key_equals void *
+//#define GLT_ds_dictionary_hash void *
+//#define GLT_ds_dictionary_cleanup void *
+//#define GLT_ds_dictionary_it void *
+//#define GLT_subthread void *
+//
+//#define glt_scheduler_config_create (config,...) ABT_sched_config_create(config,...)
+//#define glt_scheduler_config_read (config, num_vars,...) ABT_sched_config_read (config, num_vars,...)
+//
+//#define glt_ult_creation_precond(f,a,u,n,...) qthread_fork_precond(f,a,u,n,...)
+//#define glt_ult_creation_precond_to(f,a,u,d,n,...) qthread_fork_precond_to(f,a,u,d,n,...)
+//
+//#endif /*#ifndef CORE*/
+//
+//typedef struct glt_team {
+//    int num_workers;
+//} glt_team_t;
+//
+//
+//
+//#define GLT_VERSION "You are using fast glt 0.1v over MassiveThreads (adcastel@uji.es)"
+//#define GLT_ERROR_ARG printf("Error: This feature is only supported by Argobots \
+//    implementation and you are using MassiveThreads. Please use the query functions")
+//#define GLT_ERROR_QTH printf("Error: This feature is only supported by Qthreads \
+//    implementation and you are using MassiveThreads. Please use the query functions")
+//#define GLT_LIB_ERROR printf("Error: This feature is in the API but it is not \
+//    included in the Library\n")
+//
+///* Main team structure*/
+////void __attribute__((constructor)) glt_start(void);
+////void __attribute__((destructor)) glt_end(void);
+//
+//glt_team_t * main_team;
 
-#include <sched.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <assert.h>
-#include <unistd.h>
-#include <stdint.h>
-#include <myth.h>
 
-typedef struct myth_timer {
-    struct timeval start;
-    struct timeval end;
-} myth_timer_t;
-
-#define GLT_ult myth_thread_t
-#define GLT_tasklet myth_thread_t
-#define GLT_thread myth_thread_t
-#define GLT_mutex myth_mutex_t
-#define GLT_barrier myth_barrier_t
-#define GLT_cond myth_cond_t
-#define GLT_timer myth_timer_t
-#define GLT_bool int
-#define GLT_thread_id int
-#define GLT_ult_id int
-
-//Extended variables
-#ifndef CORE
-
-#define GLT_workunit_f myth_func_t
-#define GLT_workunit_o myth_thread_option_t
-#define GLT_felock myth_felock_t
-#define GLT_felock_status int
-#define GLT_pickle myth_pickle_t
-#define GLT_wsapi_decide_f myth_wsapi_decidefn_t
-#define GLT_wsapi_steal_f myth_steal_func_t
-//Shared
-#define GLT_key myth_key_t
-
-#include <sys/socket.h>
-#include <poll.h>
-#include <sys/resource.h>
-
-#define aligned_t long unsigned int
-typedef enum introspective_state {NOT_SUPPORTED} introspective_state;
-
-typedef struct mapinfo_s {
-    int not_supported;
-}mapinfo_s_t;
-
-typedef struct dynmapinfo_s {
-    int not_supported;
-}dynmapinfo_s_t;
-
-
-
-
-//ARGOBOTS
-#define GLT_event_kind void *
-#define GLT_event_cb_fn void *
-#define GLT_future void *
-#define GLT_promise void *
-
-#define GLT_pool_def void *
-#define GLT_pool_config void *
-#define GLT_pool void *
-#define GLT_pool_kind void *
-#define GLT_pool_access void *
-#define GLT_unit void *
-#define GLT_sched void *
-#define GLT_sched_config void *
-#define GLT_sched_def void *
-#define GLT_sched_predef void *
-#define GLT_thread_state void *
-#define GLT_tasklet_state void *
-#define GLT_ult_state void *
-#define GLT_ult_attr void *
-#define GLT_unit_type void *
-//QTHREADS
-#define GLT_syncvar void *
-#define GLT_aligned void *
-#define GLT_memory_state void *
-#define GLT_sinc_op void *
-#define GLT_sinc void *
-#define GLT_loop_f void *
-#define GLT_loopr_f void *
-#define GLT_loop_step_f void *
-#define GLT_accum_f void *
-#define GLT_loop_queue void *
-#define GLT_loop_queue_kind void *
-#define GLT_ds_pool void *
-#define GLT_ds_array void *
-#define GLT_ds_array_distribution void *
-#define GLT_ds_loop_f void *
-#define GLT_ds_loopr_f void *
-#define GLT_ds_cloop_f void *
-#define GLT_ds_lfqueue void *
-#define GLT_ds_dqueue void *
-#define GLT_ds_dictionary void *
-#define GLT_ds_dictionary_key_equals void *
-#define GLT_ds_dictionary_hash void *
-#define GLT_ds_dictionary_cleanup void *
-#define GLT_ds_dictionary_it void *
-#define GLT_subthread void *
-
-#define glt_scheduler_config_create (config,...) ABT_sched_config_create(config,...)
-#define glt_scheduler_config_read (config, num_vars,...) ABT_sched_config_read (config, num_vars,...)
-
-#define glt_ult_creation_precond(f,a,u,n,...) qthread_fork_precond(f,a,u,n,...)
-#define glt_ult_creation_precond_to(f,a,u,d,n,...) qthread_fork_precond_to(f,a,u,d,n,...)
-
-#endif /*#ifndef CORE*/
-
-typedef struct glt_team {
-    int num_workers;
-} glt_team_t;
-
-
-
-#define GLT_VERSION "You are using fast glt 0.1v over MassiveThreads (adcastel@uji.es)"
-#define GLT_ERROR_ARG printf("Error: This feature is only supported by Argobots \
-    implementation and you are using MassiveThreads. Please use the query functions")
-#define GLT_ERROR_QTH printf("Error: This feature is only supported by Qthreads \
-    implementation and you are using MassiveThreads. Please use the query functions")
-#define GLT_LIB_ERROR printf("Error: This feature is in the API but it is not \
-    included in the Library\n")
-
-/* Main team structure*/
-//void __attribute__((constructor)) glt_start(void);
-//void __attribute__((destructor)) glt_end(void);
-
-glt_team_t * main_team;
-
+#include <glt.c>
+/*
 static inline void glt_start() 
 {
     //printf("Starting with MASSIVETHREADS\n");
@@ -190,7 +196,10 @@ static inline void glt_finalize()
 {
     myth_fini(); //MassiveThreads
 }
+*/
 
+#include <glt_wu.c>
+/*
 static inline GLT_ult * glt_ult_malloc(int number_of_ult) 
 {
     GLT_ult * ults = (GLT_ult *) malloc(sizeof (GLT_ult) * number_of_ult);
@@ -282,7 +291,11 @@ static inline void glt_workunit_get_thread_id(GLT_thread_id *id)
 {
     myth_cancel (tasklet);
 }
- 
+ */
+
+#include <glt_mutex.c>
+
+/*
 static inline void glt_mutex_create(GLT_mutex * mutex)
 {
     *mutex = myth_mutex_create();
@@ -306,7 +319,9 @@ static inline void glt_mutex_trylock(GLT_bool * locked, GLT_mutex mutex)
 {
     *locked = myth_mutex_trylock(mutex);
 }
-
+*/
+#include <glt_barrier.c>
+/*
 static inline void glt_barrier_create(int num_waiters, GLT_barrier *barrier)
 {
     *barrier = myth_barrier_create(num_waiters);
@@ -321,7 +336,10 @@ static inline void glt_barrier_wait(GLT_barrier *barrier)
 {
     myth_barrier_wait(*barrier);
 }
+*/
 
+#include <glt_condition.c>
+/*
 static inline void glt_cond_create(GLT_cond *cond)
 {
     *cond =  myth_cond_create();
@@ -346,7 +364,11 @@ static inline void glt_cond_broadcast(GLT_cond cond)
 {
     myth_cond_broadcast(cond);
 }
+*/
+  
+#include <glt_timer.c>
 
+/*
 static inline double glt_get_wtime() 
 {
     struct timeval time;
@@ -379,7 +401,11 @@ static inline void glt_timer_get_secs(GLT_timer timer, double *secs)
     *secs = ((timer.end.tv_sec * 1000000 + timer.end.tv_usec)
 		  - (timer.start.tv_sec * 1000000 + timer.start.tv_usec))/1000000.0;
 }
+*/
+  
+#include <glt_util.c>
 
+  /*
 static inline int glt_get_num_threads() 
 {
     return main_team->num_workers;
@@ -389,9 +415,11 @@ static inline int glt_get_thread_num()
 {
     return myth_get_worker_num();
 }
-
+*/
+  
 //Extended functions
 
+  /*
 static inline int can_extended_workunits(){
 #ifdef CORE
     return 0;
@@ -481,6 +509,8 @@ static inline void glt_wu_set_def_stack_size(size_t newsize)
 
 #endif /*#ifndef CORE wu MTH*/
 
+#include <glt_felock.c>
+/*
 static inline int can_felock_functions(){
 #ifdef CORE
     return 0;
@@ -524,8 +554,12 @@ static inline void glt_felock_set_unlock(GLT_felock felock, int val)
     myth_felock_set_unlock(felock,val);
 }
 
-#endif /*#ifndef CORE felock MTH*/
+#endif /*#ifndef CORE felock MTH
+*/
 
+#include <glt_tls.c>
+
+/*
 static inline int glt_can_tls_functions()
 {
 #ifdef CORE
@@ -557,7 +591,9 @@ static inline void glt_key_get (GLT_key key, void **value)
     *value = myth_getspecific (key);
 }
 #endif
-
+*/
+#include <glt_serialize.c>
+/*
 static inline int glt_can_serialize_functions()
 {
 #ifdef CORE
@@ -590,8 +626,11 @@ static inline int glt_can_serialize_functions()
 //    //*ult = myth_ext_deserialize(pickle);
 //}
 #endif
+*/
 
+#include <glt_prof_log.c>
 
+/*
 static inline int glt_can_log_functions()
 {
 #ifdef CORE
@@ -647,7 +686,11 @@ static inline void glt_sched_prof_pause()
     myth_sched_prof_pause();
 }
 #endif
+*/
 
+#include <glt_wsapi.c>
+
+/*
 static inline int glt_can_wsapi_functions()
 {
 #ifdef CORE
@@ -721,8 +764,10 @@ static inline void glt_wsapi_set_stealfunc(GLT_wsapi_steal_f *out, GLT_wsapi_ste
 }
 
 #endif
+*/
 //ARGOBOTS FUNCTIONS that are not supported by Massivethreads
-
+#include <glt_argobots.c>
+/*
 static inline int glt_can_event_functions()
 {
     return 0;
@@ -1286,10 +1331,13 @@ static inline  void glt_ult_attr_set_migratable (GLT_ult_attr attr, GLT_bool fla
     GLT_ERROR_ARG;
 }
 
-#endif /*#ifndef CORE ARG*/
+#endif /*#ifndef CORE ARG
+*/
 
+#include <glt_qthreads.c>
 //QTHREADS functions that are not supported by MassiveThreads
 
+/*
 static inline int glt_can_extended_basic()
 {
     return 0;
@@ -1339,16 +1387,17 @@ static inline int glt_can_memory_functions()
 #ifndef CORE
 
 
-/*static inline void glt_ult_creation_precond(void(*thread_func)(void *), void * arg,
-        GLT_ult * ult, int npreconds, ...){
-    qthread_fork_precond((void *)thread_func,arg,ult,npreconds,...);
-}
+//static inline void glt_ult_creation_precond(void(*thread_func)(void *), void * arg,
+//        GLT_ult * ult, int npreconds, ...){
+//    qthread_fork_precond((void *)thread_func,arg,ult,npreconds,...);
+//}
+//
+//static inline void glt_ult_creation_precond_to(void(*thread_func)(void *), void * arg,
+//        GLT_ult * ult, int dest,int npreconds, ...){
+//    qthread_fork_precond_to((void *)thread_func,arg,ult,dest,npreconds,...);
+//}
+//
 
-static inline void glt_ult_creation_precond_to(void(*thread_func)(void *), void * arg,
-        GLT_ult * ult, int dest,int npreconds, ...){
-    qthread_fork_precond_to((void *)thread_func,arg,ult,dest,npreconds,...);
-}
-*/
 static inline void glt_ult_creation_syncvar(void(*thread_func)(void *), void * arg,
         GLT_syncvar *syncvar){
     GLT_ERROR_QTH;
@@ -1556,42 +1605,43 @@ static inline void glt_loop_step(const size_t start, const size_t end,
     GLT_ERROR_QTH;
 }
 
-/*static inline void glt_loop_future(const size_t start, const size_t end, 
-         const GLT_loop_f func, void * arg)
-{
-    GLT_ERROR_QTH;
-}
+//static inline void glt_loop_future(const size_t start, const size_t end, 
+//         const GLT_loop_f func, void * arg)
+//{
+//    GLT_ERROR_QTH;
+//}
+//
+//static inline void glt_loop_step_future(const size_t start, const size_t end, 
+//        const size_t stride, const GLT_loop_step_f func, void * arg)
+//{
+//    GLT_ERROR_QTH;
+//}
+//
 
-static inline void glt_loop_step_future(const size_t start, const size_t end, 
-        const size_t stride, const GLT_loop_step_f func, void * arg)
-{
-    GLT_ERROR_QTH;
-}
-*/
 static inline void glt_loop_balance(const size_t start, const size_t end, 
          const GLT_loop_f func, void * arg)
 {
     GLT_ERROR_QTH;
 }
 
-/*static inline void glt_loop_balance_future(const size_t start, const size_t end, 
-         const GLT_loop_f func, void * arg)
-{
-    GLT_ERROR_QTH;
-}
-*/
+//static inline void glt_loop_balance_future(const size_t start, const size_t end, 
+//         const GLT_loop_f func, void * arg)
+//{
+//    GLT_ERROR_QTH;
+//}
+
 static inline void glt_loopaccum_balance(const size_t start, const size_t end, 
          size_t size, void *out, const GLT_loopr_f func, void * arg, GLT_accum_f acc)
 {
     GLT_ERROR_QTH;
 }
 
-/*static inline void glt_loopaccum_balance_future(const size_t start, const size_t end, 
-size_t size, void *out, const GLT_loop_f func, void * arg, GLT_accum_f acc)
-{
-    GLT_ERROR_QTH;
-}
-*/
+//static inline void glt_loopaccum_balance_future(const size_t start, const size_t end, 
+//size_t size, void *out, const GLT_loop_f func, void * arg, GLT_accum_f acc)
+//{
+//    GLT_ERROR_QTH;
+//}
+//
 
 static inline void glt_loop_queue_create(GLT_loop_queue * loop, GLT_loop_queue_kind kind,
         const size_t start, const size_t end, 
@@ -2157,8 +2207,8 @@ static inline void glt_memory_checkpoint()
     GLT_ERROR_QTH;
 }
 
-#endif /*#ifndef QTHREADS*/
-
+#endif /*#ifndef QTHREADS
+*/
 
 #endif	/* FAST_GLT_H */
 
