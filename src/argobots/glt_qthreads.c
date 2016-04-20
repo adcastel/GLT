@@ -268,35 +268,13 @@ GLT_func_prefix void glt_loop(const size_t start, const size_t end,
     GLT_ERROR_QTH;
 }
 
-GLT_func_prefix void glt_loop_step(const size_t start, const size_t end, 
-        const size_t stride, const GLT_loop_step_f func, void * arg)
-{
-    GLT_ERROR_QTH;
-}
-
-// void glt_loop_future(const size_t start, const size_t end, 
-//         const GLT_loop_f func, void * arg)
-//{
-//    GLT_ERROR_QTH;
-//}
-//
-// void glt_loop_step_future(const size_t start, const size_t end, 
-//        const size_t stride, const GLT_loop_step_f func, void * arg)
-//{
-//    GLT_ERROR_QTH;
-//}
-
  GLT_func_prefix void glt_loop_balance(const size_t start, const size_t end, 
          const GLT_loop_f func, void * arg)
 {
     GLT_ERROR_QTH;
 }
 
-//void glt_loop_balance_future(const size_t start, const size_t end, 
-//         const GLT_loop_f func, void * arg)
-//{
-//    GLT_ERROR_QTH;
-//}
+
 
 GLT_func_prefix void glt_loopaccum_balance(const size_t start, const size_t end, 
          size_t size, void *out, const GLT_loopr_f func, void * arg, GLT_accum_f acc)
@@ -304,11 +282,6 @@ GLT_func_prefix void glt_loopaccum_balance(const size_t start, const size_t end,
     GLT_ERROR_QTH;
 }
 
-//void glt_loopaccum_balance_future(const size_t start, const size_t end, 
-//size_t size, void *out, const GLT_loop_f func, void * arg, GLT_accum_f acc)
-//{
-//    GLT_ERROR_QTH;
-//}
 
 
  GLT_func_prefix void glt_loop_queue_create(GLT_loop_queue * loop, GLT_loop_queue_kind kind,

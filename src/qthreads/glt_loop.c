@@ -28,44 +28,18 @@ GLT_func_prefix void glt_loop(const size_t start, const size_t end,
 }
 
 
- //This function is found in the header but not in the static or dynamic qthreads libraries
-//GLT_func_prefixvoid glt_loop_step(const size_t start, const size_t end, 
-//        const size_t stride, const GLT_loop_step_f func, void * arg)
-//{
-//    GLT_LIB_ERROR;
-    //qt_loop_step(start,end,stride,func,arg);
-//}
-
-/*GLT_func_prefix void glt_loop_future(const size_t start, const size_t end, 
-         const GLT_loop_f func, void * arg){
-    qt_loop_future(start,end,func,arg);
-}
-
-GLT_func_prefix void glt_loop_step_future(const size_t start, const size_t end, 
-        const size_t stride, const GLT_loop_step_f func, void * arg){
-    qt_loop_step_future(start,end,stride,func,arg);
-}
-*/
 GLT_func_prefix void glt_loop_balance(const size_t start, const size_t end, 
          const GLT_loop_f func, void * arg){
     qt_loop_balance(start,end,func,arg);
 }
 
-/* GLT_func_prefix void glt_loop_balance_future(const size_t start, const size_t end, 
-         const GLT_loop_f func, void * arg){
-    qt_loop_balance_future(start,end,func,arg);
-}
-*/
+
 GLT_func_prefix void glt_loopaccum_balance(const size_t start, const size_t end, 
          size_t size, void *out, const GLT_loopr_f func, void * arg, GLT_accum_f acc){
     qt_loopaccum_balance(start,end,size,out,func,arg,acc);
 }
 
-/*GLT_func_prefix void glt_loopaccum_balance_future(const size_t start, const size_t end, 
-size_t size, void *out, const GLT_loop_f func, void * arg, GLT_accum_f acc){
-    qt_loop_balance_future(start,end,size,out,func,arg,acc);
-}
-*/
+
 
 GLT_func_prefix void glt_loop_queue_create(GLT_loop_queue * loop, GLT_loop_queue_kind kind,
         const size_t start, const size_t end, 

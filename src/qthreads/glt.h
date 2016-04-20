@@ -160,9 +160,7 @@ void glt_ult_creation_syncvar(void(*thread_func)(void *), void * arg,
  
  void glt_loop(const size_t start, const size_t end, 
          const GLT_loop_f func, void * arg);
- //void glt_loop_step(const size_t start, const size_t end, 
- //       const size_t stride, const GLT_loop_step_f func, void * arg);
- void glt_loop_balance(const size_t start, const size_t end, 
+  void glt_loop_balance(const size_t start, const size_t end, 
          const GLT_loop_f func, void * arg);
  void glt_loopaccum_balance(const size_t start, const size_t end, 
          size_t size, void *out, const GLT_loopr_f func, void * arg, GLT_accum_f acc);
