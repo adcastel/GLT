@@ -56,10 +56,7 @@ GLT_func_prefix int glt_can_extended_runtime()
     return 0;
 }
 
-GLT_func_prefix int glt_can_memory_functions()
-{
-    return 0;
-}
+
 
 #ifndef CORE
 
@@ -802,75 +799,6 @@ GLT_func_prefix void glt_subthread_disable(GLT_bool *res, GLT_subthread id)
 }
 
 GLT_func_prefix void glt_thread_ok(GLT_bool *res)
-{
-    GLT_ERROR_QTH;
-}
-
-GLT_func_prefix void * glt_memory_make_stat_map(const off_t filesize, void *addr,
-        const char *filename, size_t itemsize, const size_t streams)
-{
-    void * err = NULL;
-    GLT_ERROR_QTH;
-    return err;
-}
-
-GLT_func_prefix void * glt_memory_make_dyn_map(const off_t filesize, void *addr,
-        const char *filename,  const size_t streams)
-{
-    void * err = NULL;
-    GLT_ERROR_QTH;
-    return err;
-}
-
-GLT_func_prefix void * glt_memory_load_map(const char *filename)
-{
-    void * err = NULL;
-    GLT_ERROR_QTH;
-    return err;
-}
-
-GLT_func_prefix void * glt_memory_malloc(void *map, size_t size)
-{
-    void * err = NULL;
-    GLT_ERROR_QTH;
-    return err;
-}
-
-GLT_func_prefix void * glt_memory_stat_malloc(struct mapinfo_s *map)
-{
-    void * err = NULL;
-    GLT_ERROR_QTH;
-    return err;
-}
-
-GLT_func_prefix void * glt_memory_dyn_malloc(struct dynmapinfo_s *map, size_t size)
-{
-    void * err = NULL;
-    GLT_ERROR_QTH;
-    return err;
-}
-
-GLT_func_prefix void glt_memory_free(void *block, void * map)
-{
-    GLT_ERROR_QTH;
-}
-
-GLT_func_prefix void glt_memory_stat_free(void *block, struct mapinfo_s *map)
-{
-    GLT_ERROR_QTH;
-}
-
-GLT_func_prefix void glt_memory_dyn_free(void *block, struct dynmapinfo_s *map)
-{
-    GLT_ERROR_QTH;
-}
-
-GLT_func_prefix void glt_memory_cleanup()
-{
-    GLT_ERROR_QTH;
-}
-
-GLT_func_prefix void glt_memory_checkpoint()
 {
     GLT_ERROR_QTH;
 }
