@@ -4,9 +4,13 @@
  * and open the template in the editor.
  */
 
+#ifndef FASTGLT
 #include <glt.h>
-
- int glt_can_serialize_functions()
+#define GLT_func_prefix 
+#else
+#define GLT_func_prefix static inline
+#endif
+GLT_func_prefix int glt_can_serialize_functions()
 {
 #ifdef CORE
     return 0;
