@@ -26,11 +26,6 @@ GLT_func_prefix int glt_can_log_functions()
     return 0;
 }
 
-GLT_func_prefix int glt_can_serialize_functions()
-{
-    return 0;
-}
-
 GLT_func_prefix int can_felock_functions()
 {
     return 0;
@@ -49,11 +44,7 @@ GLT_func_prefix int can_extended_workunits()
       GLT_ERROR_MYTH;
   }
   
-GLT_func_prefix  void glt_wu_create_nosched(GLT_ult * ult, GLT_workunit_f func, void * arg,
-        GLT_workunit_o opt)
-  {
-      GLT_ERROR_MYTH;
-  }
+
 
 GLT_func_prefix  void glt_yield2()
   {
@@ -85,31 +76,6 @@ GLT_func_prefix  void glt_wu_set_def_stack_size(size_t newsize)
       GLT_ERROR_MYTH;
   }
 
-GLT_func_prefix  void glt_wu_steal(GLT_ult * ult)
-  {
-      GLT_ERROR_MYTH;
-  }
-
-GLT_func_prefix  void glt_wu_import(GLT_ult ult)
-  {
-      GLT_ERROR_MYTH;
-  }
-
-GLT_func_prefix void glt_wu_ext_import(GLT_ult ult)
-  {
-      GLT_ERROR_MYTH;
-  }
-
-GLT_func_prefix void glt_wu_release_stack(GLT_ult ult)
-  {
-      GLT_ERROR_MYTH;
-  }
-
-GLT_func_prefix void glt_wu_release_desc(GLT_ult ult)
-  {
-      GLT_ERROR_MYTH;
-  }
- 
 GLT_func_prefix  void glt_felock_create(GLT_felock * felock)
   {
       GLT_ERROR_MYTH;
@@ -145,21 +111,6 @@ GLT_func_prefix void glt_felock_set_unlock(GLT_felock felock, int val)
       GLT_ERROR_MYTH;
   }
 
-GLT_func_prefix  void glt_serialize(GLT_ult ult, GLT_pickle pickle)
-  {
-      GLT_ERROR_MYTH;
-  }
-
-GLT_func_prefix void glt_deserialize(GLT_ult *ult, GLT_pickle pickle)
-  {
-      GLT_ERROR_MYTH;
-  }
-
-GLT_func_prefix void glt_ext_deserialize(GLT_ult *ult, GLT_pickle pickle)
-  {
-      GLT_ERROR_MYTH;
-  }
- 
 GLT_func_prefix void glt_log_start()
   {
       GLT_ERROR_MYTH;
@@ -241,11 +192,6 @@ GLT_func_prefix void glt_wsapi_runqueue_push(GLT_ult ult)
   }
 
 GLT_func_prefix void glt_wsapi_runqueue_pop(GLT_ult * ult)
-  {
-      GLT_ERROR_MYTH;
-  }
-
-GLT_func_prefix void glt_wsapi_rand2(int * rand_value, int min, int max)
   {
       GLT_ERROR_MYTH;
   }

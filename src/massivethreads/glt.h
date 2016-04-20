@@ -73,7 +73,6 @@ int glt_get_num_threads();
  int glt_can_wsapi_functions();
  int glt_can_prof_functions();
  int glt_can_log_functions();
- int glt_can_serialize_functions();
  int glt_can_tls_functions();
  int can_felock_functions();
  int can_extended_workunits();
@@ -112,19 +111,13 @@ int glt_can_extended_basic();
 
   void glt_wu_create_ex(GLT_ult * ult, GLT_workunit_f func, void * arg,
         GLT_workunit_o opt);
-// void glt_wu_create_nosched(GLT_ult * ult, GLT_workunit_f func, void * arg,
-//        GLT_workunit_o opt);
+
  void glt_yield2();
  void glt_wu_detach(GLT_ult ult);
  void glt_wu_set_cancel_state(int state, int *oldstate);
  void glt_wu_set_cancel_type(int type, int *oldtype);
  void glt_wu_test_cancel();
  void glt_wu_set_def_stack_size(size_t newsize);
-// void glt_wu_steal(GLT_ult * ult);
-// void glt_wu_import(GLT_ult ult);
-// void glt_wu_ext_import(GLT_ult ult);
-// void glt_wu_release_stack(GLT_ult ult);
-// void glt_wu_release_desc(GLT_ult ult);
  
   void glt_felock_create(GLT_felock * felock);
  void glt_felock_free(GLT_felock felock);
@@ -138,10 +131,6 @@ int glt_can_extended_basic();
  void glt_key_free (GLT_key *key);
  void glt_key_set (GLT_key key, void *value);
  void glt_key_get (GLT_key key, void **value);
- 
-//  void glt_serialize(GLT_ult ult, GLT_pickle pickle);
-// void glt_deserialize(GLT_ult *ult, GLT_pickle pickle);
-// void glt_ext_deserialize(GLT_ult *ult, GLT_pickle pickle);
  
  void glt_log_start();
  void glt_log_pause();
@@ -161,7 +150,6 @@ int glt_can_extended_basic();
  void glt_wsapi_runqueue_pass(GLT_bool *pass, int target,GLT_ult ult);
  void glt_wsapi_runqueue_push(GLT_ult ult);
  void glt_wsapi_runqueue_pop(GLT_ult * ult);
- //void glt_wsapi_rand2(int * rand_value, int min, int max);
  void glt_wsapi_set_stealfunc(GLT_wsapi_steal_f *out, GLT_wsapi_steal_f fn);
  
  

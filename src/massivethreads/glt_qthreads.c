@@ -64,18 +64,6 @@ GLT_func_prefix int glt_can_memory_functions()
 #ifndef CORE
 
 
-/*
-GLT_func_prefix void glt_ult_creation_precond(void(*thread_func)(void *), void * arg,
-        GLT_ult * ult, int npreconds, ...){
-    qthread_fork_precond((void *)thread_func,arg,ult,npreconds,...);
-}
-
-GLT_func_prefix void glt_ult_creation_precond_to(void(*thread_func)(void *), void * arg,
-        GLT_ult * ult, int dest,int npreconds, ...){
-    qthread_fork_precond_to((void *)thread_func,arg,ult,dest,npreconds,...);
-}
-*/
-
 GLT_func_prefix void glt_ult_creation_syncvar(void(*thread_func)(void *), void * arg,
         GLT_syncvar *syncvar){
     GLT_ERROR_QTH;
