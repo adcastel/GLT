@@ -1,7 +1,6 @@
+/* See COPYRIGHT in glt_common.h file. */
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Profiling and Loging functions file.
  */
 
 #ifndef FASTGLT
