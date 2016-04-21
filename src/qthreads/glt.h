@@ -1,10 +1,7 @@
-/* 
- * File:   glt.h
- * Author: adcastel
- *
- * Created on 11 de febrero de 2016, 16:20
+/* See COPYRIGHT in glt_common.h file. */
+/*
+ * Function headers file.
  */
-
 
 #ifndef GLT_H
 #define GLT_H
