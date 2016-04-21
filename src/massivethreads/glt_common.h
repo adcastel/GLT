@@ -23,7 +23,6 @@
 #include <sys/time.h>
 #include <sys/sysinfo.h>
 
-
 #include <sched.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -31,7 +30,6 @@
 #include <unistd.h>
 #include <stdint.h>
 #include <myth.h>
-
 
 typedef struct myth_timer {
     struct timeval start;
@@ -66,15 +64,18 @@ typedef struct myth_timer {
 #include <sys/resource.h>
 
 #define aligned_t long unsigned int
-typedef enum introspective_state {NOT_SUPPORTED} introspective_state;
+
+typedef enum introspective_state {
+    NOT_SUPPORTED
+} introspective_state;
 
 typedef struct mapinfo_s {
     int not_supported;
-}mapinfo_s_t;
+} mapinfo_s_t;
 
 typedef struct dynmapinfo_s {
     int not_supported;
-}dynmapinfo_s_t;
+} dynmapinfo_s_t;
 //ARGOBOTS
 #define GLT_event_kind void *
 #define GLT_event_cb_fn void *
@@ -97,6 +98,10 @@ typedef struct dynmapinfo_s {
 #define GLT_ult_state void *
 #define GLT_ult_attr void *
 #define GLT_unit_type void *
+
+#define glt_scheduler_config_create  ABT_sched_config_create
+#define glt_scheduler_config_read  ABT_sched_config_read 
+
 //QTHREADS
 #define GLT_syncvar void *
 #define GLT_aligned void *
@@ -124,9 +129,6 @@ typedef struct dynmapinfo_s {
 #define GLT_ds_dictionary_it void *
 #define GLT_subthread void *
 
-#define glt_scheduler_config_create  ABT_sched_config_create
-#define glt_scheduler_config_read  ABT_sched_config_read 
-
 #define glt_ult_creation_precond qthread_fork_precond
 #define glt_ult_creation_precond_to qthread_fork_precond_to
 
@@ -146,7 +148,6 @@ typedef struct glt_team {
     included in the Library\n")
 
 /* Main team structure*/
-
 glt_team_t * main_team;
 
 
