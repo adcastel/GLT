@@ -19,7 +19,6 @@
 #include <sys/sysinfo.h>
 #include <abt.h>
 
-
 #define MIN(a,b) (((a)<(b))?(a):(b))
 #define MAX(a,b) (((a)>(b))?(a):(b))
 
@@ -33,7 +32,6 @@
 #define GLT_bool ABT_bool
 #define GLT_thread_id int
 #define GLT_ult_id ABT_thread_id
-
 
 //Extended variables
 #ifndef CORE
@@ -59,7 +57,6 @@
 #define GLT_ult_attr ABT_thread_attr
 #define GLT_unit_type ABT_unit_type
 
-
 #define glt_scheduler_config_create  ABT_sched_config_create
 #define glt_scheduler_config_read  ABT_sched_config_read 
 
@@ -74,23 +71,24 @@
 //Shared
 #define GLT_key ABT_key
 
-
 //QTHREADS
-
 #include <sys/socket.h>
 #include <poll.h>
 #include <sys/resource.h>
 
 #define aligned_t long unsigned int
-typedef enum introspective_state {NOT_SUPPORTED} introspective_state;
+
+typedef enum introspective_state {
+    NOT_SUPPORTED
+} introspective_state;
 
 typedef struct mapinfo_s {
     int not_supported;
-}mapinfo_s_t;
+} mapinfo_s_t;
 
 typedef struct dynmapinfo_s {
     int not_supported;
-}dynmapinfo_s_t;
+} dynmapinfo_s_t;
 
 #define GLT_syncvar void *
 #define GLT_aligned void *
@@ -132,9 +130,6 @@ typedef struct glt_team {
     int max_elem;
 } glt_team_t;
 
-
-
-
 #define GLT_VERSION "You are using glt 0.1v over Argobots (adcastel@uji.es) "
 
 #define GLT_ERROR_QTH printf("Error: This feature is only supported by Qthreads \
@@ -146,4 +141,3 @@ typedef struct glt_team {
 glt_team_t * main_team;
 
 #endif /* GLT_COMMON_H */
-
