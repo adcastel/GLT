@@ -5,12 +5,8 @@
  * Created on 11 de febrero de 2016, 16:20
  */
 
-
-
-
 #ifndef FAST_GLT_H
-#define	FAST_GLT_H
-
+#define FAST_GLT_H
 
 #include <glt_common.h>
 
@@ -29,5 +25,5 @@
 #include <glt_argobots.c>
 #include <glt_qthreads.c>
 
-#endif	/* FAST_GLT_H */
+#endif /* FAST_GLT_H */
 
