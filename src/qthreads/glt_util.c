@@ -1,3 +1,7 @@
+/* See COPYRIGHT in glt_common.h file. */
+/*
+ * Util functions file.
+ */
 #ifndef FASTGLT
 #include <glt.h>
 #define GLT_func_prefix 
