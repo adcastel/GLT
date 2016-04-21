@@ -1,15 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/* Generic Lightweight Thread (GLT) library.
+ * Developed by: 
+ *      Adrian Castello (adcastel@uji.es) at Universitat Jaume I 
+ * Supervised by:
+ *      Antonio J. Peña (antonio.pena@bsc.es) at Barcelona Supercomputing Center
+ *      Rafael Mayo Gual and Enrique S. Quintana-Ortí ({mayo,quintana}@uji.es)
+ *      Sangmin Seo and Pavan Balaji ({sseo,balaji}@anl.gov) at Argonne National Laboratory
+*/
 
-/* 
- * File:   glt_common.h
- * Author: adcastel
- *
- * Created on 18 de abril de 2016, 14:32
- */
+/* Argobots implementation object file*/
 
 #ifndef GLT_COMMON_H
 #define GLT_COMMON_H
