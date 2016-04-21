@@ -19,7 +19,6 @@
 #include <sys/time.h>
 #include <sys/sysinfo.h>
 
-
 #include <qthread/qthread.h>
 #include <qthread/barrier.h>
 #include <qthread/qtimer.h>
@@ -35,12 +34,6 @@
 #include <qthread/qt_syscalls.h> 
 #include <qthread/cacheline.h>
 #include <qthread/qalloc.h>
-
-
-
-
-
-
 
 #define GLT_ult aligned_t
 #define GLT_tasklet aligned_t
@@ -81,7 +74,6 @@
 #define GLT_ds_dictionary_it qt_dictionary_iterator
 #define GLT_subthread qthread_worker_id_t
 
-
 //ARGOBOTS
 #define GLT_event_kind void *
 #define GLT_event_cb_fn void *
@@ -107,6 +99,9 @@
 #define GLT_ult_attr void *
 #define GLT_unit_type void *
 
+#define glt_scheduler_config_create  ABT_sched_config_create
+#define glt_scheduler_config_read  ABT_sched_config_read 
+
 //MASSIVETHREAD
 #define GLT_workunit_f void *
 #define GLT_workunit_o void *
@@ -116,14 +111,10 @@
 #define GLT_wsapi_decide_f void *
 #define GLT_wsapi_steal_f void *
 
-#define glt_scheduler_config_create  ABT_sched_config_create
-#define glt_scheduler_config_read  ABT_sched_config_read 
-
 #define glt_ult_creation_precond qthread_fork_precond
 #define glt_ult_creation_precond_to qthread_fork_precond_to
 
 #endif
-
 
 typedef struct glt_team {
     int num_shepherds;
@@ -138,10 +129,6 @@ typedef struct glt_team {
     implementation and you are using Qthreads. Please use the query functions\n")
 #define GLT_LIB_ERROR printf("Error: This feature is in the API but it is not \
     included in the Library\n")
-
-/* Main team structure*/
-//void __attribute__((constructor)) glt_start(void);
-//void __attribute__((destructor)) glt_end(void);
 
 glt_team_t * main_team;
 
