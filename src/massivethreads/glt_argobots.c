@@ -1,8 +1,8 @@
+/* See COPYRIGHT in glt_common.h file. */
 /*
- * This file includes all the functions that are supported by Argobots but not 
- * by the other implementations. They are necessary for not obtaining a 
- * compilation error. However, they are empty functions.
+ * Argobots library functions file.
  */
+
 #ifndef FASTGLT
 #include <glt.h>
 #define GLT_func_prefix 
