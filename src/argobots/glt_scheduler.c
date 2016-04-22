@@ -12,6 +12,7 @@
 #endif
 
 //scheduler functions
+/*
 GLT_func_prefix int glt_can_manage_scheduler() {
 #ifdef CORE
     return 0;
@@ -21,33 +22,35 @@ GLT_func_prefix int glt_can_manage_scheduler() {
 }
 
 #ifndef CORE
+*/
 
 GLT_func_prefix void glt_scheduler_config_free(GLT_sched_config *config) {
     ABT_sched_config_free(config);
 }
 
-GLT_func_prefix void glt_scheduler_create(GLT_sched_def *def, int num_pools,
-        GLT_pool *pools, GLT_sched_config config, GLT_sched *newsched) {
-    ABT_sched_create(def, num_pools, pools, config, newsched);
+GLT_func_prefix void glt_scheduler_create(GLT_sched_def *def, int num_threads,
+        int *threads_id, GLT_sched_config config, GLT_sched *newsched) {
+    ABT_pool pools[num_threads];
+    
+    for (int i=0;i<num_threads;i++){
+        ABT_xstream_get_main_pools(main_team->team[threads_id[i]],1,&pools[i]);
+    }
+    ABT_sched_create(def, num_threads, pools, config, newsched);
 }
 
 GLT_func_prefix void glt_schededuler_create_basic(GLT_sched_predef predef,
-        int num_pools, GLT_pool *pools, GLT_sched_config config,
+        int num_threads, int *threads_id, GLT_sched_config config,
         GLT_sched *newsched) {
-    ABT_sched_create_basic(predef, num_pools, pools, config, newsched);
+    ABT_pool pools[num_threads];
+    
+    for (int i=0;i<num_threads;i++){
+        ABT_xstream_get_main_pools(main_team->team[threads_id[i]],1,&pools[i]);
+    }
+    ABT_sched_create_basic(predef, num_threads, pools, config, newsched);
 }
 
 GLT_func_prefix void glt_scheduler_free(GLT_sched *sched) {
     ABT_sched_free(sched);
-}
-
-GLT_func_prefix void glt_scheduler_get_num_pools(GLT_sched sched, int *num_pools) {
-    ABT_sched_get_num_pools(sched, num_pools);
-}
-
-GLT_func_prefix void glt_scheduler_get_pools(GLT_sched sched, int max_pools,
-        int idx, GLT_pool *pools) {
-    ABT_sched_get_pools(sched, max_pools, idx, pools);
 }
 
 GLT_func_prefix void glt_scheduler_finish(GLT_sched sched) {
@@ -77,4 +80,6 @@ GLT_func_prefix void glt_scheduler_get_size(GLT_sched sched, size_t *size) {
 GLT_func_prefix void glt_scheduler_get_total_size(GLT_sched sched, size_t *size) {
     ABT_sched_get_total_size(sched, size);
 }
+/*
 #endif
+*/
