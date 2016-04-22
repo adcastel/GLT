@@ -27,6 +27,7 @@ GLT_func_prefix void glt_pool_create(GLT_pool_def *def, GLT_pool_config config,
         ABT_pool_create(def, config, newpool);
         main_team->pools[main_team->num_pools] = newpool;
         main_team->num_pools++;
+        printf("Creada nueva pool y con esta llevamos %d\n",main_team->num_pools);
     } else {
         printf("Error: There are not more sloots for pools\n");
     }
@@ -38,6 +39,8 @@ GLT_func_prefix void glt_pool_create_basic(GLT_pool_kind kind,
         ABT_pool_create_basic(kind, access, automatic, newpool);
         main_team->pools[main_team->num_pools] = newpool;
         main_team->num_pools++;
+                printf("Creada nueva basic pool y con esta llevamos %d\n",main_team->num_pools);
+
     } else {
         printf("Error: There are not more sloots for pools\n");
     }
@@ -85,5 +88,25 @@ GLT_func_prefix void glt_pool_add_sched(GLT_pool pool, GLT_sched sched) {
 
 GLT_func_prefix void glt_pool_get_id(GLT_pool pool, int *id) {
     ABT_pool_get_id(pool, id);
+}
+
+GLT_func_prefix void glt_pool_create_scheduler(GLT_sched_def *def, int num_pools,
+        GLT_pool *pools, GLT_sched_config config, GLT_sched *newsched) {
+    ABT_sched_create(def, num_pools, pools, config, newsched);
+}
+
+GLT_func_prefix void glt_pool_create_basic_scheduler(GLT_sched_predef predef,
+        int num_pools, GLT_pool *pools, GLT_sched_config config,
+        GLT_sched *newsched) {
+    ABT_sched_create_basic(predef, num_pools, pools, config, newsched);
+}
+
+GLT_func_prefix void glt_pool_scheduler_get_pools(GLT_sched sched, int max_pools,
+        int idx, GLT_pool *pools) {
+    ABT_sched_get_pools(sched, max_pools, idx, pools);
+}
+
+GLT_func_prefix void glt_pool_scheduler_get_num_pools(GLT_sched sched, int *num_pools) {
+    ABT_sched_get_num_pools(sched, num_pools);
 }
 #endif
