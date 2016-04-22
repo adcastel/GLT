@@ -44,6 +44,72 @@ typedef struct myth_timer {
 #define GLT_bool int
 #define GLT_thread_id int
 #define GLT_ult_id int
+//#define GLT_sched void *
+typedef void * GLT_sched;
+//#define GLT_sched_config void *
+typedef void * GLT_sched_config;
+
+//#define GLT_sched_def void *
+//#define GLT_sched_predef void *
+
+#define glt_scheduler_config_create  
+#define glt_scheduler_config_read   
+
+typedef enum {
+    GLT_SCHED_CONFIG_INT = 0, /* Parameter of type int */
+    GLT_SCHED_CONFIG_DOUBLE = 1, /* Parameter of type double */
+    GLT_SCHED_CONFIG_PTR = 2, /* Parameter of type pointer */
+} GLT_sched_config_type;
+
+typedef struct GLT_sched_config_var {
+    int idx;
+    GLT_sched_config_type type;
+} GLT_sched_config_var;
+
+#define GLT_sched_config_var_end NULL
+
+
+typedef int (*GLT_sched_init_fn)(GLT_sched, GLT_sched_config);
+typedef void (*GLT_sched_run_fn)(GLT_sched);
+typedef int (*GLT_sched_free_fn)(GLT_sched);
+typedef void * (*GLT_sched_get_migr_pool_fn)(GLT_sched);
+
+typedef enum {
+    GLT_SCHED_TYPE_ULT, /* can yield */
+    GLT_SCHED_TYPE_TASK /* cannot yield */
+} GLT_sched_type;
+
+typedef struct {
+    GLT_sched_type type; /* ULT or tasklet */
+    GLT_sched_init_fn init;
+    GLT_sched_run_fn run;
+    GLT_sched_free_fn free;
+    GLT_sched_get_migr_pool_fn get_migr_pool;
+} GLT_sched_def;
+
+ typedef enum  {
+    GLT_SCHED_DEFAULT,   /* Default scheduler */
+     GLT_SCHED_BASIC,     /* Basic scheduler */
+     GLT_SCHED_PRIO       /* Priority scheduler */
+}GLT_sched_predef;
+
+#define GLT_UNIT_NULL NULL
+#define GLT_TRUE    1
+#define GLT_FALSE   0
+
+typedef enum  {
+    GLT_POOL_FIFO 
+ } GLT_pool_kind;
+
+typedef enum  {
+       GLT_POOL_ACCESS_PRIV, /* Used by only one ES */
+       GLT_POOL_ACCESS_SPSC, /* Producers on ES1, consumers on ES2 */
+       GLT_POOL_ACCESS_MPSC, /* Producers on any ES, consumers on the same ES */
+       GLT_POOL_ACCESS_SPMC, /* Producers on the same ES, consumers on any ES */
+       GLT_POOL_ACCESS_MPMC  /* Producers on any ES, consumers on any ES */
+ } GLT_pool_access;
+
+
 
 #ifndef CORE
 
@@ -74,6 +140,7 @@ typedef struct mapinfo_s {
 typedef struct dynmapinfo_s {
     int not_supported;
 } dynmapinfo_s_t;
+
 //ARGOBOTS
 #define GLT_event_kind void *
 #define GLT_event_cb_fn void *
@@ -82,23 +149,15 @@ typedef struct dynmapinfo_s {
 #define GLT_pool_def void *
 #define GLT_pool_config void *
 #define GLT_pool void *
-#define GLT_pool_kind void *
-#define GLT_pool_access void *
+//#define GLT_pool_kind void *
+//#define GLT_pool_access void *
 #define GLT_unit void *
-#define GLT_sched void *
-#define GLT_sched_config void *
-#define GLT_sched_def void *
-#define GLT_sched_predef void *
-#define GLT_sched_config_var void *
-#define GLT_sched_config_var_end void *
 #define GLT_thread_state void *
 #define GLT_tasklet_state void *
 #define GLT_ult_state void *
 #define GLT_ult_attr void *
 #define GLT_unit_type void *
 
-#define glt_scheduler_config_create  ABT_sched_config_create
-#define glt_scheduler_config_read  ABT_sched_config_read 
 
 //QTHREADS
 #define GLT_syncvar void *
@@ -137,7 +196,7 @@ typedef struct glt_team {
 } glt_team_t;
 
 
-#define GLT_VERSION "You are using glt 0.1v overMassiveThreads (adcastel@uji.es)"
+#define GLT_VERSION "You are using glt 0.1v over MassiveThreads (adcastel@uji.es)"
 #define GLT_ERROR_ARG printf("Error: This feature is only supported by Argobots \
     implementation and you are using MassiveThreads. Please use the query functions\n")
 #define GLT_ERROR_QTH printf("Error: This feature is only supported by Qthreads \
