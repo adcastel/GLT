@@ -43,6 +43,54 @@
 #define GLT_bool int
 #define GLT_thread_id int
 #define GLT_ult_id int
+//#define GLT_sched void *
+typedef void * GLT_sched;
+//#define GLT_sched_config void *
+typedef void * GLT_sched_config;
+
+//#define GLT_sched_def void *
+//#define GLT_sched_predef void *
+
+#define glt_scheduler_config_create  
+#define glt_scheduler_config_read   
+
+typedef enum {
+    GLT_SCHED_CONFIG_INT = 0, /* Parameter of type int */
+    GLT_SCHED_CONFIG_DOUBLE = 1, /* Parameter of type double */
+    GLT_SCHED_CONFIG_PTR = 2, /* Parameter of type pointer */
+} GLT_sched_config_type;
+
+typedef struct GLT_sched_config_var {
+    int idx;
+    GLT_sched_config_type type;
+} GLT_sched_config_var;
+
+#define GLT_sched_config_var_end NULL
+
+
+typedef int (*GLT_sched_init_fn)(GLT_sched, GLT_sched_config);
+typedef void (*GLT_sched_run_fn)(GLT_sched);
+typedef int (*GLT_sched_free_fn)(GLT_sched);
+typedef void * (*GLT_sched_get_migr_pool_fn)(GLT_sched);
+
+typedef enum {
+    GLT_SCHED_TYPE_ULT, /* can yield */
+    GLT_SCHED_TYPE_TASK /* cannot yield */
+} GLT_sched_type;
+
+typedef struct {
+    GLT_sched_type type; /* ULT or tasklet */
+    GLT_sched_init_fn init;
+    GLT_sched_run_fn run;
+    GLT_sched_free_fn free;
+    GLT_sched_get_migr_pool_fn get_migr_pool;
+} GLT_sched_def;
+
+ typedef enum  {
+    GLT_SCHED_DEFAULT,   /* Default scheduler */
+     GLT_SCHED_BASIC,     /* Basic scheduler */
+     GLT_SCHED_PRIO       /* Priority scheduler */
+}GLT_sched_predef;
 
 //Extended variables
 #ifndef CORE
@@ -84,21 +132,12 @@
 #define GLT_pool_kind void *
 #define GLT_pool_access void *
 #define GLT_unit void *
-#define GLT_sched void *
-#define GLT_sched_config void *
-#define GLT_sched_def void *
-#define GLT_sched_predef void *
-#define GLT_sched_config_var void *
-#define GLT_sched_config_var_end void *
 #define GLT_thread_state void *
 #define GLT_tasklet_state void *
 #define GLT_ult_state void *
 #define GLT_ult_id int
 #define GLT_ult_attr void *
 #define GLT_unit_type void *
-
-#define glt_scheduler_config_create  ABT_sched_config_create
-#define glt_scheduler_config_read  ABT_sched_config_read 
 
 //MASSIVETHREAD
 #define GLT_workunit_f void *
