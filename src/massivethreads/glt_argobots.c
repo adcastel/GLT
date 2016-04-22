@@ -173,59 +173,23 @@ GLT_func_prefix void glt_pool_get_id(GLT_pool pool, int *id) {
     GLT_ERROR_ARG;
 }
 
-GLT_func_prefix void glt_scheduler_config_free(GLT_sched_config *config) {
-    GLT_ERROR_ARG;
-}
-
-GLT_func_prefix void glt_scheduler_create(GLT_sched_def *def, int num_pools,
+GLT_func_prefix void glt_pool_create_scheduler(GLT_sched_def *def, int num_pools,
         GLT_pool *pools, GLT_sched_config config, GLT_sched *newsched) {
     GLT_ERROR_ARG;
 }
 
-GLT_func_prefix void glt_schededuler_create_basic(GLT_sched_predef predef,
+GLT_func_prefix void glt_pool_create_basic_scheduler(GLT_sched_predef predef,
         int num_pools, GLT_pool *pools, GLT_sched_config config,
         GLT_sched *newsched) {
     GLT_ERROR_ARG;
 }
 
-GLT_func_prefix void glt_scheduler_free(GLT_sched *sched) {
-    GLT_ERROR_ARG;
-}
-
-GLT_func_prefix void glt_scheduler_get_num_pools(GLT_sched sched, int *num_pools) {
-    GLT_ERROR_ARG;
-}
-
-GLT_func_prefix void glt_scheduler_get_pools(GLT_sched sched, int max_pools,
+GLT_func_prefix void glt_pool_scheduler_get_pools(GLT_sched sched, int max_pools,
         int idx, GLT_pool *pools) {
     GLT_ERROR_ARG;
 }
 
-GLT_func_prefix void glt_scheduler_finish(GLT_sched sched) {
-    GLT_ERROR_ARG;
-}
-
-GLT_func_prefix void glt_scheduler_exit(GLT_sched sched) {
-    GLT_ERROR_ARG;
-}
-
-GLT_func_prefix void glt_scheduler_has_to_stop(GLT_sched sched, GLT_bool *stop) {
-    GLT_ERROR_ARG;
-}
-
-GLT_func_prefix void glt_scheduler_set_data(GLT_sched sched, void *data) {
-    GLT_ERROR_ARG;
-}
-
-GLT_func_prefix void glt_scheduler_get_data(GLT_sched sched, void **data) {
-    GLT_ERROR_ARG;
-}
-
-GLT_func_prefix void glt_scheduler_get_size(GLT_sched sched, size_t *size) {
-    GLT_ERROR_ARG;
-}
-
-GLT_func_prefix void glt_scheduler_get_total_size(GLT_sched sched, size_t *size) {
+GLT_func_prefix void glt_pool_scheduler_get_num_pools(GLT_sched sched, int *num_pools) {
     GLT_ERROR_ARG;
 }
 
@@ -275,6 +239,10 @@ GLT_func_prefix void glt_thread_join(GLT_thread thread) {
 }
 
 GLT_func_prefix void glt_thread_exit() {
+    GLT_ERROR_ARG;
+}
+
+GLT_func_prefix void glt_thread_self(GLT_thread *thread) {
     GLT_ERROR_ARG;
 }
 
@@ -461,6 +429,14 @@ GLT_func_prefix void glt_ult_attr_set_callback(GLT_ult_attr attr, void(*cb_func)
 }
 
 GLT_func_prefix void glt_ult_attr_set_migratable(GLT_ult_attr attr, GLT_bool flag) {
+    GLT_ERROR_ARG;
+}
+
+GLT_func_prefix void glt_tasklet_creation_to_pool(GLT_pool pool, void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult) {
+    GLT_ERROR_ARG;
+}
+
+GLT_func_prefix void glt_ult_creation_to_pool(GLT_pool pool, void(*thread_func)(void *), void *arg, GLT_ult *new_ult) {
     GLT_ERROR_ARG;
 }
 
