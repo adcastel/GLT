@@ -28,6 +28,8 @@ GLT_func_prefix void glt_thread_create(GLT_sched sched, GLT_thread *newthread) {
         ABT_xstream_create(sched, newthread);
         main_team->team[main_team->num_xstreams] = newthread;
         main_team->num_xstreams++;
+                printf("Creado nuevo thread y con esta llevamos %d\n",main_team->num_xstreams);
+
     } else {
         printf("Error: There are not more sloots for threads\n");
     }
@@ -39,6 +41,8 @@ GLT_func_prefix void glt_thread_create_basic(GLT_sched_predef predef, int num_po
         ABT_xstream_create_basic(predef, num_pools, pools, config, newthread);
         main_team->team[main_team->num_xstreams] = newthread;
         main_team->num_xstreams++;
+                        printf("Creado nuevo basic thread y con esta llevamos %d\n",main_team->num_xstreams);
+
     } else {
         printf("Error: There are not more sloots for threads\n");
     }
