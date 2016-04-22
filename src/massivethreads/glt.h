@@ -69,6 +69,21 @@ void glt_timer_get_secs(GLT_timer timer, double *secs);
 int glt_get_thread_num();
 int glt_get_num_threads();
 
+void glt_scheduler_config_free(GLT_sched_config *config);
+void glt_scheduler_create(GLT_sched_def *def, int num_threads,
+        int *threads_id, GLT_sched_config config, GLT_sched *newsched);
+void glt_scheduler_create_basic(GLT_sched_predef predef,
+        int num_threads, int *threads_id, GLT_sched_config config,
+        GLT_sched *newsched);
+void glt_scheduler_free(GLT_sched *sched);
+void glt_scheduler_finish(GLT_sched sched);
+void glt_scheduler_exit(GLT_sched sched);
+void glt_scheduler_has_to_stop(GLT_sched sched, GLT_bool *stop);
+void glt_scheduler_set_data(GLT_sched sched, void *data);
+void glt_scheduler_get_data(GLT_sched sched, void **data);
+void glt_scheduler_get_size(GLT_sched sched, size_t *size);
+void glt_scheduler_get_total_size(GLT_sched sched, size_t *size);
+
 int glt_can_wsapi_functions();
 int glt_can_prof_functions();
 int glt_can_log_functions();
@@ -84,7 +99,7 @@ int glt_can_future_functions();
 int glt_can_promise_functions();
 int glt_can_extended_mutex();
 int glt_can_manage_pools();
-int glt_can_manage_scheduler();
+//int glt_can_manage_scheduler();
 int glt_can_self();
 int glt_can_manage_threads();
 int can_extended_tasklets();
@@ -195,24 +210,14 @@ void glt_pool_set_data(GLT_pool pool, void *data);
 void glt_pool_get_data(GLT_pool pool, void **data);
 void glt_pool_add_sched(GLT_pool pool, GLT_sched sched);
 void glt_pool_get_id(GLT_pool pool, int *id);
-
-void glt_scheduler_config_free(GLT_sched_config *config);
-void glt_scheduler_create(GLT_sched_def *def, int num_pools,
+void glt_pool_create_scheduler(GLT_sched_def *def, int num_pools,
         GLT_pool *pools, GLT_sched_config config, GLT_sched *newsched);
-void glt_schededuler_create_basic(GLT_sched_predef predef,
+void glt_pool_create_basic_scheduler(GLT_sched_predef predef,
         int num_pools, GLT_pool *pools, GLT_sched_config config,
         GLT_sched *newsched);
-void glt_scheduler_free(GLT_sched *sched);
-void glt_scheduler_get_num_pools(GLT_sched sched, int *num_pools);
-void glt_scheduler_get_pools(GLT_sched sched, int max_pools,
+void glt_pool_scheduler_get_pools(GLT_sched sched, int max_pools,
         int idx, GLT_pool *pools);
-void glt_scheduler_finish(GLT_sched sched);
-void glt_scheduler_exit(GLT_sched sched);
-void glt_scheduler_has_to_stop(GLT_sched sched, GLT_bool *stop);
-void glt_scheduler_set_data(GLT_sched sched, void *data);
-void glt_scheduler_get_data(GLT_sched sched, void **data);
-void glt_scheduler_get_size(GLT_sched sched, size_t *size);
-void glt_scheduler_get_total_size(GLT_sched sched, size_t *size);
+void glt_pool_scheduler_get_num_pools(GLT_sched sched, int *num_pools);
 
 void glt_self_get_type(GLT_unit_type *type);
 void glt_self_is_primary(GLT_bool *flag);
@@ -244,7 +249,9 @@ void glt_thread_get_num(int *num_xstreams);
 void glt_thread_is_primary(GLT_thread thread, GLT_bool *flag);
 void glt_thread_run_unit(GLT_unit unit, GLT_pool pool);
 void glt_thread_check_events(GLT_sched sched);
+void glt_tasklet_creation_to_pool(GLT_pool pool, void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult);
 
+void glt_ult_creation_to_pool(GLT_pool pool, void(*thread_func)(void *), void *arg, GLT_ult *new_ult);
 void glt_tasklet_cancel(GLT_tasklet tasklet);
 void glt_tasklet_self(GLT_tasklet *tasklet);
 void glt_tasklet_get_thread(GLT_tasklet tasklet, GLT_thread *thread);
