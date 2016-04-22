@@ -30,6 +30,30 @@
 #define GLT_bool ABT_bool
 #define GLT_thread_id int
 #define GLT_ult_id ABT_thread_id
+#define GLT_sched ABT_sched
+#define GLT_sched_config ABT_sched_config
+#define GLT_sched_config_var ABT_sched_config_var
+#define GLT_sched_config_var_end ABT_sched_config_var_end
+#define GLT_sched_def ABT_sched_def
+#define GLT_sched_predef ABT_sched_predef
+
+#define glt_scheduler_config_create  ABT_sched_config_create
+#define glt_scheduler_config_read  ABT_sched_config_read 
+
+#define GLT_UNIT_NULL ABT_UNIT_NULL
+
+#define GLT_TRUE ABT_TRUE
+#define GLT_FALSE ABT_FALSE
+
+#define GLT_POOL_FIFO ABT_POOL_FIFO
+#define GLT_POOL_ACCESS_MPMC ABT_POOL_ACCESS_MPMC
+#define GLT_SCHED_TYPE_ULT ABT_SCHED_TYPE_ULT
+
+typedef enum {
+    GLT_SCHED_CONFIG_INT = 0, /* Parameter of type int */
+    GLT_SCHED_CONFIG_DOUBLE = 1, /* Parameter of type double */
+    GLT_SCHED_CONFIG_PTR = 2, /* Parameter of type pointer */
+} GLT_sched_config_type;
 
 //Extended variables
 #ifndef CORE
@@ -43,20 +67,13 @@
 #define GLT_pool_kind ABT_pool_kind
 #define GLT_pool_access ABT_pool_access
 #define GLT_unit ABT_unit
-#define GLT_sched ABT_sched
-#define GLT_sched_config ABT_sched_config
-#define GLT_sched_config_var ABT_sched_config_var
-#define GLT_sched_config_var_end ABT_sched_config_var_end
-#define GLT_sched_def ABT_sched_def
-#define GLT_sched_predef ABT_sched_predef
 #define GLT_thread_state ABT_xstream_state
 #define GLT_tasklet_state ABT_task_state
 #define GLT_ult_state ABT_thread_state
 #define GLT_ult_attr ABT_thread_attr
 #define GLT_unit_type ABT_unit_type
 
-#define glt_scheduler_config_create  ABT_sched_config_create
-#define glt_scheduler_config_read  ABT_sched_config_read 
+
 
 //MASSIVETHREAD
 #define GLT_workunit_f void *
