@@ -44,13 +44,8 @@ typedef struct myth_timer {
 #define GLT_bool int
 #define GLT_thread_id int
 #define GLT_ult_id int
-//#define GLT_sched void *
 typedef void * GLT_sched;
-//#define GLT_sched_config void *
 typedef void * GLT_sched_config;
-
-//#define GLT_sched_def void *
-//#define GLT_sched_predef void *
 
 #define glt_scheduler_config_create  
 #define glt_scheduler_config_read   
@@ -133,58 +128,48 @@ typedef enum introspective_state {
     NOT_SUPPORTED
 } introspective_state;
 
-typedef struct mapinfo_s {
-    int not_supported;
-} mapinfo_s_t;
-
-typedef struct dynmapinfo_s {
-    int not_supported;
-} dynmapinfo_s_t;
-
 //ARGOBOTS
-#define GLT_event_kind void *
-#define GLT_event_cb_fn void *
-#define GLT_future void *
-#define GLT_promise void *
-#define GLT_pool_def void *
-#define GLT_pool_config void *
-#define GLT_pool void *
-//#define GLT_pool_kind void *
-//#define GLT_pool_access void *
-#define GLT_unit void *
-#define GLT_thread_state void *
-#define GLT_tasklet_state void *
-#define GLT_ult_state void *
-#define GLT_ult_attr void *
-#define GLT_unit_type void *
+typedef void*  GLT_event_kind; 
+typedef void*  GLT_event_cb_fn; 
+typedef void*  GLT_future; 
+typedef void*  GLT_promise; 
+typedef void*  GLT_pool_def; 
+typedef void*  GLT_pool_config; 
+typedef void*  GLT_pool; 
+typedef void*  GLT_unit; 
+typedef void*  GLT_thread_state; 
+typedef void*  GLT_tasklet_state; 
+typedef void*  GLT_ult_state; 
+typedef void*  GLT_ult_attr; 
+typedef void*  GLT_unit_type; 
 
 
 //QTHREADS
-#define GLT_syncvar void *
-#define GLT_aligned void *
-#define GLT_memory_state void *
-#define GLT_sinc_op void *
-#define GLT_sinc void *
-#define GLT_loop_f void *
-#define GLT_loopr_f void *
-#define GLT_loop_step_f void *
-#define GLT_accum_f void *
-#define GLT_loop_queue void *
-#define GLT_loop_queue_kind void *
-#define GLT_ds_pool void *
-#define GLT_ds_array void *
-#define GLT_ds_array_distribution void *
-#define GLT_ds_loop_f void *
-#define GLT_ds_loopr_f void *
-#define GLT_ds_cloop_f void *
-#define GLT_ds_lfqueue void *
-#define GLT_ds_dqueue void *
-#define GLT_ds_dictionary void *
-#define GLT_ds_dictionary_key_equals void *
-#define GLT_ds_dictionary_hash void *
-#define GLT_ds_dictionary_cleanup void *
-#define GLT_ds_dictionary_it void *
-#define GLT_subthread void *
+typedef void*  GLT_syncvar; 
+typedef void*  GLT_aligned; 
+typedef void*  GLT_memory_state; 
+typedef void*  GLT_sinc_op; 
+typedef void*  GLT_sinc; 
+typedef void*  GLT_loop_f; 
+typedef void*  GLT_loopr_f; 
+typedef void*  GLT_loop_step_f; 
+typedef void*  GLT_accum_f; 
+typedef void*  GLT_loop_queue; 
+typedef void*  GLT_loop_queue_kind; 
+typedef void*  GLT_ds_pool; 
+typedef void*  GLT_ds_array; 
+typedef void*  GLT_ds_array_distribution; 
+typedef void*  GLT_ds_loop_f; 
+typedef void*  GLT_ds_loopr_f; 
+typedef void*  GLT_ds_cloop_f; 
+typedef void*  GLT_ds_lfqueue; 
+typedef void*  GLT_ds_dqueue; 
+typedef void*  GLT_ds_dictionary; 
+typedef void*  GLT_ds_dictionary_key_equals; 
+typedef void*  GLT_ds_dictionary_hash; 
+typedef void*  GLT_ds_dictionary_cleanup; 
+typedef void*  GLT_ds_dictionary_it; 
+typedef void*  GLT_subthread; 
 
 #define glt_ult_creation_precond qthread_fork_precond
 #define glt_ult_creation_precond_to qthread_fork_precond_to
