@@ -83,8 +83,8 @@ typedef struct {
 
  typedef enum  {
     GLT_SCHED_DEFAULT,   /* Default scheduler */
-     GLT_SCHED_BASIC,     /* Basic scheduler */
-     GLT_SCHED_PRIO       /* Priority scheduler */
+    GLT_SCHED_BASIC,     /* Basic scheduler */
+    GLT_SCHED_PRIO       /* Priority scheduler */
 }GLT_sched_predef;
 
 #define GLT_UNIT_NULL NULL
@@ -96,11 +96,11 @@ typedef enum  {
  } GLT_pool_kind;
 
 typedef enum  {
-       GLT_POOL_ACCESS_PRIV, /* Used by only one ES */
-       GLT_POOL_ACCESS_SPSC, /* Producers on ES1, consumers on ES2 */
-       GLT_POOL_ACCESS_MPSC, /* Producers on any ES, consumers on the same ES */
-       GLT_POOL_ACCESS_SPMC, /* Producers on the same ES, consumers on any ES */
-       GLT_POOL_ACCESS_MPMC  /* Producers on any ES, consumers on any ES */
+    GLT_POOL_ACCESS_PRIV, /* Used by only one ES */
+    GLT_POOL_ACCESS_SPSC, /* Producers on ES1, consumers on ES2 */
+    GLT_POOL_ACCESS_MPSC, /* Producers on any ES, consumers on the same ES */
+    GLT_POOL_ACCESS_SPMC, /* Producers on the same ES, consumers on any ES */
+    GLT_POOL_ACCESS_MPMC  /* Producers on any ES, consumers on any ES */
  } GLT_pool_access;
 
 
@@ -155,7 +155,9 @@ typedef int  GLT_felock_status;
 typedef void*  GLT_pickle; 
 typedef void*  GLT_wsapi_decide_f;
 typedef void*  GLT_wsapi_steal_f; 
-typedef void* GLT_key; 
+typedef void* GLT_key;
+
+
 #define glt_ult_creation_precond qthread_fork_precond
 #define glt_ult_creation_precond_to qthread_fork_precond_to
 
