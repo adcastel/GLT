@@ -43,13 +43,8 @@
 #define GLT_bool int
 #define GLT_thread_id int
 #define GLT_ult_id int
-//#define GLT_sched void *
-typedef void * GLT_sched;
-//#define GLT_sched_config void *
-typedef void * GLT_sched_config;
-
-//#define GLT_sched_def void *
-//#define GLT_sched_predef void *
+typedef void* GLT_sched;
+typedef void* GLT_sched_config;
 
 #define glt_scheduler_config_create  
 #define glt_scheduler_config_read   
@@ -92,6 +87,23 @@ typedef struct {
      GLT_SCHED_PRIO       /* Priority scheduler */
 }GLT_sched_predef;
 
+#define GLT_UNIT_NULL NULL
+#define GLT_TRUE    1
+#define GLT_FALSE   0
+
+typedef enum  {
+    GLT_POOL_FIFO 
+ } GLT_pool_kind;
+
+typedef enum  {
+       GLT_POOL_ACCESS_PRIV, /* Used by only one ES */
+       GLT_POOL_ACCESS_SPSC, /* Producers on ES1, consumers on ES2 */
+       GLT_POOL_ACCESS_MPSC, /* Producers on any ES, consumers on the same ES */
+       GLT_POOL_ACCESS_SPMC, /* Producers on the same ES, consumers on any ES */
+       GLT_POOL_ACCESS_MPMC  /* Producers on any ES, consumers on any ES */
+ } GLT_pool_access;
+
+
 //Extended variables
 #ifndef CORE
 #define GLT_syncvar syncvar_t
@@ -121,33 +133,29 @@ typedef struct {
 #define GLT_subthread qthread_worker_id_t
 
 //ARGOBOTS
-#define GLT_event_kind void *
-#define GLT_event_cb_fn void *
-#define GLT_future void *
-#define GLT_promise void *
-#define GLT_key void *
-#define GLT_pool_def void *
-#define GLT_pool_config void *
-#define GLT_pool void *
-#define GLT_pool_kind void *
-#define GLT_pool_access void *
-#define GLT_unit void *
-#define GLT_thread_state void *
-#define GLT_tasklet_state void *
-#define GLT_ult_state void *
-#define GLT_ult_id int
-#define GLT_ult_attr void *
-#define GLT_unit_type void *
+typedef void*  GLT_event_kind; 
+typedef void*  GLT_event_cb_fn; 
+typedef void*  GLT_future; 
+typedef void*  GLT_promise; 
+typedef void*  GLT_pool_def; 
+typedef void*  GLT_pool_config; 
+typedef void*  GLT_pool; 
+typedef void*  GLT_unit; 
+typedef void*  GLT_thread_state; 
+typedef void*  GLT_tasklet_state; 
+typedef void*  GLT_ult_state; 
+typedef void*  GLT_ult_attr; 
+typedef void*  GLT_unit_type; 
 
 //MASSIVETHREAD
-#define GLT_workunit_f void *
-#define GLT_workunit_o void *
-#define GLT_felock void *
-#define GLT_felock_status int
-#define GLT_pickle void *
-#define GLT_wsapi_decide_f void *
-#define GLT_wsapi_steal_f void *
-
+typedef void* GLT_workunit_f;
+typedef void*  GLT_workunit_o;
+typedef void*  GLT_felock;
+typedef int  GLT_felock_status; 
+typedef void*  GLT_pickle; 
+typedef void*  GLT_wsapi_decide_f;
+typedef void*  GLT_wsapi_steal_f; 
+typedef void* GLT_key; 
 #define glt_ult_creation_precond qthread_fork_precond
 #define glt_ult_creation_precond_to qthread_fork_precond_to
 
