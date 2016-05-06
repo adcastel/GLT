@@ -162,12 +162,10 @@ typedef struct glt_team {
     int max_elem;
 } glt_team_t;
 
-#define GLT_VERSION "You are using glt 0.1v over Argobots (adcastel@uji.es) "
+#define GLT_VERSION "You are using GLT 0.1v over Argobots (adcastel@uji.es) "
 
-#define GLT_ERROR_QTH printf("Error: This feature is only supported by Qthreads \
-    implementation and you are using Argobots. Please use the query functions")
-#define GLT_ERROR_MYTH printf("Error: This feature is only supported by MassiveThredashreads \
-    implementation and you are using Argobots. Please use the query functions")
+#define GLT_ERROR_QTH printf("Error: This feature is only supported by Qthreads implementation and you are using Argobots. Please use the query functions")
+#define GLT_ERROR_MYTH printf("Error: This feature is only supported by MassiveThredashreads implementation and you are using Argobots. Please use the query functions")
 
 
 glt_team_t * main_team;
