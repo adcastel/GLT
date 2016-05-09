@@ -7,7 +7,7 @@
  *      Sangmin Seo and Pavan Balaji ({sseo,balaji}@anl.gov) at Argonne National Laboratory
 */
 
-/* MassiveThreads implementation object file*/
+/* pthreads implementation object file*/
 
 #ifndef GLT_COMMON_H
 #define GLT_COMMON_H
