@@ -1,4 +1,4 @@
-all:qth mth arg
+all:qth mth arg pth
 
 arg:
 	make -C argobots
@@ -9,7 +9,11 @@ mth:
 qth:
 	make -C qthreads
 
+pth:
+	make -C pthreads
+
 clean:
 	make -C argobots clean
 	make -C massivethreads clean
 	make -C qthreads clean
+	make -C pthreads clean
