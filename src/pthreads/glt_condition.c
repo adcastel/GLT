@@ -11,21 +11,21 @@
 #endif
 
 GLT_func_prefix void glt_cond_create(GLT_cond *cond) {
-    *cond = myth_cond_create();
+    pthread_cond_init(cond,NULL);
 }
 
 GLT_func_prefix void glt_cond_free(GLT_cond *cond) {
-    myth_cond_destroy(*cond);
+    pthread_cond_destroy(cond);
 }
 
 GLT_func_prefix void glt_cond_signal(GLT_cond cond) {
-    myth_cond_signal(cond);
+    pthread_cond_signal(&cond);
 }
 
 GLT_func_prefix void glt_cond_wait(GLT_cond cond, GLT_mutex mutex) {
-    myth_cond_wait(cond, mutex);
+    pthread_cond_wait(&cond, &mutex);
 }
 
 GLT_func_prefix void glt_cond_broadcast(GLT_cond cond) {
-    myth_cond_broadcast(cond);
+    pthread_cond_broadcast(&cond);
 }
