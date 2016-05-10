@@ -84,13 +84,15 @@ void glt_scheduler_get_data(GLT_sched sched, void **data);
 void glt_scheduler_get_size(GLT_sched sched, size_t *size);
 void glt_scheduler_get_total_size(GLT_sched sched, size_t *size);
 
+
+int glt_can_tls_functions();
+
+//QUERY functions for MASSIVETHREADS
+int can_felock_functions();
+int can_extended_workunits();
 int glt_can_wsapi_functions();
 int glt_can_prof_functions();
 int glt_can_log_functions();
-int glt_can_tls_functions();
-int can_felock_functions();
-int can_extended_workunits();
-
 
 
 //QUERY functions for ARGOBOTS
@@ -99,13 +101,12 @@ int glt_can_future_functions();
 int glt_can_promise_functions();
 int glt_can_extended_mutex();
 int glt_can_manage_pools();
-//int glt_can_manage_scheduler();
 int glt_can_self();
 int glt_can_manage_threads();
 int can_extended_tasklets();
 int can_extended_ults();
-//QUERY functions for QTHREADS
 
+//QUERY functions for QTHREADS
 int glt_can_extended_basic();
 int glt_can_atomic_functions();
 int glt_can_feb_functions();
@@ -122,9 +123,16 @@ int glt_can_extended_runtime();
 
 #ifndef CORE
 
+void glt_key_create(void(*destructor)(void *value), GLT_key *newkey);
+void glt_key_free(GLT_key *key);
+void glt_key_set(GLT_key key, void *value);
+void glt_key_get(GLT_key key, void **value);
+
+
+//HEADERS for MASSIVETHREADSTHREADS extended functions
+
 void glt_wu_create_ex(GLT_ult * ult, GLT_workunit_f func, void * arg,
         GLT_workunit_o opt);
-
 void glt_yield2();
 void glt_wu_detach(GLT_ult ult);
 void glt_wu_set_cancel_state(int state, int *oldstate);
@@ -140,10 +148,7 @@ void glt_felock_unlock(GLT_bool *unlock, GLT_felock felock);
 void glt_felock_status(GLT_felock_status *status, GLT_felock felock);
 void glt_felock_set_unlock(GLT_felock felock, int val);
 
-void glt_key_create(void(*destructor)(void *value), GLT_key *newkey);
-void glt_key_free(GLT_key *key);
-void glt_key_set(GLT_key key, void *value);
-void glt_key_get(GLT_key key, void **value);
+
 
 void glt_log_start();
 void glt_log_pause();
