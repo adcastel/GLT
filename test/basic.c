@@ -5,9 +5,19 @@
 #include <glt.h>
 #endif
 #define N 72
+
+
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+
+#define _GNU_SOURCE             /* See feature_test_macros(7) */
+#include <sched.h>
+
 void func1(void * arg){
 
-printf("Hola soy el thread %d/%d\n",glt_get_thread_num(),glt_get_num_threads());
+printf("Hola soy el thread %d/%d (CPU %d)\n",glt_get_thread_num(),glt_get_num_threads(),sched_getcpu());
 }
 
 int main(int argc, char *argv[]){
