@@ -12,17 +12,6 @@
 #endif
 
 //scheduler functions
-/*
-GLT_func_prefix int glt_can_manage_scheduler() {
-#ifdef CORE
-    return 0;
-#else
-    return 1;
-#endif
-}
-
-#ifndef CORE
-*/
 
 GLT_func_prefix void glt_scheduler_config_free(GLT_sched_config *config) {
     GLT_ERROR_ARG;
@@ -70,6 +59,4 @@ GLT_func_prefix void glt_scheduler_get_size(GLT_sched sched, size_t *size) {
 GLT_func_prefix void glt_scheduler_get_total_size(GLT_sched sched, size_t *size) {
     GLT_ERROR_ARG;
 }
-/*
-#endif
-*/
+
