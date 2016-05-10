@@ -11,11 +11,11 @@
 #endif
 
 GLT_func_prefix int glt_get_num_threads() {
-    return main_team->num_workers;
+    return main_team->max_workers;
 }
 
 GLT_func_prefix int glt_get_thread_num() {
-    return myth_get_worker_num();
+    return pthread_getthreadid_np();
 }
 
 
