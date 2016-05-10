@@ -4,7 +4,7 @@
 #else
 #include <glt.h>
 #endif
-#define N 72
+#define N 100
 void func1(void * arg){
 
 printf("Hola soy el thread %d/%d\n",glt_get_thread_num(),glt_get_num_threads());

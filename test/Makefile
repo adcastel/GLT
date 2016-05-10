@@ -4,7 +4,7 @@
 
 
 all: basic fast_basic
-DEB=-g
+#DEB=-g
 
 basic:
 	gcc basic.c -o basic_mth -I/home/adcastel/GLT/src/massivethreads -L/home/adcastel/GLT/src/massivethreads/ -lglt -I/home/adcastel/massivethreads_wf/include -L/home/adcastel/massivethreads_wf/lib -lmyth  -lm $(DEB)
