@@ -15,7 +15,7 @@ GLT_func_prefix int glt_get_num_threads() {
 }
 
 GLT_func_prefix int glt_get_thread_num() {
-    return pthread_getthreadid_np();
+    return pthread_self();
 }
 
 
