@@ -11,11 +11,11 @@
 #endif
 
 GLT_func_prefix void glt_start() {
-    printf("Starting with MASSIVETHREADS\n");
+    printf("Starting with PTHREADS\n");
 }
 
 GLT_func_prefix void glt_end() {
-    printf("Ending with MASSIVETHREADS\n");
+    printf("Ending with PTHREADS\n");
 }
 
 GLT_func_prefix void glt_init(int argc, char * argv[]) {
@@ -26,21 +26,12 @@ GLT_func_prefix void glt_init(int argc, char * argv[]) {
     if (getenv("GLT_NUM_THREADS") != NULL) {
         num_threads = atoi(getenv("GLT_NUM_THREADS"));
         sprintf(buff, "%d", num_threads);
-        setenv("MYTH_WORKER_NUM", buff, 1);
-    } else if (getenv("MYTH_WORKER_NUM") != NULL) {
-        num_threads = atoi(getenv("MYTH_WORKER_NUM"));
-    } else {
-        sprintf(buff, "%d", num_threads);
-        setenv("MYTH_WORKER_NUM", buff, 1);
     }
 
-    setenv("MYTH_BIND_WORKERS", "1", 1);
-
-    main_team->num_workers = num_threads;
-    myth_init(); 
+    main_team->num_workers = 1;
+    main_team->max_workers = num_threads;
 }
 
 GLT_func_prefix void glt_finalize() {
-    myth_fini(); 
 }
 
