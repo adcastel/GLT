@@ -21,18 +21,18 @@ GLT_func_prefix int glt_can_tls_functions() {
 #ifndef CORE
 
 GLT_func_prefix void glt_key_create(void(*destructor)(void *value), GLT_key *newkey) {
-    myth_key_create(newkey, destructor);
+    pthread_key_create(newkey, destructor);
 }
 
 GLT_func_prefix void glt_key_free(GLT_key *key) {
-    myth_key_delete(*key);
+    pthread_key_delete(*key);
 }
 
 GLT_func_prefix void glt_key_set(GLT_key key, void *value) {
-    myth_setspecific(key, value);
+    pthread_setspecific(key, value);
 }
 
 GLT_func_prefix void glt_key_get(GLT_key key, void **value) {
-    *value = myth_getspecific(key);
+    *value = pthread_getspecific(key);
 }
 #endif
