@@ -306,7 +306,6 @@ void glt_ult_get_thread(GLT_thread *thread, int *worker);
 void glt_ult_get_thread_unique(GLT_thread *thread, int *worker);
 void glt_ult_get_tasklocal(void * pointer, unsigned int size);
 void glt_ult_size_tasklocal(unsigned int *size);
-void glt_ult_migrate_self_to(int dest);
 void glt_ult_get_stack_left(size_t *size);
 void glt_ult_retloc(GLT_ult * ult);
 void glt_atomic_incr(GLT_aligned * operand, int incr);
