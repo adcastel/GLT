@@ -17,12 +17,10 @@
 #include <glt_util.c>
 #include <glt_scheduler.c>
 
-#include <glt_felock.c>
 #include <glt_tls.c>
-#include <glt_prof_log.c>
-#include <glt_wsapi.c>
 #include <glt_argobots.c>
 #include <glt_qthreads.c>
+#include <glt_massivethreads.c>
 
 #endif /* FAST_GLT_H */
 
