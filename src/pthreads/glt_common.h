@@ -34,6 +34,7 @@ typedef struct pthread_timer {
     struct timeval end;
 } pthread_timer_t;
 
+//pthread_t unsigned long int
 #define GLT_ult pthread_t
 #define GLT_tasklet pthread_t
 #define GLT_thread pthread_t
@@ -42,8 +43,8 @@ typedef struct pthread_timer {
 #define GLT_cond pthread_cond_t
 #define GLT_timer pthread_timer_t
 #define GLT_bool int
-#define GLT_thread_id int
-#define GLT_ult_id int
+#define GLT_thread_id pthread_t
+#define GLT_ult_id pthread_t
 
 typedef void * GLT_sched;
 typedef void * GLT_sched_config;
