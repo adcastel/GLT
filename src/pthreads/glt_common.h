@@ -27,23 +27,24 @@
 #include <assert.h>
 #include <unistd.h>
 #include <stdint.h>
-#include <myth.h>
+#include <pthread.h>
 
-typedef struct myth_timer {
+typedef struct pthread_timer {
     struct timeval start;
     struct timeval end;
-} myth_timer_t;
+} pthread_timer_t;
 
-#define GLT_ult myth_thread_t
-#define GLT_tasklet myth_thread_t
-#define GLT_thread myth_thread_t
-#define GLT_mutex myth_mutex_t
-#define GLT_barrier myth_barrier_t
-#define GLT_cond myth_cond_t
-#define GLT_timer myth_timer_t
+#define GLT_ult pthread_t
+#define GLT_tasklet pthread_t
+#define GLT_thread pthread_t
+#define GLT_mutex pthread_mutex_t
+#define GLT_barrier pthread_barrier_t
+#define GLT_cond pthread_cond_t
+#define GLT_timer pthread_timer_t
 #define GLT_bool int
 #define GLT_thread_id int
 #define GLT_ult_id int
+
 typedef void * GLT_sched;
 typedef void * GLT_sched_config;
 
@@ -108,15 +109,16 @@ typedef enum  {
 
 #ifndef CORE
 
-#define GLT_workunit_f myth_func_t
-#define GLT_workunit_o myth_thread_option_t
-#define GLT_felock myth_felock_t
-#define GLT_felock_status int
-#define GLT_pickle myth_pickle_t
-#define GLT_wsapi_decide_f myth_wsapi_decidefn_t
-#define GLT_wsapi_steal_f myth_steal_func_t
+//MASSIVETHREAD
+typedef void* GLT_workunit_f;
+typedef void* GLT_workunit_o;
+typedef void* GLT_felock;
+typedef int GLT_felock_status;
+typedef void* GLT_pickle;
+typedef void* GLT_wsapi_decide_f;
+typedef void* GLT_wsapi_steal_f;
 //Shared
-#define GLT_key myth_key_t
+#define GLT_key pthread_key_t
 
 #include <sys/socket.h>
 #include <poll.h>
@@ -178,12 +180,14 @@ typedef void*  GLT_subthread;
 
 typedef struct glt_team {
     int num_workers;
+    int max_workers;
 } glt_team_t;
 
 
 #define GLT_VERSION "You are using GLT 0.1v over Pthreads (adcastel@uji.es)"
 #define GLT_ERROR_ARG printf("Error: This feature is only supported by Argobots implementation and you are using MassiveThreads. Please use the query functions\n")
 #define GLT_ERROR_QTH printf("Error: This feature is only supported by Qthreads implementation and you are using MassiveThreads. Please use the query functions\n")
+#define GLT_ERROR_MYTH printf("Error: This feature is only supported by MassiveThredashreads implementation and you are using Argobots. Please use the query functions")
 #define GLT_LIB_ERROR printf("Error: This feature is in the API but it is not included in the Library\n")
 
 /* Main team structure*/
