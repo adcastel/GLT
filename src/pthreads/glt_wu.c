@@ -88,11 +88,11 @@ GLT_func_prefix void glt_tasklet_join(GLT_tasklet *tasklet) {
 
 GLT_func_prefix void glt_ult_get_id(GLT_ult_id * id, GLT_ult ult) {
     printf("Warning: this feature is not supported in MassiveThreads\n");
-    *id = -1;
+    *id = pthread_self();
 }
 
 GLT_func_prefix void glt_workunit_get_thread_id(GLT_thread_id *id) {
-    *id = pthread_self();
+    *id = sched_getcpu();
 }
 
 GLT_func_prefix void glt_ult_migrate_self_to(GLT_thread_id id) {
