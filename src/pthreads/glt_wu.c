@@ -26,17 +26,14 @@ GLT_func_prefix void glt_ult_creation(void(*thread_func)(void *), void *arg, GLT
 }
 
 GLT_func_prefix void glt_ult_creation_to(void(*thread_func)(void *), void *arg, GLT_ult *new_ult, int dest) {
-#ifdef FASTGLT
-    pthread_create(new_ult, NULL,(void *) thread_func, arg);
-#else
+
     cpu_set_t cpuset;
     CPU_ZERO(&cpuset);
     dest=dest%main_team->max_workers;
     CPU_SET(dest, &cpuset);
     pthread_create(new_ult, NULL,(void *) thread_func, arg);
     pthread_setaffinity_np(*new_ult, sizeof (cpu_set_t), &cpuset);
-#endif
-     main_team->num_workers++;
+    main_team->num_workers++;
 
 }
 
@@ -46,34 +43,23 @@ GLT_func_prefix void glt_tasklet_creation(void(*thread_func)(void *), void *arg,
 }
 
 GLT_func_prefix void glt_tasklet_creation_to(void(*thread_func)(void *), void *arg, GLT_tasklet *new_tasklet, int dest) {
-#ifdef FASTGLT
-    pthread_create(new_tasklet, NULL,(void *) thread_func, arg);
-#else
+
     cpu_set_t cpuset;
     CPU_ZERO(&cpuset);
     dest=dest%main_team->max_workers;
     CPU_SET(dest, &cpuset);
     pthread_create(new_tasklet, NULL,(void *) thread_func, arg);
     pthread_setaffinity_np(*new_tasklet, sizeof (cpu_set_t), &cpuset);
-#endif
     main_team->num_workers++;
 
 }
 
 GLT_func_prefix void glt_yield() {
-#ifdef FASTGLT
-    sched_yield();
-#else
     pthread_yield();
-#endif
 }
 
 GLT_func_prefix void glt_yield_to(GLT_ult ult) {
-#ifdef FASTGLT
-    sched_yield();
-#else
     pthread_yield();
-#endif
 }
 
 GLT_func_prefix void glt_ult_join(GLT_ult *ult) {
