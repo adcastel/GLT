@@ -17,9 +17,8 @@
 #else
 #include <glt.h>
 #endif
-#define N 72
 
-
+#define N 100
 
 void func1(void * arg){
 
