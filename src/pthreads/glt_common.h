@@ -17,16 +17,16 @@
 #endif
 
 #define _GNU_SOURCE             /* See feature_test_macros(7) */
-
-#include <sys/time.h>
-#include <sys/sysinfo.h>
-
 #include <sched.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
 #include <unistd.h>
 #include <stdint.h>
+
+#include <sys/time.h>
+#include <sys/sysinfo.h>
+
 #include <pthread.h>
 
 typedef struct pthread_timer {
