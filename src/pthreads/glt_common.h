@@ -43,7 +43,7 @@ typedef struct pthread_timer {
 #define GLT_cond pthread_cond_t
 #define GLT_timer pthread_timer_t
 #define GLT_bool int
-#define GLT_thread_id pthread_t
+#define GLT_thread_id int
 #define GLT_ult_id pthread_t
 
 typedef void * GLT_sched;
