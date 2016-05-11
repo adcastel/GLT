@@ -1,3 +1,16 @@
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#define _GNU_SOURCE             /* See feature_test_macros(7) */
+#include <sched.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+#include <unistd.h>
+
+
+
 #include <stdio.h>
 #ifdef FASTGLT
 #include <fast_glt.h>
@@ -7,13 +20,6 @@
 #define N 72
 
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
-
-#define _GNU_SOURCE             /* See feature_test_macros(7) */
-#include <sched.h>
 
 void func1(void * arg){
 
