@@ -1,26 +1,19 @@
-all: qth
+all:qth mth arg pth
 
-QTHFLAGS := -I/home/adcastel/qthreads/include -L/home/adcastel/qthreads/lib -lqthread 
-CC := gcc
-CFLAGS := -fPIC -I.  $(QTHFLAGS) 
+arg:
+	make -C argobots
 
-OBJECTS := glt.o glt_wu.o glt_util.o glt_mutex.o glt_barrier.o \
-	   glt_condition.o glt_timer.o glt_basic.o  \
-	   glt_atomic.o glt_feb.o glt_sinc.o glt_loop.o \
-	   glt_data_structures.o glt_syscall.o glt_runtime.o \
-	   glt_argobots.o glt_massivethreads.o glt_scheduler.o
+mth:
+	make -C massivethreads
 
-ifeq ($(GLT_CORE), 1)
-    CFLAGS += -DCORE
-endif
+qth:
+	make -C qthreads
 
-ifeq ($(GLT_DEBUG), 1)
-    CFLAGS += -g
-endif
+pth:
+	make -C pthreads
 
-
-qth: $(OBJECTS)
-	gcc -shared -o libglt.so $(OBJECTS) $(QTHFLAGS)
-	
 clean:
-	rm *.so *.o
+	make -C argobots clean
+	make -C massivethreads clean
+	make -C qthreads clean
+	make -C pthreads clean
