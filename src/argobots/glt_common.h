@@ -1,11 +1,5 @@
-/* Generic Lightweight Thread (GLT) library.
- * Developed by: 
- *      Adrian Castello (adcastel@uji.es) at Universitat Jaume I 
- * Supervised by:
- *      Antonio J. Peña (antonio.pena@bsc.es) at Barcelona Supercomputing Center
- *      Rafael Mayo Gual and Enrique S. Quintana-Ortí ({mayo,quintana}@uji.es)
- *      Sangmin Seo and Pavan Balaji ({sseo,balaji}@anl.gov) at Argonne National Laboratory
- */
+/* See COPYRIGHT in top-level directory. */
+
 
 /* Argobots implementation object file*/
 
