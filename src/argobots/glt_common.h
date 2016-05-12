@@ -163,9 +163,9 @@ typedef struct glt_team {
 } glt_team_t;
 
 #define GLT_VERSION "You are using GLT 1.0v over Argobots (adcastel@uji.es) "
-
 #define GLT_ERROR_QTH printf("Error: This feature is only supported by Qthreads implementation and you are using Argobots. Please use the query functions")
 #define GLT_ERROR_MYTH printf("Error: This feature is only supported by MassiveThredashreads implementation and you are using Argobots. Please use the query functions")
+#define GLT_LIB_ERROR printf("Error: This feature is in the API but it is not included in the Library\n")
 
 
 glt_team_t * main_team;

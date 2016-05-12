@@ -42,7 +42,7 @@ GLT_func_prefix int glt_can_extended_mutex() {
 #ifndef CORE
 
 GLT_func_prefix void glt_mutex_lock_low(GLT_mutex mutex) {
-    // ABT_mutex_lock_low (mutex);
+    GLT_LIB_ERROR;
 }
 
 GLT_func_prefix void glt_mutex_spinlock(GLT_mutex mutex) {
@@ -50,7 +50,7 @@ GLT_func_prefix void glt_mutex_spinlock(GLT_mutex mutex) {
 }
 
 GLT_func_prefix void glt_mutex_unlock_se(GLT_mutex mutex) {
-    // ABT_mutex_unlock_se (mutex);
+    GLT_LIB_ERROR;
 }
 
 GLT_func_prefix void glt_mutex_equal(GLT_mutex mutex1, GLT_mutex mutex2, GLT_bool *result) {
