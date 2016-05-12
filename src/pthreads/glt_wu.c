@@ -36,7 +36,6 @@ GLT_func_prefix void glt_ult_creation_to(void(*thread_func)(void *), void *arg, 
     pthread_create(new_ult, NULL,(void *) thread_func, arg);
     pthread_setaffinity_np(*new_ult, sizeof (cpu_set_t), &cpuset);
     main_team->num_workers++;
-
 }
 
 GLT_func_prefix void glt_tasklet_creation(void(*thread_func)(void *), void *arg, GLT_tasklet *new_tasklet) {
