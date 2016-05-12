@@ -1,4 +1,4 @@
-/* See COPYRIGHT in glt_common.h file. */
+/* See COPYRIGHT in top-level directory. */
 /*
  * Future and promise functions file.
  */
