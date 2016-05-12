@@ -17,7 +17,6 @@ ifeq ($(GLT_DEBUG), 1)
 endif
 
 arg: $(OBJECTS)
-#gcc -Wall -c -fPIC glt.c -I. -I/home/adcastel/argobots/include -L/home/adcastel/argobots/lib -labt -DARGOBOTS
 	gcc -shared -o libglt.so $(OBJECTS) $(ARGFLAGS)
 
 
