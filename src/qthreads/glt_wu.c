@@ -20,19 +20,19 @@ GLT_func_prefix GLT_tasklet * glt_tasklet_malloc(int number_of_tasklets) {
     return tasklets;
 }
 
-GLT_func_prefix void glt_ult_creation(void(*thread_func)(void *), void *arg, GLT_ult *new_ult) {
+GLT_func_prefix void glt_ult_create(void(*thread_func)(void *), void *arg, GLT_ult *new_ult) {
     qthread_fork((void *) thread_func, arg, new_ult);
 }
 
-GLT_func_prefix void glt_ult_creation_to(void(*thread_func)(void *), void *arg, GLT_ult *new_ult, int dest) {
+GLT_func_prefix void glt_ult_create_to(void(*thread_func)(void *), void *arg, GLT_ult *new_ult, int dest) {
     qthread_fork_to((void *) thread_func, arg, new_ult, dest);
 }
 
-GLT_func_prefix void glt_tasklet_creation(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult) {
+GLT_func_prefix void glt_tasklet_create(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult) {
     qthread_fork((void *) thread_func, arg, new_ult);
 }
 
-GLT_func_prefix void glt_tasklet_creation_to(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult, int dest) {
+GLT_func_prefix void glt_tasklet_create_to(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult, int dest) {
     qthread_fork_to((void *) thread_func, arg, new_ult, dest);
 }
 
