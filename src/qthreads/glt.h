@@ -19,11 +19,11 @@ void glt_finalize();
 GLT_ult * glt_ult_malloc(int number_of_ult);
 GLT_tasklet * glt_tasklet_malloc(int number_of_tasklets);
 
-void glt_ult_creation(void(*thread_func)(void *), void *arg, GLT_ult *new_ult);
-void glt_ult_creation_to(void(*thread_func)(void *), void *arg, GLT_ult *new_ult, int dest);
+void glt_ult_create(void(*thread_func)(void *), void *arg, GLT_ult *new_ult);
+void glt_ult_create_to(void(*thread_func)(void *), void *arg, GLT_ult *new_ult, int dest);
 
-void glt_tasklet_creation(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult);
-void glt_tasklet_creation_to(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult, int dest);
+void glt_tasklet_create(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult);
+void glt_tasklet_create_to(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult, int dest);
 
 void glt_yield();
 void glt_yield_to(GLT_ult ult);
@@ -121,9 +121,9 @@ int can_extended_workunits();
 
 #ifndef CORE
 
-void glt_ult_creation_syncvar(void(*thread_func)(void *), void * arg,
+void glt_ult_create_syncvar(void(*thread_func)(void *), void * arg,
         GLT_syncvar *syncvar);
-void glt_ult_creation_syncvar_to(void(*thread_func)(void *), void * arg,
+void glt_ult_create_syncvar_to(void(*thread_func)(void *), void * arg,
         GLT_syncvar *syncvar, int dest, int npreconds, ...);
 void glt_ult_get_thread(GLT_thread *thread, int *worker);
 void glt_ult_get_thread_unique(GLT_thread *thread, int *worker);
@@ -400,9 +400,9 @@ void glt_thread_get_num(int *num_xstreams);
 void glt_thread_is_primary(GLT_thread thread, GLT_bool *flag);
 void glt_thread_run_unit(GLT_unit unit, GLT_pool pool);
 void glt_thread_check_events(GLT_sched sched);
-void glt_tasklet_creation_to_pool(GLT_pool pool, void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult);
+void glt_tasklet_create_to_pool(GLT_pool pool, void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult);
 
-void glt_ult_creation_to_pool(GLT_pool pool, void(*thread_func)(void *), void *arg, GLT_ult *new_ult);
+void glt_ult_create_to_pool(GLT_pool pool, void(*thread_func)(void *), void *arg, GLT_ult *new_ult);
 void glt_tasklet_cancel(GLT_tasklet tasklet);
 void glt_tasklet_self(GLT_tasklet *tasklet);
 void glt_tasklet_get_thread(GLT_tasklet tasklet, GLT_thread *thread);
