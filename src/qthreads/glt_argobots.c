@@ -432,11 +432,11 @@ GLT_func_prefix void glt_ult_attr_set_migratable(GLT_ult_attr attr, GLT_bool fla
     GLT_ERROR_ARG;
 }
 
-GLT_func_prefix void glt_tasklet_creation_to_pool(GLT_pool pool, void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult) {
+GLT_func_prefix void glt_tasklet_create_to_pool(GLT_pool pool, void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult) {
     GLT_ERROR_ARG;
 }
 
-GLT_func_prefix void glt_ult_creation_to_pool(GLT_pool pool, void(*thread_func)(void *), void *arg, GLT_ult *new_ult) {
+GLT_func_prefix void glt_ult_create_to_pool(GLT_pool pool, void(*thread_func)(void *), void *arg, GLT_ult *new_ult) {
     GLT_ERROR_ARG;
 }
 #endif
