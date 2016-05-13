@@ -103,9 +103,9 @@ int main(int argc, char *argv[]) {
             args[j].value = 0.9f;
             args[j].ptr = a;
 #ifdef TASK
-            glt_tasklet_creation_to(vector_scal, (void *) &args[j],&tasklets[j],j%num_threads);        
+            glt_tasklet_create_to(vector_scal, (void *) &args[j],&tasklets[j],j%num_threads);        
 #else
-            glt_ult_creation_to(vector_scal, (void *) &args[j],&ults[j],j%num_threads);        
+            glt_ult_create_to(vector_scal, (void *) &args[j],&ults[j],j%num_threads);        
 #endif
         }
         glt_yield();

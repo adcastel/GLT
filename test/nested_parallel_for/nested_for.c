@@ -118,9 +118,9 @@ int ct; //current_task
             out_args[ct].niterations=niterations;
 	
 #ifdef TASK            
-            glt_tasklet_creation_to(vector_scal, (void *) &out_args[ct],&tasklets[ct],glt_get_thread_num());
+            glt_tasklet_create_to(vector_scal, (void *) &out_args[ct],&tasklets[ct],glt_get_thread_num());
 #else
-            glt_ult_creation_to(vector_scal, (void *) &out_args[ct],&ults[ct],glt_get_thread_num());
+            glt_ult_create_to(vector_scal, (void *) &out_args[ct],&ults[ct],glt_get_thread_num());
 #endif
         }
 
@@ -200,7 +200,7 @@ ults = glt_ult_malloc(num_workers);
                 args[j].niterations=niterations;
                 args[j].nthreads=num_workers;
              
-                glt_ult_creation_to(task_creator, (void *) &args[j],&ults[j],j%num_workers);
+                glt_ult_create_to(task_creator, (void *) &args[j],&ults[j],j%num_workers);
  
 	}
         glt_yield();

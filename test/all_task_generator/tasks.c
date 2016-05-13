@@ -90,9 +90,9 @@ for(i=it_start;i<it_end;i++){
         out_args[ct].ptr=ptr;
         out_args[ct].gran=gran;
 #ifdef TASK
-	glt_tasklet_creation(vector_scal,(void *)&out_args[ct],&tasklets[ct]);
+	glt_tasklet_create(vector_scal,(void *)&out_args[ct],&tasklets[ct]);
 #else
-	glt_ult_creation(vector_scal,(void *)&out_args[ct],&ults[ct]);
+	glt_ult_create(vector_scal,(void *)&out_args[ct],&ults[ct]);
 #endif
         ct++;
 }
@@ -164,7 +164,7 @@ int main(int argc, char *argv[]) {
                 args[j].it_start=start;
                 args[j].it_end=end;
                 args[j].gran=granularity;
-	        glt_ult_creation_to(task_creator, (void *) &args[j],&ults[j],j%num_threads);        
+	        glt_ult_create_to(task_creator, (void *) &args[j],&ults[j],j%num_threads);        
 	}
         glt_yield();
         gettimeofday(&t_start2, NULL);

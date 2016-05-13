@@ -95,9 +95,9 @@ void task_creator(void *arguments){
             out_arg[t].pos=start;
             out_arg[t].gran=gran;
 #ifdef TASK
-	    glt_tasklet_creation_to(vector_scal, (void *) &out_arg[t],&tasklets[t],glt_get_thread_num());        
+	    glt_tasklet_create_to(vector_scal, (void *) &out_arg[t],&tasklets[t],glt_get_thread_num());        
 #else	    
-	    glt_ult_creation_to(vector_scal, (void *) &out_arg[t],&ults[t],glt_get_thread_num());        
+	    glt_ult_create_to(vector_scal, (void *) &out_arg[t],&ults[t],glt_get_thread_num());        
 #endif           
 start+=stride;
         }
@@ -168,7 +168,7 @@ int main(int argc, char *argv[]) {
             args[ct].nlevels = nlevels;
             args[ct].nchildtask = nchildtask;
  
-	    glt_ult_creation_to(task_creator,(void *) &args[ct],&ults[ct],ct%num_threads);
+	    glt_ult_create_to(task_creator,(void *) &args[ct],&ults[ct],ct%num_threads);
 	    ct++;
         }
         glt_yield();

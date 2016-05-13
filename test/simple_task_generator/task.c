@@ -98,9 +98,9 @@ int num_threads = glt_get_num_threads();
             args[current_task].value = 0.9f;
             args[current_task].ptr = a;
 #ifdef TASK
-            glt_tasklet_creation_to(vector_scal, (void *) &args[current_task],&tasklets[j],j%num_threads);
+            glt_tasklet_create_to(vector_scal, (void *) &args[current_task],&tasklets[j],j%num_threads);
 #else
-            glt_ult_creation_to(vector_scal, (void *) &args[current_task],&ults[j],j%num_threads);
+            glt_ult_create_to(vector_scal, (void *) &args[current_task],&ults[j],j%num_threads);
 #endif	   
  current_task++;
 	}
