@@ -21,7 +21,7 @@ GLT_func_prefix GLT_tasklet * glt_tasklet_malloc(int number_of_tasklets) {
     return tasklets;
 }
 
-GLT_func_prefix void glt_ult_creation(void(*thread_func)(void *), void *arg, GLT_ult *new_ult) {
+GLT_func_prefix void glt_ult_create(void(*thread_func)(void *), void *arg, GLT_ult *new_ult) {
     ABT_xstream xstream;
     ABT_xstream_self(&xstream);
     ABT_pool pool;
@@ -29,7 +29,7 @@ GLT_func_prefix void glt_ult_creation(void(*thread_func)(void *), void *arg, GLT
     ABT_thread_create(pool, thread_func, arg, ABT_THREAD_ATTR_NULL, new_ult);
 }
 
-GLT_func_prefix void glt_ult_creation_to(void(*thread_func)(void *), void *arg, GLT_ult *new_ult, int dest) {
+GLT_func_prefix void glt_ult_create_to(void(*thread_func)(void *), void *arg, GLT_ult *new_ult, int dest) {
     ABT_pool pool;
     printf("Voy a crear en %d que es menor que el numero de threads que es %d\n", dest, main_team->num_xstreams);
     ABT_xstream_get_main_pools(main_team->team[dest], 1, &pool);
@@ -40,7 +40,7 @@ GLT_func_prefix void glt_ult_creation_to(void(*thread_func)(void *), void *arg, 
 }
 
 
-GLT_func_prefix void glt_tasklet_creation(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult) {
+GLT_func_prefix void glt_tasklet_create(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult) {
     ABT_xstream xstream;
     ABT_xstream_self(&xstream);
     ABT_pool pool;
@@ -48,7 +48,7 @@ GLT_func_prefix void glt_tasklet_creation(void(*thread_func)(void *), void *arg,
     ABT_task_create(pool, thread_func, arg, new_ult);
 }
 
-GLT_func_prefix void glt_tasklet_creation_to(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult, int dest) {
+GLT_func_prefix void glt_tasklet_create_to(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult, int dest) {
     ABT_pool pool;
     ABT_xstream_get_main_pools(main_team->team[dest], 1, &pool);
     ABT_task_create(pool, thread_func, arg, new_ult);
@@ -156,7 +156,7 @@ GLT_func_prefix void glt_tasklet_get_arg(GLT_tasklet tasklet, void **arg) {
     ABT_task_get_arg(tasklet, arg);
 }
 
-GLT_func_prefix void glt_tasklet_creation_to_pool(GLT_pool pool, void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult) {
+GLT_func_prefix void glt_tasklet_create_to_pool(GLT_pool pool, void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult) {
         ABT_task_create(pool, thread_func, arg, new_ult);
 }
 
@@ -267,7 +267,7 @@ GLT_func_prefix void glt_ult_attr_set_migratable(GLT_ult_attr attr, GLT_bool fla
     ABT_thread_attr_set_migratable(attr, flag);
 }
 
-GLT_func_prefix void glt_ult_creation_to_pool(GLT_pool pool, void(*thread_func)(void *), void *arg, GLT_ult *new_ult) {
+GLT_func_prefix void glt_ult_create_to_pool(GLT_pool pool, void(*thread_func)(void *), void *arg, GLT_ult *new_ult) {
     ABT_thread_create(pool, thread_func, arg, ABT_THREAD_ATTR_NULL, new_ult);
 }
 #endif /*#ifndef CORE*/
