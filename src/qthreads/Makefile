@@ -1,6 +1,6 @@
 all: qth
 
-QTHFLAGS := -I/home/adcastel/qthreads/include -L/home/adcastel/qthreads/lib -lqthread 
+QTHFLAGS := -I/$(HOME_QTH)/include -L/$(HOME_QTH)/lib -lqthread 
 CC := gcc
 CFLAGS := -fPIC -I.  $(QTHFLAGS) 
 

@@ -1,5 +1,5 @@
 all: arg
-ARGFLAGS := -I/home/adcastel/argobots/include -L/home/adcastel/argobots/lib -labt
+ARGFLAGS := -I/$(HOME_ARG)/include -L/$(HOME_ARG)/lib -labt
 CC := gcc
 CFLAGS := -fPIC -I. $(ARGFLAGS)
 

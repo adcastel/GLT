@@ -1,5 +1,5 @@
 all: mth
-MYTHFLAGS := -I/home/adcastel/massivethreads_wf/include -L/home/adcastel/massivethreads_wf/lib -lmyth 
+MYTHFLAGS := -I/$(HOME_MTH)/include -L/$(HOME_MTH)/lib -lmyth 
 CC := gcc
 CFLAGS := -fPIC -I. $(MYTHFLAGS)
 
