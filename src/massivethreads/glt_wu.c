@@ -20,20 +20,20 @@ GLT_func_prefix GLT_tasklet * glt_tasklet_malloc(int number_of_tasklets) {
     return tasklets;
 }
 
-GLT_func_prefix void glt_ult_creation(void(*thread_func)(void *), void *arg, GLT_ult *new_ult) {
+GLT_func_prefix void glt_ult_create(void(*thread_func)(void *), void *arg, GLT_ult *new_ult) {
     *new_ult = myth_create((void *) thread_func, arg);
 }
 
-GLT_func_prefix void glt_ult_creation_to(void(*thread_func)(void *), void *arg, GLT_ult *new_ult, int dest) {
-    glt_ult_creation(thread_func, arg, new_ult);
+GLT_func_prefix void glt_ult_create_to(void(*thread_func)(void *), void *arg, GLT_ult *new_ult, int dest) {
+    glt_ult_create(thread_func, arg, new_ult);
 }
 
-GLT_func_prefix void glt_tasklet_creation(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult) {
+GLT_func_prefix void glt_tasklet_create(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult) {
     *new_ult = myth_create((void *) thread_func, arg);
 }
 
-GLT_func_prefix void glt_tasklet_creation_to(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult, int dest) {
-    glt_ult_creation(thread_func, arg, new_ult);
+GLT_func_prefix void glt_tasklet_create_to(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult, int dest) {
+    glt_ult_create(thread_func, arg, new_ult);
 }
 
 GLT_func_prefix void glt_yield() {
