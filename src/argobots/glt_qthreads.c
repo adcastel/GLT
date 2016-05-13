@@ -51,12 +51,12 @@ GLT_func_prefix int glt_can_extended_runtime() {
 
 #ifndef CORE
 
-GLT_func_prefix void glt_ult_creation_syncvar(void(*thread_func)(void *), void * arg,
+GLT_func_prefix void glt_ult_create_syncvar(void(*thread_func)(void *), void * arg,
         GLT_syncvar *syncvar) {
     GLT_ERROR_QTH;
 }
 
-GLT_func_prefix void glt_ult_creation_syncvar_to(void(*thread_func)(void *), void * arg,
+GLT_func_prefix void glt_ult_create_syncvar_to(void(*thread_func)(void *), void * arg,
         GLT_syncvar *syncvar, int dest, int npreconds, ...) {
     GLT_ERROR_QTH;
 }
