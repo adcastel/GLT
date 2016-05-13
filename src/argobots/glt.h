@@ -18,11 +18,11 @@ void glt_finalize();
 GLT_ult * glt_ult_malloc(int number_of_ult);
 GLT_tasklet * glt_tasklet_malloc(int number_of_tasklets);
 
-void glt_ult_creation(void(*thread_func)(void *), void *arg, GLT_ult *new_ult);
-void glt_ult_creation_to(void(*thread_func)(void *), void *arg, GLT_ult *new_ult, int dest);
+void glt_ult_create(void(*thread_func)(void *), void *arg, GLT_ult *new_ult);
+void glt_ult_create_to(void(*thread_func)(void *), void *arg, GLT_ult *new_ult, int dest);
 
-void glt_tasklet_creation(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult);
-void glt_tasklet_creation_to(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult, int dest);
+void glt_tasklet_create(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult);
+void glt_tasklet_create_to(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult, int dest);
 
 void glt_yield();
 void glt_yield_to(GLT_ult ult);
@@ -207,9 +207,9 @@ void glt_tasklet_equal(GLT_tasklet tasklet1, GLT_tasklet tasklet2, GLT_bool *res
 void glt_tasklet_retain(GLT_tasklet tasklet);
 void glt_tasklet_release(GLT_tasklet tasklet);
 void glt_tasklet_get_arg(GLT_tasklet tasklet, void **arg);
-void glt_tasklet_creation_to_pool(GLT_pool pool, void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult);
+void glt_tasklet_create_to_pool(GLT_pool pool, void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult);
 
-void glt_ult_creation_to_pool(GLT_pool pool, void(*thread_func)(void *), void *arg, GLT_ult *new_ult);
+void glt_ult_create_to_pool(GLT_pool pool, void(*thread_func)(void *), void *arg, GLT_ult *new_ult);
 void glt_ult_self(GLT_ult *ult);
 void glt_ult_get_state(GLT_ult ult, GLT_ult_state *state);
 void glt_ult_get_last_pool(GLT_ult ult, GLT_pool *pool);
@@ -236,9 +236,9 @@ void glt_ult_attr_set_callback(GLT_ult_attr attr, void(*cb_func)(GLT_ult ult, vo
 void glt_ult_attr_set_migratable(GLT_ult_attr attr, GLT_bool flag);
 
 //HEADERS for QTHREADS extended functions
-void glt_ult_creation_syncvar(void(*thread_func)(void *), void * arg,
+void glt_ult_create_syncvar(void(*thread_func)(void *), void * arg,
         GLT_syncvar *syncvar);
-void glt_ult_creation_syncvar_to(void(*thread_func)(void *), void * arg,
+void glt_ult_create_syncvar_to(void(*thread_func)(void *), void * arg,
         GLT_syncvar *syncvar, int dest, int npreconds, ...);
 void glt_ult_get_thread(GLT_thread *thread, int *worker);
 void glt_ult_get_thread_unique(GLT_thread *thread, int *worker);
