@@ -168,8 +168,8 @@ typedef void*  GLT_ds_dictionary_cleanup;
 typedef void*  GLT_ds_dictionary_it; 
 typedef void*  GLT_subthread; 
 
-#define glt_ult_creation_precond qthread_fork_precond
-#define glt_ult_creation_precond_to qthread_fork_precond_to
+#define glt_ult_create_precond qthread_fork_precond
+#define glt_ult_create_precond_to qthread_fork_precond_to
 
 #endif
 
