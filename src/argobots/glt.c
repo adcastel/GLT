@@ -20,7 +20,7 @@ GLT_func_prefix void glt_end() {
 
 GLT_func_prefix void glt_init(int argc, char * argv[]) {
     int num_threads = get_nprocs();
-
+   
     main_team = (glt_team_t *) malloc(sizeof (glt_team_t));
     ABT_init(argc, argv);
 
