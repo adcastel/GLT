@@ -46,19 +46,23 @@ GLT_func_prefix void glt_init(int argc, char * argv[]) {
         setenv("QTHREAD_NUM_WORKERS_PER_SHEPHERD", "1", 1);
     }
 
-    if (num_threads == 1 && num_workers_per_thread > 1) {
-        setenv("QTHREAD_SHEPHERD_BOUNDARY", "node", 1);
-        setenv("QTHREAD_WORKER_UNIT", "core", 1);
-    }
+    if ((getenv("QTHREAD_SHEPHERD_BOUNDARY") == NULL) && 
+            (getenv("QTHREAD_WORKER_UNIT") == NULL)){
+        
+        if (num_threads == 1 && num_workers_per_thread > 1) {
+            setenv("QTHREAD_SHEPHERD_BOUNDARY", "node", 1);
+            setenv("QTHREAD_WORKER_UNIT", "core", 1);
+        }
 
-    if (num_threads > 1 && num_threads <= get_nprocs() / 2) {
-        setenv("QTHREAD_SHEPHERD_BOUNDARY", "core", 1);
-        setenv("QTHREAD_WORKER_UNIT", "core", 1);
-    }
+        if (num_threads > 1 && num_threads <= get_nprocs() / 2) {
+            setenv("QTHREAD_SHEPHERD_BOUNDARY", "core", 1);
+            setenv("QTHREAD_WORKER_UNIT", "core", 1);
+        }
 
-    if (num_threads > 1 && num_threads > get_nprocs() / 2) {
-        setenv("QTHREAD_SHEPHERD_BOUNDARY", "pu", 1);
-        setenv("QTHREAD_WORKER_UNIT", "pu", 1);
+        if (num_threads > 1 && num_threads > get_nprocs() / 2) {
+            setenv("QTHREAD_SHEPHERD_BOUNDARY", "pu", 1);
+            setenv("QTHREAD_WORKER_UNIT", "pu", 1);
+        }
     }
     setenv("QTHREAD_AFFINITY", "yes", 1);
 
