@@ -1,8 +1,8 @@
-#all: arg pth_arg
-all: pth_arg
+all: arg pth_arg
+
 ARGFLAGS := -I/$(HOME_ARG)/include -L/$(HOME_ARG)/lib -labt
 CC := gcc
-CFLAGS := -fPIC -I. $(ARGFLAGS) -DFASTGLT
+CFLAGS := -fPIC -I. $(ARGFLAGS) 
 
 OBJECTS := glt.o glt_wu.o glt_util.o glt_mutex.o glt_barrier.o glt_condition.o \
 	glt_timer.o glt_event.o glt_future_promise.o glt_pool.o \
@@ -20,7 +20,8 @@ endif
 arg: $(OBJECTS)
 	gcc -shared -o libglt.so $(OBJECTS) $(ARGFLAGS)
 
-pth_arg: glt_pthreads.o
+pth_arg: 
+	gcc -fPIC -I. -I/home/adcastel/argobots/include -L/home/adcastel/argobots/lib -labt -c -o glt_pthreads.o glt_pthreads.c -DFASTGLT
 	gcc -shared -o libgltpthread.so glt_pthreads.o $(ARGFLAGS) -DFASTGLT -ldl
 
 simple:
@@ -28,6 +29,5 @@ simple:
 #-I/home/adcastel/GLT/src/argobots $(ARGFLAGS)
 
 clean:
-	rm libgltpthread.so *.o
-#		rm *.so *.o
+	rm *.so *.o
 

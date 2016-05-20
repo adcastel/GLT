@@ -38,6 +38,7 @@ int main(int argc, char *argv)
       pthread_create(&th2[i], NULL, func2, NULL);
   }
 printf("CREADAS\n");
+sched_yield();
   for (int i=0;i<N;i++){
       pthread_join(th1[i], NULL);
       pthread_join(th2[i], NULL);
