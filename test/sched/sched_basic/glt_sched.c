@@ -8,12 +8,12 @@
 
 GLT_sched_config_var param_a = {
   .idx = 0,
-  .type = ABT_SCHED_CONFIG_INT
+  .type = GLT_SCHED_CONFIG_INT
 };
 
 GLT_sched_config_var param_b = {
   .idx = 1,
-  .type = ABT_SCHED_CONFIG_DOUBLE
+  .type = GLT_SCHED_CONFIG_DOUBLE
 };
 
 int main(int argc, char *argv[])

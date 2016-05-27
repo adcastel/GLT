@@ -1,15 +1,15 @@
-all: basic performance pthread sched
+all: bs perf pth sche
 
-basic:
+bs:
 	make -C basic
 
-performance:
+perf:
 	make -C performance
 
-pthread:
+pth:
 	make -C pthread
 
-sched:
+sche:
 	make -C sched
 
 clean:
