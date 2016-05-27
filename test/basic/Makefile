@@ -1,22 +1,19 @@
-
-
-
-
+HOME_GLT=/home/adcastel/GLT/
 
 all: basic fast_basic
 #DEB=-g
 
 basic:
-	gcc basic.c -o basic_mth -I/home/adcastel/GLT/src/massivethreads -L/home/adcastel/GLT/src/massivethreads/ -lglt -I/home/adcastel/massivethreads_wf/include -L/home/adcastel/massivethreads_wf/lib -lmyth  -lm $(DEB)
-	gcc basic.c -o basic_qth  -I/home/adcastel/GLT/src/qthreads -L/home/adcastel/GLT/src/qthreads/ -lglt -I/home/adcastel/qthreads/include -L/home/adcastel/qthreads/lib -lqthread -lm $(DEB)
-	gcc basic.c -o basic_pth  -I/home/adcastel/GLT/src/pthreads -L/home/adcastel/GLT/src/pthreads/ -lglt -lpthread -lm $(DEB)
-	gcc basic.c -o basic_arg -I/home/adcastel/GLT/src/argobots -L/home/adcastel/GLT/src/argobots/ -lglt -I/home/adcastel/argobots/include -L/home/adcastel/argobots/lib -labt  -lm $(DEB)
+	gcc basic.c -o basic_mth -I$(HOME_GLT)/src/massivethreads -L$(HOME_GLT)/src/massivethreads/ -lglt -I$(HOME_MTH)/include -L$(HOME_MTH)/lib -lmyth-native  -lm $(DEB)
+	gcc basic.c -o basic_qth  -I$(HOME_GLT)src/qthreads -L$(HOME_GLT)/src/qthreads/ -lglt -I$(HOME_QTH)/include -L$(HOME_QTH)/lib -lqthread -lm $(DEB)
+	gcc basic.c -o basic_pth  -I$(HOME_GLT)/src/pthreads -L$(HOME_GLT)/src/pthreads/ -lglt -lpthread -lm $(DEB)
+	gcc basic.c -o basic_arg -I$(HOME_GLT)/src/argobots -L$(HOME_GLT)/src/argobots/ -lglt -I$(HOME_ARG)/include -L$(HOME_ARG)/lib -labt  -lm $(DEB)
 
 fast_basic:
-	gcc basic.c -o basic_f_mth -I/home/adcastel/GLT/src/massivethreads -I/home/adcastel/massivethreads_wf/include -L/home/adcastel/massivethreads_wf/lib -lmyth  -lm -DFASTGLT $(DEB)
-	gcc basic.c -o basic_f_qth  -I/home/adcastel/GLT/src/qthreads -I/home/adcastel/qthreads/include -L/home/adcastel/qthreads/lib -lqthread -lm -DFASTGLT $(DEB)
-	gcc basic.c -o basic_f_pth  -I/home/adcastel/GLT/src/pthreads -lpthread -lm -DFASTGLT $(DEB)
-	gcc basic.c -o basic_f_arg -I/home/adcastel/GLT/src/argobots -I/home/adcastel/argobots/include -L/home/adcastel/argobots/lib -labt  -lm -DFASTGLT $(DEB)
+	gcc basic.c -o basic_f_mth -I/$(HOME_GLT)/src/massivethreads -I/$(HOME_MTH)/include -L/$(HOME_MTH)/lib -lmyth-native  -lm -DFASTGLT $(DEB)
+	gcc basic.c -o basic_f_qth  -I/$(HOME_GLT)/src/qthreads -I/$(HOME_QTH)/include -L/$(HOME_QTH)/lib -lqthread -lm -DFASTGLT $(DEB)
+	gcc basic.c -o basic_f_pth  -I/$(HOME_GLT)/src/pthreads -lpthread -lm -DFASTGLT $(DEB)
+	gcc basic.c -o basic_f_arg -I/$(HOME_GLT)/src/argobots -I/$(HOME_ARG)/include -L/$(HOME_ARG)/lib -labt  -lm -DFASTGLT $(DEB)
 
 clean: 
 	rm basic_pth basic_mth basic_qth basic_arg *_f_*
