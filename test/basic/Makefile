@@ -16,4 +16,4 @@ fast_basic:
 	gcc basic.c -o basic_f_arg -I/$(HOME_GLT)/src/argobots -I/$(HOME_ARG)/include -L/$(HOME_ARG)/lib -labt  -lm -DFASTGLT $(DEB)
 
 clean: 
-	rm basic_pth basic_mth basic_qth basic_arg *_f_*
+	rm basic_*
