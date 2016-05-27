@@ -31,12 +31,8 @@ GLT_func_prefix void glt_ult_create(void(*thread_func)(void *), void *arg, GLT_u
 
 GLT_func_prefix void glt_ult_create_to(void(*thread_func)(void *), void *arg, GLT_ult *new_ult, int dest) {
     ABT_pool pool;
-    printf("Voy a crear en %d que es menor que el numero de threads que es %d\n", dest, main_team->num_xstreams);
     ABT_xstream_get_main_pools(main_team->team[dest], 1, &pool);
-    printf("Obtengo pool\n");
     ABT_thread_create(pool, thread_func, arg, ABT_THREAD_ATTR_NULL, new_ult);
-        printf("creo ult\n");
-
 }
 
 
