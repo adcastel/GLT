@@ -1,4 +1,4 @@
-all: mth
+all: pth
 PTHFLAGS := -lpthread 
 CC := gcc
 CFLAGS := -fPIC -I. $(PTHFLAGS)
@@ -15,7 +15,7 @@ ifeq ($(GLT_DEBUG), 1)
     CFLAGS += -g
 endif
 
-mth: $(OBJECTS)
+pth: $(OBJECTS)
 	gcc -shared -o libglt.so $(OBJECTS) $(PTHFLAGS)
 
 clean:

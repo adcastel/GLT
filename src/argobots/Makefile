@@ -24,10 +24,6 @@ pth_arg:
 	gcc -fPIC -I. -I/home/adcastel/argobots/include -L/home/adcastel/argobots/lib -labt -c -o glt_pthreads.o glt_pthreads.c -DFASTGLT
 	gcc -shared -o libgltpthread.so glt_pthreads.o $(ARGFLAGS) -DFASTGLT -ldl
 
-simple:
-	gcc simple.c -o simple -I/home/adcastel/GLT/src/argobots -I/home/adcastel/argobots/include -L/home/adcastel/GLT/src/argobots -lgltpthread -DFASTGLT -ldl
-#-I/home/adcastel/GLT/src/argobots $(ARGFLAGS)
-
 clean:
 	rm *.so *.o
 

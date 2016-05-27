@@ -26,8 +26,5 @@ pth_qth:
 	gcc -fPIC -I. $(QTHFLAGS) -c -o glt_pthreads.o glt_pthreads.c -DFASTGLT
 	gcc -shared -o libgltpthread.so glt_pthreads.o $(QTHFLAGS) -DFASTGLT -ldl
 
-simple:
-	gcc simple.c -o simple -I/home/adcastel/GLT/src/argobots -I/home/adcastel/argobots/include -L/home/adcastel/GLT/src/argobots -lgltpthread -DFASTGLT -ldl
-	
 clean:
 	rm *.so *.o
