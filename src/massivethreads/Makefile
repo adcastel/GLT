@@ -24,8 +24,5 @@ pth_mth:
 	gcc -fPIC -I. -I/$(HOME_MTH)/include -L/$(HOME_MTH)/lib -lmyth-native -c -o glt_pthreads.o glt_pthreads.c -DFASTGLT
 	gcc -shared -o libgltpthread.so glt_pthreads.o $(MYTHFLAGS) -DFASTGLT -ldl
 
-simple:
-	gcc simple.c -o simple -I/home/adcastel/GLT/src/massivethreads -I/$(HOME_MTH)/include -L/home/adcastel/GLT/src/massivethreads -lgltpthread -DFASTGLT -ldl
-	
 clean:
 	rm *.so *.o
