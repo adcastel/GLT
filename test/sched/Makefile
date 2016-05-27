@@ -1,7 +1,16 @@
+all: sched_basic sched_config sched_full 
 
+sched_basic:
+	make -C sched_basic
 
-all:
-	gcc glt_sched.c -o glt_sched -I/home/adcastel/GLT/src/argobots -L/home/adcastel/GLT/src/argobots -lglt -I/home/adcastel/argobots/include -L/home/adcastel/argobots/lib -labt
-	gcc glt_sched.c -o glt_sched_f -I/home/adcastel/GLT/src/argobots -I/home/adcastel/argobots/include -L/home/adcastel/argobots/lib -labt -DFASTGLT
+sched_config:
+	make -C sched_config
+
+sched_full:
+	make -C sched_full
+
 clean:
-	rm glt_sched glt_sched_f
+	make -C sched_basic clean
+	make -C sched_config clean
+	make -C sched_full clean
+
