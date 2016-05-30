@@ -22,32 +22,22 @@ GLT_func_prefix GLT_tasklet * glt_tasklet_malloc(int number_of_tasklets) {
 }
 
 GLT_func_prefix void glt_ult_create(void(*thread_func)(void *), void *arg, GLT_ult *new_ult) {
-    ABT_xstream xstream;
-    ABT_xstream_self(&xstream);
-    ABT_pool pool;
-    ABT_xstream_get_main_pools(xstream, 1, &pool);
-    ABT_thread_create(pool, thread_func, arg, ABT_THREAD_ATTR_NULL, new_ult);
+    int rank = ABT_xstream_self_rank(&rank);
+    ABT_thread_create_on_xstream(main_team->team[rank], thread_func, arg, ABT_THREAD_ATTR_NULL, new_ult);
 }
 
 GLT_func_prefix void glt_ult_create_to(void(*thread_func)(void *), void *arg, GLT_ult *new_ult, int dest) {
-    ABT_pool pool;
-    ABT_xstream_get_main_pools(main_team->team[dest], 1, &pool);
-    ABT_thread_create(pool, thread_func, arg, ABT_THREAD_ATTR_NULL, new_ult);
+    ABT_thread_create_on_xstream(main_team->team[dest], thread_func, arg, ABT_THREAD_ATTR_NULL, new_ult);
 }
 
 
 GLT_func_prefix void glt_tasklet_create(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult) {
-    ABT_xstream xstream;
-    ABT_xstream_self(&xstream);
-    ABT_pool pool;
-    ABT_xstream_get_main_pools(xstream, 1, &pool);
-    ABT_task_create(pool, thread_func, arg, new_ult);
+    int rank = ABT_xstream_self_rank(&rank);
+    ABT_task_create_on_xstream(main_team->team[rank], thread_func, arg, new_ult);
 }
 
 GLT_func_prefix void glt_tasklet_create_to(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult, int dest) {
-    ABT_pool pool;
-    ABT_xstream_get_main_pools(main_team->team[dest], 1, &pool);
-    ABT_task_create(pool, thread_func, arg, new_ult);
+    ABT_task_create_on_xstream(main_team->team[dest], thread_func, arg, new_ult);
 }
 
 GLT_func_prefix void glt_yield() {
