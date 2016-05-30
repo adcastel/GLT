@@ -15,12 +15,14 @@
 #endif
 #include <math.h>
 #include <sys/time.h>
+//#define VERBOSE
+
 #ifndef VERBOSE
 #define TIMES 50
 #else
 #define TIMES 1
 #endif
-#define NUM_ULT 250
+#define NUM_ULT 2500
 
 
 /* structure to pass arguments to expand tasks */
@@ -32,12 +34,10 @@ typedef struct {
 
 
 void final_func(void *arguments) {
-    int *arg;
-    arg = (int *) arguments;
 
 #ifdef VERBOSE
 
-    printf("#ULT: %d Thread: %d (CPU: %d), pos: %d\n", *arg,glt_get_thread_num(),sched_getcpu(),pos);
+    printf("#ULT: %d Thread: %d (CPU: %d)\n", (int)arguments,glt_get_thread_num(),sched_getcpu());
 
 #endif
 }
@@ -65,15 +65,14 @@ void thread_func(void *arguments){
 
     for(i = 0; i < NUM_ULT; i++){
 #ifdef TASK
-        glt_tasklet_create_to(final_func, (void *) &i,&tasklets[i],glt_get_thread_num());        
+        glt_tasklet_create_to(final_func, (void *)i,&tasklets[i],glt_get_thread_num());        
 #else	    
-	glt_ult_create_to(final_func, (void *) &i,&ults[i],glt_get_thread_num());        
+	glt_ult_create_to(final_func, (void *)i,&ults[i],glt_get_thread_num());        
 #endif           
     }
     gettimeofday(&t_end_create, NULL);
 
     glt_yield();
-
     gettimeofday(&t_start_join, NULL);
     for (i = 0; i < NUM_ULT; i++) {
 #ifdef TASK
@@ -82,6 +81,7 @@ void thread_func(void *arguments){
 	glt_ult_join(&ults[i]);
 #endif     
    }
+   
     gettimeofday(&t_end_join, NULL);
 
     arg->create_time = (((t_end_create.tv_sec * 1000000 + t_end_create.tv_usec) -
@@ -89,7 +89,6 @@ void thread_func(void *arguments){
     
     arg->join_time = (((t_end_join.tv_sec * 1000000 + t_end_join.tv_usec) -
                 (t_start_join.tv_sec * 1000000 + t_start_join.tv_usec))/1000000.0)/NUM_ULT;
-    //printf("Create inner %f and join inner %f\n",arg->create_time,arg->join_time);
 }
     
 int main(int argc, char *argv[]) {
