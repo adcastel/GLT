@@ -60,8 +60,8 @@ GLT_func_prefix void glt_init(int argc, char * argv[]) {
         }
 
         if (num_threads > 1 && num_threads > get_nprocs() / 2) {
-            setenv("QTHREAD_SHEPHERD_BOUNDARY", "pu", 1);
-            setenv("QTHREAD_WORKER_UNIT", "pu", 1);
+            setenv("QTHREAD_SHEPHERD_BOUNDARY", "core", 1);
+            setenv("QTHREAD_WORKER_UNIT", "core", 1);
         }
     }
     setenv("QTHREAD_AFFINITY", "yes", 1);

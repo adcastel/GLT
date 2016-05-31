@@ -22,7 +22,7 @@
 #else
 #define TIMES 1
 #endif
-#define NUM_ULT 2500
+#define NUM_ULT 250
 
 
 /* structure to pass arguments to expand tasks */
