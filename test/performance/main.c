@@ -15,12 +15,13 @@
 #endif
 #include <math.h>
 #include <sys/time.h>
+#define VERBOSE
 #ifndef VERBOSE
 #define TIMES 50
 #else
 #define TIMES 1
 #endif
-#define NUM_ULT 250
+#define NUM_ULT 25
 
 
 /* structure to pass arguments to expand tasks */
@@ -37,7 +38,7 @@ void final_func(void *arguments) {
 
 #ifdef VERBOSE
 
-    printf("#ULT: %d Thread: %d (CPU: %d), pos: %d\n", *arg,glt_get_thread_num(),sched_getcpu(),pos);
+    printf("#ULT: %d Thread: %d (CPU: %d)\n", *arg,glt_get_thread_num(),sched_getcpu());
 
 #endif
 }
