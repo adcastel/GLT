@@ -161,6 +161,18 @@ typedef struct glt_team {
 #define GLT_ERROR_MYTH printf("Error: This feature is only supported by MassiveThredashreads implementation and you are using Argobots. Please use the query functions")
 #define GLT_LIB_ERROR printf("Error: This feature is in the API but it is not included in the Library\n")
 
+#ifdef PARANOID
+#define CHECK(x, y) do { \
+  int retval = (x); \
+  if (retval != (y);) { \
+    printf("Runtime error: %s returned %d at %s:%d", #x, retval, __FILE__, __LINE__); \
+  } \
+} while (0)
+#else
+#define CHECK(x, y) do { \
+  (x); \
+} while (0)
+#endif
 
 glt_team_t * main_team;
 
