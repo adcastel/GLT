@@ -30,6 +30,11 @@ int gsched_yield(void) {
     return 0;
 }
 
+int gpthread_yield(void) {
+    glt_yield();
+    return 0;
+}
+
 pthread_t gpthread_self(void) {
     GLT_ult ult;
     glt_ult_self(&ult);
