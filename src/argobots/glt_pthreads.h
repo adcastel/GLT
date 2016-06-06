@@ -28,6 +28,7 @@ extern "C" {
     int gpthread_create(pthread_t *pth, const pthread_attr_t * attr, void *(*func)(void*), void *args);
     int gpthread_join(pthread_t th, void**ret);
     int gsched_yield(void);
+    int gpthread_yield(void);
     pthread_t gpthread_self(void);
     void gpthread_exit(void *ret);
     int gpthread_detach(pthread_t th);
@@ -59,7 +60,8 @@ extern "C" {
 
 #define pthread_create gpthread_create
 #define pthread_join gpthread_join
-#define sched_yield gsched_yield 
+#define sched_yield gsched_yield
+#define pthread_yield gpthread_yield
 #define pthread_self gpthread_self
 #define pthread_exit gpthread_exit
 #define pthread_detach gpthread_detach
