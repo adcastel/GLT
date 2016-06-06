@@ -30,10 +30,12 @@ void glt_pthread_end() {
 }
 
 int gsched_yield(void) {
-    //printf("Antes del yield\n");
     glt_yield();
-        //printf("despues del yield\n");
+    return 0;
+}
 
+int gpthread_yield(void) {
+    glt_yield();
     return 0;
 }
 
