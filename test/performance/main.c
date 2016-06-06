@@ -15,13 +15,13 @@
 #endif
 #include <math.h>
 #include <sys/time.h>
-#define VERBOSE
+//#define VERBOSE
 #ifndef VERBOSE
 #define TIMES 50
 #else
 #define TIMES 1
 #endif
-#define NUM_ULT 25
+#define NUM_ULT 250
 
 
 /* structure to pass arguments to expand tasks */
@@ -39,6 +39,8 @@ void final_func(void *arguments) {
     printf("#ULT: %d Thread: %d (CPU: %d)\n", (int)arguments,glt_get_thread_num(),sched_getcpu());
 
 #endif
+
+
 }
 
 void thread_func(void *arguments){
@@ -88,6 +90,7 @@ void thread_func(void *arguments){
     
     arg->join_time = (((t_end_join.tv_sec * 1000000 + t_end_join.tv_usec) -
                 (t_start_join.tv_sec * 1000000 + t_start_join.tv_usec))/1000000.0)/NUM_ULT;
+  
 }
     
 int main(int argc, char *argv[]) {
