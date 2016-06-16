@@ -16,6 +16,6 @@ GLT_func_prefix int glt_get_num_threads() {
 
 GLT_func_prefix int glt_get_thread_num() {
     int rank;
-    ABT_xstream_self_rank(&rank);
+    CHECK(ABT_xstream_self_rank(&rank),ABT_SUCCESS);
     return rank;
 }
