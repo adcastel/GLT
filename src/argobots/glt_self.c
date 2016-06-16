@@ -23,27 +23,27 @@ GLT_func_prefix int glt_can_self() {
 #ifndef CORE
 
 GLT_func_prefix void glt_self_get_type(GLT_unit_type *type) {
-    ABT_self_get_type(type);
+    CHECK(ABT_self_get_type(type),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_self_is_primary(GLT_bool *flag) {
-    ABT_self_is_primary(flag);
+    CHECK(ABT_self_is_primary(flag),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_self_on_primary_xstream(GLT_bool *flag) {
-    ABT_self_on_primary_xstream(flag);
+    CHECK(ABT_self_on_primary_xstream(flag),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_self_get_last_pool_id(int *pool_id) {
-    ABT_self_get_last_pool_id(pool_id);
+    CHECK(ABT_self_get_last_pool_id(pool_id),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_self_suspend(void) {
-    ABT_self_suspend();
+    CHECK(ABT_self_suspend(),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_self_get_arg(void **arg) {
-    ABT_self_get_arg(arg);
+    CHECK(ABT_self_get_arg(arg),ABT_SUCCESS);
 }
 
 #endif
