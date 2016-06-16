@@ -11,19 +11,19 @@
 #endif
 
 GLT_func_prefix void glt_mutex_create(GLT_mutex * mutex) {
-    ABT_mutex_create(mutex);
+    CHECK(ABT_mutex_create(mutex),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_mutex_lock(GLT_mutex mutex) {
-    ABT_mutex_lock(mutex);
+    CHECK(ABT_mutex_lock(mutex),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_mutex_unlock(GLT_mutex mutex) {
-    ABT_mutex_unlock(mutex);
+    CHECK(ABT_mutex_unlock(mutex),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_mutex_free(GLT_mutex * mutex) {
-    ABT_mutex_free(mutex);
+    CHECK(ABT_mutex_free(mutex),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_mutex_trylock(GLT_bool * locked, GLT_mutex mutex) {
@@ -46,7 +46,7 @@ GLT_func_prefix void glt_mutex_lock_low(GLT_mutex mutex) {
 }
 
 GLT_func_prefix void glt_mutex_spinlock(GLT_mutex mutex) {
-    ABT_mutex_spinlock(mutex);
+    CHECK(ABT_mutex_spinlock(mutex),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_mutex_unlock_se(GLT_mutex mutex) {
@@ -54,6 +54,6 @@ GLT_func_prefix void glt_mutex_unlock_se(GLT_mutex mutex) {
 }
 
 GLT_func_prefix void glt_mutex_equal(GLT_mutex mutex1, GLT_mutex mutex2, GLT_bool *result) {
-    ABT_mutex_equal(mutex1, mutex2, result);
+    CHECK(ABT_mutex_equal(mutex1, mutex2, result),ABT_SUCCESS);
 }
 #endif
