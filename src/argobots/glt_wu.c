@@ -22,72 +22,74 @@ GLT_func_prefix GLT_tasklet * glt_tasklet_malloc(int number_of_tasklets) {
 }
 
 GLT_func_prefix void glt_ult_create(void(*thread_func)(void *), void *arg, GLT_ult *new_ult) {
-    int rank = ABT_xstream_self_rank(&rank);
-    ABT_thread_create_on_xstream(main_team->team[rank], thread_func, arg, ABT_THREAD_ATTR_NULL, new_ult);
+    int rank;
+    CHECK(ABT_xstream_self_rank(&rank),ABT_SUCCESS);
+    CHECK(ABT_thread_create_on_xstream(main_team->team[rank], thread_func, arg, ABT_THREAD_ATTR_NULL, new_ult),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_ult_create_to(void(*thread_func)(void *), void *arg, GLT_ult *new_ult, int dest) {
-    ABT_thread_create_on_xstream(main_team->team[dest], thread_func, arg, ABT_THREAD_ATTR_NULL, new_ult);
+    CHECK(ABT_thread_create_on_xstream(main_team->team[dest], thread_func, arg, ABT_THREAD_ATTR_NULL, new_ult),ABT_SUCCESS);
 }
 
 
 GLT_func_prefix void glt_tasklet_create(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult) {
-    int rank = ABT_xstream_self_rank(&rank);
-    ABT_task_create_on_xstream(main_team->team[rank], thread_func, arg, new_ult);
+    int rank;
+    CHECK(ABT_xstream_self_rank(&rank),ABT_SUCCESS);
+    CHECK(ABT_task_create_on_xstream(main_team->team[rank], thread_func, arg, new_ult),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_tasklet_create_to(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult, int dest) {
-    ABT_task_create_on_xstream(main_team->team[dest], thread_func, arg, new_ult);
+    CHECK(ABT_task_create_on_xstream(main_team->team[dest], thread_func, arg, new_ult),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_yield() {
-    ABT_thread_yield();
+    CHECK(ABT_thread_yield(),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_yield_to(GLT_ult ult) {
-    ABT_thread_yield_to(ult);
+    CHECK(ABT_thread_yield_to(ult),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_ult_join(GLT_ult *ult) {
-    ABT_thread_free(ult);
+    CHECK(ABT_thread_free(ult),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_tasklet_join(GLT_tasklet *tasklet) {
-    ABT_task_free(tasklet);
+    CHECK(ABT_task_free(tasklet),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_ult_get_id(GLT_ult_id * id, GLT_ult ult) {
-    ABT_thread_get_id(ult, id);
+    CHECK(ABT_thread_get_id(ult, id),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_workunit_get_thread_id(GLT_thread_id *id) {
-    ABT_xstream_self_rank(id);
+    CHECK(ABT_xstream_self_rank(id),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_ult_migrate_self_to(GLT_thread_id id) {
     GLT_ult ult;
-    ABT_thread_self(&ult);
-    ABT_thread_migrate_to_xstream(ult, main_team->team[id]);
+    CHECK(ABT_thread_self(&ult),ABT_SUCCESS);
+    CHECK(ABT_thread_migrate_to_xstream(ult, main_team->team[id]),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_tasklet_self(GLT_tasklet *tasklet) {
-    ABT_task_self(tasklet);
+    CHECK(ABT_task_self(tasklet),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_ult_self(GLT_ult *ult) {
-    ABT_thread_self(ult);
+    CHECK(ABT_thread_self(ult),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_ult_exit() {
-    ABT_thread_exit();
+    CHECK(ABT_thread_exit(),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_ult_cancel(GLT_ult ult) {
-    ABT_thread_cancel(ult);
+    CHECK(ABT_thread_cancel(ult),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_tasklet_cancel(GLT_tasklet tasklet) {
-    ABT_task_cancel(tasklet);
+    CHECK(ABT_task_cancel(tasklet),ABT_SUCCESS);
 }
 
 // Extended functions
@@ -103,47 +105,47 @@ GLT_func_prefix int can_extended_tasklets() {
 #ifndef CORE
 
 GLT_func_prefix void glt_tasklet_get_thread(GLT_tasklet tasklet, GLT_thread *thread) {
-    ABT_task_get_xstream(tasklet, thread);
+    CHECK(ABT_task_get_xstream(tasklet, thread),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_tasklet_get_state(GLT_tasklet tasklet, GLT_tasklet_state *state) {
-    ABT_task_get_state(tasklet, state);
+    CHECK(ABT_task_get_state(tasklet, state),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_tasklet_get_last_pool(GLT_tasklet tasklet, GLT_pool *pool) {
-    ABT_task_get_last_pool(tasklet, pool);
+    CHECK(ABT_task_get_last_pool(tasklet, pool),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_tasklet_get_last_pool_id(GLT_tasklet tasklet, int *id) {
-    ABT_task_get_last_pool_id(tasklet, id);
+    CHECK(ABT_task_get_last_pool_id(tasklet, id),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_tasklet_set_migratable(GLT_tasklet tasklet, GLT_bool flag) {
-    ABT_task_set_migratable(tasklet, flag);
+    CHECK(ABT_task_set_migratable(tasklet, flag),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_tasklet_is_migratable(GLT_tasklet tasklet, GLT_bool *flag) {
-    ABT_task_is_migratable(tasklet, flag);
+    CHECK(ABT_task_is_migratable(tasklet, flag),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_tasklet_equal(GLT_tasklet tasklet1, GLT_tasklet tasklet2, GLT_bool *result) {
-    ABT_task_equal(tasklet1, tasklet2, result);
+    CHECK(ABT_task_equal(tasklet1, tasklet2, result),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_tasklet_retain(GLT_tasklet tasklet) {
-    ABT_task_retain(tasklet);
+    CHECK(ABT_task_retain(tasklet),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_tasklet_release(GLT_tasklet tasklet) {
-    ABT_task_release(tasklet);
+    CHECK(ABT_task_release(tasklet),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_tasklet_get_arg(GLT_tasklet tasklet, void **arg) {
-    ABT_task_get_arg(tasklet, arg);
+    CHECK(ABT_task_get_arg(tasklet, arg),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_tasklet_create_to_pool(GLT_pool pool, void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult) {
-        ABT_task_create(pool, thread_func, arg, new_ult);
+        CHECK(ABT_task_create(pool, thread_func, arg, new_ult),ABT_SUCCESS);
 }
 
 
@@ -162,98 +164,98 @@ GLT_func_prefix int can_extended_ults() {
 #ifndef CORE
 
 GLT_func_prefix void glt_ult_get_state(GLT_ult ult, GLT_ult_state *state) {
-    ABT_thread_get_state(ult, state);
+    CHECK(ABT_thread_get_state(ult, state),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_ult_get_last_pool(GLT_ult ult, GLT_pool *pool) {
-    ABT_thread_get_last_pool(ult, pool);
+    CHECK(ABT_thread_get_last_pool(ult, pool),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_ult_get_last_pool_id(GLT_ult ult, int *id) {
-    ABT_thread_get_last_pool_id(ult, id);
+    CHECK(ABT_thread_get_last_pool_id(ult, id),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_ult_resume(GLT_ult ult) {
-    ABT_thread_resume(ult);
+    CHECK(ABT_thread_resume(ult),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_ult_migrate_to_thread(GLT_ult ult, GLT_thread thread) {
-    ABT_thread_migrate_to_xstream(ult, thread);
+    CHECK(ABT_thread_migrate_to_xstream(ult, thread),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_ult_migrate_to_scheduler(GLT_ult ult, GLT_sched sched) {
-    ABT_thread_migrate_to_sched(ult, sched);
+    CHECK(ABT_thread_migrate_to_sched(ult, sched),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_ult_migrate_to_pool(GLT_ult ult, GLT_pool pool) {
-    ABT_thread_migrate_to_pool(ult, pool);
+    CHECK(ABT_thread_migrate_to_pool(ult, pool),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_ult_migrate(GLT_ult ult) {
-    ABT_thread_migrate(ult);
+    CHECK(ABT_thread_migrate(ult),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_ult_set_callback(GLT_ult ult, void(*cb_func)(GLT_ult ult, void *cb_arg), void *cb_arg) {
-    ABT_thread_set_callback(ult, cb_func, cb_arg);
+    CHECK(ABT_thread_set_callback(ult, cb_func, cb_arg),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_ult_set_migratable(GLT_ult ult, GLT_bool flag) {
-    ABT_thread_set_migratable(ult, flag);
+    CHECK(ABT_thread_set_migratable(ult, flag),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_ult_is_migratable(GLT_ult ult, GLT_bool *flag) {
-    ABT_thread_is_migratable(ult, flag);
+    CHECK(ABT_thread_is_migratable(ult, flag),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_ult_is_primary(GLT_ult ult, GLT_bool *flag) {
-    ABT_thread_is_primary(ult, flag);
+    CHECK(ABT_thread_is_primary(ult, flag),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_ult_equal(GLT_ult ult1, GLT_ult ult2, GLT_bool * result) {
-    ABT_thread_equal(ult1, ult2, result);
+    CHECK(ABT_thread_equal(ult1, ult2, result),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_ult_retain(GLT_ult ult) {
-    ABT_thread_retain(ult);
+    CHECK(ABT_thread_retain(ult),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_ult_release(GLT_ult ult) {
-    ABT_thread_release(ult);
+    CHECK(ABT_thread_release(ult),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_ult_get_stacksize(GLT_ult ult, size_t *stacksize) {
-    ABT_thread_get_stacksize(ult, stacksize);
+    CHECK(ABT_thread_get_stacksize(ult, stacksize),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_ult_get_arg(GLT_ult ult, void **arg) {
-    ABT_thread_get_arg(ult, arg);
+    CHECK(ABT_thread_get_arg(ult, arg),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_ult_attr_create(GLT_ult_attr *newattr) {
-    ABT_thread_attr_create(newattr);
+    CHECK(ABT_thread_attr_create(newattr),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_ult_attr_free(GLT_ult_attr *attr) {
-    ABT_thread_attr_free(attr);
+    CHECK(ABT_thread_attr_free(attr),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_ult_attr_set_stacksize(GLT_ult_attr attr, size_t stacksize) {
-    ABT_thread_attr_set_stacksize(attr, stacksize);
+    CHECK(ABT_thread_attr_set_stacksize(attr, stacksize),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_ult_attr_get_stacksize(GLT_ult_attr attr, size_t *stacksize) {
-    ABT_thread_attr_get_stacksize(attr, stacksize);
+    CHECK(ABT_thread_attr_get_stacksize(attr, stacksize),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_ult_attr_set_callback(GLT_ult_attr attr, void(*cb_func)(GLT_ult ult, void *cb_arg), void *cb_arg) {
-    ABT_thread_attr_set_callback(attr, cb_func, cb_arg);
+    CHECK(ABT_thread_attr_set_callback(attr, cb_func, cb_arg),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_ult_attr_set_migratable(GLT_ult_attr attr, GLT_bool flag) {
-    ABT_thread_attr_set_migratable(attr, flag);
+    CHECK(ABT_thread_attr_set_migratable(attr, flag),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_ult_create_to_pool(GLT_pool pool, void(*thread_func)(void *), void *arg, GLT_ult *new_ult) {
-    ABT_thread_create(pool, thread_func, arg, ABT_THREAD_ATTR_NULL, new_ult);
+    CHECK(ABT_thread_create(pool, thread_func, arg, ABT_THREAD_ATTR_NULL, new_ult),ABT_SUCCESS);
 }
 #endif /*#ifndef CORE*/
