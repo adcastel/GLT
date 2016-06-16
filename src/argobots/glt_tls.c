@@ -23,18 +23,18 @@ GLT_func_prefix int glt_can_tls_functions() {
 #ifndef CORE
 
 GLT_func_prefix void glt_key_create(void(*destructor)(void *value), GLT_key *newkey) {
-    ABT_key_create(destructor, newkey);
+    CHECK(ABT_key_create(destructor, newkey),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_key_free(GLT_key *key) {
-    ABT_key_free(key);
+    CHECK(ABT_key_free(key),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_key_set(GLT_key key, void *value) {
-    ABT_key_set(key, value);
+    CHECK(ABT_key_set(key, value),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_key_get(GLT_key key, void **value) {
-    ABT_key_get(key, value);
+    CHECK(ABT_key_get(key, value),ABT_SUCCESS);
 }
 #endif
