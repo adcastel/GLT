@@ -24,7 +24,7 @@ GLT_func_prefix int glt_can_manage_pools() {
 GLT_func_prefix void glt_pool_create(GLT_pool_def *def, GLT_pool_config config,
         GLT_pool *newpool) {
     if (main_team->num_pools < main_team->max_elem) {
-        ABT_pool_create(def, config, newpool);
+        CHECK(ABT_pool_create(def, config, newpool),ABT_SUCCESS);
         main_team->pools[main_team->num_pools] = newpool;
         main_team->num_pools++;
         printf("Creada nueva pool y con esta llevamos %d\n",main_team->num_pools);
@@ -36,7 +36,7 @@ GLT_func_prefix void glt_pool_create(GLT_pool_def *def, GLT_pool_config config,
 GLT_func_prefix void glt_pool_create_basic(GLT_pool_kind kind,
         GLT_pool_access access, GLT_bool automatic, GLT_pool *newpool) {
     if (main_team->num_pools < main_team->max_elem) {
-        ABT_pool_create_basic(kind, access, automatic, newpool);
+        CHECK(ABT_pool_create_basic(kind, access, automatic, newpool),ABT_SUCCESS);
         main_team->pools[main_team->num_pools] = newpool;
         main_team->num_pools++;
                 printf("Creada nueva basic pool y con esta llevamos %d\n",main_team->num_pools);
@@ -47,66 +47,66 @@ GLT_func_prefix void glt_pool_create_basic(GLT_pool_kind kind,
 }
 
 GLT_func_prefix void glt_pool_free(GLT_pool *pool) {
-    ABT_pool_free(pool);
+    CHECK(ABT_pool_free(pool),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_pool_get_access(GLT_pool pool, GLT_pool_access *access) {
-    ABT_pool_get_access(pool, access);
+    CHECK(ABT_pool_get_access(pool, access),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_pool_get_total_size(GLT_pool pool, size_t *size) {
-    ABT_pool_get_total_size(pool, size);
+    CHECK(ABT_pool_get_total_size(pool, size),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_pool_get_size(GLT_pool pool, size_t *size) {
-    ABT_pool_get_size(pool, size);
+    CHECK(ABT_pool_get_size(pool, size),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_pool_pop(GLT_pool pool, GLT_unit *p_unit) {
-    ABT_pool_pop(pool, p_unit);
+    CHECK(ABT_pool_pop(pool, p_unit),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_pool_push(GLT_pool pool, GLT_unit p_unit) {
-    ABT_pool_push(pool, p_unit);
+    CHECK(ABT_pool_push(pool, p_unit),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_pool_remove(GLT_pool pool, GLT_unit p_unit) {
-    ABT_pool_remove(pool, p_unit);
+    CHECK(ABT_pool_remove(pool, p_unit),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_pool_set_data(GLT_pool pool, void *data) {
-    ABT_pool_set_data(pool, data);
+    CHECK(ABT_pool_set_data(pool, data),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_pool_get_data(GLT_pool pool, void **data) {
-    ABT_pool_get_data(pool, data);
+    CHECK(ABT_pool_get_data(pool, data),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_pool_add_sched(GLT_pool pool, GLT_sched sched) {
-    ABT_pool_add_sched(pool, sched);
+    CHECK(ABT_pool_add_sched(pool, sched),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_pool_get_id(GLT_pool pool, int *id) {
-    ABT_pool_get_id(pool, id);
+    CHECK(ABT_pool_get_id(pool, id),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_pool_create_scheduler(GLT_sched_def *def, int num_pools,
         GLT_pool *pools, GLT_sched_config config, GLT_sched *newsched) {
-    ABT_sched_create(def, num_pools, pools, config, newsched);
+    CHECK(ABT_sched_create(def, num_pools, pools, config, newsched),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_pool_create_basic_scheduler(GLT_sched_predef predef,
         int num_pools, GLT_pool *pools, GLT_sched_config config,
         GLT_sched *newsched) {
-    ABT_sched_create_basic(predef, num_pools, pools, config, newsched);
+    CHECK(ABT_sched_create_basic(predef, num_pools, pools, config, newsched),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_pool_scheduler_get_pools(GLT_sched sched, int max_pools,
         int idx, GLT_pool *pools) {
-    ABT_sched_get_pools(sched, max_pools, idx, pools);
+    CHECK(ABT_sched_get_pools(sched, max_pools, idx, pools),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_pool_scheduler_get_num_pools(GLT_sched sched, int *num_pools) {
-    ABT_sched_get_num_pools(sched, num_pools);
+    CHECK(ABT_sched_get_num_pools(sched, num_pools),ABT_SUCCESS);
 }
 #endif
