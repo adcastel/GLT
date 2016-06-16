@@ -25,7 +25,7 @@ GLT_func_prefix int glt_can_manage_scheduler() {
 */
 
 GLT_func_prefix void glt_scheduler_config_free(GLT_sched_config *config) {
-    ABT_sched_config_free(config);
+    CHECK(ABT_sched_config_free(config),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_scheduler_create(GLT_sched_def *def, int num_threads,
@@ -33,9 +33,9 @@ GLT_func_prefix void glt_scheduler_create(GLT_sched_def *def, int num_threads,
     ABT_pool pools[num_threads];
     
     for (int i=0;i<num_threads;i++){
-        ABT_xstream_get_main_pools(main_team->team[threads_id[i]],1,&pools[i]);
+        CHECK(ABT_xstream_get_main_pools(main_team->team[threads_id[i]],1,&pools[i]),ABT_SUCCESS);
     }
-    ABT_sched_create(def, num_threads, pools, config, newsched);
+    CHECK(ABT_sched_create(def, num_threads, pools, config, newsched),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_schededuler_create_basic(GLT_sched_predef predef,
@@ -44,41 +44,41 @@ GLT_func_prefix void glt_schededuler_create_basic(GLT_sched_predef predef,
     ABT_pool pools[num_threads];
     
     for (int i=0;i<num_threads;i++){
-        ABT_xstream_get_main_pools(main_team->team[threads_id[i]],1,&pools[i]);
+        CHECK(ABT_xstream_get_main_pools(main_team->team[threads_id[i]],1,&pools[i]),ABT_SUCCESS);
     }
-    ABT_sched_create_basic(predef, num_threads, pools, config, newsched);
+    CHECK(ABT_sched_create_basic(predef, num_threads, pools, config, newsched),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_scheduler_free(GLT_sched *sched) {
-    ABT_sched_free(sched);
+    CHECK(ABT_sched_free(sched),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_scheduler_finish(GLT_sched sched) {
-    ABT_sched_finish(sched);
+    CHECK(ABT_sched_finish(sched),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_scheduler_exit(GLT_sched sched) {
-    ABT_sched_exit(sched);
+    CHECK(ABT_sched_exit(sched),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_scheduler_has_to_stop(GLT_sched sched, GLT_bool *stop) {
-    ABT_sched_has_to_stop(sched, stop);
+    CHECK(ABT_sched_has_to_stop(sched, stop),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_scheduler_set_data(GLT_sched sched, void *data) {
-    ABT_sched_set_data(sched, data);
+    CHECK(ABT_sched_set_data(sched, data),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_scheduler_get_data(GLT_sched sched, void **data) {
-    ABT_sched_get_data(sched, data);
+    CHECK(ABT_sched_get_data(sched, data),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_scheduler_get_size(GLT_sched sched, size_t *size) {
-    ABT_sched_get_size(sched, size);
+    CHECK(ABT_sched_get_size(sched, size),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_scheduler_get_total_size(GLT_sched sched, size_t *size) {
-    ABT_sched_get_total_size(sched, size);
+    CHECK(ABT_sched_get_total_size(sched, size),ABT_SUCCESS);
 }
 /*
 #endif
