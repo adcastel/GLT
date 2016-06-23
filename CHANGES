@@ -1,5 +1,26 @@
 
 =============================================================================== 
+                               Changes in 2.0 (Jul-2016)
+===============================================================================
+
+  - Pthreads API implemented over GLT (adcastel@uji.es)
+
+=============================================================================== 
+                               Changes in 1.2 (Jun-2016)
+===============================================================================
+
+  - Added TLS module support for Qthreads library to complete Pthreads API and  
+    moved to the CORE part(adcastel@uji.es)
+
+=============================================================================== 
+                               Changes in 1.1 (Jun-2016)
+===============================================================================
+
+  - Now, work units are created directly into an ES when Argobots is used 
+    instead of extracting the needed pool (Internally the mechanism is equal) 
+    (adcastel@uji.es)
+
+=============================================================================== 
                                Changes in 1.0 (May-2016)
 ===============================================================================
 
