@@ -16,6 +16,9 @@ void __attribute__((destructor)) glt_end(void);
 void glt_init(int argc, char * argv[]);
 void glt_finalize();
 
+void qth_tls_init(int nthreads);
+void qth_tls_fini(void);
+
 GLT_ult * glt_ult_malloc(int number_of_ult);
 GLT_tasklet * glt_tasklet_malloc(int number_of_tasklets);
 
@@ -80,6 +83,11 @@ void glt_scheduler_set_data(GLT_sched sched, void *data);
 void glt_scheduler_get_data(GLT_sched sched, void **data);
 void glt_scheduler_get_size(GLT_sched sched, size_t *size);
 void glt_scheduler_get_total_size(GLT_sched sched, size_t *size);
+
+void glt_key_create(void(*destructor)(void *value), GLT_key *newkey);
+void glt_key_free(GLT_key *key);
+void glt_key_set(GLT_key key, void *value);
+void glt_key_get(GLT_key key, void **value);
 
 int glt_can_extended_basic();
 int glt_can_atomic_functions();
@@ -336,11 +344,6 @@ void glt_promise_wait(GLT_promise promise);
 void glt_promise_test(GLT_promise promise, GLT_bool *flag);
 void glt_promise_set(GLT_promise promise, void * value);
 
-void glt_key_create(void(*destructor)(void *value), GLT_key *newkey);
-void glt_key_free(GLT_key *key);
-void glt_key_set(GLT_key key, void *value);
-void glt_key_get(GLT_key key, void **value);
-
 void glt_mutex_lock_low(GLT_mutex mutex);
 void glt_mutex_spinlock(GLT_mutex mutex);
 void glt_mutex_unlock_se(GLT_mutex mutex);
@@ -466,11 +469,6 @@ void glt_felock_wait_lock(GLT_bool *lock, GLT_felock felock, int val);
 void glt_felock_unlock(GLT_bool *unlock, GLT_felock felock);
 void glt_felock_status(GLT_felock_status *status, GLT_felock felock);
 void glt_felock_set_unlock(GLT_felock felock, int val);
-
-void glt_key_create(void(*destructor)(void *value), GLT_key *newkey);
-void glt_key_free(GLT_key *key);
-void glt_key_set(GLT_key key, void *value);
-void glt_key_get(GLT_key key, void **value);
 
 void glt_log_start();
 void glt_log_pause();
