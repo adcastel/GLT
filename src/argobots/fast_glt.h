@@ -18,11 +18,11 @@
 #include <glt_timer.c>
 #include <glt_util.c>
 #include <glt_scheduler.c>
+#include <glt_tls.c>
 
 //Extended functions
 #include <glt_event.c>
 #include <glt_future_promise.c>
-#include <glt_tls.c>
 #include <glt_pool.c>
 #include<glt_self.c>
 #include<glt_thread.c>
