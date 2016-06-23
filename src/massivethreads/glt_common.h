@@ -37,6 +37,8 @@ typedef struct myth_timer {
 #define GLT_bool int
 #define GLT_thread_id int
 #define GLT_ult_id int
+#define GLT_key myth_key_t
+
 typedef void * GLT_sched;
 typedef void * GLT_sched_config;
 
@@ -109,7 +111,6 @@ typedef enum  {
 #define GLT_wsapi_decide_f myth_wsapi_decidefn_t
 #define GLT_wsapi_steal_f myth_steal_func_t
 //Shared
-#define GLT_key myth_key_t
 
 #include <sys/socket.h>
 #include <poll.h>
