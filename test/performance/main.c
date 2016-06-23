@@ -91,6 +91,7 @@ void thread_func(void *arguments){
     arg->join_time = (((t_end_join.tv_sec * 1000000 + t_end_join.tv_usec) -
                 (t_start_join.tv_sec * 1000000 + t_start_join.tv_usec))/1000000.0)/NUM_ULT;
   
+    //printf("Threads: %d =>Time creating ULTs %f. Time joining ULTs %f\n",glt_get_thread_num(),arg->create_time,arg->join_time);
 }
     
 int main(int argc, char *argv[]) {
