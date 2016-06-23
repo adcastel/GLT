@@ -27,6 +27,23 @@
 #include <qthread/cacheline.h>
 #include <qthread/qalloc.h>
 
+#define QTH_TLS_KEY_SIZE 256
+
+typedef unsigned int qth_key_t;
+
+typedef struct qth_tls_entry
+{
+	aligned_t th;
+	qth_key_t key;
+	void *value;
+}qth_tls_entry,*qth_tls_entry_t;
+
+aligned_t g_qth_tls_lock;
+qth_tls_entry *g_qth_tls_list;
+int g_qth_tls_list_size;
+int g_qth_tls_key_status[QTH_TLS_KEY_SIZE];
+
+
 #define GLT_ult aligned_t
 #define GLT_tasklet aligned_t
 #define GLT_thread qthread_shepherd_id_t
@@ -37,6 +54,8 @@
 #define GLT_bool int
 #define GLT_thread_id int
 #define GLT_ult_id int
+#define GLT_key qth_key_t
+ 
 typedef void* GLT_sched;
 typedef void* GLT_sched_config;
 
@@ -149,7 +168,6 @@ typedef int  GLT_felock_status;
 typedef void*  GLT_pickle; 
 typedef void*  GLT_wsapi_decide_f;
 typedef void*  GLT_wsapi_steal_f; 
-typedef void* GLT_key;
 
 
 #define glt_ult_create_precond qthread_fork_precond
