@@ -16,6 +16,8 @@
 #include <glt_timer.c>
 #include <glt_util.c>
 #include <glt_scheduler.c>
+#include <glt_tls.c>
+
 
 //Extended functions
 
