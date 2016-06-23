@@ -24,6 +24,8 @@
 #define GLT_bool ABT_bool
 #define GLT_thread_id int
 #define GLT_ult_id ABT_thread_id
+#define GLT_key ABT_key
+
 #define GLT_sched ABT_sched
 #define GLT_sched_config ABT_sched_config
 #define GLT_sched_config_var ABT_sched_config_var
@@ -102,7 +104,6 @@ typedef void* GLT_pickle;
 typedef void* GLT_wsapi_decide_f;
 typedef void* GLT_wsapi_steal_f;
 //Shared
-#define GLT_key ABT_key
 
 //QTHREADS
 #include <sys/socket.h>
