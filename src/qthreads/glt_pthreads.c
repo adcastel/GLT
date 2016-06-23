@@ -86,23 +86,23 @@ void gpthread_testcancel(void) {
 }
 
 int gpthread_key_create(pthread_key_t *key, void (*destructor) (void *)) {
-    //glt_key_create(destructor, (GLT_key *) & key);
+    glt_key_create(destructor, (GLT_key *) & key);
     return 0;
 }
 
 int gpthread_key_delete(pthread_key_t key) {
-    //glt_key_free((GLT_key *) & key);
+    glt_key_free((GLT_key *) & key);
     return 0;
 }
 
 void *gpthread_getspecific(pthread_key_t key) {
     void * value;
-    //glt_key_get(&key, &value);
+    glt_key_get(key, &value);
     return value;
 }
 
 int gpthread_setspecific(pthread_key_t key, const void *ptr) {
-    //glt_key_set(&key, (void *) ptr);
+    glt_key_set(key, (void *) ptr);
     return 0;
 }
 
