@@ -84,10 +84,15 @@ void glt_scheduler_get_data(GLT_sched sched, void **data);
 void glt_scheduler_get_size(GLT_sched sched, size_t *size);
 void glt_scheduler_get_total_size(GLT_sched sched, size_t *size);
 
+void glt_key_create(void(*destructor)(void *value), GLT_key *newkey);
+void glt_key_free(GLT_key *key);
+void glt_key_set(GLT_key key, void *value);
+void glt_key_get(GLT_key key, void **value);
+
 int glt_can_wsapi_functions();
 int glt_can_prof_functions();
 int glt_can_log_functions();
-int glt_can_tls_functions();
+//int glt_can_tls_functions();
 int can_felock_functions();
 int can_extended_workunits();
 
@@ -140,10 +145,7 @@ void glt_felock_unlock(GLT_bool *unlock, GLT_felock felock);
 void glt_felock_status(GLT_felock_status *status, GLT_felock felock);
 void glt_felock_set_unlock(GLT_felock felock, int val);
 
-void glt_key_create(void(*destructor)(void *value), GLT_key *newkey);
-void glt_key_free(GLT_key *key);
-void glt_key_set(GLT_key key, void *value);
-void glt_key_get(GLT_key key, void **value);
+
 
 void glt_log_start();
 void glt_log_pause();
