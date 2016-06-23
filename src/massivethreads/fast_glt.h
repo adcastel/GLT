@@ -16,9 +16,9 @@
 #include <glt_timer.c>
 #include <glt_util.c>
 #include <glt_scheduler.c>
+#include <glt_tls.c>
 
 #include <glt_felock.c>
-#include <glt_tls.c>
 #include <glt_prof_log.c>
 #include <glt_wsapi.c>
 #include <glt_argobots.c>
