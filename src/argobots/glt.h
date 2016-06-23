@@ -82,10 +82,15 @@ void glt_scheduler_get_data(GLT_sched sched, void **data);
 void glt_scheduler_get_size(GLT_sched sched, size_t *size);
 void glt_scheduler_get_total_size(GLT_sched sched, size_t *size);
 
+void glt_key_create(void(*destructor)(void *value), GLT_key *newkey);
+void glt_key_free(GLT_key *key);
+void glt_key_set(GLT_key key, void *value);
+void glt_key_get(GLT_key key, void **value);
+
 int glt_can_event_functions();
 int glt_can_future_functions();
 int glt_can_promise_functions();
-int glt_can_tls_functions();
+//int glt_can_tls_functions();
 int glt_can_extended_mutex();
 int glt_can_manage_pools();
 //int glt_can_manage_scheduler();
@@ -131,11 +136,6 @@ void glt_promise_free(GLT_promise *promise);
 void glt_promise_wait(GLT_promise promise);
 void glt_promise_test(GLT_promise promise, GLT_bool *flag);
 void glt_promise_set(GLT_promise promise, void * value);
-
-void glt_key_create(void(*destructor)(void *value), GLT_key *newkey);
-void glt_key_free(GLT_key *key);
-void glt_key_set(GLT_key key, void *value);
-void glt_key_get(GLT_key key, void **value);
 
 void glt_mutex_lock_low(GLT_mutex mutex);
 void glt_mutex_spinlock(GLT_mutex mutex);
