@@ -11,7 +11,7 @@ Common API for Lightweight Thread Implementations.
 
 --------------------------------------------------------------------------------
 
-			GLT Release 1.0
+			GLT Release 2.0
 
 GLT is a common API for HPC lightweight thread (LWT) libraries. It supports 
 MassiveThreads, Qthreads, and Argobots as underlying LWT solutions. 
@@ -44,13 +44,13 @@ GLT installed and compiled.
     
 (b) Unpack the tar file and go to the top level directory:
 
-      tar xzf GLT-1.0.tar.gz
+      tar xzf GLT-2.0.tar.gz
       cd GLT 
 
     If your tar doesn't accept the z option, use
 
-      gunzip GLT-1.0.tar.gz
-      tar xf GLT-1.0.tar
+      gunzip GLT-2.0.tar.gz
+      tar xf GLT-2.0.tar
       cd GLT
 
 (c) Define environment variables:
@@ -76,7 +76,7 @@ GLT installed and compiled.
 2. How to use GLT
 ===================
 
-GLT offers two library approaches:
+I. GLT offers two library approaches:
 
 (a) Dynamic library. Once the step 1 is completed, a libglt.so file 
 can be found in each underlying library folder. The glt.h file needs to 
@@ -87,6 +87,12 @@ compilation order.
 implementation fast_glt.h file may be included in the user's code and 
 the -DFASTGLT flag added to the compilation order.
 
+II. Using Pthreads API with GLT
+
+GLT also offers the use of code written with pthreads just including 
+"glt_pthreads.h" instead of <pthread.h>
+
+
 -------------------------------------------------------------------------
 
 3. How to cite GLT
@@ -94,7 +100,8 @@ the -DFASTGLT flag added to the compilation order.
 
 To cite GLT in your work, please use the following for now:
 A. Castelló, A.J. Peña, S. Seo, R. Mayo, P. Balaji, E.S. Quintana-Ortí.
-GLT: A common API for lightweight thread libraries. URL a web de grupo. 2016
+GLT: A common API for lightweight thread libraries. 
+www.hpca.uji.es/GLT. 2016
 
 -------------------------------------------------------------------------
 
