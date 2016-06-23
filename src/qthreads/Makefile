@@ -7,7 +7,7 @@ CFLAGS := -fPIC -I.  $(QTHFLAGS)
 OBJECTS := glt.o glt_wu.o glt_util.o glt_mutex.o glt_barrier.o \
 	   glt_condition.o glt_timer.o glt_basic.o  \
 	   glt_atomic.o glt_feb.o glt_sinc.o glt_loop.o \
-	   glt_data_structures.o glt_syscall.o glt_runtime.o \
+	   glt_data_structures.o glt_syscall.o glt_runtime.o glt_tls.o \
 	   glt_argobots.o glt_massivethreads.o glt_scheduler.o
 
 ifeq ($(GLT_CORE), 1)
