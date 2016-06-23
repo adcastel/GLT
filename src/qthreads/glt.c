@@ -18,6 +18,20 @@ GLT_func_prefix void glt_end() {
     printf("Ending with QTHREADS\n");
 }
 
+GLT_func_prefix void qth_tls_init(int nworkers)
+{
+	g_qth_tls_list=NULL;
+	g_qth_tls_list_size=0;
+	memset(g_qth_tls_key_status,0,sizeof(int)*QTH_TLS_KEY_SIZE);
+}
+
+GLT_func_prefix void qth_tls_fini(void)
+{
+	if (g_qth_tls_list)free(g_qth_tls_list);
+	g_qth_tls_list=NULL;
+	g_qth_tls_list_size=0;
+}
+
 GLT_func_prefix void glt_init(int argc, char * argv[]) {
     int num_threads = get_nprocs();
     main_team = (glt_team_t *) malloc(sizeof (glt_team_t));
@@ -66,11 +80,14 @@ GLT_func_prefix void glt_init(int argc, char * argv[]) {
     }
     setenv("QTHREAD_AFFINITY", "yes", 1);
 
+    qth_tls_init(num_threads*num_workers_per_thread);
+    
     main_team->num_shepherds = num_threads;
     main_team->num_workers_per_shepherd = num_workers_per_thread;
     qthread_initialize(); //qthreads
 }
 
 GLT_func_prefix void glt_finalize() {
+    qth_tls_fini();
     qthread_finalize();
 }
