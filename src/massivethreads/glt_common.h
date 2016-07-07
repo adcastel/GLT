@@ -175,7 +175,7 @@ typedef struct glt_team {
 } glt_team_t;
 
 
-#define GLT_VERSION "You are using GLT GLT 1.0v over MassiveThreads (adcastel@uji.es)"
+#define GLT_VERSION "You are using GLT GLT 2.0v over MassiveThreads (adcastel@uji.es)"
 #define GLT_ERROR_ARG printf("Error: This feature is only supported by Argobots implementation and you are using MassiveThreads. Please use the query functions\n")
 #define GLT_ERROR_QTH printf("Error: This feature is only supported by Qthreads implementation and you are using MassiveThreads. Please use the query functions\n")
 #define GLT_LIB_ERROR printf("Error: This feature is in the API but it is not included in the Library\n")
@@ -183,6 +183,15 @@ typedef struct glt_team {
 /* Main team structure*/
 glt_team_t * main_team;
 
+#ifdef PARANOID
+#define CHECK(x, y) do { \
+  (x); \
+} while (0)
+#else
+#define CHECK(x, y) do { \
+  (x); \
+} while (0)
+#endif
 
 #endif /* GLT_COMMON_H */
 

@@ -25,7 +25,7 @@ GLT_func_prefix void glt_felock_create(GLT_felock * felock) {
 }
 
 GLT_func_prefix void glt_felock_free(GLT_felock felock) {
-    myth_felock_destroy(felock);
+    CHECK(myth_felock_destroy(felock),0);
 }
 
 GLT_func_prefix void glt_felock_lock(GLT_bool *lock, GLT_felock felock) {
@@ -45,7 +45,7 @@ GLT_func_prefix void glt_felock_status(GLT_felock_status *status, GLT_felock fel
 }
 
 GLT_func_prefix void glt_felock_set_unlock(GLT_felock felock, int val) {
-    myth_felock_set_unlock(felock, val);
+    CHECK(myth_felock_set_unlock(felock, val),0);
 }
 
 #endif

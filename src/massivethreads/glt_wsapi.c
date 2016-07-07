@@ -33,7 +33,7 @@ GLT_func_prefix void glt_wsapi_get_hint_ptr(void *ptr, GLT_ult ult) {
 }
 
 GLT_func_prefix void glt_wsapi_set_hint(GLT_ult ult, void **data, size_t *size) {
-    myth_wsapi_set_hint(ult, data, size);
+    CHECK(myth_wsapi_set_hint(ult, data, size),0);
 }
 
 GLT_func_prefix void glt_wsapi_rand(int * rand) {
@@ -41,7 +41,7 @@ GLT_func_prefix void glt_wsapi_rand(int * rand) {
 }
 
 GLT_func_prefix void glt_wsapi_randrr(int *ret, int n) {
-    myth_wsapi_randarr(ret, n);
+    CHECK(myth_wsapi_randarr(ret, n),0);
 }
 
 GLT_func_prefix void glt_wsapi_runqueue_take(GLT_ult * ult, int victim, GLT_wsapi_decide_f decidefn, void *udata) {
@@ -53,7 +53,7 @@ GLT_func_prefix void glt_wsapi_runqueue_pass(GLT_bool *pass, int target, GLT_ult
 }
 
 GLT_func_prefix void glt_wsapi_runqueue_push(GLT_ult ult) {
-    myth_wsapi_runqueue_push(ult);
+    CHECK(myth_wsapi_runqueue_push(ult),0);
 }
 
 GLT_func_prefix void glt_wsapi_runqueue_pop(GLT_ult * ult) {
