@@ -179,7 +179,7 @@ typedef struct glt_team {
 } glt_team_t;
 
 
-#define GLT_VERSION "You are using GLT 1.0v over Pthreads (adcastel@uji.es)"
+#define GLT_VERSION "You are using GLT 2.0v over Pthreads (adcastel@uji.es)"
 #define GLT_ERROR_ARG printf("Error: This feature is only supported by Argobots implementation and you are using MassiveThreads. Please use the query functions\n")
 #define GLT_ERROR_QTH printf("Error: This feature is only supported by Qthreads implementation and you are using MassiveThreads. Please use the query functions\n")
 #define GLT_ERROR_MYTH printf("Error: This feature is only supported by MassiveThredashreads implementation and you are using Argobots. Please use the query functions")
@@ -187,6 +187,19 @@ typedef struct glt_team {
 
 /* Main team structure*/
 glt_team_t * main_team;
+
+#ifdef PARANOID
+#define CHECK(x, y) do { \
+  int retval = (x); \
+  if (retval != (y);) { \
+    printf("Runtime error: %s returned %d at %s:%d", #x, retval, __FILE__, __LINE__); \
+  } \
+} while (0)
+#else
+#define CHECK(x, y) do { \
+  (x); \
+} while (0)
+#endif
 
 
 #endif /* GLT_COMMON_H */

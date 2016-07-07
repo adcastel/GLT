@@ -11,19 +11,19 @@
 #endif
 
 GLT_func_prefix void glt_mutex_create(GLT_mutex * mutex) {
-    pthread_mutex_init(mutex,NULL);
+    CHECK(pthread_mutex_init(mutex,NULL),0);
 }
 
 GLT_func_prefix void glt_mutex_lock(GLT_mutex mutex) {
-    pthread_mutex_lock(&mutex);
+    CHECK(pthread_mutex_lock(&mutex),0);
 }
 
 GLT_func_prefix void glt_mutex_unlock(GLT_mutex mutex) {
-    pthread_mutex_unlock(&mutex);
+    CHECK(pthread_mutex_unlock(&mutex),0);
 }
 
 GLT_func_prefix void glt_mutex_free(GLT_mutex * mutex) {
-    pthread_mutex_destroy(mutex);
+    CHECK(pthread_mutex_destroy(mutex),0);
 }
 
 GLT_func_prefix void glt_mutex_trylock(GLT_bool * locked, GLT_mutex mutex) {
