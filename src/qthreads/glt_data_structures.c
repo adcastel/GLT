@@ -31,16 +31,16 @@ GLT_func_prefix void glt_ds_pool_create_aligned(GLT_ds_pool *pool,
 }
 
 GLT_func_prefix void glt_ds_pool_destroy(GLT_ds_pool *pool) {
-    qpool_destroy(pool);
+    CHECK(qpool_destroy(pool),0);
 }
 
 GLT_func_prefix void glt_ds_pool_alloc(GLT_ds_pool *pool) {
-    qpool_alloc(pool);
+    CHECK(qpool_alloc(pool),0);
 }
 
 GLT_func_prefix void glt_ds_pool_free(GLT_ds_pool * restrict pool,
         void * restrict mem) {
-    qpool_free(pool, mem);
+    CHECK(qpool_free(pool, mem),0);
 }
 
 GLT_func_prefix void glt_ds_array_create(GLT_ds_array *array, const size_t count,
@@ -60,7 +60,7 @@ GLT_func_prefix void glt_ds_array_create_configured(GLT_ds_array *array,
 }
 
 GLT_func_prefix void glt_ds_array_destroy(GLT_ds_array *array) {
-    qarray_destroy(array);
+    CHECK(qarray_destroy(array),0);
 }
 
 GLT_func_prefix void glt_ds_array_elem(void * elem, const GLT_ds_array *array,
@@ -85,35 +85,36 @@ GLT_func_prefix void glt_ds_array_thread_of(GLT_thread * id, const GLT_ds_array 
 
 GLT_func_prefix void glt_ds_array_set_thread_of(GLT_ds_array *array,
         const size_t index, GLT_thread id) {
-    qarray_set_shepof(array, index, id);
+    CHECK(qarray_set_shepof(array, index, id),0);
 }
 
 GLT_func_prefix void glt_ds_array_iter(GLT_ds_array *array,
         const size_t start, const size_t stop, void(*thread_func)(void *)) {
-    qarray_iter(array, start, stop, (void *) thread_func);
+    CHECK(qarray_iter(array, start, stop, (void *) thread_func),0);
 }
 
 GLT_func_prefix void glt_ds_array_iter_loop(GLT_ds_array *array,
         const size_t start, const size_t stop, GLT_ds_loop_f thread_func, void * arg) {
-    qarray_iter_loop(array, start, stop, thread_func, arg);
+    CHECK(qarray_iter_loop(array, start, stop, thread_func, arg),0);
 }
 
 GLT_func_prefix void glt_ds_array_iter_nb(GLT_ds_array *array,
         const size_t start, const size_t stop, GLT_ds_loop_f thread_func,
         void * args, aligned_t *arg) {
-    qarray_iter_loop_nb(array, start, stop, thread_func, args, arg);
+    CHECK(qarray_iter_loop_nb(array, start, stop, thread_func, args, arg),0);
 }
 
 GLT_func_prefix void glt_ds_array_iter_constloop(GLT_ds_array *array,
         const size_t start, const size_t stop, GLT_ds_cloop_f thread_func,
         void * args) {
-    qarray_iter_constloop(array, start, stop, thread_func, args);
+    CHECK(qarray_iter_constloop(array, start, stop, thread_func, args),0);
 }
 
 GLT_func_prefix void glt_ds_array_iter_loopaccum(GLT_ds_array *array,
         const size_t start, const size_t stop, GLT_ds_loopr_f thread_func,
         void * args, void * ret, const size_t resize, GLT_accum_f acc) {
-    qarray_iter_loopaccum(array, start, stop, thread_func, args, ret, resize, acc);
+    CHECK(qarray_iter_loopaccum(array, start, stop, thread_func, args, 
+            ret, resize, acc),0);
 }
 
 GLT_func_prefix void glt_ds_lfqueue_create(GLT_ds_lfqueue * lfqueue) {
@@ -121,11 +122,11 @@ GLT_func_prefix void glt_ds_lfqueue_create(GLT_ds_lfqueue * lfqueue) {
 }
 
 GLT_func_prefix void glt_ds_lfqueue_destroy(GLT_ds_lfqueue * lfqueue) {
-    qlfqueue_destroy(lfqueue);
+    CHECK(qlfqueue_destroy(lfqueue),0);
 }
 
 GLT_func_prefix void glt_ds_lfqueue_enqueue(GLT_ds_lfqueue * lfqueue, void * elem) {
-    qlfqueue_enqueue(lfqueue, elem);
+    CHECK(qlfqueue_enqueue(lfqueue, elem),0);
 }
 
 GLT_func_prefix void glt_ds_lfqueue_dequeue(void * elem, GLT_ds_lfqueue * lfqueue) {
@@ -137,20 +138,20 @@ GLT_func_prefix void glt_ds_lfqueue_empty(GLT_bool * empty, GLT_ds_lfqueue * lfq
 }
 
 GLT_func_prefix void glt_ds_dqueue_create(GLT_ds_dqueue * dqueue) {
-    dqueue = qdqueue_create();
+    CHECK(dqueue = qdqueue_create(),0);
 }
 
 GLT_func_prefix void glt_ds_dqueue_destroy(GLT_ds_dqueue * dqueue) {
-    qdqueue_destroy(dqueue);
+    CHECK(qdqueue_destroy(dqueue),0);
 }
 
 GLT_func_prefix void glt_ds_dqueue_enqueue(GLT_ds_dqueue * dqueue, void * elem) {
-    qdqueue_enqueue(dqueue, elem);
+    CHECK(qdqueue_enqueue(dqueue, elem),0);
 }
 
 GLT_func_prefix void glt_ds_dqueue_enqueue_there(GLT_ds_dqueue * dqueue,
         void * elem, GLT_thread id) {
-    qdqueue_enqueue_there(dqueue, elem, id);
+    CHECK(qdqueue_enqueue_there(dqueue, elem, id),0);
 }
 
 GLT_func_prefix void glt_ds_dqueue_dequeue(void * elem, GLT_ds_dqueue * dqueue) {
@@ -168,7 +169,7 @@ GLT_func_prefix void glt_ds_dictionary_create(GLT_ds_dictionary * dictionary,
 }
 
 GLT_func_prefix void glt_ds_dictionary_destroy(GLT_ds_dictionary * dictionary) {
-    qt_dictionary_destroy(dictionary);
+    CHECK(qt_dictionary_destroy(dictionary),0);
 }
 
 GLT_func_prefix void glt_ds_dictionary_put(void * next, GLT_ds_dictionary * dictionary,
@@ -202,7 +203,7 @@ GLT_func_prefix void glt_ds_dictionary_it_create(GLT_ds_dictionary_it *it,
 }
 
 GLT_func_prefix void glt_ds_dictionary_it_destroy(GLT_ds_dictionary_it *it) {
-    qt_dictionary_iterator_destroy(it);
+    CHECK(qt_dictionary_iterator_destroy(it),0);
 }
 
 GLT_func_prefix void glt_ds_dictionary_it_next(void * entry, GLT_ds_dictionary_it *it) {

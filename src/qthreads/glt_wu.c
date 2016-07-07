@@ -21,19 +21,19 @@ GLT_func_prefix GLT_tasklet * glt_tasklet_malloc(int number_of_tasklets) {
 }
 
 GLT_func_prefix void glt_ult_create(void(*thread_func)(void *), void *arg, GLT_ult *new_ult) {
-    qthread_fork((void *) thread_func, arg, new_ult);
+    CHECK(qthread_fork((void *) thread_func, arg, new_ult),0);
 }
 
 GLT_func_prefix void glt_ult_create_to(void(*thread_func)(void *), void *arg, GLT_ult *new_ult, int dest) {
-    qthread_fork_to((void *) thread_func, arg, new_ult, dest);
+    CHECK(qthread_fork_to((void *) thread_func, arg, new_ult, dest),0);
 }
 
 GLT_func_prefix void glt_tasklet_create(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult) {
-    qthread_fork((void *) thread_func, arg, new_ult);
+    CHECK(qthread_fork((void *) thread_func, arg, new_ult),0);
 }
 
 GLT_func_prefix void glt_tasklet_create_to(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult, int dest) {
-    qthread_fork_to((void *) thread_func, arg, new_ult, dest);
+    CHECK(qthread_fork_to((void *) thread_func, arg, new_ult, dest),0);
 }
 
 GLT_func_prefix void glt_yield() {
@@ -45,11 +45,11 @@ GLT_func_prefix void glt_yield_to(GLT_ult ult) {
 }
 
 GLT_func_prefix void glt_ult_join(GLT_ult *ult) {
-    qthread_readFF(NULL, ult);
+    CHECK(qthread_readFF(NULL, ult),0);
 }
 
 GLT_func_prefix void glt_tasklet_join(GLT_tasklet *tasklet) {
-    qthread_readFF(NULL, tasklet);
+    CHECK(qthread_readFF(NULL, tasklet),0);
 }
 
 GLT_func_prefix void glt_ult_get_id(GLT_ult_id * id, GLT_ult ult) {
@@ -61,7 +61,7 @@ GLT_func_prefix void glt_workunit_get_thread_id(GLT_thread_id *id) {
 }
 
 GLT_func_prefix void glt_ult_migrate_self_to(GLT_thread_id dest) {
-    qthread_migrate_to(dest);
+    CHECK(qthread_migrate_to(dest),0);
 }
 
 GLT_func_prefix void glt_ult_self(GLT_ult * ult) {

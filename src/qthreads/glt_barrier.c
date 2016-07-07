@@ -15,11 +15,11 @@ GLT_func_prefix void glt_barrier_create(int num_waiters, GLT_barrier *barrier) {
 }
 
 GLT_func_prefix void glt_barrier_free(GLT_barrier *barrier) {
-    qt_barrier_destroy(barrier);
+    CHECK(qt_barrier_destroy(barrier),0);
 }
 
 GLT_func_prefix void glt_barrier_wait(GLT_barrier *barrier) {
-    qt_barrier_enter(barrier);
+    CHECK(qt_barrier_enter(barrier),0);
 }
 
 

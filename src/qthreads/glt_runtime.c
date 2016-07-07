@@ -49,7 +49,7 @@ GLT_func_prefix void glt_thread_distance(int * dist, const GLT_thread src, const
 }
 
 GLT_func_prefix void glt_thread_enable(GLT_thread id) {
-    qthread_enable_shepherd(id);
+    CHECK(qthread_enable_shepherd(id),0);
 }
 
 GLT_func_prefix void glt_thread_disable(GLT_bool *res, GLT_thread id) {
@@ -57,7 +57,7 @@ GLT_func_prefix void glt_thread_disable(GLT_bool *res, GLT_thread id) {
 }
 
 GLT_func_prefix void glt_subthread_enable(GLT_subthread id) {
-    qthread_enable_worker(id);
+    CHECK(qthread_enable_worker(id),0);
 }
 
 GLT_func_prefix void glt_subthread_disable(GLT_bool *res, GLT_subthread id) {
