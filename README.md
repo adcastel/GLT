@@ -15,7 +15,9 @@ Common API for Lightweight Thread Implementations.
 
 GLT is a common API for HPC lightweight thread (LWT) libraries. It supports 
 MassiveThreads, Qthreads, and Argobots as underlying LWT solutions. 
-Moreover, Pthreads are also supported with comparative purpose. 
+Moreover, GLT over Pthread is implemented with comparative purpose. 
+
+In addition, GLT can be used as POSIX threads API since version 2.0.   
 
 1. Getting Started
 2. How to use GLT
@@ -90,7 +92,7 @@ the -DFASTGLT flag added to the compilation order.
 II. Using Pthreads API with GLT
 
 GLT also offers the use of code written with pthreads just including 
-"glt_pthreads.h" instead of <pthread.h>
+"glt_pthreads.h" instead of "pthread.h"
 
 
 -------------------------------------------------------------------------
