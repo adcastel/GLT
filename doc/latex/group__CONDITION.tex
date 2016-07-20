@@ -1,0 +1,105 @@
+\hypertarget{group__CONDITION}{\section{Condition functions}
+\label{group__CONDITION}\index{Condition functions@{Condition functions}}
+}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group__CONDITION_ga0067216e7953ac7b093d998ab6afac55}{glt\-\_\-cond\-\_\-create} (G\-L\-T\-\_\-cond $\ast$cond)
+\begin{DoxyCompactList}\small\item\em Creates a condition. \end{DoxyCompactList}\item 
+void \hyperlink{group__CONDITION_ga7186f2e869bbb87171a5c4562ac752a5}{glt\-\_\-cond\-\_\-free} (G\-L\-T\-\_\-cond $\ast$cond)
+\begin{DoxyCompactList}\small\item\em Destroys a condition. \end{DoxyCompactList}\item 
+void \hyperlink{group__CONDITION_gaec5c2587a96261c51d2e1f40e3d21fcd}{glt\-\_\-cond\-\_\-signal} (G\-L\-T\-\_\-cond cond)
+\begin{DoxyCompactList}\small\item\em Sends a signal for a condition. \end{DoxyCompactList}\item 
+void \hyperlink{group__CONDITION_ga0701bd2c880a4dbd1d282e2c9aa21ea1}{glt\-\_\-cond\-\_\-wait} (G\-L\-T\-\_\-cond cond, G\-L\-T\-\_\-mutex mutex)
+\begin{DoxyCompactList}\small\item\em A U\-L\-T waits in this point for a signal. \end{DoxyCompactList}\item 
+void \hyperlink{group__CONDITION_gaf36e80119d53bc57a0347e3b42b0425f}{glt\-\_\-cond\-\_\-broadcast} (G\-L\-T\-\_\-cond cond)
+\begin{DoxyCompactList}\small\item\em Broadcast a signal for a condition. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+These functions manage the G\-L\-T conditions for the U\-L\-Ts. 
+
+\subsection{Function Documentation}
+\hypertarget{group__CONDITION_gaf36e80119d53bc57a0347e3b42b0425f}{\index{Condition functions@{Condition functions}!glt\-\_\-cond\-\_\-broadcast@{glt\-\_\-cond\-\_\-broadcast}}
+\index{glt\-\_\-cond\-\_\-broadcast@{glt\-\_\-cond\-\_\-broadcast}!Condition functions@{Condition functions}}
+\subsubsection[{glt\-\_\-cond\-\_\-broadcast}]{\setlength{\rightskip}{0pt plus 5cm}void glt\-\_\-cond\-\_\-broadcast (
+\begin{DoxyParamCaption}
+\item[{G\-L\-T\-\_\-cond}]{cond}
+\end{DoxyParamCaption}
+)}}\label{group__CONDITION_gaf36e80119d53bc57a0347e3b42b0425f}
+
+
+Broadcast a signal for a condition. 
+
+{\ttfamily \hyperlink{group__CONDITION_gaf36e80119d53bc57a0347e3b42b0425f}{glt\-\_\-cond\-\_\-broadcast()}} broadcasts a signal for U\-L\-Ts. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em cond} & Handle to the target {\ttfamily G\-L\-T\-\_\-condition}. \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__CONDITION_ga0067216e7953ac7b093d998ab6afac55}{\index{Condition functions@{Condition functions}!glt\-\_\-cond\-\_\-create@{glt\-\_\-cond\-\_\-create}}
+\index{glt\-\_\-cond\-\_\-create@{glt\-\_\-cond\-\_\-create}!Condition functions@{Condition functions}}
+\subsubsection[{glt\-\_\-cond\-\_\-create}]{\setlength{\rightskip}{0pt plus 5cm}void glt\-\_\-cond\-\_\-create (
+\begin{DoxyParamCaption}
+\item[{G\-L\-T\-\_\-cond $\ast$}]{cond}
+\end{DoxyParamCaption}
+)}}\label{group__CONDITION_ga0067216e7953ac7b093d998ab6afac55}
+
+
+Creates a condition. 
+
+{\ttfamily \hyperlink{group__CONDITION_ga0067216e7953ac7b093d998ab6afac55}{glt\-\_\-cond\-\_\-create()}} creates a condition for U\-L\-Ts. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em cond} & Hande to newly created {\ttfamily G\-L\-T\-\_\-condition} \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__CONDITION_ga7186f2e869bbb87171a5c4562ac752a5}{\index{Condition functions@{Condition functions}!glt\-\_\-cond\-\_\-free@{glt\-\_\-cond\-\_\-free}}
+\index{glt\-\_\-cond\-\_\-free@{glt\-\_\-cond\-\_\-free}!Condition functions@{Condition functions}}
+\subsubsection[{glt\-\_\-cond\-\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}void glt\-\_\-cond\-\_\-free (
+\begin{DoxyParamCaption}
+\item[{G\-L\-T\-\_\-cond $\ast$}]{cond}
+\end{DoxyParamCaption}
+)}}\label{group__CONDITION_ga7186f2e869bbb87171a5c4562ac752a5}
+
+
+Destroys a condition. 
+
+{\ttfamily \hyperlink{group__CONDITION_ga7186f2e869bbb87171a5c4562ac752a5}{glt\-\_\-cond\-\_\-free()}} destroys a condition for U\-L\-Ts. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em cond} & Handle to the target {\ttfamily G\-L\-T\-\_\-condition}. \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__CONDITION_gaec5c2587a96261c51d2e1f40e3d21fcd}{\index{Condition functions@{Condition functions}!glt\-\_\-cond\-\_\-signal@{glt\-\_\-cond\-\_\-signal}}
+\index{glt\-\_\-cond\-\_\-signal@{glt\-\_\-cond\-\_\-signal}!Condition functions@{Condition functions}}
+\subsubsection[{glt\-\_\-cond\-\_\-signal}]{\setlength{\rightskip}{0pt plus 5cm}void glt\-\_\-cond\-\_\-signal (
+\begin{DoxyParamCaption}
+\item[{G\-L\-T\-\_\-cond}]{cond}
+\end{DoxyParamCaption}
+)}}\label{group__CONDITION_gaec5c2587a96261c51d2e1f40e3d21fcd}
+
+
+Sends a signal for a condition. 
+
+{\ttfamily \hyperlink{group__CONDITION_gaec5c2587a96261c51d2e1f40e3d21fcd}{glt\-\_\-cond\-\_\-signal()}} sends a signal for U\-L\-Ts. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em cond} & Handle to the target {\ttfamily G\-L\-T\-\_\-condition}. \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__CONDITION_ga0701bd2c880a4dbd1d282e2c9aa21ea1}{\index{Condition functions@{Condition functions}!glt\-\_\-cond\-\_\-wait@{glt\-\_\-cond\-\_\-wait}}
+\index{glt\-\_\-cond\-\_\-wait@{glt\-\_\-cond\-\_\-wait}!Condition functions@{Condition functions}}
+\subsubsection[{glt\-\_\-cond\-\_\-wait}]{\setlength{\rightskip}{0pt plus 5cm}void glt\-\_\-cond\-\_\-wait (
+\begin{DoxyParamCaption}
+\item[{G\-L\-T\-\_\-cond}]{cond, }
+\item[{G\-L\-T\-\_\-mutex}]{mutex}
+\end{DoxyParamCaption}
+)}}\label{group__CONDITION_ga0701bd2c880a4dbd1d282e2c9aa21ea1}
+
+
+A U\-L\-T waits in this point for a signal. 
+
+{\ttfamily \hyperlink{group__CONDITION_ga0701bd2c880a4dbd1d282e2c9aa21ea1}{glt\-\_\-cond\-\_\-wait()}} a U\-L\-T waits at this point for a signal to access the mutex. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em cond} & Handle to the target {\ttfamily G\-L\-T\-\_\-condition}. \\
+\hline
+\mbox{\tt in}  & {\em mutex} & Handle to the target {\ttfamily G\-L\-T\-\_\-mutex}. \\
+\hline
+\end{DoxyParams}

@@ -1,0 +1,89 @@
+\contentsline {chapter}{\numberline {1}Module Index}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}Modules}{1}{section.1.1}
+\contentsline {chapter}{\numberline {2}Module Documentation}{3}{chapter.2}
+\contentsline {section}{\numberline {2.1}Library functions}{3}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Detailed Description}{3}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}Function Documentation}{3}{subsection.2.1.2}
+\contentsline {subsubsection}{\numberline {2.1.2.1}\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}\_\discretionary {-}{}{}attribute\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}\_\discretionary {-}{}{}}{3}{subsubsection.2.1.2.1}
+\contentsline {subsubsection}{\numberline {2.1.2.2}\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}\_\discretionary {-}{}{}attribute\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}\_\discretionary {-}{}{}}{3}{subsubsection.2.1.2.2}
+\contentsline {subsubsection}{\numberline {2.1.2.3}glt\discretionary {-}{}{}\_\discretionary {-}{}{}finalize}{3}{subsubsection.2.1.2.3}
+\contentsline {subsubsection}{\numberline {2.1.2.4}glt\discretionary {-}{}{}\_\discretionary {-}{}{}init}{4}{subsubsection.2.1.2.4}
+\contentsline {section}{\numberline {2.2}Barrier functions}{5}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Detailed Description}{5}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Function Documentation}{5}{subsection.2.2.2}
+\contentsline {subsubsection}{\numberline {2.2.2.1}glt\discretionary {-}{}{}\_\discretionary {-}{}{}barrier\discretionary {-}{}{}\_\discretionary {-}{}{}create}{5}{subsubsection.2.2.2.1}
+\contentsline {subsubsection}{\numberline {2.2.2.2}glt\discretionary {-}{}{}\_\discretionary {-}{}{}barrier\discretionary {-}{}{}\_\discretionary {-}{}{}free}{5}{subsubsection.2.2.2.2}
+\contentsline {subsubsection}{\numberline {2.2.2.3}glt\discretionary {-}{}{}\_\discretionary {-}{}{}barrier\discretionary {-}{}{}\_\discretionary {-}{}{}wait}{5}{subsubsection.2.2.2.3}
+\contentsline {section}{\numberline {2.3}Condition functions}{6}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}Detailed Description}{6}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}Function Documentation}{6}{subsection.2.3.2}
+\contentsline {subsubsection}{\numberline {2.3.2.1}glt\discretionary {-}{}{}\_\discretionary {-}{}{}cond\discretionary {-}{}{}\_\discretionary {-}{}{}broadcast}{6}{subsubsection.2.3.2.1}
+\contentsline {subsubsection}{\numberline {2.3.2.2}glt\discretionary {-}{}{}\_\discretionary {-}{}{}cond\discretionary {-}{}{}\_\discretionary {-}{}{}create}{6}{subsubsection.2.3.2.2}
+\contentsline {subsubsection}{\numberline {2.3.2.3}glt\discretionary {-}{}{}\_\discretionary {-}{}{}cond\discretionary {-}{}{}\_\discretionary {-}{}{}free}{6}{subsubsection.2.3.2.3}
+\contentsline {subsubsection}{\numberline {2.3.2.4}glt\discretionary {-}{}{}\_\discretionary {-}{}{}cond\discretionary {-}{}{}\_\discretionary {-}{}{}signal}{6}{subsubsection.2.3.2.4}
+\contentsline {subsubsection}{\numberline {2.3.2.5}glt\discretionary {-}{}{}\_\discretionary {-}{}{}cond\discretionary {-}{}{}\_\discretionary {-}{}{}wait}{7}{subsubsection.2.3.2.5}
+\contentsline {section}{\numberline {2.4}Mutex functions}{8}{section.2.4}
+\contentsline {subsection}{\numberline {2.4.1}Detailed Description}{8}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.2}Function Documentation}{8}{subsection.2.4.2}
+\contentsline {subsubsection}{\numberline {2.4.2.1}glt\discretionary {-}{}{}\_\discretionary {-}{}{}mutex\discretionary {-}{}{}\_\discretionary {-}{}{}create}{8}{subsubsection.2.4.2.1}
+\contentsline {subsubsection}{\numberline {2.4.2.2}glt\discretionary {-}{}{}\_\discretionary {-}{}{}mutex\discretionary {-}{}{}\_\discretionary {-}{}{}free}{8}{subsubsection.2.4.2.2}
+\contentsline {subsubsection}{\numberline {2.4.2.3}glt\discretionary {-}{}{}\_\discretionary {-}{}{}mutex\discretionary {-}{}{}\_\discretionary {-}{}{}lock}{8}{subsubsection.2.4.2.3}
+\contentsline {subsubsection}{\numberline {2.4.2.4}glt\discretionary {-}{}{}\_\discretionary {-}{}{}mutex\discretionary {-}{}{}\_\discretionary {-}{}{}trylock}{8}{subsubsection.2.4.2.4}
+\contentsline {subsubsection}{\numberline {2.4.2.5}glt\discretionary {-}{}{}\_\discretionary {-}{}{}mutex\discretionary {-}{}{}\_\discretionary {-}{}{}unlock}{9}{subsubsection.2.4.2.5}
+\contentsline {section}{\numberline {2.5}Work-\/units functions}{10}{section.2.5}
+\contentsline {subsection}{\numberline {2.5.1}Detailed Description}{10}{subsection.2.5.1}
+\contentsline {subsection}{\numberline {2.5.2}Function Documentation}{10}{subsection.2.5.2}
+\contentsline {subsubsection}{\numberline {2.5.2.1}glt\discretionary {-}{}{}\_\discretionary {-}{}{}tasklet\discretionary {-}{}{}\_\discretionary {-}{}{}cancel}{10}{subsubsection.2.5.2.1}
+\contentsline {subsubsection}{\numberline {2.5.2.2}glt\discretionary {-}{}{}\_\discretionary {-}{}{}tasklet\discretionary {-}{}{}\_\discretionary {-}{}{}create}{11}{subsubsection.2.5.2.2}
+\contentsline {subsubsection}{\numberline {2.5.2.3}glt\discretionary {-}{}{}\_\discretionary {-}{}{}tasklet\discretionary {-}{}{}\_\discretionary {-}{}{}create\discretionary {-}{}{}\_\discretionary {-}{}{}to}{11}{subsubsection.2.5.2.3}
+\contentsline {subsubsection}{\numberline {2.5.2.4}glt\discretionary {-}{}{}\_\discretionary {-}{}{}tasklet\discretionary {-}{}{}\_\discretionary {-}{}{}join}{11}{subsubsection.2.5.2.4}
+\contentsline {subsubsection}{\numberline {2.5.2.5}glt\discretionary {-}{}{}\_\discretionary {-}{}{}tasklet\discretionary {-}{}{}\_\discretionary {-}{}{}malloc}{11}{subsubsection.2.5.2.5}
+\contentsline {subsubsection}{\numberline {2.5.2.6}glt\discretionary {-}{}{}\_\discretionary {-}{}{}tasklet\discretionary {-}{}{}\_\discretionary {-}{}{}self}{11}{subsubsection.2.5.2.6}
+\contentsline {subsubsection}{\numberline {2.5.2.7}glt\discretionary {-}{}{}\_\discretionary {-}{}{}ult\discretionary {-}{}{}\_\discretionary {-}{}{}cancel}{13}{subsubsection.2.5.2.7}
+\contentsline {subsubsection}{\numberline {2.5.2.8}glt\discretionary {-}{}{}\_\discretionary {-}{}{}ult\discretionary {-}{}{}\_\discretionary {-}{}{}create}{13}{subsubsection.2.5.2.8}
+\contentsline {subsubsection}{\numberline {2.5.2.9}glt\discretionary {-}{}{}\_\discretionary {-}{}{}ult\discretionary {-}{}{}\_\discretionary {-}{}{}create\discretionary {-}{}{}\_\discretionary {-}{}{}to}{13}{subsubsection.2.5.2.9}
+\contentsline {subsubsection}{\numberline {2.5.2.10}glt\discretionary {-}{}{}\_\discretionary {-}{}{}ult\discretionary {-}{}{}\_\discretionary {-}{}{}exit}{13}{subsubsection.2.5.2.10}
+\contentsline {subsubsection}{\numberline {2.5.2.11}glt\discretionary {-}{}{}\_\discretionary {-}{}{}ult\discretionary {-}{}{}\_\discretionary {-}{}{}get\discretionary {-}{}{}\_\discretionary {-}{}{}id}{13}{subsubsection.2.5.2.11}
+\contentsline {subsubsection}{\numberline {2.5.2.12}glt\discretionary {-}{}{}\_\discretionary {-}{}{}ult\discretionary {-}{}{}\_\discretionary {-}{}{}join}{14}{subsubsection.2.5.2.12}
+\contentsline {subsubsection}{\numberline {2.5.2.13}glt\discretionary {-}{}{}\_\discretionary {-}{}{}ult\discretionary {-}{}{}\_\discretionary {-}{}{}malloc}{14}{subsubsection.2.5.2.13}
+\contentsline {subsubsection}{\numberline {2.5.2.14}glt\discretionary {-}{}{}\_\discretionary {-}{}{}ult\discretionary {-}{}{}\_\discretionary {-}{}{}migrate\discretionary {-}{}{}\_\discretionary {-}{}{}self\discretionary {-}{}{}\_\discretionary {-}{}{}to}{14}{subsubsection.2.5.2.14}
+\contentsline {subsubsection}{\numberline {2.5.2.15}glt\discretionary {-}{}{}\_\discretionary {-}{}{}ult\discretionary {-}{}{}\_\discretionary {-}{}{}self}{14}{subsubsection.2.5.2.15}
+\contentsline {subsubsection}{\numberline {2.5.2.16}glt\discretionary {-}{}{}\_\discretionary {-}{}{}workunit\discretionary {-}{}{}\_\discretionary {-}{}{}get\discretionary {-}{}{}\_\discretionary {-}{}{}thread\discretionary {-}{}{}\_\discretionary {-}{}{}id}{14}{subsubsection.2.5.2.16}
+\contentsline {subsubsection}{\numberline {2.5.2.17}glt\discretionary {-}{}{}\_\discretionary {-}{}{}yield}{15}{subsubsection.2.5.2.17}
+\contentsline {subsubsection}{\numberline {2.5.2.18}glt\discretionary {-}{}{}\_\discretionary {-}{}{}yield\discretionary {-}{}{}\_\discretionary {-}{}{}to}{15}{subsubsection.2.5.2.18}
+\contentsline {section}{\numberline {2.6}Timer functions}{16}{section.2.6}
+\contentsline {subsection}{\numberline {2.6.1}Detailed Description}{16}{subsection.2.6.1}
+\contentsline {subsection}{\numberline {2.6.2}Function Documentation}{16}{subsection.2.6.2}
+\contentsline {subsubsection}{\numberline {2.6.2.1}glt\discretionary {-}{}{}\_\discretionary {-}{}{}get\discretionary {-}{}{}\_\discretionary {-}{}{}wtime}{16}{subsubsection.2.6.2.1}
+\contentsline {subsubsection}{\numberline {2.6.2.2}glt\discretionary {-}{}{}\_\discretionary {-}{}{}timer\discretionary {-}{}{}\_\discretionary {-}{}{}create}{16}{subsubsection.2.6.2.2}
+\contentsline {subsubsection}{\numberline {2.6.2.3}glt\discretionary {-}{}{}\_\discretionary {-}{}{}timer\discretionary {-}{}{}\_\discretionary {-}{}{}free}{16}{subsubsection.2.6.2.3}
+\contentsline {subsubsection}{\numberline {2.6.2.4}glt\discretionary {-}{}{}\_\discretionary {-}{}{}timer\discretionary {-}{}{}\_\discretionary {-}{}{}get\discretionary {-}{}{}\_\discretionary {-}{}{}secs}{17}{subsubsection.2.6.2.4}
+\contentsline {subsubsection}{\numberline {2.6.2.5}glt\discretionary {-}{}{}\_\discretionary {-}{}{}timer\discretionary {-}{}{}\_\discretionary {-}{}{}start}{17}{subsubsection.2.6.2.5}
+\contentsline {subsubsection}{\numberline {2.6.2.6}glt\discretionary {-}{}{}\_\discretionary {-}{}{}timer\discretionary {-}{}{}\_\discretionary {-}{}{}stop}{17}{subsubsection.2.6.2.6}
+\contentsline {section}{\numberline {2.7}util functions}{18}{section.2.7}
+\contentsline {subsection}{\numberline {2.7.1}Detailed Description}{18}{subsection.2.7.1}
+\contentsline {subsection}{\numberline {2.7.2}Function Documentation}{18}{subsection.2.7.2}
+\contentsline {subsubsection}{\numberline {2.7.2.1}glt\discretionary {-}{}{}\_\discretionary {-}{}{}get\discretionary {-}{}{}\_\discretionary {-}{}{}num\discretionary {-}{}{}\_\discretionary {-}{}{}threads}{18}{subsubsection.2.7.2.1}
+\contentsline {subsubsection}{\numberline {2.7.2.2}glt\discretionary {-}{}{}\_\discretionary {-}{}{}get\discretionary {-}{}{}\_\discretionary {-}{}{}thread\discretionary {-}{}{}\_\discretionary {-}{}{}num}{18}{subsubsection.2.7.2.2}
+\contentsline {section}{\numberline {2.8}Scheduler functions}{19}{section.2.8}
+\contentsline {subsection}{\numberline {2.8.1}Detailed Description}{19}{subsection.2.8.1}
+\contentsline {subsection}{\numberline {2.8.2}Function Documentation}{19}{subsection.2.8.2}
+\contentsline {subsubsection}{\numberline {2.8.2.1}glt\discretionary {-}{}{}\_\discretionary {-}{}{}schededuler\discretionary {-}{}{}\_\discretionary {-}{}{}create\discretionary {-}{}{}\_\discretionary {-}{}{}basic}{19}{subsubsection.2.8.2.1}
+\contentsline {subsubsection}{\numberline {2.8.2.2}glt\discretionary {-}{}{}\_\discretionary {-}{}{}scheduler\discretionary {-}{}{}\_\discretionary {-}{}{}config\discretionary {-}{}{}\_\discretionary {-}{}{}free}{20}{subsubsection.2.8.2.2}
+\contentsline {subsubsection}{\numberline {2.8.2.3}glt\discretionary {-}{}{}\_\discretionary {-}{}{}scheduler\discretionary {-}{}{}\_\discretionary {-}{}{}create}{20}{subsubsection.2.8.2.3}
+\contentsline {subsubsection}{\numberline {2.8.2.4}glt\discretionary {-}{}{}\_\discretionary {-}{}{}scheduler\discretionary {-}{}{}\_\discretionary {-}{}{}exit}{20}{subsubsection.2.8.2.4}
+\contentsline {subsubsection}{\numberline {2.8.2.5}glt\discretionary {-}{}{}\_\discretionary {-}{}{}scheduler\discretionary {-}{}{}\_\discretionary {-}{}{}finish}{20}{subsubsection.2.8.2.5}
+\contentsline {subsubsection}{\numberline {2.8.2.6}glt\discretionary {-}{}{}\_\discretionary {-}{}{}scheduler\discretionary {-}{}{}\_\discretionary {-}{}{}free}{20}{subsubsection.2.8.2.6}
+\contentsline {subsubsection}{\numberline {2.8.2.7}glt\discretionary {-}{}{}\_\discretionary {-}{}{}scheduler\discretionary {-}{}{}\_\discretionary {-}{}{}get\discretionary {-}{}{}\_\discretionary {-}{}{}data}{21}{subsubsection.2.8.2.7}
+\contentsline {subsubsection}{\numberline {2.8.2.8}glt\discretionary {-}{}{}\_\discretionary {-}{}{}scheduler\discretionary {-}{}{}\_\discretionary {-}{}{}get\discretionary {-}{}{}\_\discretionary {-}{}{}size}{21}{subsubsection.2.8.2.8}
+\contentsline {subsubsection}{\numberline {2.8.2.9}glt\discretionary {-}{}{}\_\discretionary {-}{}{}scheduler\discretionary {-}{}{}\_\discretionary {-}{}{}get\discretionary {-}{}{}\_\discretionary {-}{}{}total\discretionary {-}{}{}\_\discretionary {-}{}{}size}{21}{subsubsection.2.8.2.9}
+\contentsline {subsubsection}{\numberline {2.8.2.10}glt\discretionary {-}{}{}\_\discretionary {-}{}{}scheduler\discretionary {-}{}{}\_\discretionary {-}{}{}has\discretionary {-}{}{}\_\discretionary {-}{}{}to\discretionary {-}{}{}\_\discretionary {-}{}{}stop}{21}{subsubsection.2.8.2.10}
+\contentsline {subsubsection}{\numberline {2.8.2.11}glt\discretionary {-}{}{}\_\discretionary {-}{}{}scheduler\discretionary {-}{}{}\_\discretionary {-}{}{}set\discretionary {-}{}{}\_\discretionary {-}{}{}data}{21}{subsubsection.2.8.2.11}
+\contentsline {section}{\numberline {2.9}Key functions}{23}{section.2.9}
+\contentsline {subsection}{\numberline {2.9.1}Detailed Description}{23}{subsection.2.9.1}
+\contentsline {subsection}{\numberline {2.9.2}Function Documentation}{23}{subsection.2.9.2}
+\contentsline {subsubsection}{\numberline {2.9.2.1}glt\discretionary {-}{}{}\_\discretionary {-}{}{}key\discretionary {-}{}{}\_\discretionary {-}{}{}create}{23}{subsubsection.2.9.2.1}
+\contentsline {subsubsection}{\numberline {2.9.2.2}glt\discretionary {-}{}{}\_\discretionary {-}{}{}key\discretionary {-}{}{}\_\discretionary {-}{}{}free}{23}{subsubsection.2.9.2.2}
+\contentsline {subsubsection}{\numberline {2.9.2.3}glt\discretionary {-}{}{}\_\discretionary {-}{}{}key\discretionary {-}{}{}\_\discretionary {-}{}{}get}{23}{subsubsection.2.9.2.3}
+\contentsline {subsubsection}{\numberline {2.9.2.4}glt\discretionary {-}{}{}\_\discretionary {-}{}{}key\discretionary {-}{}{}\_\discretionary {-}{}{}set}{23}{subsubsection.2.9.2.4}
+\contentsline {part}{Index}{25}{section*.11}

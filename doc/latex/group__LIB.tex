@@ -1,0 +1,72 @@
+\hypertarget{group__LIB}{\section{Library functions}
+\label{group__LIB}\index{Library functions@{Library functions}}
+}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group__LIB_gae387d3314ab7028a9bd1b841df20830e}{\-\_\-\-\_\-attribute\-\_\-\-\_\-} ((constructor)) glt\-\_\-start(void)
+\begin{DoxyCompactList}\small\item\em Entry point for the G\-L\-T dynamic library. \end{DoxyCompactList}\item 
+void \hyperlink{group__LIB_ga341b34f027da273cf053492b981529c4}{\-\_\-\-\_\-attribute\-\_\-\-\_\-} ((destructor)) glt\-\_\-end(void)
+\begin{DoxyCompactList}\small\item\em Ending point for the G\-L\-T dynamic library. \end{DoxyCompactList}\item 
+void \hyperlink{group__LIB_gae25b983d8269aa647ae7ba8cd2aa55b6}{glt\-\_\-init} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em G\-L\-T initialization function. \end{DoxyCompactList}\item 
+void \hyperlink{group__LIB_gadd91c2b80a0b22baf6f363f13a23c82e}{glt\-\_\-finalize} ()
+\begin{DoxyCompactList}\small\item\em G\-L\-T finalization function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+These functions start/stop and open/close the underlying G\-L\-T libraries. They are used in dynamic and static implementations. 
+
+\subsection{Function Documentation}
+\hypertarget{group__LIB_gae387d3314ab7028a9bd1b841df20830e}{\index{Library functions@{Library functions}!\-\_\-\-\_\-attribute\-\_\-\-\_\-@{\-\_\-\-\_\-attribute\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-attribute\-\_\-\-\_\-@{\-\_\-\-\_\-attribute\-\_\-\-\_\-}!Library functions@{Library functions}}
+\subsubsection[{\-\_\-\-\_\-attribute\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}void \-\_\-\-\_\-attribute\-\_\-\-\_\- (
+\begin{DoxyParamCaption}
+\item[{(constructor)}]{}
+\end{DoxyParamCaption}
+)}}\label{group__LIB_gae387d3314ab7028a9bd1b841df20830e}
+
+
+Entry point for the G\-L\-T dynamic library. 
+
+{\ttfamily glt\-\_\-start()} is the first called function when the G\-L\-T dynamic library is loaded \hypertarget{group__LIB_ga341b34f027da273cf053492b981529c4}{\index{Library functions@{Library functions}!\-\_\-\-\_\-attribute\-\_\-\-\_\-@{\-\_\-\-\_\-attribute\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-attribute\-\_\-\-\_\-@{\-\_\-\-\_\-attribute\-\_\-\-\_\-}!Library functions@{Library functions}}
+\subsubsection[{\-\_\-\-\_\-attribute\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}void \-\_\-\-\_\-attribute\-\_\-\-\_\- (
+\begin{DoxyParamCaption}
+\item[{(destructor)}]{}
+\end{DoxyParamCaption}
+)}}\label{group__LIB_ga341b34f027da273cf053492b981529c4}
+
+
+Ending point for the G\-L\-T dynamic library. 
+
+{\ttfamily glt\-\_\-end()} is the last called function when the G\-L\-T dynamic library is unloaded \hypertarget{group__LIB_gadd91c2b80a0b22baf6f363f13a23c82e}{\index{Library functions@{Library functions}!glt\-\_\-finalize@{glt\-\_\-finalize}}
+\index{glt\-\_\-finalize@{glt\-\_\-finalize}!Library functions@{Library functions}}
+\subsubsection[{glt\-\_\-finalize}]{\setlength{\rightskip}{0pt plus 5cm}void glt\-\_\-finalize (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{group__LIB_gadd91c2b80a0b22baf6f363f13a23c82e}
+
+
+G\-L\-T finalization function. 
+
+{\ttfamily \hyperlink{group__LIB_gadd91c2b80a0b22baf6f363f13a23c82e}{glt\-\_\-finalize()}} destroys the G\-L\-T environment. It is not mandatory and should be the last G\-L\-T function call. \hypertarget{group__LIB_gae25b983d8269aa647ae7ba8cd2aa55b6}{\index{Library functions@{Library functions}!glt\-\_\-init@{glt\-\_\-init}}
+\index{glt\-\_\-init@{glt\-\_\-init}!Library functions@{Library functions}}
+\subsubsection[{glt\-\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}void glt\-\_\-init (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}}\label{group__LIB_gae25b983d8269aa647ae7ba8cd2aa55b6}
+
+
+G\-L\-T initialization function. 
+
+{\ttfamily \hyperlink{group__LIB_gae25b983d8269aa647ae7ba8cd2aa55b6}{glt\-\_\-init()}} sets the G\-L\-T environment up. It is mandatory and needs to be the first G\-L\-T function call. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em argc} & \\
+\hline
+\mbox{\tt in}  & {\em argv} & \\
+\hline
+\end{DoxyParams}

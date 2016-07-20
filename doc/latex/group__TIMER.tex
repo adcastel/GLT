@@ -1,0 +1,121 @@
+\hypertarget{group__TIMER}{\section{Timer functions}
+\label{group__TIMER}\index{Timer functions@{Timer functions}}
+}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{group__TIMER_ga10b6dded8a6efbfd0050a1bbb16c6093}{glt\-\_\-get\-\_\-wtime} ()
+\begin{DoxyCompactList}\small\item\em Returns the current time. \end{DoxyCompactList}\item 
+void \hyperlink{group__TIMER_ga1f5d36e90642bc7033e5a66aad5c3374}{glt\-\_\-timer\-\_\-create} (G\-L\-T\-\_\-timer $\ast$timer)
+\begin{DoxyCompactList}\small\item\em Creates a timer. \end{DoxyCompactList}\item 
+void \hyperlink{group__TIMER_ga8148126a79bc4cc7e918ce83c072beea}{glt\-\_\-timer\-\_\-free} (G\-L\-T\-\_\-timer $\ast$timer)
+\begin{DoxyCompactList}\small\item\em Destroys a timer. \end{DoxyCompactList}\item 
+void \hyperlink{group__TIMER_gae6d5c5474df4136fba09a44a674f2d56}{glt\-\_\-timer\-\_\-start} (G\-L\-T\-\_\-timer timer)
+\begin{DoxyCompactList}\small\item\em Inits a timer. \end{DoxyCompactList}\item 
+void \hyperlink{group__TIMER_ga7acf6ad2746fb5f2e4349a695832cd4f}{glt\-\_\-timer\-\_\-stop} (G\-L\-T\-\_\-timer timer)
+\begin{DoxyCompactList}\small\item\em Stops a timer. \end{DoxyCompactList}\item 
+void \hyperlink{group__TIMER_ga20c93b3e3ab51544bbf32116f04ab85a}{glt\-\_\-timer\-\_\-get\-\_\-secs} (G\-L\-T\-\_\-timer timer, double $\ast$secs)
+\begin{DoxyCompactList}\small\item\em Obtains the elapsed time. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+These functions simplify the use of timers. 
+
+\subsection{Function Documentation}
+\hypertarget{group__TIMER_ga10b6dded8a6efbfd0050a1bbb16c6093}{\index{Timer functions@{Timer functions}!glt\-\_\-get\-\_\-wtime@{glt\-\_\-get\-\_\-wtime}}
+\index{glt\-\_\-get\-\_\-wtime@{glt\-\_\-get\-\_\-wtime}!Timer functions@{Timer functions}}
+\subsubsection[{glt\-\_\-get\-\_\-wtime}]{\setlength{\rightskip}{0pt plus 5cm}double glt\-\_\-get\-\_\-wtime (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{group__TIMER_ga10b6dded8a6efbfd0050a1bbb16c6093}
+
+
+Returns the current time. 
+
+{\ttfamily \hyperlink{group__TIMER_ga10b6dded8a6efbfd0050a1bbb16c6093}{glt\-\_\-get\-\_\-wtime()}} returns the time. \begin{DoxyReturn}{Returns}
+The time in seconds. 
+\end{DoxyReturn}
+\hypertarget{group__TIMER_ga1f5d36e90642bc7033e5a66aad5c3374}{\index{Timer functions@{Timer functions}!glt\-\_\-timer\-\_\-create@{glt\-\_\-timer\-\_\-create}}
+\index{glt\-\_\-timer\-\_\-create@{glt\-\_\-timer\-\_\-create}!Timer functions@{Timer functions}}
+\subsubsection[{glt\-\_\-timer\-\_\-create}]{\setlength{\rightskip}{0pt plus 5cm}void glt\-\_\-timer\-\_\-create (
+\begin{DoxyParamCaption}
+\item[{G\-L\-T\-\_\-timer $\ast$}]{timer}
+\end{DoxyParamCaption}
+)}}\label{group__TIMER_ga1f5d36e90642bc7033e5a66aad5c3374}
+
+
+Creates a timer. 
+
+{\ttfamily \hyperlink{group__TIMER_ga1f5d36e90642bc7033e5a66aad5c3374}{glt\-\_\-timer\-\_\-create()}} creates a timer. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em timer} & Hande to newly created {\ttfamily G\-L\-T\-\_\-timer}. \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__TIMER_ga8148126a79bc4cc7e918ce83c072beea}{\index{Timer functions@{Timer functions}!glt\-\_\-timer\-\_\-free@{glt\-\_\-timer\-\_\-free}}
+\index{glt\-\_\-timer\-\_\-free@{glt\-\_\-timer\-\_\-free}!Timer functions@{Timer functions}}
+\subsubsection[{glt\-\_\-timer\-\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}void glt\-\_\-timer\-\_\-free (
+\begin{DoxyParamCaption}
+\item[{G\-L\-T\-\_\-timer $\ast$}]{timer}
+\end{DoxyParamCaption}
+)}}\label{group__TIMER_ga8148126a79bc4cc7e918ce83c072beea}
+
+
+Destroys a timer. 
+
+{\ttfamily \hyperlink{group__TIMER_ga8148126a79bc4cc7e918ce83c072beea}{glt\-\_\-timer\-\_\-free()}} destroys a timer. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em timer} & Handle to the target {\ttfamily G\-L\-T\-\_\-timer}. \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__TIMER_ga20c93b3e3ab51544bbf32116f04ab85a}{\index{Timer functions@{Timer functions}!glt\-\_\-timer\-\_\-get\-\_\-secs@{glt\-\_\-timer\-\_\-get\-\_\-secs}}
+\index{glt\-\_\-timer\-\_\-get\-\_\-secs@{glt\-\_\-timer\-\_\-get\-\_\-secs}!Timer functions@{Timer functions}}
+\subsubsection[{glt\-\_\-timer\-\_\-get\-\_\-secs}]{\setlength{\rightskip}{0pt plus 5cm}void glt\-\_\-timer\-\_\-get\-\_\-secs (
+\begin{DoxyParamCaption}
+\item[{G\-L\-T\-\_\-timer}]{timer, }
+\item[{double $\ast$}]{secs}
+\end{DoxyParamCaption}
+)}}\label{group__TIMER_ga20c93b3e3ab51544bbf32116f04ab85a}
+
+
+Obtains the elapsed time. 
+
+{\ttfamily \hyperlink{group__TIMER_ga20c93b3e3ab51544bbf32116f04ab85a}{glt\-\_\-timer\-\_\-get\-\_\-secs()}} given a timer. It calculates the elapsed time in seconds. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em timer} & Handle to the target {\ttfamily G\-L\-T\-\_\-timer}. \\
+\hline
+\mbox{\tt out}  & {\em secs} & Seconds. \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__TIMER_gae6d5c5474df4136fba09a44a674f2d56}{\index{Timer functions@{Timer functions}!glt\-\_\-timer\-\_\-start@{glt\-\_\-timer\-\_\-start}}
+\index{glt\-\_\-timer\-\_\-start@{glt\-\_\-timer\-\_\-start}!Timer functions@{Timer functions}}
+\subsubsection[{glt\-\_\-timer\-\_\-start}]{\setlength{\rightskip}{0pt plus 5cm}void glt\-\_\-timer\-\_\-start (
+\begin{DoxyParamCaption}
+\item[{G\-L\-T\-\_\-timer}]{timer}
+\end{DoxyParamCaption}
+)}}\label{group__TIMER_gae6d5c5474df4136fba09a44a674f2d56}
+
+
+Inits a timer. 
+
+{\ttfamily \hyperlink{group__TIMER_gae6d5c5474df4136fba09a44a674f2d56}{glt\-\_\-timer\-\_\-start()}} inits a timer. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em timer} & Handle to the target {\ttfamily G\-L\-T\-\_\-timer}. \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__TIMER_ga7acf6ad2746fb5f2e4349a695832cd4f}{\index{Timer functions@{Timer functions}!glt\-\_\-timer\-\_\-stop@{glt\-\_\-timer\-\_\-stop}}
+\index{glt\-\_\-timer\-\_\-stop@{glt\-\_\-timer\-\_\-stop}!Timer functions@{Timer functions}}
+\subsubsection[{glt\-\_\-timer\-\_\-stop}]{\setlength{\rightskip}{0pt plus 5cm}void glt\-\_\-timer\-\_\-stop (
+\begin{DoxyParamCaption}
+\item[{G\-L\-T\-\_\-timer}]{timer}
+\end{DoxyParamCaption}
+)}}\label{group__TIMER_ga7acf6ad2746fb5f2e4349a695832cd4f}
+
+
+Stops a timer. 
+
+{\ttfamily \hyperlink{group__TIMER_ga7acf6ad2746fb5f2e4349a695832cd4f}{glt\-\_\-timer\-\_\-stop()}} stops a timer. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em timer} & Handle to the target {\ttfamily G\-L\-T\-\_\-timer}. \\
+\hline
+\end{DoxyParams}

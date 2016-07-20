@@ -1,0 +1,69 @@
+\hypertarget{group__BARRIER}{\section{Barrier functions}
+\label{group__BARRIER}\index{Barrier functions@{Barrier functions}}
+}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group__BARRIER_ga18d85c9f60ef4fd9c51110e1aa688ba0}{glt\-\_\-barrier\-\_\-create} (int num\-\_\-waiters, G\-L\-T\-\_\-barrier $\ast$barrier)
+\begin{DoxyCompactList}\small\item\em Creates a barrier. \end{DoxyCompactList}\item 
+void \hyperlink{group__BARRIER_ga67a843c33805b0e3e9e1c37f079a7368}{glt\-\_\-barrier\-\_\-free} (G\-L\-T\-\_\-barrier $\ast$barrier)
+\begin{DoxyCompactList}\small\item\em Destroys a barrier. \end{DoxyCompactList}\item 
+void \hyperlink{group__BARRIER_gafb1627373ad29c1dd886c60608a3e74e}{glt\-\_\-barrier\-\_\-wait} (G\-L\-T\-\_\-barrier $\ast$barrier)
+\begin{DoxyCompactList}\small\item\em Waits into a barrier. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+These functions manage the G\-L\-T barriers for the U\-L\-Ts. 
+
+\subsection{Function Documentation}
+\hypertarget{group__BARRIER_ga18d85c9f60ef4fd9c51110e1aa688ba0}{\index{Barrier functions@{Barrier functions}!glt\-\_\-barrier\-\_\-create@{glt\-\_\-barrier\-\_\-create}}
+\index{glt\-\_\-barrier\-\_\-create@{glt\-\_\-barrier\-\_\-create}!Barrier functions@{Barrier functions}}
+\subsubsection[{glt\-\_\-barrier\-\_\-create}]{\setlength{\rightskip}{0pt plus 5cm}void glt\-\_\-barrier\-\_\-create (
+\begin{DoxyParamCaption}
+\item[{int}]{num\-\_\-waiters, }
+\item[{G\-L\-T\-\_\-barrier $\ast$}]{barrier}
+\end{DoxyParamCaption}
+)}}\label{group__BARRIER_ga18d85c9f60ef4fd9c51110e1aa688ba0}
+
+
+Creates a barrier. 
+
+{\ttfamily \hyperlink{group__BARRIER_ga18d85c9f60ef4fd9c51110e1aa688ba0}{glt\-\_\-barrier\-\_\-create()}} creates a barrier for U\-L\-Ts. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em num\-\_\-waiters} & Indicates the number of U\-L\-Ts requested to continue \\
+\hline
+\mbox{\tt in,out}  & {\em barrier} & Hande to newly created {\ttfamily G\-L\-T\-\_\-barrier} \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__BARRIER_ga67a843c33805b0e3e9e1c37f079a7368}{\index{Barrier functions@{Barrier functions}!glt\-\_\-barrier\-\_\-free@{glt\-\_\-barrier\-\_\-free}}
+\index{glt\-\_\-barrier\-\_\-free@{glt\-\_\-barrier\-\_\-free}!Barrier functions@{Barrier functions}}
+\subsubsection[{glt\-\_\-barrier\-\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}void glt\-\_\-barrier\-\_\-free (
+\begin{DoxyParamCaption}
+\item[{G\-L\-T\-\_\-barrier $\ast$}]{barrier}
+\end{DoxyParamCaption}
+)}}\label{group__BARRIER_ga67a843c33805b0e3e9e1c37f079a7368}
+
+
+Destroys a barrier. 
+
+{\ttfamily \hyperlink{group__BARRIER_ga67a843c33805b0e3e9e1c37f079a7368}{glt\-\_\-barrier\-\_\-free()}} destroys a barier for U\-L\-Ts. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em barrier} & Handle to the target {\ttfamily G\-L\-T\-\_\-barrier}. \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__BARRIER_gafb1627373ad29c1dd886c60608a3e74e}{\index{Barrier functions@{Barrier functions}!glt\-\_\-barrier\-\_\-wait@{glt\-\_\-barrier\-\_\-wait}}
+\index{glt\-\_\-barrier\-\_\-wait@{glt\-\_\-barrier\-\_\-wait}!Barrier functions@{Barrier functions}}
+\subsubsection[{glt\-\_\-barrier\-\_\-wait}]{\setlength{\rightskip}{0pt plus 5cm}void glt\-\_\-barrier\-\_\-wait (
+\begin{DoxyParamCaption}
+\item[{G\-L\-T\-\_\-barrier $\ast$}]{barrier}
+\end{DoxyParamCaption}
+)}}\label{group__BARRIER_gafb1627373ad29c1dd886c60608a3e74e}
+
+
+Waits into a barrier. 
+
+{\ttfamily \hyperlink{group__BARRIER_gafb1627373ad29c1dd886c60608a3e74e}{glt\-\_\-barrier\-\_\-wait()}} Executed by a U\-L\-T, it waits until the number of waiters is achieved. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em barrier} & Handle to the target {\ttfamily G\-L\-T\-\_\-barrier}. \\
+\hline
+\end{DoxyParams}

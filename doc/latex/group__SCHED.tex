@@ -1,0 +1,249 @@
+\hypertarget{group__SCHED}{\section{Scheduler functions}
+\label{group__SCHED}\index{Scheduler functions@{Scheduler functions}}
+}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group__SCHED_ga76838701f9ab543f1b68660bb9544bdb}{glt\-\_\-scheduler\-\_\-config\-\_\-free} (G\-L\-T\-\_\-sched\-\_\-config $\ast$config)
+\begin{DoxyCompactList}\small\item\em Destroys the scheduler configuration. \end{DoxyCompactList}\item 
+void \hyperlink{group__SCHED_gade3126dca3b35d86917dbab513e9b198}{glt\-\_\-scheduler\-\_\-create} (G\-L\-T\-\_\-sched\-\_\-def $\ast$def, int num\-\_\-threads, int $\ast$threads\-\_\-id, G\-L\-T\-\_\-sched\-\_\-config config, G\-L\-T\-\_\-sched $\ast$newsched)
+\begin{DoxyCompactList}\small\item\em Creates a new scheduler. \end{DoxyCompactList}\item 
+void \hyperlink{group__SCHED_gaeae5db1ee6507774e5aa31244de9b820}{glt\-\_\-schededuler\-\_\-create\-\_\-basic} (G\-L\-T\-\_\-sched\-\_\-predef predef, int num\-\_\-threads, int $\ast$threads\-\_\-id, G\-L\-T\-\_\-sched\-\_\-config config, G\-L\-T\-\_\-sched $\ast$newsched)
+\begin{DoxyCompactList}\small\item\em Creates a new scheduler with predefined behaviour. \end{DoxyCompactList}\item 
+void \hyperlink{group__SCHED_ga35f2b8129d924c1b53f8ffe5d36a895c}{glt\-\_\-scheduler\-\_\-free} (G\-L\-T\-\_\-sched $\ast$sched)
+\begin{DoxyCompactList}\small\item\em Destroys a scheduler. \end{DoxyCompactList}\item 
+void \hyperlink{group__SCHED_ga04724f9b33887333c478744fa2714b3c}{glt\-\_\-scheduler\-\_\-finish} (G\-L\-T\-\_\-sched sched)
+\begin{DoxyCompactList}\small\item\em Finalizes a scheduler. \end{DoxyCompactList}\item 
+void \hyperlink{group__SCHED_ga8df21c40ca28bf29f55cb64ecd077aa7}{glt\-\_\-scheduler\-\_\-exit} (G\-L\-T\-\_\-sched sched)
+\begin{DoxyCompactList}\small\item\em Stops a scheduler. \end{DoxyCompactList}\item 
+void \hyperlink{group__SCHED_ga526550e59b800d931c26248d8369d950}{glt\-\_\-scheduler\-\_\-has\-\_\-to\-\_\-stop} (G\-L\-T\-\_\-sched sched, G\-L\-T\-\_\-bool $\ast$stop)
+\begin{DoxyCompactList}\small\item\em Requires to a scheduler to stop. \end{DoxyCompactList}\item 
+void \hyperlink{group__SCHED_ga44dff47dabe465b54837723b50b6da71}{glt\-\_\-scheduler\-\_\-set\-\_\-data} (G\-L\-T\-\_\-sched sched, void $\ast$data)
+\begin{DoxyCompactList}\small\item\em Sets new data to a scheduler. \end{DoxyCompactList}\item 
+void \hyperlink{group__SCHED_ga1ac411aa00d4a35211ffad154a6cf875}{glt\-\_\-scheduler\-\_\-get\-\_\-data} (G\-L\-T\-\_\-sched sched, void $\ast$$\ast$data)
+\begin{DoxyCompactList}\small\item\em gets data from a scheduler. \end{DoxyCompactList}\item 
+void \hyperlink{group__SCHED_gabb37915988dae21d910f719f891aea08}{glt\-\_\-scheduler\-\_\-get\-\_\-size} (G\-L\-T\-\_\-sched sched, size\-\_\-t $\ast$size)
+\begin{DoxyCompactList}\small\item\em gets the current size from the scheduler. \end{DoxyCompactList}\item 
+void \hyperlink{group__SCHED_ga48b98bc3571d3e7374bc5cc85bcf5bc3}{glt\-\_\-scheduler\-\_\-get\-\_\-total\-\_\-size} (G\-L\-T\-\_\-sched sched, size\-\_\-t $\ast$size)
+\begin{DoxyCompactList}\small\item\em gets the total size from the scheduler. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+These functions manages the configurable scheduler (just with Argobots). 
+
+\subsection{Function Documentation}
+\hypertarget{group__SCHED_gaeae5db1ee6507774e5aa31244de9b820}{\index{Scheduler functions@{Scheduler functions}!glt\-\_\-schededuler\-\_\-create\-\_\-basic@{glt\-\_\-schededuler\-\_\-create\-\_\-basic}}
+\index{glt\-\_\-schededuler\-\_\-create\-\_\-basic@{glt\-\_\-schededuler\-\_\-create\-\_\-basic}!Scheduler functions@{Scheduler functions}}
+\subsubsection[{glt\-\_\-schededuler\-\_\-create\-\_\-basic}]{\setlength{\rightskip}{0pt plus 5cm}void glt\-\_\-schededuler\-\_\-create\-\_\-basic (
+\begin{DoxyParamCaption}
+\item[{G\-L\-T\-\_\-sched\-\_\-predef}]{predef, }
+\item[{int}]{num\-\_\-threads, }
+\item[{int $\ast$}]{threads\-\_\-id, }
+\item[{G\-L\-T\-\_\-sched\-\_\-config}]{config, }
+\item[{G\-L\-T\-\_\-sched $\ast$}]{newsched}
+\end{DoxyParamCaption}
+)}}\label{group__SCHED_gaeae5db1ee6507774e5aa31244de9b820}
+
+
+Creates a new scheduler with predefined behaviour. 
+
+{\ttfamily \hyperlink{group__SCHED_gaeae5db1ee6507774e5aa31244de9b820}{glt\-\_\-schededuler\-\_\-create\-\_\-basic()}} creates a new scheduler for some threads with a predefined behaviour. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em def} & Handle of the target c\textbackslash{} G\-L\-T\-\_\-sched\-\_\-predef. \\
+\hline
+\mbox{\tt in}  & {\em num\-\_\-threads} & number of {\ttfamily G\-L\-T\-\_\-thread} affected by this scheduler. \\
+\hline
+\mbox{\tt in}  & {\em threads\-\_\-id} & pointer to an array of c\textbackslash{} G\-L\-T\-\_\-threads\-\_\-id. \\
+\hline
+\mbox{\tt in}  & {\em config} & Handle of the target c\textbackslash{} G\-L\-T\-\_\-sched\-\_\-config. \\
+\hline
+\mbox{\tt out}  & {\em newsched} & Handle of new c\textbackslash{} G\-L\-T\-\_\-sched. \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__SCHED_ga76838701f9ab543f1b68660bb9544bdb}{\index{Scheduler functions@{Scheduler functions}!glt\-\_\-scheduler\-\_\-config\-\_\-free@{glt\-\_\-scheduler\-\_\-config\-\_\-free}}
+\index{glt\-\_\-scheduler\-\_\-config\-\_\-free@{glt\-\_\-scheduler\-\_\-config\-\_\-free}!Scheduler functions@{Scheduler functions}}
+\subsubsection[{glt\-\_\-scheduler\-\_\-config\-\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}void glt\-\_\-scheduler\-\_\-config\-\_\-free (
+\begin{DoxyParamCaption}
+\item[{G\-L\-T\-\_\-sched\-\_\-config $\ast$}]{config}
+\end{DoxyParamCaption}
+)}}\label{group__SCHED_ga76838701f9ab543f1b68660bb9544bdb}
+
+
+Destroys the scheduler configuration. 
+
+{\ttfamily \hyperlink{group__SCHED_ga76838701f9ab543f1b68660bb9544bdb}{glt\-\_\-scheduler\-\_\-config\-\_\-free()}} deletes the scheduler configuration. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em config} & Handle of the target c\textbackslash{} G\-L\-T\-\_\-sched\-\_\-config. \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__SCHED_gade3126dca3b35d86917dbab513e9b198}{\index{Scheduler functions@{Scheduler functions}!glt\-\_\-scheduler\-\_\-create@{glt\-\_\-scheduler\-\_\-create}}
+\index{glt\-\_\-scheduler\-\_\-create@{glt\-\_\-scheduler\-\_\-create}!Scheduler functions@{Scheduler functions}}
+\subsubsection[{glt\-\_\-scheduler\-\_\-create}]{\setlength{\rightskip}{0pt plus 5cm}void glt\-\_\-scheduler\-\_\-create (
+\begin{DoxyParamCaption}
+\item[{G\-L\-T\-\_\-sched\-\_\-def $\ast$}]{def, }
+\item[{int}]{num\-\_\-threads, }
+\item[{int $\ast$}]{threads\-\_\-id, }
+\item[{G\-L\-T\-\_\-sched\-\_\-config}]{config, }
+\item[{G\-L\-T\-\_\-sched $\ast$}]{newsched}
+\end{DoxyParamCaption}
+)}}\label{group__SCHED_gade3126dca3b35d86917dbab513e9b198}
+
+
+Creates a new scheduler. 
+
+{\ttfamily \hyperlink{group__SCHED_gade3126dca3b35d86917dbab513e9b198}{glt\-\_\-scheduler\-\_\-create()}} creates a new scheduler for some threads. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em def} & Handle of the target c\textbackslash{} G\-L\-T\-\_\-sched\-\_\-def. \\
+\hline
+\mbox{\tt in}  & {\em num\-\_\-threads} & number of {\ttfamily G\-L\-T\-\_\-thread} affected by this scheduler. \\
+\hline
+\mbox{\tt in}  & {\em threads\-\_\-id} & pointer to an array of c\textbackslash{} G\-L\-T\-\_\-threads\-\_\-id. \\
+\hline
+\mbox{\tt in}  & {\em config} & Handle of the target c\textbackslash{} G\-L\-T\-\_\-sched\-\_\-config. \\
+\hline
+\mbox{\tt out}  & {\em newsched} & Handle of new c\textbackslash{} G\-L\-T\-\_\-sched. \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__SCHED_ga8df21c40ca28bf29f55cb64ecd077aa7}{\index{Scheduler functions@{Scheduler functions}!glt\-\_\-scheduler\-\_\-exit@{glt\-\_\-scheduler\-\_\-exit}}
+\index{glt\-\_\-scheduler\-\_\-exit@{glt\-\_\-scheduler\-\_\-exit}!Scheduler functions@{Scheduler functions}}
+\subsubsection[{glt\-\_\-scheduler\-\_\-exit}]{\setlength{\rightskip}{0pt plus 5cm}void glt\-\_\-scheduler\-\_\-exit (
+\begin{DoxyParamCaption}
+\item[{G\-L\-T\-\_\-sched}]{sched}
+\end{DoxyParamCaption}
+)}}\label{group__SCHED_ga8df21c40ca28bf29f55cb64ecd077aa7}
+
+
+Stops a scheduler. 
+
+{\ttfamily \hyperlink{group__SCHED_ga8df21c40ca28bf29f55cb64ecd077aa7}{glt\-\_\-scheduler\-\_\-exit()}} Stops a scheduler. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em sched} & Handle of the target c\textbackslash{} G\-L\-T\-\_\-sched. \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__SCHED_ga04724f9b33887333c478744fa2714b3c}{\index{Scheduler functions@{Scheduler functions}!glt\-\_\-scheduler\-\_\-finish@{glt\-\_\-scheduler\-\_\-finish}}
+\index{glt\-\_\-scheduler\-\_\-finish@{glt\-\_\-scheduler\-\_\-finish}!Scheduler functions@{Scheduler functions}}
+\subsubsection[{glt\-\_\-scheduler\-\_\-finish}]{\setlength{\rightskip}{0pt plus 5cm}void glt\-\_\-scheduler\-\_\-finish (
+\begin{DoxyParamCaption}
+\item[{G\-L\-T\-\_\-sched}]{sched}
+\end{DoxyParamCaption}
+)}}\label{group__SCHED_ga04724f9b33887333c478744fa2714b3c}
+
+
+Finalizes a scheduler. 
+
+{\ttfamily \hyperlink{group__SCHED_ga04724f9b33887333c478744fa2714b3c}{glt\-\_\-scheduler\-\_\-finish()}} finalizes a scheduler. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em sched} & Handle of the target c\textbackslash{} G\-L\-T\-\_\-sched. \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__SCHED_ga35f2b8129d924c1b53f8ffe5d36a895c}{\index{Scheduler functions@{Scheduler functions}!glt\-\_\-scheduler\-\_\-free@{glt\-\_\-scheduler\-\_\-free}}
+\index{glt\-\_\-scheduler\-\_\-free@{glt\-\_\-scheduler\-\_\-free}!Scheduler functions@{Scheduler functions}}
+\subsubsection[{glt\-\_\-scheduler\-\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}void glt\-\_\-scheduler\-\_\-free (
+\begin{DoxyParamCaption}
+\item[{G\-L\-T\-\_\-sched $\ast$}]{sched}
+\end{DoxyParamCaption}
+)}}\label{group__SCHED_ga35f2b8129d924c1b53f8ffe5d36a895c}
+
+
+Destroys a scheduler. 
+
+{\ttfamily \hyperlink{group__SCHED_ga35f2b8129d924c1b53f8ffe5d36a895c}{glt\-\_\-scheduler\-\_\-free()}} destroys a scheduler. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em sched} & Handle of the target c\textbackslash{} G\-L\-T\-\_\-sched. \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__SCHED_ga1ac411aa00d4a35211ffad154a6cf875}{\index{Scheduler functions@{Scheduler functions}!glt\-\_\-scheduler\-\_\-get\-\_\-data@{glt\-\_\-scheduler\-\_\-get\-\_\-data}}
+\index{glt\-\_\-scheduler\-\_\-get\-\_\-data@{glt\-\_\-scheduler\-\_\-get\-\_\-data}!Scheduler functions@{Scheduler functions}}
+\subsubsection[{glt\-\_\-scheduler\-\_\-get\-\_\-data}]{\setlength{\rightskip}{0pt plus 5cm}void glt\-\_\-scheduler\-\_\-get\-\_\-data (
+\begin{DoxyParamCaption}
+\item[{G\-L\-T\-\_\-sched}]{sched, }
+\item[{void $\ast$$\ast$}]{data}
+\end{DoxyParamCaption}
+)}}\label{group__SCHED_ga1ac411aa00d4a35211ffad154a6cf875}
+
+
+gets data from a scheduler. 
+
+{\ttfamily \hyperlink{group__SCHED_ga1ac411aa00d4a35211ffad154a6cf875}{glt\-\_\-scheduler\-\_\-get\-\_\-data()}} gets data from a scheduler. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em sched} & Handle of the target c\textbackslash{} G\-L\-T\-\_\-sched. \\
+\hline
+\mbox{\tt out}  & {\em data} & obtained. \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__SCHED_gabb37915988dae21d910f719f891aea08}{\index{Scheduler functions@{Scheduler functions}!glt\-\_\-scheduler\-\_\-get\-\_\-size@{glt\-\_\-scheduler\-\_\-get\-\_\-size}}
+\index{glt\-\_\-scheduler\-\_\-get\-\_\-size@{glt\-\_\-scheduler\-\_\-get\-\_\-size}!Scheduler functions@{Scheduler functions}}
+\subsubsection[{glt\-\_\-scheduler\-\_\-get\-\_\-size}]{\setlength{\rightskip}{0pt plus 5cm}void glt\-\_\-scheduler\-\_\-get\-\_\-size (
+\begin{DoxyParamCaption}
+\item[{G\-L\-T\-\_\-sched}]{sched, }
+\item[{size\-\_\-t $\ast$}]{size}
+\end{DoxyParamCaption}
+)}}\label{group__SCHED_gabb37915988dae21d910f719f891aea08}
+
+
+gets the current size from the scheduler. 
+
+{\ttfamily \hyperlink{group__SCHED_gabb37915988dae21d910f719f891aea08}{glt\-\_\-scheduler\-\_\-get\-\_\-size()}} gets size from a scheduler. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em sched} & Handle of the target c\textbackslash{} G\-L\-T\-\_\-sched. \\
+\hline
+\mbox{\tt out}  & {\em size} & obtained. \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__SCHED_ga48b98bc3571d3e7374bc5cc85bcf5bc3}{\index{Scheduler functions@{Scheduler functions}!glt\-\_\-scheduler\-\_\-get\-\_\-total\-\_\-size@{glt\-\_\-scheduler\-\_\-get\-\_\-total\-\_\-size}}
+\index{glt\-\_\-scheduler\-\_\-get\-\_\-total\-\_\-size@{glt\-\_\-scheduler\-\_\-get\-\_\-total\-\_\-size}!Scheduler functions@{Scheduler functions}}
+\subsubsection[{glt\-\_\-scheduler\-\_\-get\-\_\-total\-\_\-size}]{\setlength{\rightskip}{0pt plus 5cm}void glt\-\_\-scheduler\-\_\-get\-\_\-total\-\_\-size (
+\begin{DoxyParamCaption}
+\item[{G\-L\-T\-\_\-sched}]{sched, }
+\item[{size\-\_\-t $\ast$}]{size}
+\end{DoxyParamCaption}
+)}}\label{group__SCHED_ga48b98bc3571d3e7374bc5cc85bcf5bc3}
+
+
+gets the total size from the scheduler. 
+
+{\ttfamily \hyperlink{group__SCHED_ga48b98bc3571d3e7374bc5cc85bcf5bc3}{glt\-\_\-scheduler\-\_\-get\-\_\-total\-\_\-size()}} gets the total size from a scheduler. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em sched} & Handle of the target c\textbackslash{} G\-L\-T\-\_\-sched. \\
+\hline
+\mbox{\tt out}  & {\em size} & obtained. \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__SCHED_ga526550e59b800d931c26248d8369d950}{\index{Scheduler functions@{Scheduler functions}!glt\-\_\-scheduler\-\_\-has\-\_\-to\-\_\-stop@{glt\-\_\-scheduler\-\_\-has\-\_\-to\-\_\-stop}}
+\index{glt\-\_\-scheduler\-\_\-has\-\_\-to\-\_\-stop@{glt\-\_\-scheduler\-\_\-has\-\_\-to\-\_\-stop}!Scheduler functions@{Scheduler functions}}
+\subsubsection[{glt\-\_\-scheduler\-\_\-has\-\_\-to\-\_\-stop}]{\setlength{\rightskip}{0pt plus 5cm}void glt\-\_\-scheduler\-\_\-has\-\_\-to\-\_\-stop (
+\begin{DoxyParamCaption}
+\item[{G\-L\-T\-\_\-sched}]{sched, }
+\item[{G\-L\-T\-\_\-bool $\ast$}]{stop}
+\end{DoxyParamCaption}
+)}}\label{group__SCHED_ga526550e59b800d931c26248d8369d950}
+
+
+Requires to a scheduler to stop. 
+
+{\ttfamily \hyperlink{group__SCHED_ga526550e59b800d931c26248d8369d950}{glt\-\_\-scheduler\-\_\-has\-\_\-to\-\_\-stop()}} Requires a scheduler to stop. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em sched} & Handle of the target c\textbackslash{} G\-L\-T\-\_\-sched. \\
+\hline
+\mbox{\tt out}  & {\em stop} & shows the answer of the scheduler. \\
+\hline
+\end{DoxyParams}
+\hypertarget{group__SCHED_ga44dff47dabe465b54837723b50b6da71}{\index{Scheduler functions@{Scheduler functions}!glt\-\_\-scheduler\-\_\-set\-\_\-data@{glt\-\_\-scheduler\-\_\-set\-\_\-data}}
+\index{glt\-\_\-scheduler\-\_\-set\-\_\-data@{glt\-\_\-scheduler\-\_\-set\-\_\-data}!Scheduler functions@{Scheduler functions}}
+\subsubsection[{glt\-\_\-scheduler\-\_\-set\-\_\-data}]{\setlength{\rightskip}{0pt plus 5cm}void glt\-\_\-scheduler\-\_\-set\-\_\-data (
+\begin{DoxyParamCaption}
+\item[{G\-L\-T\-\_\-sched}]{sched, }
+\item[{void $\ast$}]{data}
+\end{DoxyParamCaption}
+)}}\label{group__SCHED_ga44dff47dabe465b54837723b50b6da71}
+
+
+Sets new data to a scheduler. 
+
+{\ttfamily \hyperlink{group__SCHED_ga44dff47dabe465b54837723b50b6da71}{glt\-\_\-scheduler\-\_\-set\-\_\-data()}} Sets data to a scheduler. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em sched} & Handle of the target c\textbackslash{} G\-L\-T\-\_\-sched. \\
+\hline
+\mbox{\tt in}  & {\em data} & to be set. \\
+\hline
+\end{DoxyParams}
