@@ -36,10 +36,10 @@ GLT_func_prefix void glt_init(int argc, char * argv[]) {
     setenv("MYTH_BIND_WORKERS", "1", 1);
 
     main_team->num_workers = num_threads;
-    myth_init(); 
+    CHECK(myth_init(),0); 
 }
 
 GLT_func_prefix void glt_finalize() {
-    myth_fini(); 
+    CHECK(myth_fini(),0); 
 }
 

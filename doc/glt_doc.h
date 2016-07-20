@@ -32,7 +32,7 @@
  * These functions simplify the use of timers.
  */
 
-/** \defgroup UTIL util functions
+/** \defgroup UTIL Util functions
  * These functions return values from the environment set up.
  */
 
@@ -43,7 +43,7 @@
 /** \defgroup KEY Key functions
  * These functions manage the GLT keys for the ULTs.
  */
-#include <glt_common.h>
+
 /**
  * @ingroup LIB
  * @brief   Entry point for the GLT dynamic library.

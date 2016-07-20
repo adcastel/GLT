@@ -15,17 +15,17 @@ GLT_func_prefix void glt_cond_create(GLT_cond *cond) {
 }
 
 GLT_func_prefix void glt_cond_free(GLT_cond *cond) {
-    myth_cond_destroy(*cond);
+    CHECK(myth_cond_destroy(*cond),0);
 }
 
 GLT_func_prefix void glt_cond_signal(GLT_cond cond) {
-    myth_cond_signal(cond);
+    CHECK(myth_cond_signal(cond),0);
 }
 
 GLT_func_prefix void glt_cond_wait(GLT_cond cond, GLT_mutex mutex) {
-    myth_cond_wait(cond, mutex);
+    CHECK(myth_cond_wait(cond, mutex),0);
 }
 
 GLT_func_prefix void glt_cond_broadcast(GLT_cond cond) {
-    myth_cond_broadcast(cond);
+    CHECK(myth_cond_broadcast(cond),0);
 }

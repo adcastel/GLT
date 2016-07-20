@@ -45,11 +45,11 @@ GLT_func_prefix void glt_yield_to(GLT_ult ult) {
 }
 
 GLT_func_prefix void glt_ult_join(GLT_ult *ult) {
-    myth_join(*ult, NULL);
+    CHECK(myth_join(*ult, NULL),0);
 }
 
 GLT_func_prefix void glt_tasklet_join(GLT_tasklet *tasklet) {
-    myth_join(*tasklet, NULL);
+    CHECK(myth_join(*tasklet, NULL),0);
 }
 
 GLT_func_prefix void glt_ult_get_id(GLT_ult_id * id, GLT_ult ult) {
@@ -75,15 +75,15 @@ GLT_func_prefix void glt_ult_self(GLT_ult *ult) {
 
 GLT_func_prefix void glt_ult_exit() {
     void *ret;
-    myth_exit(ret);
+    CHECK(myth_exit(ret),0);
 }
 
 GLT_func_prefix void glt_ult_cancel(GLT_ult ult) {
-    myth_cancel(ult);
+    CHECK(myth_cancel(ult),0);
 }
 
 GLT_func_prefix void glt_tasklet_cancel(GLT_tasklet tasklet) {
-    myth_cancel(tasklet);
+    CHECK(myth_cancel(tasklet),0);
 }
 
 GLT_func_prefix int can_extended_workunits() {
@@ -106,23 +106,23 @@ GLT_func_prefix void glt_yield2() {
 }
 
 GLT_func_prefix void glt_wu_detach(GLT_ult ult) {
-    myth_detach(ult);
+    CHECK(myth_detach(ult),0);
 }
 
 GLT_func_prefix void glt_wu_set_cancel_state(int state, int *oldstate) {
-    myth_setcancelstate(state, oldstate);
+    CHECK(myth_setcancelstate(state, oldstate),0);
 }
 
 GLT_func_prefix void glt_wu_set_cancel_type(int type, int *oldtype) {
-    myth_setcanceltype(type, oldtype);
+    CHECK(myth_setcanceltype(type, oldtype),0);
 }
 
 GLT_func_prefix void glt_wu_test_cancel() {
-    myth_testcancel();
+    CHECK(myth_testcancel(),0);
 }
 
 GLT_func_prefix void glt_wu_set_def_stack_size(size_t newsize) {
-    myth_set_def_stack_size(newsize);
+    CHECK(myth_set_def_stack_size(newsize),0);
 }
 
 #endif

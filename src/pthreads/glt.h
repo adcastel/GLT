@@ -84,8 +84,11 @@ void glt_scheduler_get_data(GLT_sched sched, void **data);
 void glt_scheduler_get_size(GLT_sched sched, size_t *size);
 void glt_scheduler_get_total_size(GLT_sched sched, size_t *size);
 
-
-int glt_can_tls_functions();
+void glt_key_create(void(*destructor)(void *value), GLT_key *newkey);
+void glt_key_free(GLT_key *key);
+void glt_key_set(GLT_key key, void *value);
+void glt_key_get(GLT_key key, void **value);
+//int glt_can_tls_functions();
 
 //QUERY functions for MASSIVETHREADS
 int can_felock_functions();
@@ -123,10 +126,7 @@ int glt_can_extended_runtime();
 
 #ifndef CORE
 
-void glt_key_create(void(*destructor)(void *value), GLT_key *newkey);
-void glt_key_free(GLT_key *key);
-void glt_key_set(GLT_key key, void *value);
-void glt_key_get(GLT_key key, void **value);
+
 
 
 //HEADERS for MASSIVETHREADSTHREADS extended functions

@@ -11,13 +11,13 @@
 #endif
 
 GLT_func_prefix void glt_barrier_create(int num_waiters, GLT_barrier *barrier) {
-    pthread_barrier_init(barrier,NULL,num_waiters);
+    CHECK(pthread_barrier_init(barrier,NULL,num_waiters),0);
 }
 
 GLT_func_prefix void glt_barrier_free(GLT_barrier *barrier) {
-    pthread_barrier_destroy(barrier);
+    CHECK(pthread_barrier_destroy(barrier),0);
 }
 
 GLT_func_prefix void glt_barrier_wait(GLT_barrier *barrier) {
-    pthread_barrier_wait(barrier);
+    CHECK(pthread_barrier_wait(barrier),0);
 }

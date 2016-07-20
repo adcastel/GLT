@@ -28,27 +28,27 @@ GLT_func_prefix void glt_sinc_create(GLT_sinc *sinc, size_t sizeof_value,
 
 GLT_func_prefix void glt_sinc_init(GLT_sinc * restrict sinc, size_t sizeof_value,
         const void * initial_value, GLT_sinc_op op, size_t expected) {
-    qt_sinc_init(sinc, sizeof_value, initial_value, op, expected);
+    CHECK(qt_sinc_init(sinc, sizeof_value, initial_value, op, expected),0);
 }
 
 GLT_func_prefix void glt_sinc_destroy(GLT_sinc *sinc) {
-    qt_sinc_destroy(sinc);
+    CHECK(qt_sinc_destroy(sinc),0);
 }
 
 GLT_func_prefix void glt_sinc_fini(GLT_sinc * sinc) {
-    qt_sinc_fini(sinc);
+    CHECK(qt_sinc_fini(sinc),0);
 }
 
 GLT_func_prefix void glt_sinc_reset(GLT_sinc * sinc, size_t expect) {
-    qt_sinc_reset(sinc, expect);
+    CHECK(qt_sinc_reset(sinc, expect),0);
 }
 
 GLT_func_prefix void glt_sinc_submit(GLT_sinc * restrict sinc, const void * restrict value) {
-    qt_sinc_submit(sinc, value);
+    CHECK(qt_sinc_submit(sinc, value),0);
 }
 
 GLT_func_prefix void glt_sinc_wait(GLT_sinc * restrict sinc, void * restrict target) {
-    qt_sinc_wait(sinc, target);
+    CHECK(qt_sinc_wait(sinc, target),0);
 }
 
 #endif

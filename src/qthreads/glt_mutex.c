@@ -15,11 +15,11 @@ GLT_func_prefix void glt_mutex_create(GLT_mutex * mutex) {
 }
 
 GLT_func_prefix void glt_mutex_lock(GLT_mutex mutex) {
-    qthread_lock(mutex);
+    CHECK(qthread_lock(mutex),0);
 }
 
 GLT_func_prefix void glt_mutex_unlock(GLT_mutex mutex) {
-    qthread_unlock(mutex);
+    CHECK(qthread_unlock(mutex),0);
 }
 
 GLT_func_prefix void glt_mutex_free(GLT_mutex * mutex) {

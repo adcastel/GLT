@@ -23,12 +23,12 @@ GLT_func_prefix int glt_can_extended_basic() {
 
 GLT_func_prefix void glt_ult_create_syncvar(void(*thread_func)(void *), void * arg,
         GLT_syncvar *syncvar) {
-    qthread_fork_syncvar((void *) thread_func, arg, syncvar);
+    CHECK(qthread_fork_syncvar((void *) thread_func, arg, syncvar),0);
 }
 
 GLT_func_prefix void glt_ult_create_syncvar_to(void(*thread_func)(void *), void * arg,
         GLT_syncvar *syncvar, int dest, int npreconds, ...) {
-    qthread_fork_syncvar_to((void *) thread_func, arg, syncvar, dest);
+    CHECK(qthread_fork_syncvar_to((void *) thread_func, arg, syncvar, dest),0);
 }
 
 GLT_func_prefix void glt_ult_get_thread(GLT_thread *thread, int *worker) {

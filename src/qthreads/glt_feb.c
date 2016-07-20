@@ -22,11 +22,11 @@ GLT_func_prefix int glt_can_feb_functions() {
 #ifndef CORE
 
 GLT_func_prefix void glt_feb_empty(const GLT_memory_state *dest) {
-    qthread_empty(dest);
+    CHECK(qthread_empty(dest),0);
 }
 
 GLT_func_prefix void glt_feb_fill(const GLT_memory_state *dest) {
-    qthread_fill(dest);
+    CHECK(qthread_fill(dest),0);
 }
 
 GLT_func_prefix void glt_feb_status(const GLT_memory_state *addr, int *status) {
@@ -34,35 +34,35 @@ GLT_func_prefix void glt_feb_status(const GLT_memory_state *addr, int *status) {
 }
 
 GLT_func_prefix void glt_feb_readFE(GLT_memory_state *dst, const GLT_memory_state *src) {
-    qthread_readFE(dst, src);
+    CHECK(qthread_readFE(dst, src),0);
 }
 
 GLT_func_prefix void glt_feb_readFF(GLT_memory_state *dst, const GLT_memory_state *src) {
-    qthread_readFF(dst, src);
+    CHECK(qthread_readFF(dst, src),0);
 }
 
 GLT_func_prefix void glt_feb_writeEF(GLT_memory_state * restrict dst, const GLT_memory_state * restrict src) {
-    qthread_writeEF(dst, src);
+    CHECK(qthread_writeEF(dst, src),0);
 }
 
 GLT_func_prefix void glt_feb_writeEF_const(GLT_memory_state * dst, GLT_memory_state src) {
-    qthread_writeEF_const(dst, src);
+    CHECK(qthread_writeEF_const(dst, src),0);
 }
 
 GLT_func_prefix void glt_feb_writeF(GLT_memory_state * restrict dst, const GLT_memory_state * restrict src) {
-    qthread_writeF(dst, src);
+    CHECK(qthread_writeF(dst, src),0);
 }
 
 GLT_func_prefix void glt_feb_writeF_const(GLT_memory_state * dst, GLT_memory_state src) {
-    qthread_writeF_const(dst, src);
+    CHECK(qthread_writeF_const(dst, src),0);
 }
 
 GLT_func_prefix void glt_syncvar_empty(GLT_syncvar *dest) {
-    qthread_syncvar_empty(dest);
+    CHECK(qthread_syncvar_empty(dest),0);
 }
 
 GLT_func_prefix void glt_syncvar_fill(GLT_syncvar *dest) {
-    qthread_syncvar_fill(dest);
+    CHECK(qthread_syncvar_fill(dest),0);
 }
 
 GLT_func_prefix void glt_syncvar_status(GLT_syncvar *addr, int *status) {
@@ -70,27 +70,27 @@ GLT_func_prefix void glt_syncvar_status(GLT_syncvar *addr, int *status) {
 }
 
 GLT_func_prefix void glt_syncvar_readFE(uint64_t * restrict dst, GLT_syncvar * restrict src) {
-    qthread_syncvar_readFE(dst, src);
+    CHECK(qthread_syncvar_readFE(dst, src),0);
 }
 
 GLT_func_prefix void glt_syncvar_readFF(uint64_t * restrict dst, GLT_syncvar * restrict src) {
-    qthread_syncvar_readFF(dst, src);
+    CHECK(qthread_syncvar_readFF(dst, src),0);
 }
 
 GLT_func_prefix void glt_syncvar_writeEF(GLT_syncvar * restrict dst, const uint64_t * restrict src) {
-    qthread_syncvar_writeEF(dst, src);
+    CHECK(qthread_syncvar_writeEF(dst, src),0);
 }
 
 GLT_func_prefix void glt_syncvar_writeEF_const(GLT_syncvar * dst, uint64_t src) {
-    qthread_syncvar_writeEF_const(dst, src);
+    CHECK(qthread_syncvar_writeEF_const(dst, src),0);
 }
 
 GLT_func_prefix void glt_syncvar_writeF(GLT_syncvar * restrict dst, const uint64_t * restrict src) {
-    qthread_syncvar_writeF(dst, src);
+    CHECK(qthread_syncvar_writeF(dst, src),0);
 }
 
 GLT_func_prefix void glt_syncvar_writeF_const(GLT_syncvar * dst, uint64_t src) {
-    qthread_syncvar_writeF_const(dst, src);
+    CHECK(qthread_syncvar_writeF_const(dst, src),0);
 }
 
 #endif

@@ -84,10 +84,10 @@ GLT_func_prefix void glt_init(int argc, char * argv[]) {
     
     main_team->num_shepherds = num_threads;
     main_team->num_workers_per_shepherd = num_workers_per_thread;
-    qthread_initialize(); //qthreads
+    CHECK(qthread_initialize(),0); //qthreads
 }
 
 GLT_func_prefix void glt_finalize() {
     qth_tls_fini();
-    qthread_finalize();
+    CHECK(qthread_finalize(),0);
 }

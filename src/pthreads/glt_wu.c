@@ -22,9 +22,9 @@ GLT_func_prefix GLT_tasklet * glt_tasklet_malloc(int number_of_tasklets) {
 
 GLT_func_prefix void glt_ult_create(void(*thread_func)(void *), void *arg, GLT_ult *new_ult) {
     cpu_set_t cpuset;
-    pthread_getaffinity_np(pthread_self(), sizeof (cpu_set_t), &cpuset);
-    pthread_create(new_ult, NULL,(void *) thread_func, arg);
-    pthread_setaffinity_np(*new_ult, sizeof (cpu_set_t), &cpuset);
+    CHECK(pthread_getaffinity_np(pthread_self(), sizeof (cpu_set_t), &cpuset),0);
+    CHECK(pthread_create(new_ult, NULL,(void *) thread_func, arg),0);
+    CHECK(pthread_setaffinity_np(*new_ult, sizeof (cpu_set_t), &cpuset),0);
     main_team->num_workers++;
 }
 
@@ -33,16 +33,16 @@ GLT_func_prefix void glt_ult_create_to(void(*thread_func)(void *), void *arg, GL
     CPU_ZERO(&cpuset);
     dest=dest%main_team->max_workers;
     CPU_SET(dest, &cpuset);
-    pthread_create(new_ult, NULL,(void *) thread_func, arg);
-    pthread_setaffinity_np(*new_ult, sizeof (cpu_set_t), &cpuset);
+    CHECK(pthread_create(new_ult, NULL,(void *) thread_func, arg),0);
+    CHECK(pthread_setaffinity_np(*new_ult, sizeof (cpu_set_t), &cpuset),0);
     main_team->num_workers++;
 }
 
 GLT_func_prefix void glt_tasklet_create(void(*thread_func)(void *), void *arg, GLT_tasklet *new_tasklet) {
     cpu_set_t cpuset;
-    pthread_getaffinity_np(pthread_self(), sizeof (cpu_set_t), &cpuset);
-    pthread_create(new_tasklet, NULL,(void *) thread_func, arg);
-    pthread_setaffinity_np(*new_tasklet, sizeof (cpu_set_t), &cpuset);
+    CHECK(pthread_getaffinity_np(pthread_self(), sizeof (cpu_set_t), &cpuset),0);
+    CHECK(pthread_create(new_tasklet, NULL,(void *) thread_func, arg),0);
+    CHECK(pthread_setaffinity_np(*new_tasklet, sizeof (cpu_set_t), &cpuset),0);
     main_team->num_workers++;
 }
 
@@ -51,26 +51,26 @@ GLT_func_prefix void glt_tasklet_create_to(void(*thread_func)(void *), void *arg
     CPU_ZERO(&cpuset);
     dest=dest%main_team->max_workers;
     CPU_SET(dest, &cpuset);
-    pthread_create(new_tasklet, NULL,(void *) thread_func, arg);
-    pthread_setaffinity_np(*new_tasklet, sizeof (cpu_set_t), &cpuset);
+    CHECK(pthread_create(new_tasklet, NULL,(void *) thread_func, arg),0);
+    CHECK(pthread_setaffinity_np(*new_tasklet, sizeof (cpu_set_t), &cpuset),0);
     main_team->num_workers++;
 }
 
 GLT_func_prefix void glt_yield() {
-    pthread_yield();
+    CHECK(pthread_yield(),0);
 }
 
 GLT_func_prefix void glt_yield_to(GLT_ult ult) {
-    pthread_yield();
+    CHECK(pthread_yield(),0);
 }
 
 GLT_func_prefix void glt_ult_join(GLT_ult *ult) {
-    pthread_join(*ult, NULL);
+    CHECK(pthread_join(*ult, NULL),0);
     main_team->num_workers--;
 }
 
 GLT_func_prefix void glt_tasklet_join(GLT_tasklet *tasklet) {
-    pthread_join(*tasklet, NULL);
+    CHECK(pthread_join(*tasklet, NULL),0);
     main_team->num_workers--;
 }
 
@@ -97,16 +97,16 @@ GLT_func_prefix void glt_ult_self(GLT_ult *ult) {
 
 GLT_func_prefix void glt_ult_exit() {
     void *ret;
-    pthread_exit(ret);
+    CHECK(pthread_exit(ret),0);
     main_team->num_workers--;
 }
 
 GLT_func_prefix void glt_ult_cancel(GLT_ult ult) {
-    pthread_cancel(ult);
+    CHECK(pthread_cancel(ult),0);
     main_team->num_workers--;
 }
 
 GLT_func_prefix void glt_tasklet_cancel(GLT_tasklet tasklet) {
-    pthread_cancel(tasklet);
+    CHECK(pthread_cancel(tasklet),0);
     main_team->num_workers--;
 }

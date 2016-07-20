@@ -15,15 +15,15 @@ GLT_func_prefix void glt_mutex_create(GLT_mutex * mutex) {
 }
 
 GLT_func_prefix void glt_mutex_lock(GLT_mutex mutex) {
-    myth_mutex_lock(mutex);
+    CHECK(myth_mutex_lock(mutex),0);
 }
 
 GLT_func_prefix void glt_mutex_unlock(GLT_mutex mutex) {
-    myth_mutex_unlock(mutex);
+    CHECK(myth_mutex_unlock(mutex),0);
 }
 
 GLT_func_prefix void glt_mutex_free(GLT_mutex * mutex) {
-    myth_mutex_destroy(*mutex);
+    CHECK(myth_mutex_destroy(*mutex),0);
 }
 
 GLT_func_prefix void glt_mutex_trylock(GLT_bool * locked, GLT_mutex mutex) {
