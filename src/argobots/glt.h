@@ -974,4 +974,3 @@ void glt_wsapi_set_stealfunc(GLT_wsapi_steal_f *out, GLT_wsapi_steal_f fn);
 
 #endif /* glt_H */
 
-  
