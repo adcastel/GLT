@@ -6,6 +6,16 @@
 #ifndef GLT_COMMON_H
 #define GLT_COMMON_H
 
+#if __STDC_VERSION__ < 199901L
+#define restrict /* nothing */
+#endif
+
+/* Keep C++ compilers from getting confused */
+#if defined(__cplusplus)
+extern "C" {
+#endif
+
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -185,8 +195,6 @@ typedef struct glt_team {
 #define GLT_ERROR_MYTH printf("Error: This feature is only supported by MassiveThredashreads implementation and you are using Argobots. Please use the query functions")
 #define GLT_LIB_ERROR printf("Error: This feature is in the API but it is not included in the Library\n")
 
-/* Main team structure*/
-glt_team_t * main_team;
 
 #ifdef PARANOID
 #define CHECK(x, y) do { \
@@ -199,6 +207,12 @@ glt_team_t * main_team;
 #define CHECK(x, y) do { \
   (x); \
 } while (0)
+#endif
+
+extern glt_team_t * main_team;
+
+#if defined(__cplusplus)
+}
 #endif
 
 

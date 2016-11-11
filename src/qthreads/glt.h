@@ -6,6 +6,11 @@
 #ifndef GLT_H
 #define GLT_H
 
+/* Keep C++ compilers from getting confused */
+#if defined(__cplusplus)
+extern "C" {
+#endif
+
 #include <glt_common.h>
 
 
@@ -492,6 +497,11 @@ void glt_wsapi_set_stealfunc(GLT_wsapi_steal_f *out, GLT_wsapi_steal_f fn);
 
 
 #endif
+
+#if defined(__cplusplus)
+}
+#endif
+
 
 #endif /* glt_H */
 

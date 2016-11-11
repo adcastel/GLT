@@ -7,6 +7,12 @@
 #ifndef GLT_H
 #define GLT_H
 
+/* Keep C++ compilers from getting confused */
+#if defined(__cplusplus)
+extern "C" {
+#endif
+
+
 #include <glt_common.h>
 
 
@@ -491,6 +497,11 @@ void glt_subthread_disable(GLT_bool *res, GLT_subthread id);
 void glt_thread_ok(GLT_bool *res);
 
 #endif
+
+#if defined(__cplusplus)
+}
+#endif
+
 
 #endif /* glt_H */
 

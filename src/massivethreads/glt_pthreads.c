@@ -132,9 +132,7 @@ int gpthread_mutex_destroy(pthread_mutex_t *mutex) {
 }
 
 int gpthread_mutex_trylock(pthread_mutex_t *mutex) {
-    GLT_bool try = GLT_FALSE;
-    glt_mutex_trylock(&try, (GLT_mutex) mutex);
-    return try;
+    return glt_mutex_trylock((GLT_mutex) mutex);
 }
 
 int gpthread_mutex_lock(pthread_mutex_t *mutex) {

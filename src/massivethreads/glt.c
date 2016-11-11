@@ -10,6 +10,9 @@
 #define GLT_func_prefix static inline
 #endif
 
+glt_team_t * main_team;
+
+
 GLT_func_prefix void glt_start() {
     printf("Starting with MASSIVETHREADS\n");
 }
