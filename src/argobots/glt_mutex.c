@@ -26,8 +26,8 @@ GLT_func_prefix void glt_mutex_free(GLT_mutex * mutex) {
     CHECK(ABT_mutex_free(mutex),ABT_SUCCESS);
 }
 
-GLT_func_prefix void glt_mutex_trylock(GLT_bool * locked, GLT_mutex mutex) {
-    *locked = ABT_mutex_trylock(mutex);
+GLT_func_prefix int glt_mutex_trylock(GLT_mutex mutex) {
+    return ABT_mutex_trylock(mutex);
 }
 
 //extended mutex functions

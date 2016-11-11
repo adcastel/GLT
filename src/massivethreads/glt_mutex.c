@@ -26,6 +26,6 @@ GLT_func_prefix void glt_mutex_free(GLT_mutex * mutex) {
     CHECK(myth_mutex_destroy(*mutex),0);
 }
 
-GLT_func_prefix void glt_mutex_trylock(GLT_bool * locked, GLT_mutex mutex) {
-    *locked = myth_mutex_trylock(mutex);
+GLT_func_prefix int glt_mutex_trylock(GLT_mutex mutex) {
+    return myth_mutex_trylock(mutex);
 }
