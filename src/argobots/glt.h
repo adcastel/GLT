@@ -7,6 +7,11 @@
 #ifndef GLT_H
 #define GLT_H
 
+/* Keep C++ compilers from getting confused */
+#if defined(__cplusplus)
+extern "C" {
+#endif
+
 /** \defgroup LIB Library functions
  * These functions start/stop and open/close the underlying GLT 
  * libraries. They are used in dynamic and static implementations.
@@ -300,7 +305,7 @@ void glt_mutex_free(GLT_mutex * mutex);
  * @param[out] locked  \c GLT_bool with the value 1 if the mutex has been locked
  * or 0 if it was not possible.
  */
-void glt_mutex_trylock(GLT_bool * locked, GLT_mutex mutex);
+int glt_mutex_trylock(GLT_mutex mutex);
 
  /** @ingroup BARRIER
  * @brief Creates a barrier.
@@ -963,5 +968,10 @@ void glt_wsapi_set_stealfunc(GLT_wsapi_steal_f *out, GLT_wsapi_steal_f fn);
 
 #endif
 
+#if defined(__cplusplus)
+}
+#endif
+
 #endif /* glt_H */
 
+  

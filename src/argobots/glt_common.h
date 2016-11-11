@@ -6,6 +6,15 @@
 #ifndef GLT_COMMON_H
 #define GLT_COMMON_H
 
+#if __STDC_VERSION__ < 199901L
+#define restrict /* nothing */
+#endif
+
+/* Keep C++ compilers from getting confused */
+#if defined(__cplusplus)
+extern "C" {
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/sysinfo.h>
@@ -119,7 +128,7 @@ typedef enum introspective_state {
 
 typedef void* GLT_syncvar;
 typedef void* GLT_aligned;
-typedef void* GLT_memory_state;
+typedef unsigned long int GLT_memory_state;
 typedef void* GLT_sinc_op;
 typedef void* GLT_sinc;
 typedef void* GLT_loop_f;
@@ -175,6 +184,11 @@ typedef struct glt_team {
 } while (0)
 #endif
 
-glt_team_t * main_team;
+extern glt_team_t * main_team;
+
+#if defined(__cplusplus)
+}
+#endif
+
 
 #endif /* GLT_COMMON_H */
