@@ -47,6 +47,8 @@ extern "C" {
 #define GLT_TRUE    1
 #define GLT_FALSE   0
 
+#define GLT_SUCCESS 0
+    
 /* ABT_sched_type*/
 #define GLT_SCHED_TYPE_ULT ABT_SCHED_TYPE_ULT
 #define GLT_SCHED_TYPE_TASK ABT_SCHED_TYPE_TASK

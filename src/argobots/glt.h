@@ -78,6 +78,9 @@ void __attribute__((destructor)) glt_end(void);
  */
 void glt_init(int argc, char * argv[]);
 
+glt_team_t * glt_get_team();
+
+
 /**
  * @ingroup LIB
  * @brief   GLT finalization function.
