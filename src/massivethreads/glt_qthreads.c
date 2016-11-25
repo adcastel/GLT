@@ -3,6 +3,7 @@
  * Qthreads library functions file.
  */
 
+
 #ifndef FASTGLT
 #include <glt.h>
 #define GLT_func_prefix 
@@ -14,17 +15,23 @@ GLT_func_prefix int glt_can_extended_basic() {
     return 0;
 }
 
+/*
 GLT_func_prefix int glt_can_atomic_functions() {
     return 0;
 }
+*/
 
+/*
 GLT_func_prefix int glt_can_feb_functions() {
     return 0;
 }
+*/
 
+/*
 GLT_func_prefix int glt_can_sinc_functions() {
     return 0;
 }
+*/
 
 GLT_func_prefix int glt_can_loop_functions() {
     return 0;
@@ -38,20 +45,20 @@ GLT_func_prefix int glt_can_data_structures_functions() {
     return 0;
 }
 
+/*
 GLT_func_prefix int glt_can_syscall_functions() {
     return 0;
 }
+*/
 
 GLT_func_prefix int glt_can_extended_runtime() {
     return 0;
 }
 
-GLT_func_prefix int glt_can_memory_functions() {
-    return 0;
-}
+
 
 #ifndef CORE
-
+/*
 GLT_func_prefix void glt_ult_create_syncvar(void(*thread_func)(void *), void * arg,
         GLT_syncvar *syncvar) {
     GLT_ERROR_QTH;
@@ -61,7 +68,7 @@ GLT_func_prefix void glt_ult_create_syncvar_to(void(*thread_func)(void *), void 
         GLT_syncvar *syncvar, int dest, int npreconds, ...) {
     GLT_ERROR_QTH;
 }
-
+*/
 GLT_func_prefix void glt_ult_get_thread(GLT_thread *thread, int *worker) {
     GLT_ERROR_QTH;
 }
@@ -82,6 +89,7 @@ GLT_func_prefix void glt_ult_get_stack_left(size_t *size) {
     GLT_ERROR_QTH;
 }
 
+/*
 GLT_func_prefix void glt_atomic_incr(GLT_aligned * operand, int incr) {
     GLT_ERROR_QTH;
 }
@@ -205,7 +213,7 @@ GLT_func_prefix void glt_sinc_submit(GLT_sinc * restrict sinc, const void * rest
 GLT_func_prefix void glt_sinc_wait(GLT_sinc * restrict sinc, void * restrict target) {
     GLT_ERROR_QTH;
 }
-
+*/
 GLT_func_prefix void glt_loop(const size_t start, const size_t end,
         const GLT_loop_f func, void * arg) {
     GLT_ERROR_QTH;
@@ -513,7 +521,7 @@ GLT_func_prefix void glt_ds_dictionary_it_copy(GLT_ds_dictionary_it *output,
         GLT_ds_dictionary_it *input) {
     GLT_ERROR_QTH;
 }
-
+/*
 GLT_func_prefix void glt_syscall_begin_blocking() {
     GLT_ERROR_QTH;
 }
@@ -578,7 +586,7 @@ GLT_func_prefix int glt_syscall_wait4(pid_t pid, int *stat_loc, int options,
     GLT_ERROR_QTH;
     return -1;
 }
-
+*/
 GLT_func_prefix void glt_subthread_get_num(GLT_subthread *num) {
     GLT_ERROR_QTH;
 }

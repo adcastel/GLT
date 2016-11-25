@@ -21,6 +21,10 @@ GLT_func_prefix void glt_end() {
     printf("Ending with MASSIVETHREADS\n");
 }
 
+GLT_func_prefix glt_team_t * glt_get_team(){
+    return main_team;
+}
+
 GLT_func_prefix void glt_init(int argc, char * argv[]) {
     int num_threads = get_nprocs();
     main_team = (glt_team_t *) malloc(sizeof (glt_team_t));
@@ -37,7 +41,6 @@ GLT_func_prefix void glt_init(int argc, char * argv[]) {
     }
 
     setenv("MYTH_BIND_WORKERS", "1", 1);
-
     main_team->num_workers = num_threads;
     CHECK(myth_init(),0); 
 }

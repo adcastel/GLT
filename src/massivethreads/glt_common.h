@@ -19,7 +19,9 @@ extern "C" {
 #include <config.h>
 #endif
 
+#ifndef _GNU_SOURCE
 #define _GNU_SOURCE             /* See feature_test_macros(7) */
+#endif
 
 #include <sys/time.h>
 #include <sys/sysinfo.h>
@@ -96,6 +98,8 @@ typedef struct {
 #define GLT_UNIT_NULL NULL
 #define GLT_TRUE    1
 #define GLT_FALSE   0
+
+#define GLT_SUCCESS 0
 
 typedef enum  {
     GLT_POOL_FIFO 

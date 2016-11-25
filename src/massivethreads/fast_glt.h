@@ -19,8 +19,8 @@
 #include <glt_tls.c>
 
 #include <glt_felock.c>
-#include <glt_prof_log.c>
-#include <glt_wsapi.c>
+//#include <glt_prof_log.c>
+//#include <glt_wsapi.c>
 #include <glt_argobots.c>
 #include <glt_qthreads.c>
 

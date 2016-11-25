@@ -109,7 +109,7 @@ int gpthread_barrier_init(pthread_barrier_t *barrier, const pthread_barrierattr_
 /* Destroy a previously dynamically initialized barrier BARRIER.  */
 
 int gpthread_barrier_destroy(pthread_barrier_t *barrier) {
-    glt_barrier_free((GLT_barrier *) &barrier);
+    glt_barrier_free((GLT_barrier *) barrier);
     return 0;
 }
 
