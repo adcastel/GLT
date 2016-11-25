@@ -68,7 +68,7 @@ GLT_func_prefix void glt_ult_self(GLT_ult * ult) {
     ult = qthread_retloc();
 }
 
-GLT_func_prefix void glt_tasklet_self(GLT_ult * ult) {
+GLT_func_prefix void glt_tasklet_self(GLT_tasklet * ult) {
     ult = qthread_retloc();
 }
 

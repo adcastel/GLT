@@ -22,12 +22,12 @@
 //Extended functions
 
 #include <glt_basic.c>
-#include <glt_atomic.c>
-#include <glt_feb.c>
-#include <glt_sinc.c>
+//#include <glt_atomic.c>
+//#include <glt_feb.c>
+//#include <glt_sinc.c>
 #include <glt_loop.c>
 #include <glt_data_structures.c>
-#include <glt_syscall.c>
+//#include <glt_syscall.c>
 #include <glt_runtime.c>
 #include <glt_argobots.c>
 #include <glt_massivethreads.c>

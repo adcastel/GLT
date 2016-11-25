@@ -11,6 +11,7 @@
 extern "C" {
 #endif
 
+    
 #include <glt_common.h>
 
 
@@ -20,6 +21,8 @@ void __attribute__((destructor)) glt_end(void);
 
 void glt_init(int argc, char * argv[]);
 void glt_finalize();
+
+glt_team_t * glt_get_team();
 
 void qth_tls_init(int nthreads);
 void qth_tls_fini(void);
@@ -95,13 +98,13 @@ void glt_key_set(GLT_key key, void *value);
 void glt_key_get(GLT_key key, void **value);
 
 int glt_can_extended_basic();
-int glt_can_atomic_functions();
-int glt_can_feb_functions();
-int glt_can_sinc_functions();
+//int glt_can_atomic_functions();
+//int glt_can_feb_functions();
+//int glt_can_sinc_functions();
 int glt_can_loop_functions();
 int glt_can_util_functions();
 int glt_can_data_structures_functions();
-int glt_can_syscall_functions();
+//int glt_can_syscall_functions();
 int glt_can_extended_runtime();
 
 
@@ -123,9 +126,9 @@ int can_extended_ults();
 
 //QUERY functions for MAssiveThreads
 //Always return 0;
-int glt_can_wsapi_functions();
-int glt_can_prof_functions();
-int glt_can_log_functions();
+//int glt_can_wsapi_functions();
+//int glt_can_prof_functions();
+//int glt_can_log_functions();
 int can_felock_functions();
 int can_extended_workunits();
 
@@ -134,17 +137,19 @@ int can_extended_workunits();
 
 #ifndef CORE
 
+/*
 void glt_ult_create_syncvar(void(*thread_func)(void *), void * arg,
         GLT_syncvar *syncvar);
 void glt_ult_create_syncvar_to(void(*thread_func)(void *), void * arg,
         GLT_syncvar *syncvar, int dest, int npreconds, ...);
+ */
 void glt_ult_get_thread(GLT_thread *thread, int *worker);
 void glt_ult_get_thread_unique(GLT_thread *thread, int *worker);
 void glt_ult_get_tasklocal(void * pointer, unsigned int size);
 void glt_ult_size_tasklocal(unsigned int *size);
 void glt_ult_get_stack_left(size_t *size);
 void glt_ult_retloc(GLT_ult * ult);
-
+/*
 void glt_atomic_incr(GLT_aligned * operand, int incr);
 void glt_atomic_fincr(float * operand, float incr);
 void glt_atomic_dincr(double * operand, double incr);
@@ -181,7 +186,7 @@ void glt_sinc_fini(GLT_sinc * sinc);
 void glt_sinc_reset(GLT_sinc * sinc, size_t expect);
 void glt_sinc_submit(GLT_sinc * restrict sinc, const void * restrict value);
 void glt_sinc_wait(GLT_sinc * restrict sinc, void * restrict target);
-
+*/
 void glt_loop(const size_t start, const size_t end,
         const GLT_loop_f func, void * arg);
 void glt_loop_balance(const size_t start, const size_t end,
@@ -296,7 +301,7 @@ void glt_ds_dictionary_it_equals(GLT_bool * eq,
         GLT_ds_dictionary_it *it1, GLT_ds_dictionary_it *it2);
 void glt_ds_dictionary_it_copy(GLT_ds_dictionary_it *output,
         GLT_ds_dictionary_it *input);
-
+/*
 void glt_syscall_begin_blocking();
 void glt_syscall_end_blocking();
 int glt_syscall_accept(int socket,
@@ -316,7 +321,7 @@ int glt_syscall_select(int nfds, fd_set *restrict readfds,
 int glt_syscall_system(const char * command);
 int glt_syscall_wait4(pid_t pid, int *stat_loc, int options,
         struct rusage *rusage);
-
+*/
 void glt_subthread_get_num(GLT_subthread *num);
 void glt_cacheline(int *cl);
 void glt_sorted_threads(const GLT_thread * list);
@@ -474,7 +479,7 @@ void glt_felock_wait_lock(GLT_bool *lock, GLT_felock felock, int val);
 void glt_felock_unlock(GLT_bool *unlock, GLT_felock felock);
 void glt_felock_status(GLT_felock_status *status, GLT_felock felock);
 void glt_felock_set_unlock(GLT_felock felock, int val);
-
+/*
 void glt_log_start();
 void glt_log_pause();
 void glt_log_flush();
@@ -494,7 +499,7 @@ void glt_wsapi_runqueue_pass(GLT_bool *pass, int target, GLT_ult ult);
 void glt_wsapi_runqueue_push(GLT_ult ult);
 void glt_wsapi_runqueue_pop(GLT_ult * ult);
 void glt_wsapi_set_stealfunc(GLT_wsapi_steal_f *out, GLT_wsapi_steal_f fn);
-
+*/
 
 #endif
 

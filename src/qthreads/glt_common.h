@@ -6,9 +6,7 @@
 #ifndef GLT_COMMON_H
 #define GLT_COMMON_H
 
-#if __STDC_VERSION__ < 199901L
-#define restrict /* nothing */
-#endif
+
 
 /* Keep C++ compilers from getting confused */
 #if defined(__cplusplus)
@@ -22,6 +20,7 @@ extern "C" {
 
 #include <qthread/qthread.h>
 #include <qthread/barrier.h>
+//#include <qthread/feb_barrier.h>
 #include <qthread/qtimer.h>
 #include <qthread/sinc.h>
 #include <qthread/qloop.h>
@@ -36,6 +35,13 @@ extern "C" {
 #include <qthread/cacheline.h>
 #include <qthread/qalloc.h>
 
+//#if __STDC_VERSION__ < 199901L
+//#ifndef restrict
+//#define restrict /* nothing */
+//#endif
+//#endif  
+  
+    
 #define QTH_TLS_KEY_SIZE 256
 
 typedef unsigned int qth_key_t;
@@ -47,17 +53,19 @@ typedef struct qth_tls_entry
 	void *value;
 }qth_tls_entry,*qth_tls_entry_t;
 
-aligned_t g_qth_tls_lock;
-qth_tls_entry *g_qth_tls_list;
-int g_qth_tls_list_size;
-int g_qth_tls_key_status[QTH_TLS_KEY_SIZE];
+extern aligned_t g_qth_tls_lock;
+extern qth_tls_entry *g_qth_tls_list;
+extern int g_qth_tls_list_size;
+extern int g_qth_tls_key_status[QTH_TLS_KEY_SIZE];
 
 
-#define GLT_ult aligned_t
-#define GLT_tasklet aligned_t
+//#define GLT_ult aligned_t
+//#define GLT_tasklet aligned_t
+typedef aligned_t GLT_ult;
+typedef aligned_t GLT_tasklet;
 #define GLT_thread qthread_shepherd_id_t
-#define GLT_mutex aligned_t *
-#define GLT_barrier  qt_barrier_t
+typedef aligned_t* GLT_mutex;
+typedef qt_barrier_t* GLT_barrier;
 #define GLT_cond aligned_t
 #define GLT_timer qtimer_t
 #define GLT_bool int
@@ -112,6 +120,8 @@ typedef struct {
 #define GLT_UNIT_NULL NULL
 #define GLT_TRUE    1
 #define GLT_FALSE   0
+
+#define GLT_SUCCESS 0
 
 typedef enum  {
     GLT_POOL_FIFO 

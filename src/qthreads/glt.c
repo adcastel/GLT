@@ -11,7 +11,10 @@
 #endif
 
 glt_team_t * main_team;
-
+aligned_t g_qth_tls_lock;
+qth_tls_entry *g_qth_tls_list;
+int g_qth_tls_list_size;
+int g_qth_tls_key_status[QTH_TLS_KEY_SIZE];
 
 GLT_func_prefix void glt_start() {
     printf("Starting with QTHREADS\n");
@@ -19,6 +22,10 @@ GLT_func_prefix void glt_start() {
 
 GLT_func_prefix void glt_end() {
     printf("Ending with QTHREADS\n");
+}
+
+GLT_func_prefix glt_team_t * glt_get_team(){
+    return main_team;
 }
 
 GLT_func_prefix void qth_tls_init(int nworkers)
@@ -36,12 +43,13 @@ GLT_func_prefix void qth_tls_fini(void)
 }
 
 GLT_func_prefix void glt_init(int argc, char * argv[]) {
+        printf("glt_init!");
+
     int num_threads = get_nprocs();
     main_team = (glt_team_t *) malloc(sizeof (glt_team_t));
 
     char buff[10];
     int num_workers_per_thread;
-
     if (getenv("GLT_NUM_THREADS") != NULL) {
         num_threads = atoi(getenv("GLT_NUM_THREADS"));
         sprintf(buff, "%d", num_threads);

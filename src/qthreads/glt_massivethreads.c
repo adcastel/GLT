@@ -9,7 +9,7 @@
 #else
 #define GLT_func_prefix static inline
 #endif
-
+/*
 GLT_func_prefix int glt_can_wsapi_functions() {
     return 0;
 }
@@ -21,7 +21,7 @@ GLT_func_prefix int glt_can_prof_functions() {
 GLT_func_prefix int glt_can_log_functions() {
     return 0;
 }
-
+*/
 GLT_func_prefix int can_felock_functions() {
     return 0;
 }
@@ -88,7 +88,7 @@ GLT_func_prefix void glt_felock_status(GLT_felock_status *status, GLT_felock fel
 GLT_func_prefix void glt_felock_set_unlock(GLT_felock felock, int val) {
     GLT_ERROR_MYTH;
 }
-
+/*
 GLT_func_prefix void glt_log_start() {
     GLT_ERROR_MYTH;
 }
@@ -160,5 +160,5 @@ GLT_func_prefix void glt_wsapi_runqueue_pop(GLT_ult * ult) {
 GLT_func_prefix void glt_wsapi_set_stealfunc(GLT_wsapi_steal_f *out, GLT_wsapi_steal_f fn) {
     GLT_ERROR_MYTH;
 }
-
+*/
 #endif
