@@ -44,6 +44,7 @@ extern "C" {
 #define glt_scheduler_config_read  ABT_sched_config_read 
 
 #define GLT_UNIT_NULL ABT_UNIT_NULL
+
 #define GLT_TRUE    1
 #define GLT_FALSE   0
 
