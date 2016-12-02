@@ -64,7 +64,8 @@ extern int g_qth_tls_key_status[QTH_TLS_KEY_SIZE];
 typedef aligned_t GLT_ult;
 typedef aligned_t GLT_tasklet;
 #define GLT_thread qthread_shepherd_id_t
-typedef aligned_t* GLT_mutex;
+//#define GLT_mutex aligned_t
+typedef aligned_t * GLT_mutex;
 typedef qt_barrier_t* GLT_barrier;
 #define GLT_cond aligned_t
 #define GLT_timer qtimer_t
@@ -117,7 +118,7 @@ typedef struct {
     GLT_SCHED_PRIO       /* Priority scheduler */
 }GLT_sched_predef;
 
-#define GLT_UNIT_NULL NULL
+#define GLT_UNIT_NULL 0
 #define GLT_TRUE    1
 #define GLT_FALSE   0
 

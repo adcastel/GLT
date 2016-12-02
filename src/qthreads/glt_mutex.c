@@ -11,7 +11,6 @@
 #endif
 
 GLT_func_prefix void glt_mutex_create(GLT_mutex * mutex) {
-    // mutex = (GLT_mutex *)malloc(sizeof(GLT_mutex));
 }
 
 GLT_func_prefix void glt_mutex_lock(GLT_mutex mutex) {
@@ -23,7 +22,6 @@ GLT_func_prefix void glt_mutex_unlock(GLT_mutex mutex) {
 }
 
 GLT_func_prefix void glt_mutex_free(GLT_mutex * mutex) {
-    //free(mutex);
 }
 
 GLT_func_prefix int glt_mutex_trylock(GLT_mutex mutex) {
