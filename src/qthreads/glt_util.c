@@ -14,7 +14,9 @@ GLT_func_prefix int glt_get_num_threads() {
 }
 
 GLT_func_prefix int glt_get_thread_num() {
-    return qthread_shep();
+    int a = qthread_shep();
+    //printf("en glt_get_thread_num devolviendo %d\n",a);
+    return a;
 }
 
 GLT_func_prefix int glt_can_util_functions() {

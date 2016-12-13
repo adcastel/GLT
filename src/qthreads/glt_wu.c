@@ -25,7 +25,10 @@ GLT_func_prefix void glt_ult_create(void(*thread_func)(void *), void *arg, GLT_u
 }
 
 GLT_func_prefix void glt_ult_create_to(void(*thread_func)(void *), void *arg, GLT_ult *new_ult, int dest) {
+            int a = qthread_shep();
+    //printf("en glt_ult_create_to con tid %d y creo en %d\n",a,dest);
     CHECK(qthread_fork_to((void *) thread_func, arg, new_ult, dest),0);
+    //printf("despues del fork, el bit esta %d (0 vacio, 1 lleno)\n",qthread_feb_status(new_ult));
 }
 
 GLT_func_prefix void glt_tasklet_create(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult) {
@@ -45,10 +48,18 @@ GLT_func_prefix void glt_yield_to(GLT_ult ult) {
 }
 
 GLT_func_prefix void glt_ult_join(GLT_ult *ult) {
-    CHECK(qthread_readFF(NULL, ult),0);
+    CHECK(qthread_readFF(NULL, (ult)),0);
 }
 
 GLT_func_prefix void glt_tasklet_join(GLT_tasklet *tasklet) {
+    CHECK(qthread_readFF(NULL, tasklet),0);
+}
+
+GLT_func_prefix void glt_ult_free(GLT_ult *ult) {
+    CHECK(qthread_readFF(NULL, (ult)),0);
+}
+
+GLT_func_prefix void glt_tasklet_free(GLT_tasklet *tasklet) {
     CHECK(qthread_readFF(NULL, tasklet),0);
 }
 
@@ -74,7 +85,6 @@ GLT_func_prefix void glt_tasklet_self(GLT_tasklet * ult) {
 
 GLT_func_prefix void glt_ult_exit() {
     printf("Warning: this feature is not supported in Qthreads\n");
-
 }
 
 GLT_func_prefix void glt_ult_cancel(GLT_ult ult) {

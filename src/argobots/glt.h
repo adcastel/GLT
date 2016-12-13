@@ -194,7 +194,8 @@ void glt_ult_join(GLT_ult *ult);
  * @param[in] tasklet Handle to the target \c GLT_tasklet.
  */
 void glt_tasklet_join(GLT_tasklet *tasklet);
-
+void glt_ult_free(GLT_ult *ult);
+void glt_tasklet_free(GLT_tasklet *tasklet);
 /**
  * @ingroup WORKUNIT
  * @brief   Return the unique id of a ULT.

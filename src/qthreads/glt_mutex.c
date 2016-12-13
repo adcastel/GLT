@@ -11,13 +11,20 @@
 #endif
 
 GLT_func_prefix void glt_mutex_create(GLT_mutex * mutex) {
+ //       int a = qthread_shep();
+  //  printf("en glt_mutex_create con tid %d\n",a);
+    qthread_unlock(*mutex);
 }
 
 GLT_func_prefix void glt_mutex_lock(GLT_mutex mutex) {
+  //          int a = qthread_shep();
+  //  printf("en glt_mutex_lock con tid %d\n",a);
     CHECK(qthread_lock(mutex),0);
 }
 
 GLT_func_prefix void glt_mutex_unlock(GLT_mutex mutex) {
+  //          int a = qthread_shep();
+  //  printf("en glt_mutex_unlock con tid %d\n",a);
     CHECK(qthread_unlock(mutex),0);
 }
 

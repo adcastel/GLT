@@ -52,6 +52,14 @@ GLT_func_prefix void glt_tasklet_join(GLT_tasklet *tasklet) {
     CHECK(myth_join(*tasklet, NULL),0);
 }
 
+GLT_func_prefix void glt_ult_free(GLT_ult *ult) {
+    CHECK(myth_join(*ult, NULL),0);
+}
+
+GLT_func_prefix void glt_tasklet_free(GLT_tasklet *tasklet) {
+    CHECK(myth_join(*tasklet, NULL),0);
+}
+
 GLT_func_prefix void glt_ult_get_id(GLT_ult_id * id, GLT_ult ult) {
     printf("Warning: this feature is not supported in MassiveThreads\n");
     *id = -1;

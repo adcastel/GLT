@@ -74,6 +74,16 @@ GLT_func_prefix void glt_tasklet_join(GLT_tasklet *tasklet) {
     main_team->num_workers--;
 }
 
+GLT_func_prefix void glt_ult_free(GLT_ult *ult) {
+    CHECK(pthread_join(*ult, NULL),0);
+    main_team->num_workers--;
+}
+
+GLT_func_prefix void glt_tasklet_free(GLT_tasklet *tasklet) {
+    CHECK(pthread_join(*tasklet, NULL),0);
+    main_team->num_workers--;
+}
+
 GLT_func_prefix void glt_ult_get_id(GLT_ult_id * id, GLT_ult ult) {
     printf("Warning: this feature is not supported in MassiveThreads\n");
     *id = pthread_self();

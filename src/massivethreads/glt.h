@@ -39,6 +39,8 @@ void glt_yield_to(GLT_ult ult);
 
 void glt_ult_join(GLT_ult *ult);
 void glt_tasklet_join(GLT_tasklet *tasklet);
+void glt_ult_free(GLT_ult *ult);
+void glt_tasklet_free(GLT_tasklet *tasklet);
 
 void glt_ult_get_id(GLT_ult_id * id, GLT_ult ult);
 void glt_workunit_get_thread_id(GLT_thread_id *id);
