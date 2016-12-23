@@ -51,11 +51,11 @@ GLT_func_prefix void glt_yield_to(GLT_ult ult) {
 }
 
 GLT_func_prefix void glt_ult_join(GLT_ult *ult) {
-    CHECK(ABT_thread_join(ult),ABT_SUCCESS);
+    CHECK(ABT_thread_join(*ult),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_tasklet_join(GLT_tasklet *tasklet) {
-    CHECK(ABT_task_join(tasklet),ABT_SUCCESS);
+    CHECK(ABT_task_join(*tasklet),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_ult_free(GLT_ult *ult) {
