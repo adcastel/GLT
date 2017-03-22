@@ -17,11 +17,11 @@ int g_qth_tls_list_size;
 int g_qth_tls_key_status[QTH_TLS_KEY_SIZE];
 
 GLT_func_prefix void glt_start() {
-    //printf("Starting with QTHREADS\n");
+    printf("Starting with QTHREADS\n");
 }
 
 GLT_func_prefix void glt_end() {
-    //printf("Ending with QTHREADS\n");
+    printf("Ending with QTHREADS\n");
 }
 
 GLT_func_prefix glt_team_t * glt_get_team(){
