@@ -21,7 +21,7 @@ arg: $(OBJECTS)
 	gcc -shared -o libglt.so $(OBJECTS) $(ARGFLAGS)
 
 pth_arg: 
-	gcc -fPIC -I. -I/home/adcastel/argobots/include -L/home/adcastel/argobots/lib -labt -c -o glt_pthreads.o glt_pthreads.c -DFASTGLT
+	gcc -fPIC -I. $(ARGFLAGS) -c -o glt_pthreads.o glt_pthreads.c -DFASTGLT
 	gcc -shared -o libgltpthread.so glt_pthreads.o $(ARGFLAGS) -DFASTGLT -ldl
 
 clean:
