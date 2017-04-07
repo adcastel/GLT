@@ -51,6 +51,18 @@ typedef struct myth_timer {
 #define GLT_ult_id int
 #define GLT_key myth_key_t
 
+
+
+#define GLT_UNIT_NULL NULL
+#define GLT_NULL NULL
+#define GLT_TRUE    1
+#define GLT_FALSE   0
+
+#define GLT_SUCCESS 0
+
+
+#ifndef CORE
+
 typedef void * GLT_sched;
 typedef void * GLT_sched_config;
 
@@ -95,92 +107,11 @@ typedef struct {
     GLT_SCHED_PRIO       /* Priority scheduler */
 }GLT_sched_predef;
 
-#define GLT_UNIT_NULL NULL
-#define GLT_TRUE    1
-#define GLT_FALSE   0
 
-#define GLT_SUCCESS 0
-
-typedef enum  {
-    GLT_POOL_FIFO 
- } GLT_pool_kind;
-
-typedef enum  {
-    GLT_POOL_ACCESS_PRIV, /* Used by only one ES */
-    GLT_POOL_ACCESS_SPSC, /* Producers on ES1, consumers on ES2 */
-    GLT_POOL_ACCESS_MPSC, /* Producers on any ES, consumers on the same ES */
-    GLT_POOL_ACCESS_SPMC, /* Producers on the same ES, consumers on any ES */
-    GLT_POOL_ACCESS_MPMC  /* Producers on any ES, consumers on any ES */
- } GLT_pool_access;
-
-
-
-#ifndef CORE
-
-#define GLT_workunit_f myth_func_t
-#define GLT_workunit_o myth_thread_option_t
-#define GLT_felock myth_felock_t
-#define GLT_felock_status int
-#define GLT_pickle myth_pickle_t
-#define GLT_wsapi_decide_f myth_wsapi_decidefn_t
-#define GLT_wsapi_steal_f myth_steal_func_t
-//Shared
-
-#include <sys/socket.h>
-#include <poll.h>
-#include <sys/resource.h>
-
-#define aligned_t long unsigned int
-
-typedef enum introspective_state {
-    NOT_SUPPORTED
-} introspective_state;
-
-//ARGOBOTS
 typedef void*  GLT_event_kind; 
 typedef void*  GLT_event_cb_fn; 
 typedef void*  GLT_future; 
-typedef void*  GLT_promise; 
-typedef void*  GLT_pool_def; 
-typedef void*  GLT_pool_config; 
-typedef void*  GLT_pool; 
-typedef void*  GLT_unit; 
-typedef void*  GLT_thread_state; 
-typedef void*  GLT_tasklet_state; 
-typedef void*  GLT_ult_state; 
-typedef void*  GLT_ult_attr; 
-typedef void*  GLT_unit_type; 
 
-
-//QTHREADS
-typedef void*  GLT_syncvar; 
-typedef void*  GLT_aligned; 
-typedef void*  GLT_memory_state; 
-typedef void*  GLT_sinc_op; 
-typedef void*  GLT_sinc; 
-typedef void*  GLT_loop_f; 
-typedef void*  GLT_loopr_f; 
-typedef void*  GLT_loop_step_f; 
-typedef void*  GLT_accum_f; 
-typedef void*  GLT_loop_queue; 
-typedef void*  GLT_loop_queue_kind; 
-typedef void*  GLT_ds_pool; 
-typedef void*  GLT_ds_array; 
-typedef void*  GLT_ds_array_distribution; 
-typedef void*  GLT_ds_loop_f; 
-typedef void*  GLT_ds_loopr_f; 
-typedef void*  GLT_ds_cloop_f; 
-typedef void*  GLT_ds_lfqueue; 
-typedef void*  GLT_ds_dqueue; 
-typedef void*  GLT_ds_dictionary; 
-typedef void*  GLT_ds_dictionary_key_equals; 
-typedef void*  GLT_ds_dictionary_hash; 
-typedef void*  GLT_ds_dictionary_cleanup; 
-typedef void*  GLT_ds_dictionary_it; 
-typedef void*  GLT_subthread; 
-
-#define glt_ult_create_precond qthread_fork_precond
-#define glt_ult_create_precond_to qthread_fork_precond_to
 
 #endif
 
