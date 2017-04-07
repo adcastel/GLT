@@ -23,7 +23,6 @@ GLT_func_prefix void glt_cond_signal(GLT_cond cond) {
 }
 
 GLT_func_prefix void glt_cond_wait(GLT_cond cond, GLT_mutex mutex) {
-    /*Waits for memory to become empty and then fills it*/
     aligned_t fill = 1;
     CHECK(qthread_writeEF(&cond, &fill),0);
     CHECK(qthread_lock(mutex),0);

@@ -28,7 +28,6 @@ GLT_func_prefix void glt_key_create(void(*destructor)(void *value), GLT_key *new
     }
     qthread_unlock(&g_qth_tls_lock);
 
-    //myth_key_create(newkey, destructor);
 }
 
 GLT_func_prefix void glt_key_free(GLT_key *key) {

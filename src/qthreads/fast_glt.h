@@ -15,22 +15,16 @@
 #include <glt_condition.c>
 #include <glt_timer.c>
 #include <glt_util.c>
-#include <glt_scheduler.c>
 #include <glt_tls.c>
 
 
 //Extended functions
 
-#include <glt_basic.c>
-//#include <glt_atomic.c>
-//#include <glt_feb.c>
-//#include <glt_sinc.c>
-#include <glt_loop.c>
-#include <glt_data_structures.c>
-//#include <glt_syscall.c>
-#include <glt_runtime.c>
-#include <glt_argobots.c>
-#include <glt_massivethreads.c>
+#include <glt_scheduler.c>
+#include <glt_event.c>
+#include <glt_future.c>
+#include <glt_thread.c>
+
 
 #endif /* FAST_GLT_H */
 
