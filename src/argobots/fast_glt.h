@@ -21,7 +21,7 @@
 
 //Extended functions
 #include <glt_event.c>
-#include <glt_future_promise.c>
+#include <glt_future.c>
 #include<glt_thread.c>
 #include <glt_scheduler.c>
 

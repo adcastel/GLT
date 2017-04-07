@@ -5,7 +5,7 @@ CC := gcc
 CFLAGS := -fPIC -I. $(ARGFLAGS) 
 
 OBJECTS := glt.o glt_wu.o glt_util.o glt_mutex.o glt_barrier.o glt_condition.o \
-	glt_timer.o glt_event.o glt_future_promise.o  \
+	glt_timer.o glt_event.o glt_future.o  \
 	glt_scheduler.o  glt_thread.o glt_tls.o 
 
 ifeq ($(GLT_CORE), 1)
