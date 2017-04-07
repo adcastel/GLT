@@ -18,6 +18,11 @@ GLT_func_prefix void glt_mutex_lock(GLT_mutex mutex) {
     CHECK(pthread_mutex_lock(&mutex),0);
 }
 
+
+GLT_func_prefix void glt_mutex_spinlock(GLT_mutex mutex) {
+    CHECK(pthread_mutex_lock(&mutex),0);
+}
+
 GLT_func_prefix void glt_mutex_unlock(GLT_mutex mutex) {
     CHECK(pthread_mutex_unlock(&mutex),0);
 }

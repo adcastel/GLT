@@ -15,12 +15,14 @@
 #include <glt_condition.c>
 #include <glt_timer.c>
 #include <glt_util.c>
-#include <glt_scheduler.c>
-
 #include <glt_tls.c>
-#include <glt_argobots.c>
-#include <glt_qthreads.c>
-#include <glt_massivethreads.c>
+
+
+
+#include <glt_scheduler.c>
+#include <glt_event.c>
+#include <glt_future.c>
+#include <glt_thread.c>
 
 #endif /* FAST_GLT_H */
 
