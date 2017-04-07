@@ -19,5 +19,3 @@ GLT_func_prefix int glt_get_thread_num() {
     return a;
 }
 
-#endif
-
