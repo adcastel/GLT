@@ -44,11 +44,17 @@ extern "C" {
 #define glt_scheduler_config_read  ABT_sched_config_read 
 
 #define GLT_UNIT_NULL ABT_UNIT_NULL
+#define GLT_NULL NULL
 
 #define GLT_TRUE    1
 #define GLT_FALSE   0
 
 #define GLT_SUCCESS 0
+    
+
+
+//Extended variables
+#ifndef CORE
     
 /* ABT_sched_type*/
 #define GLT_SCHED_TYPE_ULT ABT_SCHED_TYPE_ULT
@@ -69,94 +75,23 @@ extern "C" {
 #define GLT_SCHED_PRIO ABT_SCHED_PRIO/* Priority scheduler */
 #define GLT_sched_predef ABT_sched_predef
 
-/* ABT_pool_kind*/
-#define GLT_POOL_FIFO ABT_POOL_FIFO
-#define GLT_pool_kind ABT_pool_kind
-
-/* ABT_pool_access*/
-#define GLT_POOL_ACCESS_PRIV ABT_POOL_ACCESS_PRIV/* Used by only one ES */
-#define GLT_POOL_ACCESS_SPSC ABT_POOL_ACCESS_SPSC/* Producers on ES1, consumers on ES2 */
-#define GLT_POOL_ACCESS_MPSC ABT_POOL_ACCESS_MPSC/* Producers on any ES, consumers on the same ES */
-#define GLT_POOL_ACCESS_SPMC ABT_POOL_ACCESS_SPMC/* Producers on the same ES, consumers on any ES */
-#define GLT_POOL_ACCESS_MPMC ABT_POOL_ACCESS_MPMC/* Producers on any ES, consumers on any ES */
-#define GLT_pool_access ABT_pool_access
-
 /* ABT_sched_config_type*/
 #define GLT_SCHED_CONFIG_INT  ABT_SCHED_CONFIG_INT/* Parameter of type int */
 #define GLT_SCHED_CONFIG_DOUBLE ABT_SCHED_CONFIG_DOUBLE /* Parameter of type double */
 #define GLT_SCHED_CONFIG_PTR ABT_SCHED_CONFIG_PTR /* Parameter of type pointer */
-#define GLT_sched_config_type ABT_sched_config_type
-
-//Extended variables
-#ifndef CORE
+#define GLT_sched_config_type ABT_sched_config_type    
+    
+    
 #define GLT_event_kind ABT_event_kind
 #define GLT_event_cb_fn ABT_event_cb_fn
 #define GLT_future ABT_eventual
-#define GLT_promise ABT_future
-#define GLT_pool_def ABT_pool_def
-#define GLT_pool_config ABT_pool_config
-#define GLT_pool ABT_pool
-#define GLT_pool_kind ABT_pool_kind
-#define GLT_pool_access ABT_pool_access
-#define GLT_unit ABT_unit
-#define GLT_thread_state ABT_xstream_state
-#define GLT_tasklet_state ABT_task_state
-#define GLT_ult_state ABT_thread_state
-#define GLT_ult_attr ABT_thread_attr
-#define GLT_unit_type ABT_unit_type
 
 
 
-//MASSIVETHREAD
-typedef void* GLT_workunit_f;
-typedef void* GLT_workunit_o;
-typedef void* GLT_felock;
-typedef int GLT_felock_status;
-typedef void* GLT_pickle;
-typedef void* GLT_wsapi_decide_f;
-typedef void* GLT_wsapi_steal_f;
-//Shared
 
-//QTHREADS
-#include <sys/socket.h>
-#include <poll.h>
-#include <sys/resource.h>
+
 
 #define aligned_t long unsigned int
-
-typedef enum introspective_state {
-    NOT_SUPPORTED
-} introspective_state;
-
-
-typedef void* GLT_syncvar;
-typedef void* GLT_aligned;
-typedef unsigned long int GLT_memory_state;
-typedef void* GLT_sinc_op;
-typedef void* GLT_sinc;
-typedef void* GLT_loop_f;
-typedef void* GLT_loopr_f;
-typedef void* GLT_loop_step_f;
-typedef void* GLT_accum_f;
-typedef void* GLT_loop_queue;
-typedef void* GLT_loop_queue_kind;
-typedef void* GLT_ds_pool;
-typedef void* GLT_ds_array;
-typedef void* GLT_ds_array_distribution;
-typedef void* GLT_ds_loop_f;
-typedef void* GLT_ds_loopr_f;
-typedef void* GLT_ds_cloop_f;
-typedef void* GLT_ds_lfqueue;
-typedef void* GLT_ds_dqueue;
-typedef void* GLT_ds_dictionary;
-typedef void* GLT_ds_dictionary_key_equals;
-typedef void* GLT_ds_dictionary_hash;
-typedef void* GLT_ds_dictionary_cleanup;
-typedef void* GLT_ds_dictionary_it;
-typedef void* GLT_subthread;
-
-#define glt_ult_create_precond qthread_fork_precond
-#define glt_ult_create_precond_to qthread_fork_precond_to
 
 #endif
 

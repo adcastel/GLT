@@ -17,17 +17,15 @@
 #include <glt_condition.c>
 #include <glt_timer.c>
 #include <glt_util.c>
-#include <glt_scheduler.c>
 #include <glt_tls.c>
 
 //Extended functions
 #include <glt_event.c>
 #include <glt_future_promise.c>
-#include <glt_pool.c>
-#include<glt_self.c>
 #include<glt_thread.c>
-#include <glt_massivethreads.c>
-#include <glt_qthreads.c>
+#include <glt_scheduler.c>
+
+
 
 #endif /* FAST_GLT_H */
 
