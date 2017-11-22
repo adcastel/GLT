@@ -1,4 +1,5 @@
-all: arg pth_arg
+#all: arg pth_arg
+all: arg 
 
 ARGFLAGS := -I/$(HOME_ARG)/include -L/$(HOME_ARG)/lib -labt
 CC := gcc

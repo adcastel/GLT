@@ -24,10 +24,22 @@ GLT_func_prefix GLT_tasklet * glt_tasklet_malloc(int number_of_tasklets) {
 GLT_func_prefix void glt_ult_create(void(*thread_func)(void *), void *arg, GLT_ult *new_ult) {
     int rank;
     CHECK(ABT_xstream_self_rank(&rank),ABT_SUCCESS);
-    CHECK(ABT_thread_create_on_xstream(main_team->team[rank], thread_func, arg, ABT_THREAD_ATTR_NULL, new_ult),ABT_SUCCESS);
+    //printf("soy el rank %d y voy a crear un ULT con create: ", rank);
+    if(main_team->glto==0){
+      //  printf("como soy tipo GLT lo creo en mi pool\n");
+        CHECK(ABT_thread_create_on_xstream(main_team->team[rank], thread_func, arg, ABT_THREAD_ATTR_NULL, new_ult),ABT_SUCCESS);
+    }
+    else{
+        //printf("como soy tipo GLTO lo creo en mi pool compartida\n");
+        CHECK(ABT_thread_create(main_team->spools[rank], thread_func, arg, ABT_THREAD_ATTR_NULL, new_ult),ABT_SUCCESS);
+    }
 }
 
 GLT_func_prefix void glt_ult_create_to(void(*thread_func)(void *), void *arg, GLT_ult *new_ult, int dest) {
+    /*int rank;
+    CHECK(ABT_xstream_self_rank(&rank),ABT_SUCCESS);
+    printf("soy el rank %d y voy a crear un ULT con create to\n", rank);
+    */
     CHECK(ABT_thread_create_on_xstream(main_team->team[dest], thread_func, arg, ABT_THREAD_ATTR_NULL, new_ult),ABT_SUCCESS);
 }
 
@@ -35,7 +47,12 @@ GLT_func_prefix void glt_ult_create_to(void(*thread_func)(void *), void *arg, GL
 GLT_func_prefix void glt_tasklet_create(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult) {
     int rank;
     CHECK(ABT_xstream_self_rank(&rank),ABT_SUCCESS);
-    CHECK(ABT_task_create_on_xstream(main_team->team[rank], thread_func, arg, new_ult),ABT_SUCCESS);
+    if(main_team->glto==0){
+        CHECK(ABT_task_create_on_xstream(main_team->team[rank], thread_func, arg, new_ult),ABT_SUCCESS);
+    }
+    else{
+        CHECK(ABT_task_create(main_team->spools[rank], thread_func, arg, new_ult),ABT_SUCCESS);
+    }
 }
 
 GLT_func_prefix void glt_tasklet_create_to(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult, int dest) {

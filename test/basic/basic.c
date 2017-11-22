@@ -18,7 +18,7 @@
 #include <glt.h>
 #endif
 
-#define N 100
+#define N 10
 
 void func1(void * arg){
 

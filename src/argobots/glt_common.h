@@ -18,6 +18,8 @@ extern "C" {
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/sysinfo.h>
+#include <sys/time.h>
+#include <sys/times.h>
 #include <abt.h>
 
 #define MIN(a,b) (((a)<(b))?(a):(b))
@@ -101,7 +103,10 @@ typedef struct glt_team {
     int num_xstreams;
     int num_pools;
     ABT_pool *pools;
+    ABT_pool *spools;
+    ABT_sched *sched;
     int max_elem;
+    int glto;
 } glt_team_t;
 
 #define GLT_VERSION "You are using GLT 2.0v over Argobots (adcastel@uji.es) "
