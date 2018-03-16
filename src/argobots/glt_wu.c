@@ -56,7 +56,14 @@ GLT_func_prefix void glt_tasklet_create(void(*thread_func)(void *), void *arg, G
 }
 
 GLT_func_prefix void glt_tasklet_create_to(void(*thread_func)(void *), void *arg, GLT_tasklet *new_ult, int dest) {
-    CHECK(ABT_task_create_on_xstream(main_team->team[dest], thread_func, arg, new_ult),ABT_SUCCESS);
+    if(main_team->glto==0){
+    	CHECK(ABT_task_create_on_xstream(main_team->team[dest], thread_func, arg, new_ult),ABT_SUCCESS);
+    }
+    else{
+        CHECK(ABT_task_create(main_team->spools[dest], thread_func, arg, new_ult),ABT_SUCCESS);
+    }
+    //printf("destino %d %p\n",dest,main_team->pools[dest]);
+    //CHECK(ABT_task_create(main_team->pools[dest], thread_func, arg, new_ult),ABT_SUCCESS);
 }
 
 GLT_func_prefix void glt_yield() {

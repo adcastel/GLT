@@ -36,11 +36,9 @@ GLT_func_prefix void glt_init(int argc, char * argv[]) {
    
     main_team = (glt_team_t *) malloc(sizeof (glt_team_t));
     CHECK(ABT_init(argc, argv),ABT_SUCCESS);
-
     if(getenv("GLTO_NUM_THREADS") != NULL){
         num_threads = atoi(getenv("GLTO_NUM_THREADS"));
         int num_pools = num_threads;
-      //  printf("voy a comportarme como glto\n"); 
         main_team->num_xstreams = num_threads;
         main_team->num_pools = num_pools;
         main_team->max_elem = get_nprocs();
@@ -53,7 +51,6 @@ GLT_func_prefix void glt_init(int argc, char * argv[]) {
             ABT_pool_create_basic(ABT_POOL_FIFO, ABT_POOL_ACCESS_MPSC, ABT_TRUE,
                                        &main_team->pools[i]);
         //KMP_CHECK_SYSFAIL( "ABT_pool_create_basic", status );
-
             ABT_pool_create_basic(ABT_POOL_FIFO, ABT_POOL_ACCESS_MPMC, ABT_TRUE,
                                        &main_team->spools[i]);
         //KMP_CHECK_SYSFAIL( "ABT_pool_create_basic", status );
